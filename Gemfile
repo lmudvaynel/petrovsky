@@ -30,4 +30,5 @@ group :development do
 end
 group :development, :test do
   gem 'debugger'
+  gem 'rspec-rails'
 end
