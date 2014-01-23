@@ -1,20 +1,21 @@
-# Ignore bundler config.
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+.rvmrc
 /.bundle
-
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
-# Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
-
-# Ignore other unneeded files.
+/vendor/bundle
+/log/*
+/tmp/*
 database.yml
-doc/
-*.swp
-*~
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
 .project
-.DS_Store
-.idea
-.secret
+config/initializers/secret_token.rb
+*~
