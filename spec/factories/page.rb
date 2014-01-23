@@ -1,10 +1,9 @@
 FactoryGirl.define do
   factory :page do
-    slug :slug
+    name 'Name'
     content 'Content'
 
-    factory :named_page do
-      name 'Name'
+    factory :titled_page do
       title 'Title'
     end
   end
