@@ -19,6 +19,8 @@ gem 'turbolinks'
 # Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 gem 'unicorn'
+gem 'factory_girl_rails'
+gem 'faker'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

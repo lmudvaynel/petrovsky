@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Page do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:page) { FactoryGirl.build(:page) }
+
+  it 'should be valid with valid attributes' do
+    page.should be_valid
+  end
 end
