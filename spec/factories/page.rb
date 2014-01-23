@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :page do
-    name 'Name'
-    content 'Content'
+    name    { Faker::Lorem.words(2).join(' ').capitalize }
+    content { (Faker::Lorem.words(7).join(' ') + '.').capitalize }
 
     factory :titled_page do
-      title 'Title'
+      title { Faker::Lorem.word }
     end
   end
 end
