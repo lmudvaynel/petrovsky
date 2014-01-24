@@ -1,5 +1,6 @@
 #= require threejs/Three
-console.log('err')
+
+# BRIEFLY TEST OF THREE JS (not working)
 camera = '', scene = '', renderer = ''
 geometry = '', material = '', mesh = ''
 
@@ -26,7 +27,6 @@ init ->
   document.body.appendChild( renderer.domElement )
 
 animate ->
-  # note: three.js includes requestAnimationFrame shim
   requestAnimationFrame( animate )
 
   mesh.rotation.x += 0.01
