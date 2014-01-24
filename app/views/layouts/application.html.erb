@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Petrovsky</title>
+  <title>
+    <%= content_for?(:title) ? yield(:title) : 'Petrovsky Apart House' %>
+  </title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <header>
+    <%= render 'shared/header' %>
+  </header>
+  <nav>
+    <%= render 'shared/menu' %>
+  </nav>
+  <section>
+    <%= yield %>
+  </section>
+  <footer>
+    <%= render 'shared/footer' %>
+  </footer>
 </body>
 </html>

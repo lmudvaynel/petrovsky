@@ -1,0 +1,7 @@
+<% if @pages %>
+  <ul>
+    <% @pages.each do |page| %>
+      <%= link_to page.name, slug_path(page.slug) %>
+    <% end %>
+  </ul>
+<% end %>
