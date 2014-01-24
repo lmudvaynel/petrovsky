@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def get_menu
-    @pages = Page.where_slug_is_not :main
+    @home_page = Page.find_by_slug(:home)
+    @pages = Page.for_menu.where_slug_is_not :home
   end
 end

@@ -1,7 +1,21 @@
 <% if @pages %>
   <ul>
+    <% unless @page.try(:slug).try(:to_sym) == :home %>
+      <li>
+        <%= link_to @home_page.name, slug_path(@home_page.slug) %>
+      </li>
+    <% end %>
     <% @pages.each do |page| %>
-      <%= link_to page.name, slug_path(page.slug) %>
+      <li>
+        <%= link_to page.name, slug_path(page.slug) %>
+        <ul>
+          <% page.subpages.each do |subpage| %>
+            <li>
+              <%= link_to subpage.name, slug_path(subpage.slug) %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
     <% end %>
   </ul>
 <% end %>

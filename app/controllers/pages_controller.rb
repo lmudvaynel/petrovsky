@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @page = Page.find_by_slug(:main)
+    @page = Page.find_by_slug(:home)
     render :show
   end
 
