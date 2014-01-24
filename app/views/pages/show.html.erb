@@ -1,5 +1,3 @@
 <%= set_content_for :title, @page.title %>
 <%= set_content_for :name, @page.name %>
-<% if @page %>
-  <%= @page.content %>
-<% end %>
+<%= render_page %>
