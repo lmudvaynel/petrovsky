@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def get_menu
-    @home_page = Page.find_by_slug(:home)
+    @home_page = Page.find_by_slug(:home) unless request.path == root_path
     @pages = Page.for_menu.where_slug_is_not :home
   end
 end
