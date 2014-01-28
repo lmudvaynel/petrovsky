@@ -1,35 +1,33 @@
-#= require threejs/Three
+#= require three.min
 
-# BRIEFLY TEST OF THREE JS (not working)
-camera = '', scene = '', renderer = ''
-geometry = '', material = '', mesh = ''
+$.app.floor_plans =
+  init: ->
+    @.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000)
+    @.camera.position.z = 1000
 
-init()
-animate()
+    @.scene = new THREE.Scene()
 
-init ->
-  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 )
-  camera.position.z = 1000
+    @.geometry = new THREE.CubeGeometry(200, 200, 200)
+    @.material = new THREE.MeshBasicMaterial
+      color: "#ff0000"
+      wireframe: true
 
-  scene = new THREE.Scene()
+    @.mesh = new THREE.Mesh(@.geometry, @.material)
+    @.scene.add(@.mesh)
 
-  geometry = new THREE.CubeGeometry( 200, 200, 200 )
-  material = new THREE.MeshBasicMaterial
-    color: "#ff0000"
-    wireframe: true
+    @.renderer = new THREE.CanvasRenderer()
+    @.renderer.setSize(window.innerWidth, window.innerHeight)
 
-  mesh = new THREE.Mesh( geometry, material )
-  scene.add( mesh )
+    document.body.appendChild(@.renderer.domElement)
 
-  renderer = new THREE.CanvasRenderer()
-  renderer.setSize( window.innerWidth, window.innerHeight )
+  animate: ->
+    fp = $.app.floor_plans
+    requestAnimationFrame(fp.animate)
 
-  document.body.appendChild( renderer.domElement )
+    fp.mesh.rotation.x += 0.01
+    fp.mesh.rotation.y += 0.02
 
-animate ->
-  requestAnimationFrame( animate )
+    fp.renderer.render(fp.scene, fp.camera)
 
-  mesh.rotation.x += 0.01
-  mesh.rotation.y += 0.02
-
-  renderer.render( scene, camera )
+$.app.floor_plans.init()
+$.app.floor_plans.animate()
