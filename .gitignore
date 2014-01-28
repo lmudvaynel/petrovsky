@@ -8,14 +8,5 @@ capybara-*.html
 /vendor/bundle
 /log/*
 /tmp/*
-/db/*.sqlite3
-/public/system/*
-/coverage/
-/spec/tmp/*
-**.orig
-rerun.txt
-pickle-email-*.html
-.project
-config/initializers/secret_token.rb
-*~
 database.yml
+*~
