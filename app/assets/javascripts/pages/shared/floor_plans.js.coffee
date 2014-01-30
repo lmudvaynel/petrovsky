@@ -5,6 +5,10 @@
 $.app.pages ||= {}
 $.app.pages.shared ||= {}
 $.app.pages.shared.floor_plans =
+  container: $("#canvas-container")
+  scene_params:
+    distance: 1000
+    yz_angle: Math.PI / 4
   floors_params:
     count: 4
     size:
@@ -12,7 +16,6 @@ $.app.pages.shared.floor_plans =
       height: 600
     opacity: 0.5
   floors: []
-  container: $("#canvas-container")
 
   init: ->
     @.init_camera()
@@ -25,8 +28,8 @@ $.app.pages.shared.floor_plans =
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
     @.camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000)
-    @.camera.position.z = 1000
-    @.camera.position.y = 1000
+    @.camera.position.y = @.scene_params.distance * Math.cos(@.scene_params.yz_angle)
+    @.camera.position.z = @.scene_params.distance * Math.sin(@.scene_params.yz_angle)
 
   init_scene: ->
     @.scene = new THREE.Scene()
@@ -37,28 +40,28 @@ $.app.pages.shared.floor_plans =
     oy = document.createElement('div')
     oz = document.createElement('div')
     ox_css =
-      width: "1000px"
-      height: "10px"
+      width: "#{@.scene_params.distance}px"
+      height: "#{Math.round(@.scene_params.distance / 100)}px"
       'background-color': "#ff0000"
     oy_css =
-      width: "1000px"
-      height: "10px"
+      width: "#{@.scene_params.distance}px"
+      height: "#{Math.round(@.scene_params.distance / 100)}px"
       'background-color': "#00ff00"
     oz_css =
-      width: "1000px"
-      height: "10px"
+      width: "#{@.scene_params.distance}px"
+      height: "#{Math.round(@.scene_params.distance / 100)}px"
       'background-color': "#0000ff"
     $(ox).css ox_css
     $(oy).css oy_css
     $(oz).css oz_css
 
     ox_object = new THREE.CSS3DObject(ox)
-    ox_object.position.x += 500
+    ox_object.position.x += Math.round(@.scene_params.distance / 2)
     oy_object = new THREE.CSS3DObject(oy)
-    oy_object.position.y += 500
+    oy_object.position.y += Math.round(@.scene_params.distance / 2)
     oy_object.rotation.z += Math.PI / 2
     oz_object = new THREE.CSS3DObject(oz)
-    oz_object.position.z += 500
+    oz_object.position.z += Math.round(@.scene_params.distance / 2)
     oz_object.rotation.y += Math.PI / 2
 
     fp.scene.add(ox_object)
@@ -73,10 +76,10 @@ $.app.pages.shared.floor_plans =
   init_controls: ->
     @.controls = new THREE.OrbitControls(@.camera, @.renderer.domElement)
     @.controls.rotateSpeed = 1
-    @.controls.minDistance = 500
-    @.controls.maxDistance = 2000
-    @.controls.minPolarAngle = Math.PI / 4
-    @.controls.maxPolarAngle = Math.PI / 4
+    @.controls.minDistance = Math.round(@.scene_params.distance / 2)
+    @.controls.maxDistance = @.scene_params.distance * 2
+    @.controls.minPolarAngle = @.scene_params.yz_angle
+    @.controls.maxPolarAngle = @.scene_params.yz_angle
     @.controls.noPan = true
     $(@.controls).on 'change', @.render
 
