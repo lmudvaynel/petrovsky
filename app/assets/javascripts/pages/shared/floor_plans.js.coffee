@@ -8,7 +8,7 @@ $.app.pages.shared.floor_plans =
   container: $("#canvas-container")
   scene_params:
     distance: 1000
-    yz_angle: Math.PI / 4
+    yz_angle: 3 * Math.PI / 8
   floors_params:
     count: 4
     size:
@@ -102,8 +102,7 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     fp.renderer.render(fp.scene, fp.camera)
 
-  init_floor: (floor_number) ->
-    fp = $.app.pages.shared.floor_plans
+  init_floor_dom_element: (floor_number) ->
     floor_element = document.createElement('div')
     floor_css =
       width: "#{@.floors_params.size.width}px"
@@ -111,13 +110,18 @@ $.app.pages.shared.floor_plans =
       opacity: @.floors_params.opacity
       'background-image': "url(/assets/floor#{floor_number}.png)"
     $(floor_element).addClass('floor-element').css floor_css
+    floor_element
 
-    floor_object = new THREE.CSS3DObject(floor_element)
+  init_floor_object: (floor_number) ->
+    floor_object = new THREE.CSS3DObject(@.init_floor_dom_element(floor_number))
     floor_object.position.y = Math.round((floor_number - @.floors_params.count / 2) * 100)
     floor_object.rotation.x = 3 * Math.PI / 2
+    floor_object
 
+  init_floor: (floor_number) ->
+    fp = $.app.pages.shared.floor_plans
+    floor_object = @.init_floor_object(floor_number)
     fp.scene.add(floor_object)
-
     floor_object
 
   init_floors: ->
