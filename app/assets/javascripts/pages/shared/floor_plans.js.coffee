@@ -87,7 +87,9 @@ $.app.pages.shared.floor_plans =
     $(@.controls).on 'change', @.render
 
   init_events: ->
-    @.container.on('resize', @.on_window_resize, false)
+    @.container.on 'resize', @.on_window_resize
+    # mouseup и click не подходят, трудно отследить когда идёт перемещение, а когда клик на этаж
+    @.container.on 'mouseup', '.floor-element', @.floor_element_on_click
 
   on_window_resize: ->
     fp = $.app.pages.shared.floor_plans
@@ -95,6 +97,11 @@ $.app.pages.shared.floor_plans =
     fp.camera.updateProjectionMatrix()
     fp.renderer.setSize(@.container.innerWidth(), @.container.innerHeight())
     fp.render()
+
+  floor_element_on_click: ->
+    fp = $.app.pages.shared.floor_plans
+    floor_number = parseInt $(@).data('floor-number')
+    fp.show_floor floor_number
 
   animate: ->
     fp = $.app.pages.shared.floor_plans
@@ -122,15 +129,15 @@ $.app.pages.shared.floor_plans =
       height: "#{@.floors_params.size.height}px"
       opacity: @.floors_params.opacity
       'background-image': "url(/assets/floor#{floor_number}.png)"
-    $(floor_element).css floor_css
+    $(floor_element).addClass('floor-element').css floor_css
+    $(floor_element).data 'floor-number', floor_number
     floor_element
 
-  init_floor_number_object: (floor_number) ->
+  init_floor_number_object: (floor_object, floor_number) ->
     floor_number_element = @.init_floor_number_dom_element(floor_number)
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
-    floor_center_position = Math.round((floor_number - @.floors_params.count / 2) * 100)
     floor_number_dy = Math.round(@.floors_numbers_params.font_size_px / 2)
-    floor_number_object.position.y = floor_center_position + floor_number_dy
+    floor_number_object.position.y = floor_object.position.y + floor_number_dy
     floor_number_object
 
   init_floor_object: (floor_number) ->
@@ -144,12 +151,31 @@ $.app.pages.shared.floor_plans =
     floor_object = @.init_floor_object(floor_number)
     fp.scene.add(floor_object)
     @.floors.push floor_object
-    floor_number_object = @.init_floor_number_object(floor_number)
+    floor_number_object = @.init_floor_number_object(floor_object, floor_number)
     fp.scene.add(floor_number_object)
     @.floors_numbers.push floor_number_object
 
   init_floors: ->
     @.init_floor(i) for i in [1..@.floors_params.count]
+
+  show_floor: (floor_number) ->
+    fp = $.app.pages.shared.floor_plans
+    floor_object = fp.init_floor_object(floor_number)
+    fp.scene.add floor_object
+    for i in [1..20]
+      setTimeout ->
+        fp.animate_show_floor(floor_object, floor_number)
+      , i * 20
+
+  animate_show_floor: (floor_object, floor_number) ->
+    fp = $.app.pages.shared.floor_plans
+    floor_object.position.x -= floor_object.position.x / 20
+    floor_object.position.y -= (floor_object.position.y - Math.round((floor_number - @.floors_params.count / 2) * 20)) / 20
+    floor_object.position.z -= floor_object.position.z / 20
+    floor_object.rotation.x -= (floor_object.rotation.x - 3 * Math.PI / 2) / 20
+    floor_object.rotation.y -= floor_object.rotation.y / 20
+    floor_object.rotation.z -= floor_object.rotation.z / 20
+    fp.render()
 
 $.app.pages.shared.floor_plans.init()
 $.app.pages.shared.floor_plans.init_floors()
