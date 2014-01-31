@@ -40,6 +40,14 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: - Math.PI / 2, y: 0, z: 0
 
+  floor_solid_position_center: (floor_number) ->
+    position:
+      x: 0
+      y: (floor_number - @.floors_params.count / 2) * @.floors_params.gap
+      z: 0
+    rotation:
+      x: - Math.PI / 2, y: 0, z: 0
+
   floor_solid_position_foreground: ->
     position:
       x: 0
