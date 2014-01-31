@@ -11,7 +11,7 @@ $.app.pages.shared.floor_plans =
     yz_angle: 3 * Math.PI / 8
   animation:
     frames_count: 50
-    speed: 50
+    speed: 30
   floors_params:
     count: 4
     size:
@@ -20,8 +20,9 @@ $.app.pages.shared.floor_plans =
     opacity: 0.5
   floors_numbers_params:
     font_size_px: 40
-  floors: []
-  floors_numbers: []
+  house:
+    floors: new THREE.Object3D()
+    numbers: new THREE.Object3D()
 
   camera_base: ->
     position:
@@ -31,13 +32,19 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: 0, y: 0, z: 0
 
-  floor_object_base: ->
+  floor_object_foreground: ->
     position:
       x: 0
       y: @.scene_params.distance / 4 * Math.cos(@.scene_params.yz_angle)
       z: @.scene_params.distance / 4 * Math.sin(@.scene_params.yz_angle)
     rotation:
       x: @.scene_params.yz_angle - Math.PI / 2, y: 0, z: 0
+
+  house_object_back: ->
+    position:
+      x: 0, y: 1500, z: -1000
+    rotation:
+      x: 0, y: 0, z: 0
 
   init: ->
     @.init_camera()
@@ -50,12 +57,9 @@ $.app.pages.shared.floor_plans =
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
     @.camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000)
-    @.camera.position.x = @.camera_base().position.x
-    @.camera.position.y = @.camera_base().position.y
-    @.camera.position.z = @.camera_base().position.z
-    @.camera.rotation.x = @.camera_base().rotation.x
-    @.camera.rotation.y = @.camera_base().rotation.y
-    @.camera.rotation.z = @.camera_base().rotation.z
+    for option in ['position', 'rotation']
+      for coord in ['x', 'y', 'z']
+        @.camera[option][coord] = @.camera_base()[option][coord]
 
   init_scene: ->
     @.scene = new THREE.Scene()
@@ -133,7 +137,7 @@ $.app.pages.shared.floor_plans =
 
   render: ->
     fp = $.app.pages.shared.floor_plans
-    floor_number.rotation = fp.camera.rotation for floor_number in fp.floors_numbers
+    floor_number.rotation = fp.camera.rotation for floor_number in fp.house.numbers.getDescendants()
     fp.renderer.render(fp.scene, fp.camera)
 
   init_floor_number_dom_element: (floor_number) ->
@@ -177,14 +181,15 @@ $.app.pages.shared.floor_plans =
   init_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
     floor_object = @.init_floor_object(floor_number)
-    fp.scene.add(floor_object)
-    @.floors.push floor_object
+    fp.house.floors.add floor_object
     floor_number_object = @.init_floor_number_object(floor_object, floor_number)
-    fp.scene.add(floor_number_object)
-    @.floors_numbers.push floor_number_object
+    fp.house.numbers.add floor_number_object
 
-  init_floors: ->
-    @.init_floor(i) for i in [1..@.floors_params.count]
+  init_house: ->
+    fp = $.app.pages.shared.floor_plans
+    fp.init_floor(i) for i in [1..@.floors_params.count]
+    fp.scene.add fp.house.floors
+    fp.scene.add fp.house.numbers
 
   show_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
@@ -197,29 +202,32 @@ $.app.pages.shared.floor_plans =
   set_animation_timeout: (floor_object, frame) ->
     fp = $.app.pages.shared.floor_plans
     setTimeout ->
-      fp.animate_show_camera(fp.animation.frames_count - frame + 1)
-      fp.animate_show_floor(floor_object, fp.animation.frames_count - frame + 1)
+      frames = fp.animation.frames_count - frame + 1
+      fp.animate_show_camera(frames)
+      fp.animate_house_back(frames)
+      fp.animate_show_floor(floor_object, frames)
       fp.render()
     , frame * fp.animation.speed
 
   animate_show_camera: (frames) ->
     fp = $.app.pages.shared.floor_plans
-    fp.camera.position.x -= (fp.camera.position.x - @.camera_base().position.x) / frames
-    fp.camera.position.y -= (fp.camera.position.y - @.camera_base().position.y) / frames
-    fp.camera.position.z -= (fp.camera.position.z - @.camera_base().position.z) / frames
-    fp.camera.rotation.x -= (fp.camera.rotation.x - @.camera_base().rotation.x) / frames
-    fp.camera.rotation.y -= (fp.camera.rotation.y - @.camera_base().rotation.y) / frames
-    fp.camera.rotation.z -= (fp.camera.rotation.z - @.camera_base().rotation.z) / frames
+    for option in ['position', 'rotation']
+      for coord in ['x', 'y', 'z']
+        fp.camera[option][coord] -= (fp.camera[option][coord] - @.camera_base()[option][coord]) / frames
+
+  animate_house_back: (frames) ->
+    fp = $.app.pages.shared.floor_plans
+    for option in ['position', 'rotation']
+      for coord in ['x', 'y', 'z']
+        fp.house.floors[option][coord] -= (fp.house.floors[option][coord] - fp.house_object_back()[option][coord]) / frames
+        fp.house.numbers[option][coord] -= (fp.house.numbers[option][coord] - fp.house_object_back()[option][coord]) / frames
 
   animate_show_floor: (floor_object, frames) ->
     fp = $.app.pages.shared.floor_plans
-    floor_object.position.x -= (floor_object.position.x - @.floor_object_base().position.x) / frames
-    floor_object.position.y -= (floor_object.position.y - @.floor_object_base().position.y) / frames
-    floor_object.position.z -= (floor_object.position.z - @.floor_object_base().position.z) / frames
-    floor_object.rotation.x -= (floor_object.rotation.x - @.floor_object_base().rotation.x) / frames
-    floor_object.rotation.y -= (floor_object.rotation.y - @.floor_object_base().rotation.y) / frames
-    floor_object.rotation.z -= (floor_object.rotation.z - @.floor_object_base().rotation.z) / frames
+    for option in ['position', 'rotation']
+      for coord in ['x', 'y', 'z']
+        floor_object[option][coord] -= (floor_object[option][coord] - fp.floor_object_foreground()[option][coord]) / frames
 
 $.app.pages.shared.floor_plans.init()
-$.app.pages.shared.floor_plans.init_floors()
+$.app.pages.shared.floor_plans.init_house()
 $.app.pages.shared.floor_plans.animate()
