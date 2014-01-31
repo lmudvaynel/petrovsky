@@ -35,7 +35,7 @@ $.app.pages.shared.floor_plans =
   floor_solid_position_start: (floor_number) ->
     position:
       x: 0
-      y: (floor_number - @.floors_params.count / 2) * @.floors_params.gap
+      y: (floor_number - @.floors_params.count / 2) * @.floors_params.gap + @.scene_params.distance * 2
       z: 0
     rotation:
       x: - Math.PI / 2, y: 0, z: 0
@@ -56,13 +56,6 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: @.scene_params.yz_angle - Math.PI / 2, y: 0, z: 0
 
-  floor_position_above_the_scene: (current) ->
-    position:
-      x: current.position.x
-      y: @.scene_params.distance * 2
-      z: current.position.x
-    rotation: current.rotation
-
   init: ->
     @.init_camera()
     @.init_scene()
@@ -70,8 +63,10 @@ $.app.pages.shared.floor_plans =
     @.init_controls()
     @.init_events()
     @.init_animation()
+
     @.init_house()
     @.house.add_to_scene()
+    @.house.animate_to_scene()
     # @.init_axes()
 
   init_camera: ->
@@ -230,8 +225,9 @@ $.app.pages.shared.floor_plans =
 
   init_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
-    animate_to_center_of_scene_frames: 40
-    animate_to_up_frames: 80
+    animate_to_foreground_frames: 40
+    animate_to_start_frames: 80
+    animate_to_center_frames: 80
     object: fp.init_floor_object(floor_number)
     get_object_by_type: (object_type) ->
       @.object[object_type]
@@ -242,22 +238,37 @@ $.app.pages.shared.floor_plans =
       @.add_to_scene_all_objects_of_types ['solid', 'number']
     add_to_scene_solid: ->
       @.add_to_scene_all_objects_of_types 'solid'
+    set_position_by: (other_floor) ->
+      for object_type in ['solid', 'number']
+        for option in ['position', 'rotation']
+          @.object[object_type][option] = other_floor.object[object_type][option].clone()
     update_number_rotation: ->
       @.object.number.rotation = fp.camera.rotation
-    animate_to_center_of_scene: ->
+    animate_to_foreground: ->
       fp.animated_objects.push
         object: @.object.solid
         final: fp.floor_solid_position_foreground()
-        frames: @.animate_to_center_of_scene_frames
-    animate_above_the_scene: ->
+        frames: @.animate_to_foreground_frames
+    animate_to_center: ->
+      floor_number = @.object.number.element.textContent
       fp.animated_objects.push
         object: @.object.solid
-        final: fp.floor_position_above_the_scene(@.object.solid)
-        frames: @.animate_to_up_frames
+        final: fp.floor_solid_position_center(floor_number)
+        frames: @.animate_to_center_frames
       fp.animated_objects.push
         object: @.object.number
-        final: fp.floor_position_above_the_scene(@.object.number)
-        frames: @.animate_to_up_frames
+        final: fp.floor_solid_position_center(floor_number)
+        frames: @.animate_to_center_frames
+    animate_to_start: ->
+      floor_number = @.object.number.element.textContent
+      fp.animated_objects.push
+        object: @.object.solid
+        final: fp.floor_solid_position_start(floor_number)
+        frames: @.animate_to_start_frames
+      fp.animated_objects.push
+        object: @.object.number
+        final: fp.floor_solid_position_start(floor_number)
+        frames: @.animate_to_start_frames
 
   init_floors: ->
     fp = $.app.pages.shared.floor_plans
@@ -268,22 +279,25 @@ $.app.pages.shared.floor_plans =
   init_house: ->
     fp = $.app.pages.shared.floor_plans
     fp.house =
-      animate_to_scene_frames: 50
-      animate_from_scene_frames: 50
       floors: fp.init_floors()
+      floor: (floor_number) ->
+        @.floors[floor_number - 1]
       add_to_scene: ->
         floor.add_to_scene_solid_with_number() for floor in @.floors
-      animate_to_scene: -> #
+      animate_to_scene: ->
+        for floor in @.floors
+          floor.animate_to_center()
       animate_from_scene: ->
         for floor in @.floors
-          floor.animate_above_the_scene()
+          floor.animate_to_start()
 
   show_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
     floor_object = fp.init_floor(floor_number)
+    floor_object.set_position_by fp.house.floor(floor_number)
     floor_object.add_to_scene_solid()
 
-    floor_object.animate_to_center_of_scene()
+    floor_object.animate_to_foreground()
     fp.house.animate_from_scene()
     fp.animated_objects.push
       object: fp.camera
