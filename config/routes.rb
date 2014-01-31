@@ -4,7 +4,10 @@ Petrovsky::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'pages#index'
 
+  get '/home' => redirect('/')
+  get ':slug' => 'pages#show', :as => :slug
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -25,6 +28,8 @@ Petrovsky::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
+
+  resources :pages, only: :index
 
   # Example resource route with sub-resources:
   #   resources :products do

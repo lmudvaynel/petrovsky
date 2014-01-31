@@ -1,0 +1,21 @@
+<% if @pages %>
+  <ul class="menu">
+    <% if @home_page %>
+      <li class="page-elem">
+        <%= link_to @home_page.name, root_path %>
+      </li>
+    <% end %>
+    <% @pages.each do |page| %>
+      <li class="page-elem">
+        <%= link_to page.name, slug_path(page.slug) %>
+        <ul class="submenu">
+          <% page.subpages.each do |subpage| %>
+            <li class="subpage-elem">
+              <%= link_to subpage.name, slug_path(subpage.slug) %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
