@@ -10,14 +10,15 @@ $.app.pages.shared.floor_plans =
     distance: 1000
     yz_angle: 3 * Math.PI / 8
   animation:
-    frames_count: 50
+    frames:
+      camera: 50
     speed: 30
   floors_params:
-    count: 4
+    count: 6
     size:
-      width: 800
-      height: 600
-    opacity: 0.5
+      width: 1023
+      height: 544
+    opacity: 0.7
     gap: 100
   floors_numbers_params:
     font_size_px: 40
@@ -67,7 +68,6 @@ $.app.pages.shared.floor_plans =
     @.init_house()
     @.house.add_to_scene()
     @.house.animate_to_scene()
-    # @.init_axes()
 
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
@@ -115,6 +115,13 @@ $.app.pages.shared.floor_plans =
         animated_object.object[option][coord] -= (animated_object.object[option][coord] - animated_object.final[option][coord]) / animated_object.frames
     animated_object.frames -= 1
     fp.animated_objects.splice(i, 1) if animated_object.frames == 0
+
+  animate_camera_to_start: ->
+    fp = $.app.pages.shared.floor_plans
+    fp.animated_objects.push
+      object: fp.camera
+      final: fp.camera_position_start()
+      frames: fp.animation.frames.camera
 
   init_axes: ->
     fp = $.app.pages.shared.floor_plans
@@ -226,8 +233,8 @@ $.app.pages.shared.floor_plans =
   init_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
     animate_to_foreground_frames: 40
-    animate_to_start_frames: 80
-    animate_to_center_frames: 80
+    animate_to_start_frames: 40
+    animate_to_center_frames: 40
     object: fp.init_floor_object(floor_number)
     get_object_by_type: (object_type) ->
       @.object[object_type]
@@ -244,11 +251,16 @@ $.app.pages.shared.floor_plans =
           @.object[object_type][option] = other_floor.object[object_type][option].clone()
     update_number_rotation: ->
       @.object.number.rotation = fp.camera.rotation
+    animate_to: (position, object_types) ->
+      object_types = [object_types] unless $.type(object_types) == 'array'
+      floor_number = @.object.number.element.textContent
+      for object_type in object_types
+        fp.animated_objects.push
+          object: @.object[object_type]
+          final: fp["floor_#{object_type}_position_#{position}"](floor_number)
+          frames: @["animate_to_#{position}_frames"]
     animate_to_foreground: ->
-      fp.animated_objects.push
-        object: @.object.solid
-        final: fp.floor_solid_position_foreground()
-        frames: @.animate_to_foreground_frames
+      @.animate_to 'foreground', 'solid'
     animate_to_center: ->
       floor_number = @.object.number.element.textContent
       fp.animated_objects.push
@@ -279,19 +291,23 @@ $.app.pages.shared.floor_plans =
   init_house: ->
     fp = $.app.pages.shared.floor_plans
     fp.house =
+      animation:
+        delay: 300
       floors: fp.init_floors()
       floor: (floor_number) ->
         @.floors[floor_number - 1]
       add_to_scene: ->
         floor.add_to_scene_solid_with_number() for floor in @.floors
+      set_delay_timeout_to_animate: (floor, called_animation, i) ->
+        setTimeout ->
+          floor[called_animation]()
+        , i * @.animation.delay
       animate_to_scene: ->
         for floor, i in @.floors
-          setTimeout ->
-            floor.animate_to_center()
-          , 100 * i
+          @.set_delay_timeout_to_animate(floor, 'animate_to_center', i)
       animate_from_scene: ->
-        for floor in @.floors
-          floor.animate_to_start()
+        for floor, i in @.floors
+          @.set_delay_timeout_to_animate(floor, 'animate_to_start', i)
 
   show_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
@@ -301,10 +317,7 @@ $.app.pages.shared.floor_plans =
 
     floor_object.animate_to_foreground()
     fp.house.animate_from_scene()
-    fp.animated_objects.push
-      object: fp.camera
-      final: fp.camera_position_start()
-      frames: 50
+    fp.animate_camera_to_start()
 
 $.app.pages.shared.floor_plans.init()
 $.app.pages.shared.floor_plans.animate()
