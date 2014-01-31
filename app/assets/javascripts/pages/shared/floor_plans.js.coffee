@@ -285,8 +285,10 @@ $.app.pages.shared.floor_plans =
       add_to_scene: ->
         floor.add_to_scene_solid_with_number() for floor in @.floors
       animate_to_scene: ->
-        for floor in @.floors
-          floor.animate_to_center()
+        for floor, i in @.floors
+          setTimeout ->
+            floor.animate_to_center()
+          , 100 * i
       animate_from_scene: ->
         for floor in @.floors
           floor.animate_to_start()
