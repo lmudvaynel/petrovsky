@@ -18,12 +18,13 @@ $.app.pages.shared.floor_plans =
       width: 800
       height: 600
     opacity: 0.5
+    gap: 100
   floors_numbers_params:
     font_size_px: 40
   house: null
   animated_objects: []
 
-  camera_base: ->
+  camera_position_start: ->
     position:
       x: 0
       y: @.scene_params.distance * Math.cos(@.scene_params.yz_angle)
@@ -31,7 +32,15 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: 0, y: 0, z: 0
 
-  floor_object_foreground: ->
+  floor_solid_position_start: (floor_number) ->
+    position:
+      x: 0
+      y: (floor_number - @.floors_params.count / 2) * @.floors_params.gap
+      z: 0
+    rotation:
+      x: - Math.PI / 2, y: 0, z: 0
+
+  floor_solid_position_foreground: ->
     position:
       x: 0
       y: @.scene_params.distance / 4 * Math.cos(@.scene_params.yz_angle)
@@ -39,11 +48,12 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: @.scene_params.yz_angle - Math.PI / 2, y: 0, z: 0
 
-  floor_object_up_position: ->
+  floor_position_above_the_scene: (current) ->
     position:
-      x: 0, y: 1500, z: 0
-    rotation:
-      x: 0, y: 0, z: 0
+      x: current.position.x
+      y: @.scene_params.distance * 2
+      z: current.position.x
+    rotation: current.rotation
 
   init: ->
     @.init_camera()
@@ -61,7 +71,7 @@ $.app.pages.shared.floor_plans =
     @.camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000)
     for option in ['position', 'rotation']
       for coord in ['x', 'y', 'z']
-        @.camera[option][coord] = @.camera_base()[option][coord]
+        @.camera[option][coord] = @.camera_position_start()[option][coord]
 
   init_scene: ->
     @.scene = new THREE.Scene()
@@ -189,14 +199,16 @@ $.app.pages.shared.floor_plans =
   init_number_floor_object: (floor_object, floor_number) ->
     floor_number_element = @.init_number_floor_dom_element(floor_number)
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
-    floor_number_dy = @.floors_numbers_params.font_size_px / 2
-    floor_number_object.position.y = floor_object.position.y + floor_number_dy
+    for coord in ['x', 'y', 'z']
+      floor_number_object.position[coord] = @.floor_solid_position_start(floor_number).position[coord]
+    floor_number_object.position.y += @.floors_numbers_params.font_size_px / 2
     floor_number_object
 
   init_solid_floor_object: (floor_number) ->
     solid_floor_object = new THREE.CSS3DObject(@.init_solid_floor_dom_element(floor_number))
-    solid_floor_object.position.y = (floor_number - @.floors_params.count / 2) * 100
-    solid_floor_object.rotation.x = - Math.PI / 2
+    for option in ['position', 'rotation']
+      for coord in ['x', 'y', 'z']
+        solid_floor_object[option][coord] = @.floor_solid_position_start(floor_number)[option][coord]
     solid_floor_object
 
   init_floor_object: (floor_number) ->
@@ -227,16 +239,16 @@ $.app.pages.shared.floor_plans =
     animate_to_center_of_scene: ->
       fp.animated_objects.push
         object: @.object.solid
-        final: fp.floor_object_foreground()
+        final: fp.floor_solid_position_foreground()
         frames: @.animate_to_center_of_scene_frames
-    animate_to_up: ->
+    animate_above_the_scene: ->
       fp.animated_objects.push
         object: @.object.solid
-        final: fp.floor_object_up_position()
+        final: fp.floor_position_above_the_scene(@.object.solid)
         frames: @.animate_to_up_frames
       fp.animated_objects.push
         object: @.object.number
-        final: fp.floor_object_up_position()
+        final: fp.floor_position_above_the_scene(@.object.number)
         frames: @.animate_to_up_frames
 
   init_floors: ->
@@ -256,7 +268,7 @@ $.app.pages.shared.floor_plans =
       animate_to_scene: -> #
       animate_from_scene: ->
         for floor in @.floors
-          floor.animate_to_up()
+          floor.animate_above_the_scene()
 
   show_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
@@ -267,7 +279,7 @@ $.app.pages.shared.floor_plans =
     fp.house.animate_from_scene()
     fp.animated_objects.push
       object: fp.camera
-      final: fp.camera_base()
+      final: fp.camera_position_start()
       frames: 50
 
 $.app.pages.shared.floor_plans.init()
