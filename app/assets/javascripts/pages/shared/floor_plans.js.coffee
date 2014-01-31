@@ -191,34 +191,30 @@ $.app.pages.shared.floor_plans =
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
     floor_number_dy = @.floors_numbers_params.font_size_px / 2
     floor_number_object.position.y = floor_object.position.y + floor_number_dy
-    @.scene.add floor_number_object
     floor_number_object
 
   init_solid_floor_object: (floor_number) ->
     solid_floor_object = new THREE.CSS3DObject(@.init_solid_floor_dom_element(floor_number))
     solid_floor_object.position.y = (floor_number - @.floors_params.count / 2) * 100
     solid_floor_object.rotation.x = - Math.PI / 2
-    @.scene.add solid_floor_object
     solid_floor_object
 
   init_floor_object: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
     solid_floor_object = fp.init_solid_floor_object(floor_number)
-    console.log solid_floor_object, solid_floor_object.id
     number_floor_object = fp.init_number_floor_object(solid_floor_object, floor_number)
-    console.log number_floor_object, number_floor_object.id
     floor_object =
-      solid_id: solid_floor_object.id
-      number_id: number_floor_object.id
+      solid: solid_floor_object
+      number: number_floor_object
     floor_object
 
   init_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
     animate_to_center_of_scene_frames: 40
     animate_to_up_frames: 80
-    object_ids: fp.init_floor_object(floor_number)
+    object: fp.init_floor_object(floor_number)
     get_object_by_type: (object_type) ->
-      fp.scene.getObjectById @.object_ids[object_type]
+      @.object[object_type]
     add_to_scene_all_objects_of_types: (object_types) ->
       object_types = [object_types] unless $.type(object_types) == 'array'
       fp.scene.add @.get_object_by_type(object_type) for object_type in object_types
@@ -227,19 +223,19 @@ $.app.pages.shared.floor_plans =
     add_to_scene_solid: ->
       @.add_to_scene_all_objects_of_types 'solid'
     update_number_rotation: ->
-      fp.scene.getObjectById(@.object_ids.number_id).rotation = fp.camera.rotation
+      @.object.number.rotation = fp.camera.rotation
     animate_to_center_of_scene: ->
       fp.animated_objects.push
-        object: fp.scene.getObjectById(@.object_ids.solid_id)
+        object: @.object.solid
         final: fp.floor_object_foreground()
         frames: @.animate_to_center_of_scene_frames
     animate_to_up: ->
       fp.animated_objects.push
-        object: fp.scene.getObjectById(@.object_ids.solid_id)
+        object: @.object.solid
         final: fp.floor_object_up_position()
         frames: @.animate_to_up_frames
       fp.animated_objects.push
-        object: fp.scene.getObjectById(@.object_ids.number_id)
+        object: @.object.number
         final: fp.floor_object_up_position()
         frames: @.animate_to_up_frames
 
@@ -265,6 +261,7 @@ $.app.pages.shared.floor_plans =
   show_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
     floor_object = fp.init_floor(floor_number)
+    floor_object.add_to_scene_solid()
 
     floor_object.animate_to_center_of_scene()
     fp.house.animate_from_scene()
