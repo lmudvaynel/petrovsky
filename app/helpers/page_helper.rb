@@ -1,7 +1,11 @@
 module PageHelper
   def render_page
-    render "/pages/shared/#{@page.slug.gsub('-', '_')}"
-    init_shared_page_js
+    page = render "/pages/shared/#{@page.slug.gsub('-', '_')}"
+    if page
+      page + init_shared_page_js
+    else
+      @page.try(:content)
+    end
   rescue
     @page.try(:content)
   end
