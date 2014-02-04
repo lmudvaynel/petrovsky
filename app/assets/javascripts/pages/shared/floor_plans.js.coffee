@@ -106,151 +106,74 @@ $.app.pages.shared.floor_plans =
 
   init_events: ->
     @.container.on 'resize', @.on_window_resize
-    @.container.on 'click', 'a.show-floor', @.floor_element_on_click
+    @.container.on 'click', 'a.show-floor', (event) ->
+      event.preventDefault()
+      floor_number = parseInt $(@).closest('.floor-element').data('floor-number')
+      $.app.pages.shared.floor_plans.floor_element_on_click floor_number
 
     controls = $('#controls-container')
-    controls.on 'click', 'a#back-to-house', @.back_to_house_on_click
+    controls.on 'click', 'a#back-to-house', (event) ->
+      event.preventDefault()
+      $.app.pages.shared.floor_plans.back_to_house_on_click()
 
   init_animation: ->
-    fp = $.app.pages.shared.floor_plans
-    setInterval ->
-      if fp.animated_objects.length > 0
-        fp.animation_step_for_object(i) for object, i in fp.animated_objects
-        fp.render()
-    , fp.params.animation.speed
+    setInterval =>
+      if @.animated_objects.length > 0
+        @.animation_step_for_object(i) for object, i in @.animated_objects
+        @.render()
+    , @.params.animation.speed
 
   animation_step_for_object: (i) ->
-    fp = $.app.pages.shared.floor_plans
-    animated_object = fp.animated_objects[i]
+    animated_object = @.animated_objects[i]
     return unless animated_object
     for option in ['position', 'rotation']
       for coord in ['x', 'y', 'z']
         animated_object.object[option][coord] -= (animated_object.object[option][coord] - animated_object.final[option][coord]) / animated_object.frames
     animated_object.frames -= 1
-    fp.animated_objects.splice(i, 1) if animated_object.frames == 0
+    @.animated_objects.splice(i, 1) if animated_object.frames == 0
 
   animate_camera_to_start: ->
-    fp = $.app.pages.shared.floor_plans
-    fp.animated_objects.push
-      object: fp.camera
-      final: fp.camera_position_start()
-      frames: fp.params.animation.frames.camera
+    @.animated_objects.push
+      object: @.camera
+      final: @.camera_position_start()
+      frames: @.params.animation.frames.camera
 
   do_it_after_animation: (callback) ->
-    fp = $.app.pages.shared.floor_plans
-    fp.waiting_end_of_animation = setInterval ->
-      fp.call_after_animation callback
-    , fp.params.animation.speed
+    @.waiting_end_of_animation = setInterval =>
+      @.call_after_animation callback
+    , @.params.animation.speed
 
   call_after_animation: (callback) ->
-    fp = $.app.pages.shared.floor_plans
-    unless fp.animated_objects.length > 0
-      clearInterval fp.waiting_end_of_animation
+    unless @.animated_objects.length > 0
+      clearInterval @.waiting_end_of_animation
       callback()
 
-  init_axes: ->
-    fp = $.app.pages.shared.floor_plans
-    ox = document.createElement('div')
-    oy = document.createElement('div')
-    oz = document.createElement('div')
-    ox_css =
-      width: "#{@.params.scene.distance}px"
-      height: "#{Math.round(@.params.scene.distance / 100)}px"
-      'background-color': "#ff0000"
-    oy_css =
-      width: "#{@.params.scene.distance}px"
-      height: "#{Math.round(@.params.scene.distance / 100)}px"
-      'background-color': "#00ff00"
-    oz_css =
-      width: "#{@.params.scene.distance}px"
-      height: "#{Math.round(@.params.scene.distance / 100)}px"
-      'background-color': "#0000ff"
-    $(ox).css ox_css
-    $(oy).css oy_css
-    $(oz).css oz_css
+  init_house: ->
+    @.house =
+      floors: @.init_floors()
+      floor: (floor_number) ->
+        @.floors[floor_number - 1]
+      add_to_scene: ->
+        floor.add_to_scene_solid_with_number() for floor in @.floors
+      set_delay_timeout_to_animate: (floor, called_animation, i) =>
+        setTimeout =>
+          floor[called_animation]()
+        , i * @.params.animation.house.delay
+      animate_to_scene: ->
+        for floor, i in @.floors
+          @.set_delay_timeout_to_animate(floor, 'animate_to_center', i)
+      animate_from_scene: ->
+        for floor, i in @.floors.slice(0).reverse()
+          @.set_delay_timeout_to_animate(floor, 'animate_to_start', i)
 
-    ox_object = new THREE.CSS3DObject(ox)
-    ox_object.position.x += Math.round(@.params.scene.distance / 2)
-    oy_object = new THREE.CSS3DObject(oy)
-    oy_object.position.y += Math.round(@.params.scene.distance / 2)
-    oy_object.rotation.z += Math.PI / 2
-    oz_object = new THREE.CSS3DObject(oz)
-    oz_object.position.z += Math.round(@.params.scene.distance / 2)
-    oz_object.rotation.y += Math.PI / 2
-
-    fp.scene.add(ox_object)
-    fp.scene.add(oy_object)
-    fp.scene.add(oz_object)
-
-  on_window_resize: ->
-    fp = $.app.pages.shared.floor_plans
-    fp.camera.aspect = @.container.innerWidth() / @.container.innerHeight()
-    fp.camera.updateProjectionMatrix()
-    fp.renderer.setSize(@.container.innerWidth(), @.container.innerHeight())
-    fp.render()
-
-  animate: ->
-    fp = $.app.pages.shared.floor_plans
-    requestAnimationFrame(fp.animate)
-    fp.controls.update()
-
-  render: ->
-    fp = $.app.pages.shared.floor_plans
-    for floor, i in fp.house.floors
-      floor.update_number_rotation()
-    fp.renderer.render(fp.scene, fp.camera)
-
-  init_number_floor_dom_element: (floor_number) ->
-    number_floor_element = document.createElement('div')
-    number_floor_css =
-      width: "#{3 * @.params.floors.number.font_size.px}px"
-      height: "#{@.params.floors.number.font_size.px}px"
-      'font-size': "#{@.params.floors.number.font_size.px}px"
-    $(number_floor_element).text(floor_number).css number_floor_css
-    number_floor_element
-
-  init_solid_floor_show_link_dom_element: ->
-    link = document.createElement('a')
-    $(link).addClass('show-floor').attr('href', '#').text('SHOW')
-
-  init_solid_floor_dom_element: (floor_number) ->
-    solid_floor_element = document.createElement('div')
-    solid_floor_css =
-      width: "#{@.params.floors.solid.size.width}px"
-      height: "#{@.params.floors.solid.size.height}px"
-      opacity: @.params.floors.solid.opacity
-      'background-image': "url(/assets/floor#{floor_number}.png)"
-    $(solid_floor_element).addClass('floor-element').css solid_floor_css
-    $(solid_floor_element).data 'floor-number', floor_number
-    $(solid_floor_element).append @.init_solid_floor_show_link_dom_element
-    solid_floor_element
-
-  init_number_floor_object: (floor_object, floor_number) ->
-    floor_number_element = @.init_number_floor_dom_element(floor_number)
-    floor_number_object = new THREE.CSS3DObject(floor_number_element)
-    for coord in ['x', 'y', 'z']
-      floor_number_object.position[coord] = @.floor_position_start('number', floor_number).position[coord]
-    floor_number_object
-
-  init_solid_floor_object: (floor_number) ->
-    solid_floor_object = new THREE.CSS3DObject(@.init_solid_floor_dom_element(floor_number))
-    for option in ['position', 'rotation']
-      for coord in ['x', 'y', 'z']
-        solid_floor_object[option][coord] = @.floor_position_start('solid', floor_number)[option][coord]
-    solid_floor_object
-
-  init_floor_object: (floor_number) ->
-    fp = $.app.pages.shared.floor_plans
-    solid_floor_object = fp.init_solid_floor_object(floor_number)
-    number_floor_object = fp.init_number_floor_object(solid_floor_object, floor_number)
-    floor_object =
-      solid: solid_floor_object
-      number: number_floor_object
-    floor_object
+  init_floors: ->
+    floors = []
+    floors.push @.init_floor(i) for i in [1..@.params.floors.count]
+    floors
 
   init_floor: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
-    object: fp.init_floor_object(floor_number)
+    object: @.init_floor_object(floor_number)
     get_object_by_type: (object_type) ->
       @.object[object_type]
     add_to_scene_all_objects_of_types: (object_types) ->
@@ -286,63 +209,92 @@ $.app.pages.shared.floor_plans =
     animate_to_start: ->
       @.animate_to 'start', ['solid', 'number']
 
-  init_floors: ->
-    fp = $.app.pages.shared.floor_plans
-    floors = []
-    floors.push fp.init_floor(i) for i in [1..fp.params.floors.count]
-    floors
+  init_floor_object: (floor_number) ->
+    solid_floor_object = @.init_solid_floor_object(floor_number)
+    number_floor_object = @.init_number_floor_object(solid_floor_object, floor_number)
+    solid: solid_floor_object
+    number: number_floor_object
 
-  init_house: ->
-    fp = $.app.pages.shared.floor_plans
-    fp.house =
-      floors: fp.init_floors()
-      floor: (floor_number) ->
-        @.floors[floor_number - 1]
-      add_to_scene: ->
-        floor.add_to_scene_solid_with_number() for floor in @.floors
-      set_delay_timeout_to_animate: (floor, called_animation, i) ->
-        setTimeout ->
-          floor[called_animation]()
-        , i * fp.params.animation.house.delay
-      animate_to_scene: ->
-        for floor, i in @.floors
-          @.set_delay_timeout_to_animate(floor, 'animate_to_center', i)
-      animate_from_scene: ->
-        for floor, i in @.floors
-          @.set_delay_timeout_to_animate(floor, 'animate_to_start', i)
+  init_solid_floor_object: (floor_number) ->
+    solid_floor_object = new THREE.CSS3DObject(@.init_solid_floor_dom_element(floor_number))
+    for option in ['position', 'rotation']
+      for coord in ['x', 'y', 'z']
+        solid_floor_object[option][coord] = @.floor_position_start('solid', floor_number)[option][coord]
+    solid_floor_object
 
-  floor_element_on_click: (event) ->
-    event.preventDefault()
-    fp = $.app.pages.shared.floor_plans
-    floor_number = parseInt $(@).closest('.floor-element').data('floor-number')
+  init_solid_floor_dom_element: (floor_number) ->
+    solid_floor_element = document.createElement('div')
+    solid_floor_css =
+      width: "#{@.params.floors.solid.size.width}px"
+      height: "#{@.params.floors.solid.size.height}px"
+      opacity: @.params.floors.solid.opacity
+      'background-image': "url(/assets/floor#{floor_number}.png)"
+    $(solid_floor_element).addClass('floor-element').css solid_floor_css
+    $(solid_floor_element).data 'floor-number', floor_number
+    $(solid_floor_element).append @.init_solid_floor_show_link_dom_element
+    solid_floor_element
 
-    fp.showed_floor.solid = fp.init_floor(floor_number)
-    fp.showed_floor.solid.set_position_by fp.house.floor(floor_number)
-    fp.showed_floor.solid.add_to_scene_solid()
+  init_solid_floor_show_link_dom_element: ->
+    link = document.createElement('a')
+    $(link).addClass('show-floor').attr('href', '#').text('SHOW')
 
-    fp.showed_floor.solid.animate_to_foreground()
-    fp.house.animate_from_scene()
-    fp.animate_camera_to_start()
+  init_number_floor_object: (floor_object, floor_number) ->
+    floor_number_element = @.init_number_floor_dom_element(floor_number)
+    floor_number_object = new THREE.CSS3DObject(floor_number_element)
+    for coord in ['x', 'y', 'z']
+      floor_number_object.position[coord] = @.floor_position_start('number', floor_number).position[coord]
+    floor_number_object
 
-    fp.do_it_after_animation fp.end_show_floor_element_animation
+  init_number_floor_dom_element: (floor_number) ->
+    number_floor_element = document.createElement('div')
+    number_floor_css =
+      width: "#{3 * @.params.floors.number.font_size.px}px"
+      height: "#{@.params.floors.number.font_size.px}px"
+      'font-size': "#{@.params.floors.number.font_size.px}px"
+    $(number_floor_element).text(floor_number).css number_floor_css
+    number_floor_element
 
-  back_to_house_on_click: (event) ->
-    event.preventDefault()
-    fp = $.app.pages.shared.floor_plans
+  on_window_resize: ->
+    @.camera.aspect = @.container.innerWidth() / @.container.innerHeight()
+    @.camera.updateProjectionMatrix()
+    @.renderer.setSize(@.container.innerWidth(), @.container.innerHeight())
+    @.render()
 
-    fp.showed_floor.solid.animate_to_center()
-    fp.house.animate_to_scene()
-    fp.animate_camera_to_start()
+  floor_element_on_click: (floor_number) ->
+    @.showed_floor.solid = @.init_floor(floor_number)
+    @.showed_floor.solid.set_position_by @.house.floor(floor_number)
+    @.showed_floor.solid.add_to_scene_solid()
 
-    fp.do_it_after_animation fp.end_back_to_house_animation
+    @.showed_floor.solid.animate_to_foreground()
+    @.house.animate_from_scene()
+    @.animate_camera_to_start()
+
+    @.do_it_after_animation @.end_show_floor_element_animation
 
   end_show_floor_element_animation: ->
     $('#back-to-house').removeClass 'hidden'
 
+  back_to_house_on_click: ->
+    @.showed_floor.solid.animate_to_center()
+    @.house.animate_to_scene()
+    @.animate_camera_to_start()
+
+    @.do_it_after_animation @.end_back_to_house_animation
+
   end_back_to_house_animation: ->
-    fp = $.app.pages.shared.floor_plans
     $('#back-to-house').addClass 'hidden'
-    fp.showed_floor.solid.remove_from_scene_solid()
+    $.app.pages.shared.floor_plans.showed_floor.solid.remove_from_scene_solid()
+
+  animate: ->
+    fp = $.app.pages.shared.floor_plans
+    requestAnimationFrame(fp.animate)
+    fp.controls.update()
+
+  render: ->
+    fp = $.app.pages.shared.floor_plans
+    for floor, i in fp.house.floors
+      floor.update_number_rotation()
+    fp.renderer.render(fp.scene, fp.camera)
 
 $.app.pages.shared.floor_plans.init()
 $.app.pages.shared.floor_plans.animate()
