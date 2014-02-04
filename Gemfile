@@ -8,6 +8,8 @@ group :assets do
   gem 'sass-rails', '~> 4.0.0'
   gem 'coffee-rails', '~> 4.0.0'
 
+	gem 'therubyracer', :platforms => :ruby
+
   gem 'uglifier', '>= 1.3.0'
 end
 
@@ -29,7 +31,10 @@ group :doc do
 end
 group :development do
   gem 'capistrano'
+  gem 'capistrano-ext'
   gem 'capistrano-unicorn'
+  gem 'rvm-capistrano', github: 'wayneeseguin/rvm-capistrano'
+  gem 'capistrano-helpers'
 end
 group :development, :test do
   gem 'debugger'
