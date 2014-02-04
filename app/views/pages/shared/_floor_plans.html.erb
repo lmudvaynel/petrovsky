@@ -1,4 +1,8 @@
-<section id="canvas-container"></section>
+<section id="canvas-container">
+</section>
+<section id="controls-container">
+  <%= link_to 'Back to house', '#', id: 'back-to-house', class: 'hidden' %>
+</section>
 <section>
   <%= @page.try(:content) %>
 </section>
