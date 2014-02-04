@@ -13,13 +13,13 @@ $.app.pages.shared.floor_plans =
     controls:
       blocked: false
     animation:
-      speed: 40
+      speed: 10
       frames:
-        camera: 40
+        camera: 100
         floor:
-          to_foreground: 40
-          to_start: 40
-          to_center: 40
+          to_foreground: 100
+          to_start: 100
+          to_center: 100
       house:
         delay: 300
     floors:
@@ -32,7 +32,7 @@ $.app.pages.shared.floor_plans =
         gap: 100
       number:
         font_size:
-          px: 40
+          px: 50
   house: {}
   showed_floor: {}
   animated_objects: []
@@ -158,7 +158,7 @@ $.app.pages.shared.floor_plans =
     return unless animated_object
     for option in ['position', 'rotation']
       for coord in ['x', 'y', 'z']
-        animated_object.object[option][coord] -= (animated_object.object[option][coord] - animated_object.final[option][coord]) / animated_object.frames
+        animated_object.object[option][coord] += (animated_object.final[option][coord] - animated_object.object[option][coord]) / animated_object.frames
     animated_object.frames -= 1
     @.animated_objects.splice(i, 1) if animated_object.frames == 0
 
