@@ -18,8 +18,8 @@ $.app.pages.shared.floor_plans =
         camera: 100
         floor:
           to_foreground: 100
-          to_start: 100
-          to_center: 100
+          to_start: 50
+          to_center: 50
       house:
         delay: 300
     floors:
@@ -28,9 +28,16 @@ $.app.pages.shared.floor_plans =
         size:
           width: 1023
           height: 544
-        opacity: 0.7
+        opacity: 0.85
         gap: 100
       number:
+        positions:
+          1: positions: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
+          2: positions: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
+          3: positions: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
+          4: positions: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
+          5: positions: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
+          6: positions: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
         font_size:
           px: 50
   house: {}
@@ -45,19 +52,19 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: 0, y: 0, z: 0
 
-  floor_position_start: (floor_type, floor_number) ->
-    position_y = (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap + @.params.scene.distance * 2
-    position_y += @.params.floors.number.font_size.px / 2 if floor_type == 'number'
+  floor_position_start: (floor_number) ->
     position:
-      x: 0, y: position_y, z: 0
+      x: 0
+      y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap + @.params.scene.distance * 2
+      z: 0
     rotation:
       x: - Math.PI / 2, y: 0, z: 0
 
-  floor_position_center: (floor_type, floor_number) ->
-    position_y = (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap
-    position_y += @.params.floors.number.font_size.px / 2 if floor_type == 'number'
+  floor_position_center: (floor_number) ->
     position:
-      x: 0, y: position_y, z: 0
+      x: 0
+      y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap
+      z: 0
     rotation:
       x: - Math.PI / 2, y: 0, z: 0
 
@@ -106,7 +113,7 @@ $.app.pages.shared.floor_plans =
     @.container.on 'resize', @.on_window_resize
     @.container.on 'click', 'a.show-floor', (event) ->
       event.preventDefault()
-      floor_number = parseInt $(@).closest('.floor-element').data('floor-number')
+      floor_number = parseInt $(@).text()
       $.app.pages.shared.floor_plans.floor_element_on_click floor_number
 
     controls = $('#controls-container')
@@ -231,15 +238,33 @@ $.app.pages.shared.floor_plans =
       for object_type in ['solid', 'number']
         for option in ['position', 'rotation']
           @.object[object_type][option] = other_floor.object[object_type][option].clone()
-    update_number_rotation: ->
+    update_number_position: ->
       @.object.number.rotation = fp.camera.rotation
+      abs_positions = []
+      for position in [0..3]
+        sign_x = if position == 0 || position == 3 then 1 else -1
+        sign_z = if position < 2 then 1 else -1
+        abs_positions[position] =
+          x: @.object.solid.position.x - fp.params.floors.solid.size.width / 2 + fp.params.floors.number.positions[floor_number].positions[position][0] + sign_x * fp.params.floors.number.font_size.px
+          y: @.object.solid.position.y + fp.params.floors.number.font_size.px / 2
+          z: @.object.solid.position.z - Math.round(fp.params.floors.solid.size.height / 2) + fp.params.floors.number.positions[floor_number].positions[position][1] + sign_z * fp.params.floors.number.font_size.px
+      current_position = fp.params.floors.number.positions[floor_number].current
+      d = Math.sqrt(Math.pow(abs_positions[current_position].x - fp.camera.position.x, 2) + Math.pow(abs_positions[current_position].y - fp.camera.position.y, 2) + Math.pow(abs_positions[current_position].z - fp.camera.position.z, 2))
+      for abs_position, i in abs_positions
+        nd = Math.sqrt(Math.pow(abs_position.x - fp.camera.position.x, 2) + Math.pow(abs_position.y - fp.camera.position.y, 2) + Math.pow(abs_position.z - fp.camera.position.z, 2))
+        if nd < d - 100
+          d = nd
+          current_position = i
+      @.object.number.position.x = abs_positions[current_position].x
+      @.object.number.position.y = abs_positions[current_position].y
+      @.object.number.position.z = abs_positions[current_position].z
     animate_to: (position, object_types) ->
       object_types = [object_types] unless $.type(object_types) == 'array'
       floor_number = @.object.number.element.textContent
       for object_type in object_types
         fp.animated_objects.push
           object: @.object[object_type]
-          final: fp["floor_position_#{position}"](object_type, floor_number)
+          final: fp["floor_position_#{position}"](floor_number)
           frames: fp.params.animation.frames.floor["to_#{position}"]
     animate_to_foreground: ->
       @.animate_to 'foreground', 'solid'
@@ -259,7 +284,7 @@ $.app.pages.shared.floor_plans =
     solid_floor_object = new THREE.CSS3DObject(@.init_solid_floor_dom_element(floor_number))
     for option in ['position', 'rotation']
       for coord in ['x', 'y', 'z']
-        solid_floor_object[option][coord] = @.floor_position_start('solid', floor_number)[option][coord]
+        solid_floor_object[option][coord] = @.floor_position_start(floor_number)[option][coord]
     solid_floor_object
 
   init_solid_floor_dom_element: (floor_number) ->
@@ -270,27 +295,22 @@ $.app.pages.shared.floor_plans =
       opacity: @.params.floors.solid.opacity
       'background-image': "url(/assets/floor#{floor_number}.png)"
     $(solid_floor_element).addClass('floor-element').css solid_floor_css
-    $(solid_floor_element).data 'floor-number', floor_number
-    $(solid_floor_element).append @.init_solid_floor_show_link_dom_element
     solid_floor_element
-
-  init_solid_floor_show_link_dom_element: ->
-    link = document.createElement('a')
-    $(link).addClass('show-floor').attr('href', '#').text('SHOW')
 
   init_number_floor_object: (floor_object, floor_number) ->
     floor_number_element = @.init_number_floor_dom_element(floor_number)
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
     for coord in ['x', 'y', 'z']
-      floor_number_object.position[coord] = @.floor_position_start('number', floor_number).position[coord]
+      floor_number_object.position[coord] = @.floor_position_start(floor_number).position[coord]
     floor_number_object
 
   init_number_floor_dom_element: (floor_number) ->
-    number_floor_element = document.createElement('div')
+    number_floor_element = document.createElement('a')
     number_floor_css =
-      width: "#{3 * @.params.floors.number.font_size.px}px"
+      width: "#{@.params.floors.number.font_size.px}px"
       height: "#{@.params.floors.number.font_size.px}px"
       'font-size': "#{@.params.floors.number.font_size.px}px"
+    $(number_floor_element).attr('href', '#').addClass('show-floor')
     $(number_floor_element).text(floor_number).css number_floor_css
     number_floor_element
 
@@ -338,8 +358,11 @@ $.app.pages.shared.floor_plans =
 
   render: ->
     fp = $.app.pages.shared.floor_plans
-    for floor, i in fp.house.floors
-      floor.update_number_rotation()
+    for floor in fp.house.floors
+      if fp.goes_an_animation()
+        for coord in ['x', 'y', 'z']
+          fp.camera.rotation[coord] = 0
+      floor.update_number_position()
     fp.renderer.render(fp.scene, fp.camera)
 
 $.app.pages.shared.floor_plans.init()
