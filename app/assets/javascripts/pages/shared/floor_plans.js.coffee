@@ -11,7 +11,7 @@ $.app.pages.shared.floor_plans =
       distance: 1000
       yz_angle: 3 * Math.PI / 8
     animation:
-      speed: 40
+      speed: 30
       frames:
         camera: 40
         floor:
@@ -32,6 +32,7 @@ $.app.pages.shared.floor_plans =
         font_size:
           px: 40
   house: {}
+  showed_floor: {}
   animated_objects: []
 
   camera_position_start: ->
@@ -107,6 +108,9 @@ $.app.pages.shared.floor_plans =
     @.container.on 'resize', @.on_window_resize
     @.container.on 'click', 'a.show-floor', @.floor_element_on_click
 
+    controls = $('#controls-container')
+    controls.on 'click', 'a#back-to-house', @.back_to_house_on_click
+
   init_animation: ->
     fp = $.app.pages.shared.floor_plans
     setInterval ->
@@ -131,6 +135,18 @@ $.app.pages.shared.floor_plans =
       object: fp.camera
       final: fp.camera_position_start()
       frames: fp.params.animation.frames.camera
+
+  do_it_after_animation: (callback) ->
+    fp = $.app.pages.shared.floor_plans
+    fp.waiting_end_of_animation = setInterval ->
+      fp.call_after_animation callback
+    , fp.params.animation.speed
+
+  call_after_animation: (callback) ->
+    fp = $.app.pages.shared.floor_plans
+    unless fp.animated_objects.length > 0
+      clearInterval fp.waiting_end_of_animation
+      callback()
 
   init_axes: ->
     fp = $.app.pages.shared.floor_plans
@@ -172,12 +188,6 @@ $.app.pages.shared.floor_plans =
     fp.camera.updateProjectionMatrix()
     fp.renderer.setSize(@.container.innerWidth(), @.container.innerHeight())
     fp.render()
-
-  floor_element_on_click: (event) ->
-    event.preventDefault()
-    fp = $.app.pages.shared.floor_plans
-    floor_number = parseInt $(@).closest('.floor-element').data('floor-number')
-    fp.show_floor floor_number
 
   animate: ->
     fp = $.app.pages.shared.floor_plans
@@ -246,10 +256,15 @@ $.app.pages.shared.floor_plans =
     add_to_scene_all_objects_of_types: (object_types) ->
       object_types = [object_types] unless $.type(object_types) == 'array'
       fp.scene.add @.get_object_by_type(object_type) for object_type in object_types
+    remove_from_scene_all_objects_of_types: (object_types) ->
+      object_types = [object_types] unless $.type(object_types) == 'array'
+      fp.scene.remove @.get_object_by_type(object_type) for object_type in object_types
     add_to_scene_solid_with_number: ->
       @.add_to_scene_all_objects_of_types ['solid', 'number']
     add_to_scene_solid: ->
       @.add_to_scene_all_objects_of_types 'solid'
+    remove_from_scene_solid: ->
+      @.remove_from_scene_all_objects_of_types 'solid'
     set_position_by: (other_floor) ->
       for object_type in ['solid', 'number']
         for option in ['position', 'rotation']
@@ -296,15 +311,38 @@ $.app.pages.shared.floor_plans =
         for floor, i in @.floors
           @.set_delay_timeout_to_animate(floor, 'animate_to_start', i)
 
-  show_floor: (floor_number) ->
+  floor_element_on_click: (event) ->
+    event.preventDefault()
     fp = $.app.pages.shared.floor_plans
-    floor_object = fp.init_floor(floor_number)
-    floor_object.set_position_by fp.house.floor(floor_number)
-    floor_object.add_to_scene_solid()
+    floor_number = parseInt $(@).closest('.floor-element').data('floor-number')
 
-    floor_object.animate_to_foreground()
+    fp.showed_floor.solid = fp.init_floor(floor_number)
+    fp.showed_floor.solid.set_position_by fp.house.floor(floor_number)
+    fp.showed_floor.solid.add_to_scene_solid()
+
+    fp.showed_floor.solid.animate_to_foreground()
     fp.house.animate_from_scene()
     fp.animate_camera_to_start()
+
+    fp.do_it_after_animation fp.end_show_floor_element_animation
+
+  back_to_house_on_click: (event) ->
+    event.preventDefault()
+    fp = $.app.pages.shared.floor_plans
+
+    fp.showed_floor.solid.animate_to_center()
+    fp.house.animate_to_scene()
+    fp.animate_camera_to_start()
+
+    fp.do_it_after_animation fp.end_back_to_house_animation
+
+  end_show_floor_element_animation: ->
+    $('#back-to-house').removeClass 'hidden'
+
+  end_back_to_house_animation: ->
+    fp = $.app.pages.shared.floor_plans
+    $('#back-to-house').addClass 'hidden'
+    fp.showed_floor.solid.remove_from_scene_solid()
 
 $.app.pages.shared.floor_plans.init()
 $.app.pages.shared.floor_plans.animate()
