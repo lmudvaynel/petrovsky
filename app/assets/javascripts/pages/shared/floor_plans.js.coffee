@@ -10,8 +10,10 @@ $.app.pages.shared.floor_plans =
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8
+    controls:
+      blocked: false
     animation:
-      speed: 30
+      speed: 40
       frames:
         camera: 40
         floor:
@@ -96,12 +98,8 @@ $.app.pages.shared.floor_plans =
 
   init_controls: ->
     @.controls = new THREE.OrbitControls(@.camera, @.renderer.domElement)
-    @.controls.rotateSpeed = 1
     @.controls.minDistance = @.params.scene.distance / 2
     @.controls.maxDistance = @.params.scene.distance * 2
-    @.controls.minPolarAngle = @.params.scene.yz_angle
-    @.controls.maxPolarAngle = @.params.scene.yz_angle
-    @.controls.noPan = true
     $(@.controls).on 'change', @.render
 
   init_events: ->
@@ -118,10 +116,42 @@ $.app.pages.shared.floor_plans =
 
   init_animation: ->
     setInterval =>
-      if @.animated_objects.length > 0
+      if @.goes_an_animation()
+        @.block_controls()
         @.animation_step_for_object(i) for object, i in @.animated_objects
         @.render()
     , @.params.animation.speed
+
+  block_controls: ->
+    return if @.params.controls.blocked
+
+    @.controls.rotateSpeed = 0
+    @.controls.noPan = true
+    @.controls.noZoom = true
+
+    @.params.controls.blocked = true
+
+  unblock_controls_for_house: ->
+    return unless @.params.controls.blocked
+
+    @.controls.rotateSpeed = 1
+    @.controls.minPolarAngle = @.params.scene.yz_angle
+    @.controls.maxPolarAngle = @.params.scene.yz_angle
+    @.controls.noPan = true
+    @.controls.noZoom = false
+
+    @.params.controls.blocked = false
+
+  unblock_controls_for_floor: ->
+    return unless @.params.controls.blocked
+
+    @.controls.rotateSpeed = 1
+    @.controls.minPolarAngle = 0
+    @.controls.maxPolarAngle = 2 * Math.PI
+    @.controls.noPan = false
+    @.controls.noZoom = false
+
+    @.params.controls.blocked = false
 
   animation_step_for_object: (i) ->
     animated_object = @.animated_objects[i]
@@ -144,17 +174,23 @@ $.app.pages.shared.floor_plans =
     , @.params.animation.speed
 
   call_after_animation: (callback) ->
-    unless @.animated_objects.length > 0
+    unless @.goes_an_animation()
       clearInterval @.waiting_end_of_animation
       callback()
 
+  goes_an_animation: ->
+    @.animated_objects.length > 0
+
   init_house: ->
+    fp = $.app.pages.shared.floor_plans
     @.house =
       floors: @.init_floors()
       floor: (floor_number) ->
         @.floors[floor_number - 1]
       add_to_scene: ->
         floor.add_to_scene_solid_with_number() for floor in @.floors
+      remove_from_scene: ->
+        floor.remove_from_scene() for floor in @.floors
       set_delay_timeout_to_animate: (floor, called_animation, i) =>
         setTimeout =>
           floor[called_animation]()
@@ -162,6 +198,7 @@ $.app.pages.shared.floor_plans =
       animate_to_scene: ->
         for floor, i in @.floors
           @.set_delay_timeout_to_animate(floor, 'animate_to_center', i)
+        fp.do_it_after_animation fp.end_house_animate_to_scene
       animate_from_scene: ->
         for floor, i in @.floors.slice(0).reverse()
           @.set_delay_timeout_to_animate(floor, 'animate_to_start', i)
@@ -188,6 +225,8 @@ $.app.pages.shared.floor_plans =
       @.add_to_scene_all_objects_of_types 'solid'
     remove_from_scene_solid: ->
       @.remove_from_scene_all_objects_of_types 'solid'
+    remove_from_scene: ->
+      @.remove_from_scene_all_objects_of_types ['solid', 'number']
     set_position_by: (other_floor) ->
       for object_type in ['solid', 'number']
         for option in ['position', 'rotation']
@@ -204,6 +243,7 @@ $.app.pages.shared.floor_plans =
           frames: fp.params.animation.frames.floor["to_#{position}"]
     animate_to_foreground: ->
       @.animate_to 'foreground', 'solid'
+      fp.do_it_after_animation fp.end_floor_animate_to_foreground
     animate_to_center: ->
       @.animate_to 'center', ['solid', 'number']
     animate_to_start: ->
@@ -269,21 +309,27 @@ $.app.pages.shared.floor_plans =
     @.house.animate_from_scene()
     @.animate_camera_to_start()
 
-    @.do_it_after_animation @.end_show_floor_element_animation
+  end_floor_animate_to_foreground: ->
+    fp = $.app.pages.shared.floor_plans
+    fp.house.remove_from_scene()
+    fp.unblock_controls_for_floor()
 
-  end_show_floor_element_animation: ->
     $('#back-to-house').removeClass 'hidden'
 
   back_to_house_on_click: ->
+    @.init_house()
+    @.house.add_to_scene()
+
     @.showed_floor.solid.animate_to_center()
     @.house.animate_to_scene()
     @.animate_camera_to_start()
 
-    @.do_it_after_animation @.end_back_to_house_animation
+  end_house_animate_to_scene: ->
+    fp = $.app.pages.shared.floor_plans
+    fp.showed_floor.solid.remove_from_scene_solid() if fp.showed_floor.solid
+    fp.unblock_controls_for_house()
 
-  end_back_to_house_animation: ->
     $('#back-to-house').addClass 'hidden'
-    $.app.pages.shared.floor_plans.showed_floor.solid.remove_from_scene_solid()
 
   animate: ->
     fp = $.app.pages.shared.floor_plans
