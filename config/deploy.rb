@@ -7,7 +7,7 @@ set :stages, %w(production staging)
 set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
-set :application, "petrovsky" #write app name there
+set :application, "petrovsky_house" #write app name there
 
 set :scm, :git
 set :repository,  "https://github.com/balticit/petrovsky.git" #place your repo there
