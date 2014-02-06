@@ -313,7 +313,7 @@ $.app.pages.shared.floor_plans =
       width: "#{@.params.floors.solid.size.width}px"
       height: "#{@.params.floors.solid.size.height}px"
       opacity: @.params.floors.solid.opacity
-      'background-image': "url(/assets/floor#{floor_number}.png)"
+      'background-image': "url(/images/floor#{floor_number}.png)"
     $(solid_floor_element).addClass('floor-element').css solid_floor_css
     solid_floor_element
 
