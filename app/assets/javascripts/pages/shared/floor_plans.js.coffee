@@ -50,7 +50,7 @@ $.app.pages.shared.floor_plans =
       y: @.params.scene.distance * Math.cos(@.params.scene.yz_angle)
       z: @.params.scene.distance * Math.sin(@.params.scene.yz_angle)
     rotation:
-      x: 0, y: 0, z: 0
+      x: - Math.cos(@.params.scene.yz_angle), y: 0, z: 0
 
   floor_position_start: (floor_number) ->
     position:
@@ -361,7 +361,7 @@ $.app.pages.shared.floor_plans =
     for floor in fp.house.floors
       if fp.goes_an_animation()
         for coord in ['x', 'y', 'z']
-          fp.camera.rotation[coord] = 0
+          fp.camera.rotation[coord] = fp.camera_position_start().rotation[coord]
       floor.update_number_position()
     fp.renderer.render(fp.scene, fp.camera)
 
