@@ -6,7 +6,9 @@ $.app.pages ||= {}
 $.app.pages.shared ||= {}
 $.app.pages.shared.floor_plans =
   container: $("#canvas-container")
-  coordinates: ['x', 'y', 'z']
+  location:
+    options: ['position', 'rotation']
+    coords: ['x', 'y', 'z']
   params:
     scene:
       distance: 1000
@@ -97,8 +99,8 @@ $.app.pages.shared.floor_plans =
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
     @.camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000)
-    for option in ['position', 'rotation']
-      for coord in @.coordinates
+    for option in @.location.options
+      for coord in @.location.coords
         @.camera[option][coord] = @.camera_position_start()[option][coord]
 
   init_scene: ->
@@ -169,8 +171,8 @@ $.app.pages.shared.floor_plans =
   animation_step_for_object: (i) ->
     animated_object = @.animated_objects[i]
     return unless animated_object
-    for option in ['position', 'rotation']
-      for coord in @.coordinates
+    for option in @.location.options
+      for coord in @.location.coords
         animated_object.object[option][coord] += (animated_object.final[option][coord] - animated_object.object[option][coord]) / animated_object.frames
     animated_object.frames -= 1
     @.animated_objects.splice(i, 1) if animated_object.frames == 0
@@ -258,7 +260,7 @@ $.app.pages.shared.floor_plans =
       corner_positions
     calculate_distance_to_corner_position: (corner_positions, corner) ->
       sqr = {}
-      for coord in fp.coordinates
+      for coord in fp.location.coords
         sqr[coord] = Math.pow(corner_positions[corner][coord] - fp.camera.position[coord], 2)
       Math.sqrt sqr.x + sqr.y + sqr.z
     recalculate_current_corner: (corner_positions, current_corner) ->
@@ -276,7 +278,7 @@ $.app.pages.shared.floor_plans =
       current_corner = fp.params.floors.number.positions[floor_number].current
       current_corner = @.recalculate_current_corner(corner_positions, current_corner)
       fp.params.floors.number.positions[floor_number].current = current_corner
-      for coord in fp.coordinates
+      for coord in fp.location.coords
         @.object.number.position[coord] = corner_positions[current_corner][coord]
     animate_to: (position, object_types) ->
       object_types = [object_types] unless $.type(object_types) == 'array'
@@ -302,8 +304,8 @@ $.app.pages.shared.floor_plans =
 
   init_solid_floor_object: (floor_number) ->
     solid_floor_object = new THREE.CSS3DObject(@.init_solid_floor_dom_element(floor_number))
-    for option in ['position', 'rotation']
-      for coord in @.coordinates
+    for option in @.location.options
+      for coord in @.location.coords
         solid_floor_object[option][coord] = @.floor_position_start(floor_number)[option][coord]
     solid_floor_object
 
@@ -320,7 +322,7 @@ $.app.pages.shared.floor_plans =
   init_number_floor_object: (floor_object, floor_number) ->
     floor_number_element = @.init_number_floor_dom_element(floor_number)
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
-    for coord in @.coordinates
+    for coord in @.location.coords
       floor_number_object.position[coord] = @.floor_position_start(floor_number).position[coord]
     floor_number_object
 
@@ -381,7 +383,7 @@ $.app.pages.shared.floor_plans =
 
   fix_camera_rotation_before_render: ->
     if @.goes_an_animation()
-      for coord in @.coordinates
+      for coord in @.location.coords
         @.camera.rotation[coord] = @.camera_position_start().rotation[coord]
 
   update_number_positions_before_render: ->
@@ -395,8 +397,8 @@ $.app.pages.shared.floor_plans =
       return
 
   floors_position_is_coincides: (one_floor, other_floor) ->
-    for option in ['position', 'rotation']
-      for coord in @.coordinates
+    for option in @.location.options
+      for coord in @.location.coords
         return false unless one_floor.object.solid[option][coord] == other_floor.object.solid[option][coord]
     true
 
