@@ -31,7 +31,7 @@ $.app.pages.shared.floor_plans =
         size:
           width: 1023
           height: 544
-        opacity: 0.85
+        opacity: 0.75
         gap: 100
       number:
         positions:
@@ -45,7 +45,9 @@ $.app.pages.shared.floor_plans =
         font_size:
           px: 50
   house: {}
-  showed_floor: {}
+  showed_floor:
+    floor: null
+    number: null
   animated_objects: []
 
   camera_position_start: ->
@@ -339,11 +341,12 @@ $.app.pages.shared.floor_plans =
     @.render()
 
   floor_element_on_click: (floor_number) ->
-    @.showed_floor.solid = @.init_floor(floor_number)
-    @.showed_floor.solid.set_position_by @.house.floor(floor_number)
-    @.showed_floor.solid.add_to_scene_solid()
+    @.showed_floor.floor = @.init_floor(floor_number)
+    @.showed_floor.floor.set_position_by @.house.floor(floor_number)
+    @.showed_floor.floor.add_to_scene_solid()
+    @.showed_floor.number = floor_number
 
-    @.showed_floor.solid.animate_to_foreground()
+    @.showed_floor.floor.animate_to_foreground()
     @.house.animate_from_scene()
     @.animate_camera_to_start()
 
@@ -358,16 +361,44 @@ $.app.pages.shared.floor_plans =
     @.init_house()
     @.house.add_to_scene()
 
-    @.showed_floor.solid.animate_to_center()
+    @.showed_floor.floor.animate_to_center()
     @.house.animate_to_scene()
     @.animate_camera_to_start()
 
   end_house_animate_to_scene: ->
     fp = $.app.pages.shared.floor_plans
-    fp.showed_floor.solid.remove_from_scene_solid() if fp.showed_floor.solid
+    fp.remove_showed_floor() if fp.showed_floor.floor
     fp.unblock_controls_for_house()
 
     $('#back-to-house').addClass 'hidden'
+
+  remove_showed_floor: ->
+    return unless @.showed_floor.floor
+    @.showed_floor.floor.remove_from_scene_solid()
+    @.showed_floor =
+      floor: null
+      number: null
+
+  fix_camera_rotation_before_render: ->
+    if @.goes_an_animation()
+      for coord in @.coordinates
+        @.camera.rotation[coord] = @.camera_position_start().rotation[coord]
+
+  update_number_positions_before_render: ->
+    floor.update_number_position(i + 1) for floor, i in @.house.floors
+
+  remove_showed_floor_before_it_coincides_with_house: ->
+    return unless @.showed_floor.floor
+    floor = @.house.floors[@.showed_floor.number - 1]
+    if @.floors_position_is_coincides(floor, @.showed_floor.floor)
+      @.remove_showed_floor()
+      return
+
+  floors_position_is_coincides: (one_floor, other_floor) ->
+    for option in ['position', 'rotation']
+      for coord in @.coordinates
+        return false unless one_floor.object.solid[option][coord] == other_floor.object.solid[option][coord]
+    true
 
   animate: ->
     fp = $.app.pages.shared.floor_plans
@@ -376,11 +407,9 @@ $.app.pages.shared.floor_plans =
 
   render: ->
     fp = $.app.pages.shared.floor_plans
-    for floor, i in fp.house.floors
-      if fp.goes_an_animation()
-        for coord in fp.coordinates
-          fp.camera.rotation[coord] = fp.camera_position_start().rotation[coord]
-      floor.update_number_position(i + 1)
+    fp.fix_camera_rotation_before_render()
+    fp.update_number_positions_before_render()
+    fp.remove_showed_floor_before_it_coincides_with_house()
     fp.renderer.render(fp.scene, fp.camera)
 
 $.app.pages.shared.floor_plans.init()
