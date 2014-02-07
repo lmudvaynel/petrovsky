@@ -367,12 +367,12 @@ $.app.pages.shared.floor_plans =
     @.house.animate_to_scene()
     @.animate_camera_to_start()
 
+    $('#back-to-house').addClass 'hidden'
+
   end_house_animate_to_scene: ->
     fp = $.app.pages.shared.floor_plans
     fp.remove_showed_floor() if fp.showed_floor.floor
     fp.unblock_controls_for_house()
-
-    $('#back-to-house').addClass 'hidden'
 
   remove_showed_floor: ->
     return unless @.showed_floor.floor
