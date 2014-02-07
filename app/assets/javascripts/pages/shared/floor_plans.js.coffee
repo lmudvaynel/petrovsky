@@ -21,11 +21,13 @@ $.app.pages.shared.floor_plans =
         camera: 100
         floor:
           to_foreground: 100
-          to_start: 40
+          to_above_the_scene: 40
+          to_under_the_scene: 40
           to_center: 50
       house:
         delay:
-          to_start: 200
+          to_above_the_scene: 200
+          to_under_the_scene: 200
           to_center: 300
     floors:
       count: 6
@@ -60,7 +62,16 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: - Math.cos(@.params.scene.yz_angle), y: 0, z: 0
 
-  floor_position_start: (floor_number) ->
+  floor_position_center: (floor_number) ->
+    position:
+      x: 0
+      y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap
+      z: 0
+    rotation:
+      x: - Math.PI / 2, y: 0, z: 0
+
+  # Наследовать от center
+  floor_position_above_the_scene: (floor_number) ->
     position:
       x: 0
       y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap + @.params.scene.distance * 2
@@ -68,10 +79,10 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: - Math.PI / 2, y: 0, z: 0
 
-  floor_position_center: (floor_number) ->
+  floor_position_under_the_scene: (floor_number) ->
     position:
       x: 0
-      y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap
+      y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap - @.params.scene.distance * 2
       z: 0
     rotation:
       x: - Math.PI / 2, y: 0, z: 0
@@ -210,13 +221,24 @@ $.app.pages.shared.floor_plans =
         setTimeout =>
           floor["animate_#{animation_direction}"]()
         , i * @.params.animation.house.delay[animation_direction]
+      set_delay_timeout_to_animations: (i, animations) ->
+        setTimeout =>
+          for floor_id, animation_direction of animations
+            @.floors[floor_id]["animate_to_#{animation_direction}"]()
+        , i * 300
       animate_to_scene: ->
         for floor, i in @.floors
           @.set_delay_timeout_to_animate(floor, 'to_center', i)
         fp.do_it_after_animation fp.end_house_animate_to_scene
-      animate_from_scene: ->
-        for floor, i in @.floors.slice(0).reverse()
-          @.set_delay_timeout_to_animate(floor, 'to_start', i)
+      animate_from_scene: (floor_number) ->
+        for i in [0..@.floors.length - 1]
+          animations = {}
+          if i < floor_number - 1
+            animations[i] = 'under_the_scene'
+          j = @.floors.length - 1 - i
+          if j > floor_number - 1
+            animations[j] = 'above_the_scene'
+          @.set_delay_timeout_to_animations i, animations if Object.keys(animations).length > 0
 
   init_floors: ->
     floors = []
@@ -293,8 +315,10 @@ $.app.pages.shared.floor_plans =
       fp.do_it_after_animation fp.end_floor_animate_to_foreground
     animate_to_center: ->
       @.animate_to 'center', ['solid', 'number']
-    animate_to_start: ->
-      @.animate_to 'start', ['solid', 'number']
+    animate_to_above_the_scene: ->
+      @.animate_to 'above_the_scene', ['solid', 'number']
+    animate_to_under_the_scene: ->
+      @.animate_to 'under_the_scene', ['solid', 'number']
 
   init_floor_object: (floor_number) ->
     solid_floor_object = @.init_solid_floor_object(floor_number)
@@ -306,7 +330,7 @@ $.app.pages.shared.floor_plans =
     solid_floor_object = new THREE.CSS3DObject(@.init_solid_floor_dom_element(floor_number))
     for option in @.location.options
       for coord in @.location.coords
-        solid_floor_object[option][coord] = @.floor_position_start(floor_number)[option][coord]
+        solid_floor_object[option][coord] = @.floor_position_above_the_scene(floor_number)[option][coord]
     solid_floor_object
 
   init_solid_floor_dom_element: (floor_number) ->
@@ -323,7 +347,7 @@ $.app.pages.shared.floor_plans =
     floor_number_element = @.init_number_floor_dom_element(floor_number)
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
     for coord in @.location.coords
-      floor_number_object.position[coord] = @.floor_position_start(floor_number).position[coord]
+      floor_number_object.position[coord] = @.floor_position_above_the_scene(floor_number).position[coord]
     floor_number_object
 
   init_number_floor_dom_element: (floor_number) ->
@@ -349,7 +373,7 @@ $.app.pages.shared.floor_plans =
     @.showed_floor.number = floor_number
 
     @.showed_floor.floor.animate_to_foreground()
-    @.house.animate_from_scene()
+    @.house.animate_from_scene(floor_number)
     @.animate_camera_to_start()
 
   end_floor_animate_to_foreground: ->
