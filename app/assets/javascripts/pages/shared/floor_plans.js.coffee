@@ -27,7 +27,7 @@ $.app.pages.shared.floor_plans =
       house:
         delay:
           to_above_the_scene: 200
-          to_under_the_scene: 200
+          from_scene: 200
           to_center: 300
     floors:
       count: 6
@@ -221,11 +221,11 @@ $.app.pages.shared.floor_plans =
         setTimeout =>
           floor["animate_#{animation_direction}"]()
         , i * @.params.animation.house.delay[animation_direction]
-      set_delay_timeout_to_animations: (i, animations) ->
+      set_delay_timeout_to_animations: (i, animations, direction) ->
         setTimeout =>
-          for floor_id, animation_direction of animations
-            @.floors[floor_id]["animate_to_#{animation_direction}"]()
-        , i * 300
+          for floor_id, animation of animations
+            @.floors[floor_id]["animate_to_#{animation}"]()
+        , i * fp.params.animation.house.delay[direction]
       animate_to_scene: ->
         for floor, i in @.floors
           @.set_delay_timeout_to_animate(floor, 'to_center', i)
@@ -239,7 +239,8 @@ $.app.pages.shared.floor_plans =
           animations[j] = 'under_the_scene' if j in [0..floor_id - 1]
           j = floor_id + length - i
           animations[j] = 'above_the_scene' if j in [floor_number..@.floors.length - 1]
-          @.set_delay_timeout_to_animations i, animations if Object.keys(animations).length > 0
+          unless Object.keys(animations).length == 0
+            @.set_delay_timeout_to_animations i, animations, 'from_scene'
 
   init_floors: ->
     floors = []
@@ -296,7 +297,7 @@ $.app.pages.shared.floor_plans =
           current_corner = corner
       current_corner
     update_number_position: (floor_number) ->
-      @.object.number.rotation = fp.camera.rotation
+      @.object.number.rotation = fp.camera.rotation.clone()
       corner_positions = @.calculate_number_corner_positions(floor_number)
       current_corner = fp.params.floors.number.positions[floor_number].current
       current_corner = @.recalculate_current_corner(corner_positions, current_corner)
@@ -368,7 +369,6 @@ $.app.pages.shared.floor_plans =
     @.render()
 
   floor_element_on_click: (floor_number) ->
-    @.animate_camera_to_start()
     @.house.animate_from_scene(floor_number)
     @.do_it_after_animation =>
       @.animate_showed_floor_to_foreground(floor_number)
@@ -381,6 +381,7 @@ $.app.pages.shared.floor_plans =
     fp.house.floor(floor_number).remove_from_scene()
     fp.showed_floor.number = floor_number
 
+    fp.animate_camera_to_start()
     fp.showed_floor.floor.animate_to_foreground()
 
   end_floor_animate_to_foreground: ->
@@ -412,11 +413,6 @@ $.app.pages.shared.floor_plans =
       floor: null
       number: null
 
-  fix_camera_rotation_before_render: ->
-    if @.goes_an_animation()
-      for coord in @.location.coords
-        @.camera.rotation[coord] = @.camera_position_start().rotation[coord]
-
   update_number_positions_before_render: ->
     floor.update_number_position(i + 1) for floor, i in @.house.floors
 
@@ -440,7 +436,6 @@ $.app.pages.shared.floor_plans =
 
   render: ->
     fp = $.app.pages.shared.floor_plans
-    fp.fix_camera_rotation_before_render()
     fp.update_number_positions_before_render()
     fp.remove_showed_floor_before_it_coincides_with_house()
     fp.renderer.render(fp.scene, fp.camera)
