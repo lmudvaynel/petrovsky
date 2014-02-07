@@ -231,13 +231,14 @@ $.app.pages.shared.floor_plans =
           @.set_delay_timeout_to_animate(floor, 'to_center', i)
         fp.do_it_after_animation fp.end_house_animate_to_scene
       animate_from_scene: (floor_number) ->
-        for i in [0..@.floors.length - 1]
+        floor_id = floor_number - 1
+        length = Math.max floor_id, @.floors.length - floor_number
+        for i in [0..length - 1]
           animations = {}
-          if i < floor_number - 1
-            animations[i] = 'under_the_scene'
-          j = @.floors.length - 1 - i
-          if j > floor_number - 1
-            animations[j] = 'above_the_scene'
+          j = floor_id - length + i
+          animations[j] = 'under_the_scene' if j in [0..floor_id - 1]
+          j = floor_id + length - i
+          animations[j] = 'above_the_scene' if j in [floor_number..@.floors.length - 1]
           @.set_delay_timeout_to_animations i, animations if Object.keys(animations).length > 0
 
   init_floors: ->
@@ -367,14 +368,20 @@ $.app.pages.shared.floor_plans =
     @.render()
 
   floor_element_on_click: (floor_number) ->
-    @.showed_floor.floor = @.init_floor(floor_number)
-    @.showed_floor.floor.set_position_by @.house.floor(floor_number)
-    @.showed_floor.floor.add_to_scene_solid()
-    @.showed_floor.number = floor_number
-
-    @.showed_floor.floor.animate_to_foreground()
-    @.house.animate_from_scene(floor_number)
     @.animate_camera_to_start()
+    @.house.animate_from_scene(floor_number)
+    @.do_it_after_animation =>
+      @.animate_showed_floor_to_foreground(floor_number)
+
+  animate_showed_floor_to_foreground: (floor_number) ->
+    fp = $.app.pages.shared.floor_plans
+    fp.showed_floor.floor = fp.init_floor(floor_number)
+    fp.showed_floor.floor.set_position_by fp.house.floor(floor_number)
+    fp.showed_floor.floor.add_to_scene_solid()
+    fp.house.floor(floor_number).remove_from_scene()
+    fp.showed_floor.number = floor_number
+
+    fp.showed_floor.floor.animate_to_foreground()
 
   end_floor_animate_to_foreground: ->
     fp = $.app.pages.shared.floor_plans
