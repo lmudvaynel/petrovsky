@@ -69,22 +69,15 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: - Math.PI / 2, y: 0, z: 0
 
-  # Наследовать от center
   floor_position_above_the_scene: (floor_number) ->
-    position:
-      x: 0
-      y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap + @.params.scene.distance * 2
-      z: 0
-    rotation:
-      x: - Math.PI / 2, y: 0, z: 0
+    floor_position_above_the_scene = @.floor_position_center_of_scene(floor_number)
+    floor_position_above_the_scene.position.y += @.params.scene.distance * 2
+    floor_position_above_the_scene
 
   floor_position_under_the_scene: (floor_number) ->
-    position:
-      x: 0
-      y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap - @.params.scene.distance * 2
-      z: 0
-    rotation:
-      x: - Math.PI / 2, y: 0, z: 0
+    floor_position_under_the_scene = @.floor_position_center_of_scene(floor_number)
+    floor_position_under_the_scene.position.y -= @.params.scene.distance * 2
+    floor_position_under_the_scene
 
   floor_position_foreground: ->
     position:
