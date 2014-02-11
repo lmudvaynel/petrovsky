@@ -10,19 +10,23 @@ $.app.pages.shared.floor_plans =
     options: ['position', 'rotation']
     coords: ['x', 'y', 'z']
   params:
+    container:
+      size_in_percents:
+        width: 100
+        height: 80
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8
     controls:
-      blocked: false
+      blocked: true
     animation:
       speed: 10
       frames:
         camera: 50
         floor:
           to_foreground: 50
-          to_above_the_scene: 40
-          to_under_the_scene: 40
+          to_above_the_scene: 30
+          to_under_the_scene: 30
           to_center_of_scene: 50
       house:
         delay:
@@ -88,6 +92,7 @@ $.app.pages.shared.floor_plans =
       x: @.params.scene.yz_angle - Math.PI / 2, y: 0, z: 0
 
   init: ->
+    @.init_container()
     @.init_camera()
     @.init_scene()
     @.init_renderer()
@@ -100,6 +105,11 @@ $.app.pages.shared.floor_plans =
     @.house.add_to_scene()
     @.house.animate_to_scene 0, =>
       @.end_house_animate_to_scene()
+
+  init_container: ->
+    @.container.css
+      width: window.innerWidth * @.params.container.size_in_percents.width / 100
+      height: window.innerHeight * @.params.container.size_in_percents.height / 100
 
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
