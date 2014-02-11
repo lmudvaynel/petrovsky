@@ -79,28 +79,6 @@ jQuery(function($){
 
 	$(window).trigger('resize');
 
-	//Vertical scroll for blog section
-	//------------------------------------------
-	$(".blog_container").mCustomScrollbar({
-		horizontalScroll:true,
-		advanced:{
-			autoExpandHorizontalScroll:true
-		}
-	});
-
-	
-	// Nav button click 
-	// -------------------------------------------------------
-	
-	$('#navbar .nav a , #header a.nav-item , #navbar .brand,#btn_up').click(function(e){
-		e.preventDefault();
-		var des = $(this).attr('href');
-		if($('.navbar .nav-collapse').hasClass('in')){
-			$('.navbar .btn-navbar').trigger('click');
-		}
-		goToSectionID(des);
-	})
-
 	/**
 	 * Isotope filter
 	 */

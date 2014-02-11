@@ -25,7 +25,7 @@
 		animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ],
 		scrollWrap = document.getElementById( 'scroll-wrap' ),
 		docscroll = 0,
-		books = document.querySelectorAll( '#bookshelf > figure' );
+		books = document.querySelectorAll( '#bookshelf > .special' );
 
 	function scrollY() {
 		return window.pageYOffset || window.document.documentElement.scrollTop;
@@ -33,8 +33,8 @@
 
 	function Book( el ) {
 		this.el = el;
-		this.book = this.el.querySelector( '.book' );
-		this.ctrls = this.el.querySelector( '.buttons' );
+		this.book = this.el.querySelector( '.books' );
+		this.ctrls = this.el.querySelector( '.brick1' );
 		this.details = this.el.querySelector( '.details' );
 		// create the necessary structure for the books to rotate in 3d
 		this._layout();
@@ -113,10 +113,10 @@
 		classie.remove( scrollWrap, 'hide-overflow' );
 		setTimeout( function() { document.body.scrollTop = document.documentElement.scrollTop = docscroll; }, 25 );
 		classie.remove( this.el, 'open' );
-		classie.add( this.el, 'close' );
+		//classie.add( this.el, 'close' );
 		classie.remove( this.bbWrapper, 'show' );
-		classie.add( this.bbWrapper, 'hide' );
-
+		//classie.add( this.bbWrapper, 'hide' );
+/*
 		var self = this,
 			onCloseBookEndFn = function( ev ) {
 				this.removeEventListener( animEndEventName, onCloseBookEndFn );
@@ -131,7 +131,7 @@
 		}
 		else {
 			onCloseBookEndFn.call();
-		}
+		}*/
 	}
 
 	Book.prototype._nextPage = function() {
