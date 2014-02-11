@@ -18,7 +18,7 @@ $.app.pages.shared.floor_plans =
       distance: 1000
       yz_angle: 3 * Math.PI / 8
     controls:
-      blocked: true
+      blocked: false
     animation:
       speed: 10
       frames:
