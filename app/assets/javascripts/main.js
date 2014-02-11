@@ -22,7 +22,7 @@ jQuery(function($){
 	},3000);
 
 	function triggerEvent(elem,fn,offset){
-		var top = elem.offset().top;
+		var top = elem.offset();
 		if((top-offset)<$(window).scrollTop()){
 			fn(elem);
 		}
