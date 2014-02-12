@@ -10,6 +10,10 @@ $.app.pages.shared.floor_plans =
     options: ['position', 'rotation']
     coords: ['x', 'y', 'z']
   params:
+    container:
+      size_in_percents:
+        width: 100
+        height: 80
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8
@@ -18,15 +22,16 @@ $.app.pages.shared.floor_plans =
     animation:
       speed: 10
       frames:
-        camera: 100
+        camera: 50
         floor:
-          to_foreground: 100
-          to_start: 40
-          to_center: 50
+          to_foreground: 50
+          to_above_the_scene: 30
+          to_under_the_scene: 30
+          to_center_of_scene: 50
       house:
         delay:
-          to_start: 200
-          to_center: 300
+          to_scene: 200
+          from_scene: 200
     floors:
       count: 6
       solid:
@@ -50,7 +55,7 @@ $.app.pages.shared.floor_plans =
   showed_floor:
     floor: null
     number: null
-  animated_objects: []
+  animated_objects: {}
 
   camera_position_start: ->
     position:
@@ -60,21 +65,23 @@ $.app.pages.shared.floor_plans =
     rotation:
       x: - Math.cos(@.params.scene.yz_angle), y: 0, z: 0
 
-  floor_position_start: (floor_number) ->
-    position:
-      x: 0
-      y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap + @.params.scene.distance * 2
-      z: 0
-    rotation:
-      x: - Math.PI / 2, y: 0, z: 0
-
-  floor_position_center: (floor_number) ->
+  floor_position_center_of_scene: (floor_number) ->
     position:
       x: 0
       y: (floor_number - @.params.floors.count / 2) * @.params.floors.solid.gap
       z: 0
     rotation:
       x: - Math.PI / 2, y: 0, z: 0
+
+  floor_position_above_the_scene: (floor_number) ->
+    floor_position_above_the_scene = @.floor_position_center_of_scene(floor_number)
+    floor_position_above_the_scene.position.y += @.params.scene.distance * 2
+    floor_position_above_the_scene
+
+  floor_position_under_the_scene: (floor_number) ->
+    floor_position_under_the_scene = @.floor_position_center_of_scene(floor_number)
+    floor_position_under_the_scene.position.y -= @.params.scene.distance * 2
+    floor_position_under_the_scene
 
   floor_position_foreground: ->
     position:
@@ -85,16 +92,24 @@ $.app.pages.shared.floor_plans =
       x: @.params.scene.yz_angle - Math.PI / 2, y: 0, z: 0
 
   init: ->
+    @.init_container()
     @.init_camera()
     @.init_scene()
     @.init_renderer()
     @.init_controls()
     @.init_events()
     @.init_animation()
+    @.init_animated_objects()
 
     @.init_house()
     @.house.add_to_scene()
-    @.house.animate_to_scene()
+    @.house.animate_to_scene 0, =>
+      @.end_house_animate_to_scene()
+
+  init_container: ->
+    @.container.css
+      width: window.innerWidth * @.params.container.size_in_percents.width / 100
+      height: window.innerHeight * @.params.container.size_in_percents.height / 100
 
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
@@ -129,12 +144,82 @@ $.app.pages.shared.floor_plans =
       event.preventDefault()
       $.app.pages.shared.floor_plans.back_to_house_on_click()
 
+  init_animated_objects: ->
+    fp = $.app.pages.shared.floor_plans
+    @.animated_objects =
+      objects: []
+      get_by_name: (name) ->
+        for object in @.objects
+          return object if object.params.name == name
+        return null
+      set: (animated_object) ->
+        if @.get_by_name(animated_object.params.name)
+          @.get_by_name(animated_object.params.name).set animated_object.params
+        else
+          @.objects.push animated_object
+      set_by_params: (name, callbacks = [], scene_objects = [], animated = false) ->
+        if @.get_by_name(name)
+          @.get_by_name(name).set
+            name: name
+            callbacks: callbacks
+            scene_objects: scene_objects
+            animated: animated
+        else
+          @.objects.push fp.init_animated_object(name, callbacks, scene_objects, animated)
+      animate: ->
+        return unless @.animated()
+        fp.block_controls()
+        object.animate() for object in @.objects
+        fp.render()
+      animated: (name = null) ->
+        return @.get_by_name(name).params.animated if name && @.get_by_name(name)
+        for object in @.objects
+          return true if object.params.animated
+        false
+
+  init_animated_object: (name, callbacks = [], scene_objects = [], animated = false) ->
+    fp = $.app.pages.shared.floor_plans
+    callbacks = [callbacks] unless $.isArray callbacks
+    scene_objects = [scene_objects] unless $.isArray scene_objects
+    params:
+      name: name
+      callbacks: callbacks
+      scene_objects: scene_objects
+      animated: animated
+    set: (params) ->
+      @.params = $.extend @.params, params
+    set_callbacks: (callbacks) ->
+      callbacks = [callbacks] unless $.isArray callbacks
+      for callback in callbacks
+        @.params.callbacks.push callback unless callback in @.params.callbacks
+    set_scene_objects: (scene_objects) ->
+      scene_objects = [scene_objects] unless $.isArray scene_objects
+      @.params.scene_objects.push scene_object for scene_object in scene_objects
+    animation_start: ->
+      @.params.animated = true
+    animation_stop: ->
+      callback() for callback in @.params.callbacks
+      @.params =
+        name: @.params.name
+        callbacks: []
+        scene_objects: []
+        animated: false
+    animate: ->
+      return unless @.params.animated
+      if @.params.scene_objects.length == 0
+        @.animation_stop()
+        return
+      for scene_object, i in @.params.scene_objects
+        continue unless scene_object
+        for option in fp.location.options
+          for coord in fp.location.coords
+            scene_object.object[option][coord] += (scene_object.position_of_arrival[option][coord] - scene_object.object[option][coord]) / scene_object.frames
+        scene_object.frames -= 1
+        @.params.scene_objects.splice i, 1 if scene_object.frames == 0
+
   init_animation: ->
     setInterval =>
-      if @.goes_an_animation()
-        @.block_controls()
-        @.animation_step_for_object(i) for object, i in @.animated_objects
-        @.render()
+      @.animated_objects.animate()
     , @.params.animation.speed
 
   block_controls: ->
@@ -168,83 +253,85 @@ $.app.pages.shared.floor_plans =
 
     @.params.controls.blocked = false
 
-  animation_step_for_object: (i) ->
-    animated_object = @.animated_objects[i]
-    return unless animated_object
-    for option in @.location.options
-      for coord in @.location.coords
-        animated_object.object[option][coord] += (animated_object.final[option][coord] - animated_object.object[option][coord]) / animated_object.frames
-    animated_object.frames -= 1
-    @.animated_objects.splice(i, 1) if animated_object.frames == 0
-
   animate_camera_to_start: ->
-    @.animated_objects.push
+    animated_camera = @.animated_objects.get_by_name 'camera'
+    animated_camera = @.init_animated_object 'camera' unless animated_camera
+    animated_camera.set_scene_objects
       object: @.camera
-      final: @.camera_position_start()
+      position_of_arrival: @.camera_position_start()
       frames: @.params.animation.frames.camera
+    @.animated_objects.set animated_camera
+    animated_camera.animation_start()
 
-  do_it_after_animation: (callback) ->
-    @.waiting_end_of_animation = setInterval =>
-      @.call_after_animation callback
-    , @.params.animation.speed
-
-  call_after_animation: (callback) ->
-    unless @.goes_an_animation()
-      clearInterval @.waiting_end_of_animation
-      callback()
-
-  goes_an_animation: ->
-    @.animated_objects.length > 0
-
-  init_house: ->
+  init_house: (showed_floor = {}) ->
     fp = $.app.pages.shared.floor_plans
     @.house =
-      floors: @.init_floors()
+      floors: @.init_floors(showed_floor)
       floor: (floor_number) ->
         @.floors[floor_number - 1]
       add_to_scene: ->
-        floor.add_to_scene_solid_with_number() for floor in @.floors
-      remove_from_scene: ->
-        floor.remove_from_scene() for floor in @.floors
-      set_delay_timeout_to_animate: (floor, animation_direction, i) =>
-        setTimeout =>
-          floor["animate_#{animation_direction}"]()
-        , i * @.params.animation.house.delay[animation_direction]
-      animate_to_scene: ->
+        floor.add_to_scene() for floor in @.floors
+      add_to_scene_by: (floor_number) ->
         for floor, i in @.floors
-          @.set_delay_timeout_to_animate(floor, 'to_center', i)
-        fp.do_it_after_animation fp.end_house_animate_to_scene
-      animate_from_scene: ->
-        for floor, i in @.floors.slice(0).reverse()
-          @.set_delay_timeout_to_animate(floor, 'to_start', i)
+          floor.add_to_scene() unless i == floor_number - 1
+      remove_from_scene_by: (floor_number) ->
+        for floor, i in @.floors
+          floor.remove_from_scene() unless i == floor_number - 1
+      set_delay_timeout_to_animations: (i, animations, direction, callbacks = []) ->
+        setTimeout =>
+          for floor_id, animation of animations
+            @.floors[floor_id]["animate_to_#{animation}"]('house', callbacks)
+        , i * fp.params.animation.house.delay[direction]
+      animate_to_scene: (floor_number = 0, callbacks = []) ->
+        floor_id = floor_number - 1
+        length = Math.max floor_id, @.floors.length - floor_number
+        for i in [1..length]
+          animations = {}
+          j = floor_id - i
+          animations[j] = 'center_of_scene' if j >= 0 && j < floor_id
+          j = floor_id + i
+          animations[j] = 'center_of_scene' if j > floor_id && j < @.floors.length
+          unless Object.keys(animations).length == 0
+            @.set_delay_timeout_to_animations i, animations, 'to_scene', callbacks
+      animate_from_scene: (floor_number, callbacks = []) ->
+        floor_id = floor_number - 1
+        length = Math.max floor_id, @.floors.length - floor_number
+        for i in [0..length - 1]
+          animations = {}
+          j = floor_id - length + i
+          animations[j] = 'under_the_scene' if j >= 0 && j < floor_id
+          j = floor_id + length - i
+          animations[j] = 'above_the_scene' if j > floor_id && j < @.floors.length
+          unless Object.keys(animations).length == 0
+            @.set_delay_timeout_to_animations i, animations, 'from_scene', callbacks
 
-  init_floors: ->
+  init_floors: (showed_floor) ->
     floors = []
-    floors.push @.init_floor(i) for i in [1..@.params.floors.count]
+    for i in [1..@.params.floors.count]
+      if showed_floor.floor
+        floors.push @.init_floor(i, 'under_the_scene') if i < showed_floor.number
+        floors.push showed_floor.floor if i == showed_floor.number
+        floors.push @.init_floor(i, 'above_the_scene') if i > showed_floor.number
+      else
+        floors.push @.init_floor(i)
     floors
 
-  init_floor: (floor_number) ->
+  init_floor: (floor_number, position = 'above_the_scene') ->
     fp = $.app.pages.shared.floor_plans
-    object: @.init_floor_object(floor_number)
-    get_object_by_type: (object_type) ->
-      @.object[object_type]
-    add_to_scene_all_objects_of_types: (object_types) ->
-      object_types = [object_types] unless $.type(object_types) == 'array'
-      fp.scene.add @.get_object_by_type(object_type) for object_type in object_types
-    remove_from_scene_all_objects_of_types: (object_types) ->
-      object_types = [object_types] unless $.type(object_types) == 'array'
-      fp.scene.remove @.get_object_by_type(object_type) for object_type in object_types
-    add_to_scene_solid_with_number: ->
-      @.add_to_scene_all_objects_of_types ['solid', 'number']
-    add_to_scene_solid: ->
-      @.add_to_scene_all_objects_of_types 'solid'
-    remove_from_scene_solid: ->
-      @.remove_from_scene_all_objects_of_types 'solid'
+    object: @.init_floor_object(floor_number, position)
+    object_types: ->
+      Object.keys @.object
+    add_to_scene: ->
+      fp.scene.add object for object_type, object of @.object
     remove_from_scene: ->
-      @.remove_from_scene_all_objects_of_types ['solid', 'number']
+      fp.scene.remove object for object_type, object of @.object
+    show_number: ->
+      $(@.object.number.element).removeClass('hidden')
+    hide_number: ->
+      $(@.object.number.element).addClass('hidden')
     set_position_by: (other_floor) ->
-      for object_type in ['solid', 'number']
-        for option in ['position', 'rotation']
+      for object_type in @.object_types()
+        for option in fp.location.options
           @.object[object_type][option] = other_floor.object[object_type][option].clone()
     calculate_number_corner_positions: (floor_number) ->
       floor =
@@ -273,40 +360,44 @@ $.app.pages.shared.floor_plans =
           current_corner = corner
       current_corner
     update_number_position: (floor_number) ->
-      @.object.number.rotation = fp.camera.rotation
+      @.object.number.rotation = fp.camera.rotation.clone()
       corner_positions = @.calculate_number_corner_positions(floor_number)
       current_corner = fp.params.floors.number.positions[floor_number].current
       current_corner = @.recalculate_current_corner(corner_positions, current_corner)
       fp.params.floors.number.positions[floor_number].current = current_corner
       for coord in fp.location.coords
         @.object.number.position[coord] = corner_positions[current_corner][coord]
-    animate_to: (position, object_types) ->
-      object_types = [object_types] unless $.type(object_types) == 'array'
+    animate_to: (position, name = 'house', callbacks = []) ->
       floor_number = @.object.number.element.textContent
-      for object_type in object_types
-        fp.animated_objects.push
-          object: @.object[object_type]
-          final: fp["floor_position_#{position}"](floor_number)
+      animated_floor = fp.animated_objects.get_by_name(name)
+      unless animated_floor
+        animated_floor = fp.init_animated_object name, callbacks
+      for object_type, object of @.object
+        animated_floor.set_scene_objects
+          object: object
+          position_of_arrival: fp["floor_position_#{position}"](floor_number)
           frames: fp.params.animation.frames.floor["to_#{position}"]
-    animate_to_foreground: ->
-      @.animate_to 'foreground', 'solid'
-      fp.do_it_after_animation fp.end_floor_animate_to_foreground
-    animate_to_center: ->
-      @.animate_to 'center', ['solid', 'number']
-    animate_to_start: ->
-      @.animate_to 'start', ['solid', 'number']
+        animated_floor.set_callbacks callbacks
+      fp.animated_objects.set animated_floor
+      animated_floor.animation_start()
+    animate_to_foreground: (name = 'floor', callbacks = []) ->
+      @.animate_to 'foreground', name, callbacks
+    animate_to_center_of_scene: (name = 'house', callbacks = []) ->
+      @.animate_to 'center_of_scene', name, callbacks
+    animate_to_above_the_scene: (name = 'house', callbacks = []) ->
+      @.animate_to 'above_the_scene', name, callbacks
+    animate_to_under_the_scene: (name = 'house', callbacks = []) ->
+      @.animate_to 'under_the_scene', name, callbacks
 
-  init_floor_object: (floor_number) ->
-    solid_floor_object = @.init_solid_floor_object(floor_number)
-    number_floor_object = @.init_number_floor_object(solid_floor_object, floor_number)
-    solid: solid_floor_object
-    number: number_floor_object
+  init_floor_object: (floor_number, position) ->
+    solid: @.init_solid_floor_object(floor_number, position)
+    number: @.init_number_floor_object(floor_number)
 
-  init_solid_floor_object: (floor_number) ->
+  init_solid_floor_object: (floor_number, position) ->
     solid_floor_object = new THREE.CSS3DObject(@.init_solid_floor_dom_element(floor_number))
     for option in @.location.options
       for coord in @.location.coords
-        solid_floor_object[option][coord] = @.floor_position_start(floor_number)[option][coord]
+        solid_floor_object[option][coord] = @["floor_position_#{position}"](floor_number)[option][coord]
     solid_floor_object
 
   init_solid_floor_dom_element: (floor_number) ->
@@ -319,11 +410,9 @@ $.app.pages.shared.floor_plans =
     $(solid_floor_element).addClass('floor-element').css solid_floor_css
     solid_floor_element
 
-  init_number_floor_object: (floor_object, floor_number) ->
+  init_number_floor_object: (floor_number) ->
     floor_number_element = @.init_number_floor_dom_element(floor_number)
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
-    for coord in @.location.coords
-      floor_number_object.position[coord] = @.floor_position_start(floor_number).position[coord]
     floor_number_object
 
   init_number_floor_dom_element: (floor_number) ->
@@ -343,64 +432,50 @@ $.app.pages.shared.floor_plans =
     @.render()
 
   floor_element_on_click: (floor_number) ->
-    @.showed_floor.floor = @.init_floor(floor_number)
-    @.showed_floor.floor.set_position_by @.house.floor(floor_number)
-    @.showed_floor.floor.add_to_scene_solid()
+    @.house.animate_from_scene floor_number, =>
+      @.animate_showed_floor_to_foreground(floor_number)
+
+  animate_showed_floor_to_foreground: (floor_number) ->
+    @.showed_floor.floor = @.house.floor(floor_number)
+    @.showed_floor.floor.hide_number()
     @.showed_floor.number = floor_number
 
-    @.showed_floor.floor.animate_to_foreground()
-    @.house.animate_from_scene()
     @.animate_camera_to_start()
+    @.showed_floor.floor.animate_to_foreground 'floor', =>
+      @.end_floor_animate_to_foreground()
 
   end_floor_animate_to_foreground: ->
     fp = $.app.pages.shared.floor_plans
-    fp.house.remove_from_scene()
+    fp.house.remove_from_scene_by(fp.showed_floor.number)
     fp.unblock_controls_for_floor()
 
     $('#back-to-house').removeClass 'hidden'
 
   back_to_house_on_click: ->
-    @.init_house()
-    @.house.add_to_scene()
-
-    @.showed_floor.floor.animate_to_center()
-    @.house.animate_to_scene()
     @.animate_camera_to_start()
-
-  end_house_animate_to_scene: ->
-    fp = $.app.pages.shared.floor_plans
-    fp.remove_showed_floor() if fp.showed_floor.floor
-    fp.unblock_controls_for_house()
-
+    @.showed_floor.floor.animate_to_center_of_scene 'floor', =>
+      @.animate_house_to_center_of_scene()
     $('#back-to-house').addClass 'hidden'
 
-  remove_showed_floor: ->
-    return unless @.showed_floor.floor
-    @.showed_floor.floor.remove_from_scene_solid()
+  animate_house_to_center_of_scene: ->
+    floor_number = @.showed_floor.number
+    @.showed_floor.floor.show_number()
+    @.init_house @.showed_floor
+    @.house.add_to_scene_by(floor_number)
+    @.house.animate_to_scene floor_number, =>
+      @.end_house_animate_to_scene()
+    @.clear_showed_floor()
+
+  end_house_animate_to_scene: ->
+    @.unblock_controls_for_house()
+
+  clear_showed_floor: ->
     @.showed_floor =
       floor: null
       number: null
 
-  fix_camera_rotation_before_render: ->
-    if @.goes_an_animation()
-      for coord in @.location.coords
-        @.camera.rotation[coord] = @.camera_position_start().rotation[coord]
-
   update_number_positions_before_render: ->
     floor.update_number_position(i + 1) for floor, i in @.house.floors
-
-  remove_showed_floor_before_it_coincides_with_house: ->
-    return unless @.showed_floor.floor
-    floor = @.house.floors[@.showed_floor.number - 1]
-    if @.floors_position_is_coincides(floor, @.showed_floor.floor)
-      @.remove_showed_floor()
-      return
-
-  floors_position_is_coincides: (one_floor, other_floor) ->
-    for option in @.location.options
-      for coord in @.location.coords
-        return false unless one_floor.object.solid[option][coord] == other_floor.object.solid[option][coord]
-    true
 
   animate: ->
     fp = $.app.pages.shared.floor_plans
@@ -409,9 +484,7 @@ $.app.pages.shared.floor_plans =
 
   render: ->
     fp = $.app.pages.shared.floor_plans
-    fp.fix_camera_rotation_before_render()
     fp.update_number_positions_before_render()
-    fp.remove_showed_floor_before_it_coincides_with_house()
     fp.renderer.render(fp.scene, fp.camera)
 
 $.app.pages.shared.floor_plans.init()
