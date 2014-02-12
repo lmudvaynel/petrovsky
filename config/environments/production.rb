@@ -30,6 +30,7 @@ Petrovsky::Application.configure do
   config.assets.compile = false
 
   config.assets.precompile = ['*.js', '*.css']
+  config.assets.precompile += %w(active_admin.css active_admin/print.css rsvp.css)
   # Generate digests for assets URLs.
   config.assets.digest = true
 
