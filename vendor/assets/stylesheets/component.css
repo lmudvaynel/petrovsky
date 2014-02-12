@@ -22,7 +22,6 @@ body {
 
 .bookshelf {
     position: relative;
-    margin: 40px auto 0;
     list-style: none;
     text-align: center;
 }
@@ -87,18 +86,6 @@ body {
     transform-origin: 100% 50%;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-}
-
-.front {
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.inner {
-    border-width: 3px;
-    border-style: solid;
-    background-color: #fff;
 }
 
 .bookshelf .book .inner-left {
@@ -488,74 +475,6 @@ body {
     transform-origin: 0% 50%;
 }
 
-.csstransformspreserve3d .bookshelf .special.open .cover {
-    -webkit-animation: openSmallBook 0.5s forwards;
-    animation: openSmallBook 0.5s forwards;
-}
-
-.csstransformspreserve3d .bookshelf .special.close .cover {
-    -webkit-animation: closeSmallBook 0.5s forwards;
-    animation: closeSmallBook 0.5s forwards;
-}
-
-@-webkit-keyframes openSmallBook { 
-  55%,
-  100% { -webkit-transform: rotateY(-180deg) }
-}
-
-@keyframes openSmallBook { 
-  55%,
-  100% { transform: rotateY(-180deg) }
-}
-
-@-webkit-keyframes closeSmallBook { 
-  0%,
-  45% { -webkit-transform: rotateY(-180deg) }
-
-  100% { -webkit-transform: rotateY(0deg) }
-}
-
-@keyframes closeSmallBook { 
-  0%,
-  45% { transform: rotateY(-180deg) }
-
-  100% { transform: rotateY(0deg) }
-}
-
-.bookshelf .special.open .books {
-    z-index: 1000;
-    -webkit-animation: scaleUpSmallBook 0.5s forwards;
-    animation: scaleUpSmallBook 0.5s forwards;
-}
-
-.bookshelf .special.close .book {
-    -webkit-animation: scaleDownSmallBook 0.5s forwards;
-    animation: scaleDownSmallBook 0.5s forwards;
-}
-
-@-webkit-keyframes scaleUpSmallBook { 
-  85%,
-  10% { -webkit-transform: scale(1.4) }
-}
-
-@keyframes scaleUpSmallBook { 
-  85%,
-  10% { transform: scale(1.4) }
-}
-
-@-webkit-keyframes scaleDownSmallBook { 
-  0%,
-  15% { -webkit-transform: scale(1.4) }
-
-  100% { -webkit-transform: scale(1) }
-}
-
-@keyframes scaleDownSmallBook { 
-  0%,
-  15% { transform: scale(1.4) }
-
-  100% { transform: scale(1) }
-}
 
 .inner-right {
     background-color: #ddd;

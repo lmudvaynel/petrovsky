@@ -25,7 +25,7 @@
 		animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ],
 		scrollWrap = document.getElementById( 'scroll-wrap' ),
 		docscroll = 0,
-		books = document.querySelectorAll( '#bookshelf > .special' );
+		books = document.querySelectorAll( '#bookshelf > .withBookblock' );
 
 	function scrollY() {
 		return window.pageYOffset || window.document.documentElement.scrollTop;
