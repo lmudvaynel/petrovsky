@@ -81,7 +81,7 @@ jQuery(function($){
 
 	/**
 	 * Isotope filter
-	 */
+	 
 		// cache container
 		var $container = $('.isotope');
 		// initialize isotope
@@ -97,7 +97,7 @@ jQuery(function($){
 		  $(this).addClass('active');
 		  return false;
 		});
-
+**/
 	/**
 	 * Portfolio hover effect 
 	 */
@@ -109,9 +109,9 @@ jQuery(function($){
 
 	/**
 	 * Init carousel
-	 */
+	 
 	$('#msgs').carousel({interval:5000});
-
+	*/
 	
 	/**
 	 * Detect IE 10

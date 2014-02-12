@@ -12,13 +12,10 @@
   <%= render 'shared/javascripts' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body background="<%= image_path 'bg.jpg' %>">
   <header>
     <%= render 'shared/header' %>
   </header>
-  <nav>
-    <%= render 'shared/menu' %>
-  </nav>
   <section>
     <%= yield %>
   </section>
