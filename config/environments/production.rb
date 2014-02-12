@@ -29,8 +29,7 @@ Petrovsky::Application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
-  config.assets.precompile = ['*.js', '*.css']
-  config.assets.precompile += %w(active_admin.css active_admin/print.css rsvp.css)
+  config.assets.precompile = [/^[a-z0-9\/]*[a-z0-9]\w+.(css|js)$/]
   # Generate digests for assets URLs.
   config.assets.digest = true
 
