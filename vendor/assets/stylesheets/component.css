@@ -10,6 +10,19 @@ body,
 body {
     overflow: scroll;
     overflow-x: hidden;
+    background: url(bg.jpg) no-repeat fixed center center transparent;
+}
+
+@font-face {
+    font-family: 'ArnoProSemibold';
+    src: url('arnopro-smbd-webfont.eot');
+    src: url('arnopro-smbd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/arnopro-smbd-webfont.woff') format('woff'),
+         url('arnopro-smbd-webfont.ttf') format('truetype'),
+         url('arnopro-smbd-webfont.svg#ArnoProSemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 .container.hide-overflow { overflow: hidden }
@@ -161,6 +174,7 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
+    display: none;
 }
 
 .details ul {
