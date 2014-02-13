@@ -24,6 +24,8 @@ gem 'unicorn'
 gem 'factory_girl_rails'
 gem 'faker'
 gem 'friendly_id'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

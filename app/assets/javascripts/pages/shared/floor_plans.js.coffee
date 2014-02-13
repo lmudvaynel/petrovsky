@@ -407,7 +407,7 @@ $.app.pages.shared.floor_plans =
       width: "#{@.params.floors.solid.size.width}px"
       height: "#{@.params.floors.solid.size.height}px"
       opacity: @.params.floors.solid.opacity
-      'background-image': "url(/images/floor#{floor_number}.png)"
+      'background-image': "url(/images/floors/floor#{floor_number}/floor#{floor_number}.png)"
     $(solid_floor_element).addClass('floor-element').css solid_floor_css
     solid_floor_element
 
@@ -490,7 +490,7 @@ $.app.pages.shared.floor_plans =
 
 $(document).ready ->
   for floor_number in [1..$.app.pages.shared.floor_plans.params.floors.count]
-    $.app.preload.image "/images/floor#{floor_number}.png"
+    $.app.preload.image "/images/floors/floor#{floor_number}/floor#{floor_number}.png"
 
   $.app.pages.shared.floor_plans.init()
   $.app.pages.shared.floor_plans.animate()
