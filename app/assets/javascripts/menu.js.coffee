@@ -1,4 +1,3 @@
-#= require jquery
 $.app.menu =
   init: ->
     $(".menu").on "mouseover", ".page-elem", $.app.menu.show
