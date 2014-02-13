@@ -10,7 +10,7 @@ Apartment.reset_column_information
 (1..floors_count).each do |floor_number|
   aparts_positions.each do |number, position|
     uploader = ApartmentImageUploader.new
-    path = "app/assets/images/floors/floor#{floor_number}"
+    path = "public/images/floors/floor#{floor_number}"
     if uploader.store! File.open(File.join(Rails.root, path, "#{floor_number}-#{number}.png"))
       apartment = Apartment.create! image: open(File.join(Rails.root, path, "#{floor_number}-#{number}.png")),
                                     dx: position.first,
