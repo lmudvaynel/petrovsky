@@ -1,3 +1,4 @@
+#= require images_preloader
 #= require threejs/three.min
 #= require threejs/renderers/CSS3DRenderer
 #= require threejs/controls/OrbitControls
@@ -18,7 +19,7 @@ $.app.pages.shared.floor_plans =
       distance: 1000
       yz_angle: 3 * Math.PI / 8
     controls:
-      blocked: true
+      blocked: false
     animation:
       speed: 10
       frames:
@@ -487,5 +488,9 @@ $.app.pages.shared.floor_plans =
     fp.update_number_positions_before_render()
     fp.renderer.render(fp.scene, fp.camera)
 
-$.app.pages.shared.floor_plans.init()
-$.app.pages.shared.floor_plans.animate()
+$(document).ready ->
+  for floor_number in [1..$.app.pages.shared.floor_plans.params.floors.count]
+    $.app.preload.image "/images/floor#{floor_number}.png"
+
+  $.app.pages.shared.floor_plans.init()
+  $.app.pages.shared.floor_plans.animate()
