@@ -489,8 +489,8 @@ $.app.pages.shared.floor_plans =
     fp.renderer.render(fp.scene, fp.camera)
 
 $(document).ready ->
-  for floor_number in [1..$.app.pages.shared.floor_plans.params.floors.count]
-    $.app.preload.image "/images/floor#{floor_number}.png"
-
-  $.app.pages.shared.floor_plans.init()
-  $.app.pages.shared.floor_plans.animate()
+  images = []
+  images.push "/images/floor#{n}.png" for n in [1..$.app.pages.shared.floor_plans.params.floors.count]
+  $.app.preload.ready images, ->
+    $.app.pages.shared.floor_plans.init()
+    $.app.pages.shared.floor_plans.animate()
