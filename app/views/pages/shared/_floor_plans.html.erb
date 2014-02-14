@@ -1,3 +1,8 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $.app.pages.shared.floor_plans.apartments = JSON.parse('<%= raw @apartments_json %>');
+  });
+</script>
 <section id="canvas-container">
 </section>
 <section id="controls-container">

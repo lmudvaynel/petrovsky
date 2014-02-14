@@ -14,7 +14,7 @@ $.app.pages.shared.floor_plans =
     container:
       size_in_percents:
         width: 100
-        height: 80
+        height: 100
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8
@@ -41,6 +41,9 @@ $.app.pages.shared.floor_plans =
           height: 544
         opacity: 0.75
         gap: 100
+      plan:
+        apartment:
+          opacity: 0.75
       number:
         positions:
           1: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
@@ -325,7 +328,11 @@ $.app.pages.shared.floor_plans =
     add_to_scene: ->
       fp.scene.add object for object_type, object of @.object
     remove_from_scene: ->
-      fp.scene.remove object for object_type, object of @.object
+      for object_type, object of @.object
+        if object_type == 'plan'
+          object.remove apartment for apartment in object.getDescendants()
+        else
+          fp.scene.remove object
     show_number: ->
       $(@.object.number.element).removeClass('hidden')
     hide_number: ->
@@ -360,6 +367,10 @@ $.app.pages.shared.floor_plans =
           current_distance = distance
           current_corner = corner
       current_corner
+    update_plan_position: (floor_number) ->
+      @.object.plan.rotation = @.object.solid.rotation.clone()
+      @.object.plan.position = @.object.solid.position.clone()
+      @.object.plan.position.y += 1
     update_number_position: (floor_number) ->
       @.object.number.rotation = fp.camera.rotation.clone()
       corner_positions = @.calculate_number_corner_positions(floor_number)
@@ -392,6 +403,7 @@ $.app.pages.shared.floor_plans =
 
   init_floor_object: (floor_number, position) ->
     solid: @.init_solid_floor_object(floor_number, position)
+    plan: @.init_plan_floor_object(floor_number, position)
     number: @.init_number_floor_object(floor_number)
 
   init_solid_floor_object: (floor_number, position) ->
@@ -410,6 +422,29 @@ $.app.pages.shared.floor_plans =
       'background-image': "url(/images/floor#{floor_number}.png)"
     $(solid_floor_element).addClass('floor-element').css solid_floor_css
     solid_floor_element
+
+  init_plan_floor_object: (floor_number, position) ->
+    plan_floor_object = new THREE.Object3D()
+    for apartment in @.apartments
+      if apartment.floor_number == floor_number
+        apartment_floor_object = @.init_apartnemt_floor_object(apartment, position)
+        plan_floor_object.add apartment_floor_object
+    plan_floor_object
+
+  init_apartnemt_floor_object: (apartment, position) ->
+    apartment_floor_object = new THREE.CSS3DObject(@.init_apartnemt_floor_dom_element(apartment))
+    apartment_floor_object.position.x = - @.params.floors.solid.size.width / 2 + apartment.size[0] / 2 + apartment.dx
+    apartment_floor_object.position.y = @.params.floors.solid.size.height / 2 - apartment.size[1] / 2 - apartment.dy
+    apartment_floor_object
+
+  init_apartnemt_floor_dom_element: (apartnemt) ->
+    apartnemt_floor_element = $('<div/>', class: 'apartment-element')
+    $(apartnemt_floor_element).css
+      width: "#{apartnemt.size[0]}px"
+      height: "#{apartnemt.size[1]}px"
+      opacity: @.params.floors.plan.apartment.opacity
+      'background-image': "url(/uploads/apartment/image/#{apartnemt.image})"
+    apartnemt_floor_element.get(0)
 
   init_number_floor_object: (floor_number) ->
     floor_number_element = @.init_number_floor_dom_element(floor_number)
@@ -475,7 +510,10 @@ $.app.pages.shared.floor_plans =
       floor: null
       number: null
 
-  update_number_positions_before_render: ->
+  update_plans_positions_before_render: ->
+    floor.update_plan_position(i + 1) for floor, i in @.house.floors
+
+  update_numbers_positions_before_render: ->
     floor.update_number_position(i + 1) for floor, i in @.house.floors
 
   animate: ->
@@ -485,7 +523,8 @@ $.app.pages.shared.floor_plans =
 
   render: ->
     fp = $.app.pages.shared.floor_plans
-    fp.update_number_positions_before_render()
+    fp.update_plans_positions_before_render()
+    fp.update_numbers_positions_before_render()
     fp.renderer.render(fp.scene, fp.camera)
 
 $(document).ready ->
