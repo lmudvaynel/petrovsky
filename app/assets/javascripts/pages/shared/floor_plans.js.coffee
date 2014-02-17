@@ -46,10 +46,6 @@ $.app.pages.shared.floor_plans =
           opacity: 0.75
           mouseover:
             dz: 5
-            css:
-              MozMoxShadow: '0 0 40px white'
-              WebkitBoxShadow: '0 0 40px white'
-              boxShadow: '0 0 40px white'
       number:
         positions:
           1: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
@@ -531,11 +527,12 @@ $.app.pages.shared.floor_plans =
     return unless fp.showed_floor.floor
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     if event.type == 'mouseover'
-      $(@).css fp.params.floors.plan.apartment.mouseover.css
+      if apartment.sold_out then shadow_color = 'red' else shadow_color = 'green'
+      shadow = "inset 0 0 #{Math.round((apartment.size[0] + apartment.size[1]) / 2)}px #{shadow_color}"
+      $(@).css 'boxShadow', shadow
       sign_dz = 1
     else
-      for style_name, style_value of fp.params.floors.plan.apartment.mouseover.css
-        $(@).css style_name, 'none'
+      $(@).css 'boxShadow', 'none'
       sign_dz = -1
     object = fp.scene.getObjectByName("plan-#{apartment.floor_number}").getObjectByName("apartment-#{apartment.number}")
     object.position.z += sign_dz * fp.params.floors.plan.apartment.mouseover.dz if object

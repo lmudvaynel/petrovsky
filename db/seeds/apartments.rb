@@ -1,10 +1,9 @@
 floors_count = 6
 aparts_positions = {
-  1 => [0, 0],
-  2 => [300, 0],
-  3 => [0, 300],
-  4 => [300, 300]
+  1 => [200, 150],
+  2 => [600, 150]
 }
+sold_out = false
 
 Apartment.reset_column_information
 (1..floors_count).each do |floor_number|
@@ -14,6 +13,9 @@ Apartment.reset_column_information
                                   dx: position.first,
                                   dy: position.second,
                                   number: number,
-                                  floor_number: floor_number
+                                  floor_number: floor_number,
+                                  sold_out: sold_out
+    sold_out = !sold_out
   end
+  sold_out = !sold_out
 end
