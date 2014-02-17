@@ -148,8 +148,9 @@ $.app.pages.shared.floor_plans =
       event.preventDefault()
       floor_number = parseInt $(@).text()
       $.app.pages.shared.floor_plans.floor_element_on_click floor_number
-    @.container.on 'mouseover', '.apartment-element', @.apartment_on_mouse_event
-    @.container.on 'mouseout', '.apartment-element', @.apartment_on_mouse_event
+    @.container.on 'mouseover', '.apartment-element', @.apartment_element_on_mouse_event
+    @.container.on 'mouseout', '.apartment-element', @.apartment_element_on_mouse_event
+    @.container.on 'click', '.apartment-element', @.apartment_element_on_click
 
     controls = $('#controls-container')
     controls.on 'click', 'a#back-to-house', (event) ->
@@ -520,13 +521,15 @@ $.app.pages.shared.floor_plans =
       floor: null
       number: null
 
-  apartment_on_mouse_event: (event) ->
+  get_apartment_by_id: (id) ->
+    for apartment in @.apartments
+      if apartment.id == id
+        return apartment
+
+  apartment_element_on_mouse_event: (event) ->
     fp = $.app.pages.shared.floor_plans
     return unless fp.showed_floor.floor
-    apartment = (=>
-      for apartment in fp.apartments
-        return apartment if apartment.id == parseInt($(@).attr('id'))
-    )()
+    apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     if event.type == 'mouseover'
       $(@).css fp.params.floors.plan.apartment.mouseover.css
       sign_dz = 1
@@ -537,6 +540,21 @@ $.app.pages.shared.floor_plans =
     object = fp.scene.getObjectByName("plan-#{apartment.floor_number}").getObjectByName("apartment-#{apartment.number}")
     object.position.z += sign_dz * fp.params.floors.plan.apartment.mouseover.dz if object
     fp.render()
+
+  apartment_element_on_click: (event) ->
+    fp = $.app.pages.shared.floor_plans
+    return unless fp.showed_floor.floor
+    container = $('#apartment-info-container')
+    apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
+    for div in container.find('div')
+      $(div).find('.info').text apartment[div.id]
+    if apartment.sold_out
+      container.find('#sold_out .info').text 'продано'
+      container.find('#buy-button').addClass 'hidden'
+    else
+      container.find('#sold_out .info').text 'свободно'
+      container.find('#buy-button').removeClass 'hidden'
+    container.removeClass 'hidden'
 
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors
