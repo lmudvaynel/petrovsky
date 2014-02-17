@@ -44,6 +44,12 @@ $.app.pages.shared.floor_plans =
       plan:
         apartment:
           opacity: 0.75
+          mouseover:
+            dz: 5
+            css:
+              MozMoxShadow: '0 0 40px white'
+              WebkitBoxShadow: '0 0 40px white'
+              boxShadow: '0 0 40px white'
       number:
         positions:
           1: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
@@ -142,6 +148,8 @@ $.app.pages.shared.floor_plans =
       event.preventDefault()
       floor_number = parseInt $(@).text()
       $.app.pages.shared.floor_plans.floor_element_on_click floor_number
+    @.container.on 'mouseover', '.apartment-element', @.apartment_on_mouse_event
+    @.container.on 'mouseout', '.apartment-element', @.apartment_on_mouse_event
 
     controls = $('#controls-container')
     controls.on 'click', 'a#back-to-house', (event) ->
@@ -425,6 +433,7 @@ $.app.pages.shared.floor_plans =
 
   init_plan_floor_object: (floor_number, position) ->
     plan_floor_object = new THREE.Object3D()
+    plan_floor_object.name = "plan-#{floor_number}"
     for apartment in @.apartments
       if apartment.floor_number == floor_number
         apartment_floor_object = @.init_apartnemt_floor_object(apartment, position)
@@ -433,17 +442,18 @@ $.app.pages.shared.floor_plans =
 
   init_apartnemt_floor_object: (apartment, position) ->
     apartment_floor_object = new THREE.CSS3DObject(@.init_apartnemt_floor_dom_element(apartment))
+    apartment_floor_object.name = "apartment-#{apartment.number}"
     apartment_floor_object.position.x = - @.params.floors.solid.size.width / 2 + apartment.size[0] / 2 + apartment.dx
     apartment_floor_object.position.y = @.params.floors.solid.size.height / 2 - apartment.size[1] / 2 - apartment.dy
     apartment_floor_object
 
-  init_apartnemt_floor_dom_element: (apartnemt) ->
-    apartnemt_floor_element = $('<div/>', class: 'apartment-element')
+  init_apartnemt_floor_dom_element: (apartment) ->
+    apartnemt_floor_element = $('<div/>', class: 'apartment-element', id: apartment.id)
     $(apartnemt_floor_element).css
-      width: "#{apartnemt.size[0]}px"
-      height: "#{apartnemt.size[1]}px"
+      width: "#{apartment.size[0]}px"
+      height: "#{apartment.size[1]}px"
       opacity: @.params.floors.plan.apartment.opacity
-      'background-image': "url(/uploads/apartment/image/#{apartnemt.image})"
+      'background-image': "url(/uploads/apartment/image/#{apartment.image})"
     apartnemt_floor_element.get(0)
 
   init_number_floor_object: (floor_number) ->
@@ -509,6 +519,24 @@ $.app.pages.shared.floor_plans =
     @.showed_floor =
       floor: null
       number: null
+
+  apartment_on_mouse_event: (event) ->
+    fp = $.app.pages.shared.floor_plans
+    return unless fp.showed_floor.floor
+    apartment = (=>
+      for apartment in fp.apartments
+        return apartment if apartment.id == parseInt($(@).attr('id'))
+    )()
+    if event.type == 'mouseover'
+      $(@).css fp.params.floors.plan.apartment.mouseover.css
+      sign_dz = 1
+    else
+      for style_name, style_value of fp.params.floors.plan.apartment.mouseover.css
+        $(@).css style_name, 'none'
+      sign_dz = -1
+    object = fp.scene.getObjectByName("plan-#{apartment.floor_number}").getObjectByName("apartment-#{apartment.number}")
+    object.position.z += sign_dz * fp.params.floors.plan.apartment.mouseover.dz if object
+    fp.render()
 
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors

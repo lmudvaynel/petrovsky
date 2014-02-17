@@ -5,6 +5,7 @@ class Apartment < ActiveRecord::Base
 
   def to_hash
     {
+      id: id,
       image: image.file.filename,
       size: image.get_geometry,
       dx: dx,
