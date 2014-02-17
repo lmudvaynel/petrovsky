@@ -9,7 +9,6 @@ Petrovsky::Application.routes.draw do
   root 'pages#index'
 
   get '/home' => redirect('/')
-  get ':slug' => 'pages#show', :as => :slug
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -30,6 +29,8 @@ Petrovsky::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
+  post 'create_order' => 'pages#create_order'
+  get ':slug' => 'pages#show', :as => :slug
 
   resources :pages, only: :index
 

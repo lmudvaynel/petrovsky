@@ -1,3 +1,4 @@
+#= require jquery.ui.all
 #= require images_preloader
 #= require threejs/three.min
 #= require threejs/renderers/CSS3DRenderer
@@ -541,17 +542,18 @@ $.app.pages.shared.floor_plans =
   apartment_element_on_click: (event) ->
     fp = $.app.pages.shared.floor_plans
     return unless fp.showed_floor.floor
-    container = $('#apartment-info-container')
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
-    for div in container.find('div')
-      $(div).find('.info').text apartment[div.id]
-    if apartment.sold_out
-      container.find('#sold_out .info').text 'продано'
-      container.find('#buy-button').addClass 'hidden'
-    else
-      container.find('#sold_out .info').text 'свободно'
-      container.find('#buy-button').removeClass 'hidden'
-    container.removeClass 'hidden'
+    return if apartment.sold_out
+    $('#order-form-dialog').dialog
+      width: 400
+      modal: true
+      buttons:
+        'Отправить заявку': ->
+          $(@).find('#order_apartment_id').val(apartment.id)
+          $(@).find('form').submit()
+          $(@).dialog 'close'
+        'Отменить': -> $(@).dialog 'close'
+      close: -> $(@).find('input').val('')
 
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors

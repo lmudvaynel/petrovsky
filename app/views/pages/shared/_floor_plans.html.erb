@@ -5,17 +5,14 @@
 </script>
 <section id="canvas-container">
 </section>
-<section id="apartment-info-container" class="hidden">
-  <div id="floor_number">
-    Этаж: <span class="info"></span>
+<section id="order-form-container" class="hidden">
+  <div id="order-form-dialog">
+    <%= form_for :order, url: create_order_path do |f| %>
+      Ваше имя: <%= f.text_field :name %><br />
+      Ваш e-mail: <%= f.text_field :email %><br />
+      <%= f.hidden_field :apartment_id %>
+    <% end %>
   </div>
-  <div id="number">
-    Номер апартамента: <span class="info"></span>
-  </div>
-  <div id="sold_out">
-    Статус: <span class="info"></span>
-  </div>
-  <button id="buy-button">Купить</button>
 </section>
 <section id="controls-container">
   <%= link_to 'Back to house', '#', id: 'back-to-house', class: 'hidden' %>
