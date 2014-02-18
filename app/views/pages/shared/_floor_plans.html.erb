@@ -14,8 +14,9 @@
     <% end %>
   </div>
 </section>
-<section id="controls-container">
-  <%= link_to 'Back to house', '#', id: 'back-to-house', class: 'hidden' %>
+<section id="controls-container" class="hidden">
+  <%= link_to 'Back to house', '#', id: 'back-to-house' %>
+  <%= link_to 'Show 3D', '#', :id => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
 </section>
 <section>
   <%= @page.try(:content) %>
