@@ -26,10 +26,11 @@ $.app.pages.shared.floor_plans =
       frames:
         camera: 50
         floor:
+          to_preforeground: 50
           to_foreground: 50
           to_demonstration: 50
-          to_above_the_scene: 30
-          to_under_the_scene: 30
+          to_above_the_scene: 50
+          to_under_the_scene: 50
           to_center_of_scene: 50
       house:
         delay:
@@ -111,11 +112,19 @@ $.app.pages.shared.floor_plans =
     floor_position_under_the_scene.position.y -= @.params.scene.distance * 3
     floor_position_under_the_scene
 
-  floor_position_foreground: ->
+  floor_position_preforeground: ->
     position:
       x: 0
       y: @.params.scene.distance / 4 * Math.cos(@.params.scene.yz_angle)
       z: @.params.scene.distance / 4 * Math.sin(@.params.scene.yz_angle)
+    rotation:
+      x: @.params.scene.yz_angle - Math.PI / 2, y: 0, z: 0
+
+  floor_position_foreground: ->
+    position:
+      x: 0
+      y: @.params.scene.distance / 2 * Math.cos(@.params.scene.yz_angle)
+      z: @.params.scene.distance / 2 * Math.sin(@.params.scene.yz_angle)
     rotation:
       x: @.params.scene.yz_angle - Math.PI / 2, y: 0, z: 0
 
@@ -515,6 +524,8 @@ $.app.pages.shared.floor_plans =
         animated_floor.set_callbacks callbacks
       fp.animated_objects.set animated_floor
       animated_floor.animation_start()
+    animate_to_preforeground: (name = 'floor', callbacks = []) ->
+      @.animate_to 'preforeground', name, callbacks
     animate_to_foreground: (name = 'floor', callbacks = []) ->
       @.animate_to 'foreground', name, callbacks
     animate_to_demonstration: (name = 'floor', callbacks = []) ->
@@ -636,11 +647,14 @@ $.app.pages.shared.floor_plans =
     @.showed_floor.number = floor_number
 
     @.animate_camera_to_start()
-    @.showed_floor.floor.animate_to_foreground 'floor', =>
-      @.house.remove_from_scene_by(@.showed_floor.number)
-      @.unblock_controls_for_floor_foreground()
-      @.toggle_controls_container 'show'
-      @.change_mode_to 'floor-foreground'
+    @.showed_floor.floor.animate_to_preforeground 'floor-preforeground', =>
+      setTimeout =>
+        @.showed_floor.floor.animate_to_foreground 'floor', =>
+          @.house.remove_from_scene_by(@.showed_floor.number)
+          @.unblock_controls_for_floor_foreground()
+          @.toggle_controls_container 'show'
+          @.change_mode_to 'floor-foreground'
+      , 100
 
   back_to_house_on_click: ->
     @.toggle_controls_container 'hide'
