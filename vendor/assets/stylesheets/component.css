@@ -10,7 +10,7 @@ body,
 body {
     overflow: scroll;
     overflow-x: hidden;
-    background: url(../images/bg.jpg) no-repeat fixed center center transparent;
+    background: url(bg.jpg) no-repeat fixed center center transparent;
 }
 
 @font-face {
