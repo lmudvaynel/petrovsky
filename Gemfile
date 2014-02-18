@@ -27,7 +27,7 @@ gem 'faker'
 gem 'friendly_id'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'rmagick', '2.13.2', git: 'http://github.com/rmagick/rmagick.git'
+gem 'rmagick', '2.13.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
