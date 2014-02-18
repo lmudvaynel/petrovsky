@@ -1,7 +1,7 @@
 floors_count = 6
 aparts_positions = {
-  1 => [200, 150],
-  2 => [600, 150]
+  1 => [123, 172],
+  2 => [609, 172]
 }
 sold_out = false
 
