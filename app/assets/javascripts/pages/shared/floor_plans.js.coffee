@@ -15,7 +15,7 @@ $.app.pages.shared.floor_plans =
     container:
       size_in_percents:
         width: 100
-        height: 90
+        height: 100
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8
@@ -158,42 +158,6 @@ $.app.pages.shared.floor_plans =
     @.house.add_to_scene()
     @.house.animate_to_scene 0, =>
       @.end_house_animate_to_scene()
-
-#    @.init_axes()
-
-  init_axes: ->
-    fp = $.app.pages.shared.floor_plans
-    ox = document.createElement('div')
-    oy = document.createElement('div')
-    oz = document.createElement('div')
-    ox_css =
-      width: "#{@.params.scene.distance}px"
-      height: "#{Math.round(@.params.scene.distance / 100)}px"
-      'background-color': 'red'
-    oy_css =
-      width: "#{@.params.scene.distance}px"
-      height: "#{Math.round(@.params.scene.distance / 100)}px"
-      'background-color': 'green'
-    oz_css =
-      width: "#{@.params.scene.distance}px"
-      height: "#{Math.round(@.params.scene.distance / 100)}px"
-      'background-color': 'blue'
-    $(ox).css ox_css
-    $(oy).css oy_css
-    $(oz).css oz_css
-
-    ox_object = new THREE.CSS3DObject(ox)
-    ox_object.position.x += Math.round(@.params.scene.distance / 2)
-    oy_object = new THREE.CSS3DObject(oy)
-    oy_object.position.y += Math.round(@.params.scene.distance / 2)
-    oy_object.rotation.z += Math.PI / 2
-    oz_object = new THREE.CSS3DObject(oz)
-    oz_object.position.z += Math.round(@.params.scene.distance / 2)
-    oz_object.rotation.y += Math.PI / 2
-
-    fp.scene.add(ox_object)
-    fp.scene.add(oy_object)
-    fp.scene.add(oz_object)
 
   init_container: ->
     @.container.css
