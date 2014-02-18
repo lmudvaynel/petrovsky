@@ -218,6 +218,7 @@ $.app.pages.shared.floor_plans =
     @.container.on 'resize', @.on_window_resize
     @.container.on 'click', 'a.show-floor', (event) ->
       return unless fp.mode == 'house'
+      return if fp.animated_objects.animated()
       event.preventDefault()
       floor_number = parseInt $(@).text()
       fp.floor_element_on_click floor_number
@@ -228,10 +229,12 @@ $.app.pages.shared.floor_plans =
     controls = $('#controls-container')
     controls.on 'click', 'a#back-to-house', (event) ->
       return unless fp.mode == 'floor-foreground'
+      return if fp.animated_objects.animated()
       event.preventDefault()
       fp.back_to_house_on_click()
     controls.on 'click', 'a#toggle-dimensions', (event) ->
       return if fp.mode == 'house'
+      return if fp.animated_objects.animated()
       event.preventDefault()
       fp.toggle_dimensions_on_click @
 
@@ -486,7 +489,7 @@ $.app.pages.shared.floor_plans =
     update_plan_position: (floor_number) ->
       @.object.plan.rotation = @.object.solid.rotation.clone()
       @.object.plan.position = @.object.solid.position.clone()
-      @.object.plan.position.y += 1
+      @.object.plan.position.y += 2
     calculate_nearest_number_position: ->
       floor_number = parseInt $(@.object.number.element).text()
       corner_positions = @.calculate_number_corner_positions(floor_number)
@@ -646,7 +649,6 @@ $.app.pages.shared.floor_plans =
       @.showed_floor.floor.show_number()
       @.init_house @.showed_floor
       @.house.add_to_scene_by(@.showed_floor.number)
-      @.render()
       @.house.animate_to_scene @.showed_floor.number, =>
         @.end_house_animate_to_scene()
         @.clear_showed_floor()
@@ -674,11 +676,12 @@ $.app.pages.shared.floor_plans =
     else
       @.floor_demonstration.remove_from_scene()
       @.showed_floor.floor.show_to_scene =>
-        @.unblock_controls_for_floor_foreground()
+        @.showed_floor.floor.animate_to_foreground 'floor', =>
+          @.unblock_controls_for_floor_foreground()
 
-        $(link).text('Show 3D').data('toggle-direction', 'to-3d')
-        @.change_mode_to 'floor-foreground'
-        $('#back-to-house').removeClass('hidden')
+          $(link).text('Show 3D').data('toggle-direction', 'to-3d')
+          @.change_mode_to 'floor-foreground'
+          $('#back-to-house').removeClass('hidden')
 
   clear_showed_floor: ->
     @.showed_floor =
@@ -695,6 +698,7 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     return unless fp.mode == 'floor-foreground'
     return unless fp.showed_floor.floor
+    return if fp.animated_objects.animated()
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     if event.type == 'mouseover'
       if apartment.sold_out then shadow_color = 'red' else shadow_color = 'green'
@@ -718,6 +722,7 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     return unless fp.mode == 'floor-foreground'
     return unless fp.showed_floor.floor
+    return if fp.animated_objects.animated()
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     return if apartment.sold_out
     $('#order-form-dialog').dialog
@@ -748,7 +753,11 @@ $.app.pages.shared.floor_plans =
 $(document).ready ->
   fp = $.app.pages.shared.floor_plans
   images = []
-  images.push "/images/floor-#{n}.png" for n in [1..fp.params.floors.count]
+  for floor_number in [1..fp.params.floors.count]
+    images.push "/images/floor-#{floor_number}.png"
+    images.push "/images/floor-demonstration-#{floor_number}.png"
+  for apartment in fp.apartments
+    images.push "/uploads/apartment/image/#{apartment.image}"
   $.app.preload.ready images, ->
     fp.init()
     fp.animate()
