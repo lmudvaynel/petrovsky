@@ -185,14 +185,18 @@ $.app.pages.shared.floor_plans =
     @.controls.maxDistance = @.params.scene.distance * 2
     $(@.controls).on 'change', @.render
 
+  valid_event_for: (mode, event) ->
+    return false unless @.mode == mode
+    return false if @.animated_objects.animated()
+    event.preventDefault()
+    true
+
   init_events: ->
     fp = $.app.pages.shared.floor_plans
 
     @.container.on 'resize', @.on_window_resize
     @.container.on 'click', 'a.show-floor', (event) ->
-      return unless fp.mode == 'house'
-      return if fp.animated_objects.animated()
-      event.preventDefault()
+      return unless fp.valid_event_for 'house', event
       floor_number = parseInt $(@).text()
       fp.floor_element_on_click floor_number
     @.container.on 'mouseover', '.apartment-element', @.apartment_element_on_mouse_event
@@ -201,15 +205,9 @@ $.app.pages.shared.floor_plans =
 
     controls = $('#controls-container')
     controls.on 'click', 'a#back-to-house', (event) ->
-      return unless fp.mode == 'floor-foreground'
-      return if fp.animated_objects.animated()
-      event.preventDefault()
+      return unless fp.valid_event_for 'floor-foreground', event
       fp.back_to_house_on_click()
-    controls.on 'click', 'a#toggle-dimensions', (event) ->
-      return if fp.mode == 'house'
-      return if fp.animated_objects.animated()
-      event.preventDefault()
-      fp.toggle_dimensions_on_click @
+    controls.on 'click', 'a#toggle-dimensions', fp.toggle_dimensions_on_click
 
   init_animated_objects: ->
     fp = $.app.pages.shared.floor_plans
@@ -639,26 +637,30 @@ $.app.pages.shared.floor_plans =
   end_house_animate_to_scene: ->
     @.unblock_controls_for_house()
 
-  toggle_dimensions_on_click: (link) ->
-    @.animate_camera_to_start()
-    if $(link).data('toggle-direction') == 'to-3d'
+  toggle_dimensions_on_click: (event) ->
+    fp = $.app.pages.shared.floor_plans
+    if $(@).data('toggle-direction') == 'to-3d'
+      return unless fp.valid_event_for 'floor-foreground', event
+      fp.animate_camera_to_start()
       $('#back-to-house').addClass('hidden')
-      @.showed_floor.floor.animate_to_demonstration 'floor', =>
-        @.init_floor_demonstration(@.showed_floor.number)
-        @.floor_demonstration.add_to_scene()
-        @.showed_floor.floor.hide_from_scene()
-        @.unblock_controls_for_floor_demonstration()
+      fp.showed_floor.floor.animate_to_demonstration 'floor', =>
+        fp.init_floor_demonstration(fp.showed_floor.number)
+        fp.floor_demonstration.add_to_scene()
+        fp.showed_floor.floor.hide_from_scene()
+        fp.unblock_controls_for_floor_demonstration()
 
-        $(link).text('Show 2D').data('toggle-direction', 'to-2d')
-        @.change_mode_to 'floor-demonstration'
+        $(@).text('Show 2D').data('toggle-direction', 'to-2d')
+        fp.change_mode_to 'floor-demonstration'
     else
-      @.floor_demonstration.remove_from_scene()
-      @.showed_floor.floor.show_to_scene =>
-        @.showed_floor.floor.animate_to_foreground 'floor', =>
-          @.unblock_controls_for_floor_foreground()
+      return unless fp.valid_event_for 'floor-demonstration', event
+      fp.animate_camera_to_start()
+      fp.floor_demonstration.remove_from_scene()
+      fp.showed_floor.floor.show_to_scene =>
+        fp.showed_floor.floor.animate_to_foreground 'floor', =>
+          fp.unblock_controls_for_floor_foreground()
 
-          $(link).text('Show 3D').data('toggle-direction', 'to-3d')
-          @.change_mode_to 'floor-foreground'
+          $(@).text('Show 3D').data('toggle-direction', 'to-3d')
+          fp.change_mode_to 'floor-foreground'
           $('#back-to-house').removeClass('hidden')
 
   clear_showed_floor: ->
@@ -672,11 +674,9 @@ $.app.pages.shared.floor_plans =
         return apartment
 
   apartment_element_on_mouse_event: (event) ->
-    event.preventDefault()
     fp = $.app.pages.shared.floor_plans
-    return unless fp.mode == 'floor-foreground'
+    return unless fp.valid_event_for 'floor-foreground', event
     return unless fp.showed_floor.floor
-    return if fp.animated_objects.animated()
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     if event.type == 'mouseover'
       if apartment.sold_out then shadow_color = 'red' else shadow_color = 'green'
@@ -696,11 +696,9 @@ $.app.pages.shared.floor_plans =
     fp.render()
 
   apartment_element_on_click: (event) ->
-    event.preventDefault()
     fp = $.app.pages.shared.floor_plans
-    return unless fp.mode == 'floor-foreground'
+    return unless fp.valid_event_for 'floor-foreground', event
     return unless fp.showed_floor.floor
-    return if fp.animated_objects.animated()
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     return if apartment.sold_out
     $('#order-form-dialog').dialog
