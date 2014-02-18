@@ -349,8 +349,8 @@ $.app.pages.shared.floor_plans =
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 1
-    @.controls.minPolarAngle = 0
-    @.controls.maxPolarAngle = Math.PI
+    @.controls.minPolarAngle = Math.PI / 4
+    @.controls.maxPolarAngle = 9 * Math.PI / 16
     @.controls.noPan = true
     @.controls.noZoom = false
 
