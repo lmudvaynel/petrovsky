@@ -1,0 +1,14 @@
+<%= semantic_form_for [:admin, resource] do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :image %>
+    <%= f.input :dx %>
+    <%= f.input :dy %>
+    <%= f.input :number %>
+    <%= f.input :floor_number %>
+    <%= f.input :sold_out %>
+
+    <%= image_tag resource.image.url if resource.image.url.present? %>
+  <% end %>
+
+  <%= f.actions %>
+<% end %>

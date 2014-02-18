@@ -1,7 +1,22 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $.app.pages.shared.floor_plans.apartments = JSON.parse('<%= raw @apartments_json %>');
+  });
+</script>
 <section id="canvas-container">
 </section>
-<section id="controls-container">
-  <%= link_to 'Back to house', '#', id: 'back-to-house', class: 'hidden' %>
+<section id="order-form-container" class="hidden">
+  <div id="order-form-dialog">
+    <%= form_for :order, url: create_order_path do |f| %>
+      Ваше имя: <%= f.text_field :name %><br />
+      Ваш e-mail: <%= f.text_field :email %><br />
+      <%= f.hidden_field :apartment_id %>
+    <% end %>
+  </div>
+</section>
+<section id="controls-container" class="hidden">
+  <%= link_to 'Back to house', '#', id: 'back-to-house' %>
+  <%= link_to 'Show 3D', '#', :id => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
 </section>
 <section>
   <%= @page.try(:content) %>
