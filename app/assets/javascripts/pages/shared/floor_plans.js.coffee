@@ -56,17 +56,21 @@ $.app.pages.shared.floor_plans =
           speed: 1000
       plan:
         apartment:
-          opacity: 0.75
+          opacity:
+            default: 0
+            mouseover: 1
           mouseover:
             dz: 5
       number:
         positions:
-          1: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
-          2: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
-          3: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
-          4: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
-          5: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
-          6: corners: [[0, 0], [1023, 0], [1023, 544], [0, 544]], current: 3
+          corners:
+            1: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
+            2: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
+            3: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
+            4: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
+            5: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
+            6: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
+          current: 3
         change_position_delay: 200
         font_size:
           px: 50
@@ -375,6 +379,9 @@ $.app.pages.shared.floor_plans =
       remove_from_scene_by: (floor_number) ->
         for floor, i in @.floors
           floor.remove_from_scene() unless i == floor_number - 1
+      update_numbers_positions: ->
+        @.floors[@.floors.length - 1].calculate_nearest_number_position()
+        floor.update_number_position() for floor in @.floors
       set_delay_timeout_to_animations: (i, animations, direction, callbacks = []) ->
         setTimeout =>
           for floor_id, animation of animations
@@ -456,7 +463,7 @@ $.app.pages.shared.floor_plans =
         half_height: fp.params.floors.solid.size.height / 2
       corner_positions = []
       for corner in [0..3]
-        corner_position_by_params = fp.params.floors.number.positions[floor_number].corners[corner]
+        corner_position_by_params = fp.params.floors.number.positions.corners[floor_number][corner]
         corner_positions[corner] =
           x: @.object.solid.position.x - floor.half_width + corner_position_by_params[0]
           y: @.object.solid.position.y + fp.params.floors.number.font_size.px / 2
@@ -480,14 +487,18 @@ $.app.pages.shared.floor_plans =
       @.object.plan.rotation = @.object.solid.rotation.clone()
       @.object.plan.position = @.object.solid.position.clone()
       @.object.plan.position.y += 1
-    update_number_position: (floor_number) ->
-      @.object.number.rotation = fp.camera.rotation.clone()
+    calculate_nearest_number_position: ->
+      floor_number = parseInt $(@.object.number.element).text()
       corner_positions = @.calculate_number_corner_positions(floor_number)
-      current_corner = fp.params.floors.number.positions[floor_number].current
+      current_corner = fp.params.floors.number.positions.current
       current_corner = @.recalculate_current_corner(corner_positions, current_corner)
-      fp.params.floors.number.positions[floor_number].current = current_corner
+      fp.params.floors.number.positions.current = current_corner
+    update_number_position: ->
+      @.object.number.rotation = fp.camera.rotation.clone()
+      floor_number = parseInt $(@.object.number.element).text()
+      current_corner = fp.params.floors.number.positions.current
       for coord in fp.location.coords
-        @.object.number.position[coord] = corner_positions[current_corner][coord]
+        @.object.number.position[coord] = @.calculate_number_corner_positions(floor_number)[current_corner][coord]
     animate_to: (position, name = 'house', callbacks = []) ->
       floor_number = @.object.number.element.textContent
       animated_floor = fp.animated_objects.get_by_name(name)
@@ -555,7 +566,7 @@ $.app.pages.shared.floor_plans =
     $(apartnemt_floor_element).css
       width: "#{apartment.size[0]}px"
       height: "#{apartment.size[1]}px"
-      opacity: @.params.floors.plan.apartment.opacity
+      opacity: @.params.floors.plan.apartment.opacity.default
       'background-image': "url(/uploads/apartment/image/#{apartment.image})"
     apartnemt_floor_element.get(0)
 
@@ -687,11 +698,15 @@ $.app.pages.shared.floor_plans =
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     if event.type == 'mouseover'
       if apartment.sold_out then shadow_color = 'red' else shadow_color = 'green'
-      shadow = "inset 0 0 #{Math.round((apartment.size[0] + apartment.size[1]) / 2)}px #{shadow_color}"
-      $(@).css 'boxShadow', shadow
+      shadow = "inset 0 0 #{Math.round((apartment.size[0] + apartment.size[1]) / 4)}px #{shadow_color}"
+      $(@).css
+        boxShadow: shadow
+        opacity: fp.params.floors.plan.apartment.opacity.mouseover
       sign_dz = 1
     else
-      $(@).css 'boxShadow', 'none'
+      $(@).css
+        boxShadow: 'none'
+        opacity: fp.params.floors.plan.apartment.opacity.default
       sign_dz = -1
     plan_object = fp.scene.getObjectByName("plan-#{apartment.floor_number}")
     object = plan_object.getObjectByName("apartment-#{apartment.number}")
@@ -719,9 +734,6 @@ $.app.pages.shared.floor_plans =
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors
 
-  update_numbers_positions_before_render: ->
-    floor.update_number_position(i + 1) for floor, i in @.house.floors
-
   animate: ->
     fp = $.app.pages.shared.floor_plans
     requestAnimationFrame(fp.animate)
@@ -730,7 +742,7 @@ $.app.pages.shared.floor_plans =
   render: ->
     fp = $.app.pages.shared.floor_plans
     fp.update_plans_positions_before_render()
-    fp.update_numbers_positions_before_render()
+    fp.house.update_numbers_positions()
     fp.renderer.render(fp.scene, fp.camera)
 
 $(document).ready ->
