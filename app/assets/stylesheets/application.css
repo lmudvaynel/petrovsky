@@ -14,4 +14,5 @@
  *= require responsive
  *= require style
  *= require pages/shared/floor_plans
+ *= require jquery.ui.all
  */

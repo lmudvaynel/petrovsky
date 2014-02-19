@@ -307,9 +307,11 @@ $.app.pages.shared.floor_plans =
   unblock_controls_for_house: ->
     return unless @.params.controls.blocked
 
-    @.controls.rotateSpeed = 1
+    @.controls.rotateSpeed = 2
     @.controls.minPolarAngle = @.params.scene.yz_angle
     @.controls.maxPolarAngle = @.params.scene.yz_angle
+    @.controls.minAzimuthalAngle = - Math.PI
+    @.controls.maxAzimuthalAngle = Math.PI
     @.controls.noPan = true
     @.controls.noZoom = false
 
@@ -321,6 +323,8 @@ $.app.pages.shared.floor_plans =
     @.controls.rotateSpeed = 1
     @.controls.minPolarAngle = 3 * Math.PI / 8
     @.controls.maxPolarAngle = 9 * Math.PI / 16
+    @.controls.minAzimuthalAngle = - Math.PI / 16
+    @.controls.maxAzimuthalAngle = Math.PI / 16
     @.controls.noPan = true
     @.controls.noZoom = false
 
@@ -329,9 +333,11 @@ $.app.pages.shared.floor_plans =
   unblock_controls_for_floor_demonstration: ->
     return unless @.params.controls.blocked
 
-    @.controls.rotateSpeed = 0
-    @.controls.minPolarAngle = @.params.scene.yz_angle
-    @.controls.maxPolarAngle = @.params.scene.yz_angle
+    @.controls.rotateSpeed = 0.2
+    @.controls.minPolarAngle = 3 * Math.PI / 8
+    @.controls.maxPolarAngle = 7 * Math.PI / 16
+    @.controls.minAzimuthalAngle = - Math.PI / 32
+    @.controls.maxAzimuthalAngle = Math.PI / 32
     @.controls.noPan = true
     @.controls.noZoom = false
 
