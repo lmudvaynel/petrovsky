@@ -87,6 +87,12 @@ $.app.pages.shared.floor_plans =
     @.mode = new_mode
     console.log @.mode
 
+  objects_positions_is_equal: (first_object, second_object) ->
+    for option in @.location.options
+      for coord in @.location.coords
+        return false if Math.abs(first_object[option][coord] - second_object[option][coord]) > 0.2
+    true
+
   camera_position_start: ->
     position:
       x: 0
@@ -330,13 +336,18 @@ $.app.pages.shared.floor_plans =
 
     @.params.controls.blocked = false
 
-  animate_camera_to_start: ->
+  camera_on_start_position: ->
+    @.objects_positions_is_equal(@.camera, @.camera_position_start())
+
+  animate_camera_to_start: (callbacks = []) ->
+    return if @.camera_on_start_position()
     animated_camera = @.animated_objects.get_by_name 'camera'
     animated_camera = @.init_animated_object 'camera' unless animated_camera
     animated_camera.set_scene_objects
       object: @.camera
       position_of_arrival: @.camera_position_start()
       frames: @.params.animation.frames.camera
+    animated_camera.set_callbacks callbacks
     @.animated_objects.set animated_camera
     animated_camera.animation_start()
 
@@ -638,8 +649,8 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     if $(@).data('toggle-direction') == 'to-3d'
       return unless fp.valid_event_for 'floor-foreground', event
-      fp.animate_camera_to_start()
       $('#back-to-house').addClass('hidden')
+      fp.animate_camera_to_start()
       fp.showed_floor.floor.animate_to_demonstration 'floor', =>
         fp.init_floor_demonstration(fp.showed_floor.number)
         fp.floor_demonstration.add_to_scene()
