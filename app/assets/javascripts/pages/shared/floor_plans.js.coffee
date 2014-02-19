@@ -513,14 +513,13 @@ $.app.pages.shared.floor_plans =
     solid_floor_object
 
   init_solid_floor_dom_element: (floor_number) ->
-    solid_floor_element = document.createElement('div')
+    solid_floor_element = $('<div/>', class: 'floor-element')
     solid_floor_css =
       width: "#{@.params.floors.solid.size.width}px"
       height: "#{@.params.floors.solid.size.height}px"
       opacity: @.params.floors.solid.opacity.show
       'background-image': "url(/images/floor-#{floor_number}.png)"
-    $(solid_floor_element).addClass('floor-element').css solid_floor_css
-    solid_floor_element
+    $(solid_floor_element).css(solid_floor_css).get(0)
 
   init_plan_floor_object: (floor_number, position) ->
     plan_floor_object = new THREE.Object3D()
@@ -553,14 +552,12 @@ $.app.pages.shared.floor_plans =
     floor_number_object
 
   init_number_floor_dom_element: (floor_number) ->
-    number_floor_element = document.createElement('a')
+    number_floor_element = $("<a/>", class: 'show-floor').attr('href', '#').text(floor_number)
     number_floor_css =
       width: "#{@.params.floors.number.font_size.px}px"
       height: "#{@.params.floors.number.font_size.px}px"
       'font-size': "#{@.params.floors.number.font_size.px}px"
-    $(number_floor_element).attr('href', '#').addClass('show-floor')
-    $(number_floor_element).text(floor_number).css number_floor_css
-    number_floor_element
+    $(number_floor_element).css(number_floor_css).get(0)
 
   init_floor_demonstration: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
@@ -585,14 +582,13 @@ $.app.pages.shared.floor_plans =
     floor_demonstration_object
 
   init_floor_demonstration_dom_element: (floor_number) ->
-    floor_demonstration_element = document.createElement('div')
+    floor_demonstration_element = $('<div/>', class: 'floor-demonstration-element')
     floor_demonstration_css =
       width: "#{@.params.floors.demonstration.size.width}px"
       height: "#{@.params.floors.demonstration.size.height}px"
       opacity: @.params.floors.demonstration.opacity.hide
       'background-image': "url(/images/floor-demonstration-#{floor_number}.png)"
-    $(floor_demonstration_element).addClass('floor-demonstration-element').css floor_demonstration_css
-    floor_demonstration_element
+    $(floor_demonstration_element).css(floor_demonstration_css).get(0)
 
   on_window_resize: ->
     @.camera.aspect = @.container.innerWidth() / @.container.innerHeight()
