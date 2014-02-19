@@ -85,7 +85,6 @@ $.app.pages.shared.floor_plans =
 
   change_mode_to: (new_mode) ->
     @.mode = new_mode
-    console.log @.mode
 
   objects_positions_is_equal: (first_object, second_object) ->
     for option in @.location.options
@@ -138,10 +137,12 @@ $.app.pages.shared.floor_plans =
   floor_position_demonstration: ->
     position:
       x: -50
-      y: 85
-      z: 40
+      y: 90
+      z: 0
     rotation:
-      x: @.params.scene.yz_angle - 120 * Math.PI / 200, y: -10 * Math.PI / 600, z: - 95 * Math.PI / 600
+      x: -0.7968583470577033
+      y: -0.032359877559829886
+      z: -0.49741883681838395
 
   floor_demonstration_position_foreground: ->
     position:
