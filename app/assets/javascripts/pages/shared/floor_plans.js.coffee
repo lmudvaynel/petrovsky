@@ -85,6 +85,7 @@ $.app.pages.shared.floor_plans =
 
   change_mode_to: (new_mode) ->
     @.mode = new_mode
+    console.log @.mode
 
   camera_position_start: ->
     position:
@@ -311,7 +312,7 @@ $.app.pages.shared.floor_plans =
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 1
-    @.controls.minPolarAngle = Math.PI / 4
+    @.controls.minPolarAngle = 3 * Math.PI / 8
     @.controls.maxPolarAngle = 9 * Math.PI / 16
     @.controls.noPan = true
     @.controls.noZoom = false
@@ -538,7 +539,7 @@ $.app.pages.shared.floor_plans =
     apartment_floor_object
 
   init_apartnemt_floor_dom_element: (apartment) ->
-    apartnemt_floor_element = $('<div/>', class: 'apartment-element', id: apartment.id)
+    apartnemt_floor_element = $('<div/>', class: 'apartment-element', id: apartment.id, 'data-selected': false)
     $(apartnemt_floor_element).css
       width: "#{apartment.size[0]}px"
       height: "#{apartment.size[1]}px"
@@ -679,6 +680,7 @@ $.app.pages.shared.floor_plans =
     return unless fp.showed_floor.floor
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     if event.type == 'mouseover'
+      if $(@).data('selected') then return else $(@).data('selected', true)
       if apartment.sold_out then shadow_color = 'red' else shadow_color = 'green'
       shadow = "inset 0 0 #{Math.round((apartment.size[0] + apartment.size[1]) / 4)}px #{shadow_color}"
       $(@).css
@@ -686,6 +688,7 @@ $.app.pages.shared.floor_plans =
         opacity: fp.params.floors.plan.apartment.opacity.mouseover
       sign_dz = 1
     else
+      if $(@).data('selected') then $(@).data('selected', false) else return
       $(@).css
         boxShadow: 'none'
         opacity: fp.params.floors.plan.apartment.opacity.default
