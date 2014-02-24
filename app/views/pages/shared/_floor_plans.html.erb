@@ -3,6 +3,9 @@
     $.app.pages.shared.floor_plans.apartments = JSON.parse('<%= raw @apartments_json %>');
   });
 </script>
+<section id="preloader-container">
+  LOADING: <span id="percents">0</span>%
+</section>
 <section id="canvas-container">
 </section>
 <section id="order-form-container" class="hidden">

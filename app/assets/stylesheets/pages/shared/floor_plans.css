@@ -48,3 +48,15 @@
   padding: 5px;
   margin: 10px;
 }
+
+#preloader-container {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  padding-top: 400px;
+  z-index: 100;
+  font-size: 48pt;
+  font-weight: bold;
+  color: darkgoldenrod;
+  text-shadow: 0 0 10px gold;
+}
