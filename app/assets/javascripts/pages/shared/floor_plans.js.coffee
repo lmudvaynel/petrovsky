@@ -213,6 +213,8 @@ $.app.pages.shared.floor_plans =
       return unless fp.valid_event_for 'house', event
       floor_number = parseInt $(@).text()
       fp.floor_element_on_click floor_number
+    @.container.on 'mouseover', '.show-floor', @.floor_element_on_mouse_event
+    @.container.on 'mouseout', '.show-floor', @.floor_element_on_mouse_event
     @.container.on 'mouseover', '.apartment-element', @.apartment_element_on_mouse_event
     @.container.on 'mouseout', '.apartment-element', @.apartment_element_on_mouse_event
     @.container.on 'click', '.apartment-element', @.apartment_element_on_click
@@ -647,8 +649,20 @@ $.app.pages.shared.floor_plans =
     @.render()
 
   floor_element_on_click: (floor_number) ->
+    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
     @.house.animate_from_scene floor_number, =>
       @.animate_showed_floor_to_foreground(floor_number)
+
+  floor_element_on_mouse_event: (event) ->
+    fp = $.app.pages.shared.floor_plans
+    return unless fp.valid_event_for 'house', event
+    floor_number = parseInt $(@).text()
+    floor_element = $(fp.house.floors[floor_number - 1].object.solid.element)
+    if event.type == 'mouseover'
+      box_shadow = "inset 0 0 #{Math.round((floor_element.width() + floor_element.height()))}px gold"
+    else
+      box_shadow = 'none'
+    floor_element.css boxShadow: box_shadow
 
   animate_showed_floor_to_foreground: (floor_number) ->
     @.showed_floor.floor = @.house.floor(floor_number)
