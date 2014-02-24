@@ -73,8 +73,9 @@ $.app.pages.shared.floor_plans =
             6: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
           current: 3
         change_position_delay: 200
-        font_size:
-          px: 50
+        size:
+          width: 200
+          height: 40
   house: {}
   showed_floor:
     floor: null
@@ -459,7 +460,7 @@ $.app.pages.shared.floor_plans =
         corner_position_by_params = fp.params.floors.number.positions.corners[floor_number][corner]
         corner_positions[corner] =
           x: @.object.solid.position.x - floor.half_width + corner_position_by_params[0]
-          y: @.object.solid.position.y + fp.params.floors.number.font_size.px / 2
+          y: @.object.solid.position.y + fp.params.floors.number.size.height / 2
           z: @.object.solid.position.z - floor.half_height + corner_position_by_params[1]
       corner_positions
     calculate_distance_to_corner_position: (corner_positions, corner) ->
@@ -493,7 +494,7 @@ $.app.pages.shared.floor_plans =
       for coord in fp.location.coords
         @.object.number.position[coord] = @.calculate_number_corner_positions(floor_number)[current_corner][coord]
     animate_to: (position, name = 'house', callbacks = []) ->
-      floor_number = @.object.number.element.textContent
+      floor_number = parseInt $(@.object.number.element).text()
       animated_floor = fp.animated_objects.get_by_name(name)
       unless animated_floor
         animated_floor = fp.init_animated_object name, callbacks
@@ -570,11 +571,12 @@ $.app.pages.shared.floor_plans =
     floor_number_object
 
   init_number_floor_dom_element: (floor_number) ->
-    number_floor_element = $("<a/>", class: 'show-floor').attr('href', '#').text(floor_number)
+    number_floor_element = $("<a/>", class: 'show-floor')
+    number_floor_element.attr('href', '#').text("#{floor_number} этаж")
     number_floor_css =
-      width: "#{@.params.floors.number.font_size.px}px"
-      height: "#{@.params.floors.number.font_size.px}px"
-      'font-size': "#{@.params.floors.number.font_size.px}px"
+      width: "#{@.params.floors.number.size.width}px"
+      height: "#{@.params.floors.number.size.height}px"
+      'font-size': "#{@.params.floors.number.size.height}px"
     $(number_floor_element).css(number_floor_css).get(0)
 
   init_floor_demonstration: (floor_number) ->

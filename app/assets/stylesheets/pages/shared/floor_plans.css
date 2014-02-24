@@ -7,6 +7,8 @@
   font-weight: bold;
   text-decoration: none;
   color: darkgoldenrod;
+  border: 2px solid darkgoldenrod;
+  padding-top: 15px;
 }
 .show-floor:hover {
   color: gold;
