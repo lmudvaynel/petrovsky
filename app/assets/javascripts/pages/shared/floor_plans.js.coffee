@@ -73,8 +73,14 @@ $.app.pages.shared.floor_plans =
             6: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
           current: 3
         change_position_delay: 200
-        font_size:
-          px: 50
+        change_part_delay: 10
+        size:
+          number:
+            width: 140
+            height: 40
+          container:
+            width: 400
+            height: 50
   house: {}
   showed_floor:
     floor: null
@@ -203,10 +209,12 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
 
     @.container.on 'resize', @.on_window_resize
-    @.container.on 'click', 'a.show-floor', (event) ->
+    @.container.on 'click', '.show-floor', (event) ->
       return unless fp.valid_event_for 'house', event
       floor_number = parseInt $(@).text()
       fp.floor_element_on_click floor_number
+    @.container.on 'mouseover', '.show-floor', @.floor_element_on_mouse_event
+    @.container.on 'mouseout', '.show-floor', @.floor_element_on_mouse_event
     @.container.on 'mouseover', '.apartment-element', @.apartment_element_on_mouse_event
     @.container.on 'mouseout', '.apartment-element', @.apartment_element_on_mouse_event
     @.container.on 'click', '.apartment-element', @.apartment_element_on_click
@@ -374,7 +382,8 @@ $.app.pages.shared.floor_plans =
           floor.remove_from_scene() unless i == floor_number - 1
       update_numbers_positions: ->
         @.floors[@.floors.length - 1].calculate_nearest_number_position()
-        floor.update_number_position() for floor in @.floors
+        corner = 3 if fp.animated_objects.animated()
+        floor.update_number_position(corner) for floor in @.floors
       set_delay_timeout_to_animations: (i, animations, direction, callbacks = []) ->
         setTimeout =>
           for floor_id, animation of animations
@@ -459,7 +468,7 @@ $.app.pages.shared.floor_plans =
         corner_position_by_params = fp.params.floors.number.positions.corners[floor_number][corner]
         corner_positions[corner] =
           x: @.object.solid.position.x - floor.half_width + corner_position_by_params[0]
-          y: @.object.solid.position.y + fp.params.floors.number.font_size.px / 2
+          y: @.object.solid.position.y
           z: @.object.solid.position.z - floor.half_height + corner_position_by_params[1]
       corner_positions
     calculate_distance_to_corner_position: (corner_positions, corner) ->
@@ -486,14 +495,14 @@ $.app.pages.shared.floor_plans =
       current_corner = fp.params.floors.number.positions.current
       current_corner = @.recalculate_current_corner(corner_positions, current_corner)
       fp.params.floors.number.positions.current = current_corner
-    update_number_position: ->
+    update_number_position: (corner) ->
       @.object.number.rotation = fp.camera.rotation.clone()
       floor_number = parseInt $(@.object.number.element).text()
-      current_corner = fp.params.floors.number.positions.current
+      current_corner = corner || fp.params.floors.number.positions.current
       for coord in fp.location.coords
         @.object.number.position[coord] = @.calculate_number_corner_positions(floor_number)[current_corner][coord]
     animate_to: (position, name = 'house', callbacks = []) ->
-      floor_number = @.object.number.element.textContent
+      floor_number = parseInt $(@.object.number.element).text()
       animated_floor = fp.animated_objects.get_by_name(name)
       unless animated_floor
         animated_floor = fp.init_animated_object name, callbacks
@@ -569,13 +578,38 @@ $.app.pages.shared.floor_plans =
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
     floor_number_object
 
+  init_show_floor_link_dom_element: (floor_number) ->
+    show_floor_link_element = $("<div/>", class: 'show-floor')
+    show_floor_link_element.text("#{floor_number} этаж")
+    show_floor_link_css =
+      width: "#{@.params.floors.number.size.number.width}px"
+      height: "#{@.params.floors.number.size.number.height}px"
+    show_floor_link_element.css(show_floor_link_css)
+
+  init_number_floor_arrow_dom_element: (arrow_direction) ->
+    number_floor_arrow_element = $('<img/>', class: 'floor-number-arrow')
+    number_floor_arrow_element.attr('src', "images/floor-number-#{arrow_direction}-arrow.png")
+    number_floor_arrow_element
+
   init_number_floor_dom_element: (floor_number) ->
-    number_floor_element = $("<a/>", class: 'show-floor').attr('href', '#').text(floor_number)
+    number_floor_element = $('<div/>', class: 'floor-number')
+    number_floor_left_element = $('<div/>', class: 'left')
+    number_floor_element.append(number_floor_left_element)
+    number_floor_left_element.append(@.init_show_floor_link_dom_element(floor_number))
+    number_floor_left_element.append(@.init_number_floor_arrow_dom_element('right'))
+    number_floor_right_element = $('<div/>', class: 'right')
+    number_floor_element.append(number_floor_right_element)
+    number_floor_right_element.append(@.init_number_floor_arrow_dom_element('left'))
+    number_floor_right_element.append(@.init_show_floor_link_dom_element(floor_number))
     number_floor_css =
-      width: "#{@.params.floors.number.font_size.px}px"
-      height: "#{@.params.floors.number.font_size.px}px"
-      'font-size': "#{@.params.floors.number.font_size.px}px"
-    $(number_floor_element).css(number_floor_css).get(0)
+      width: "#{@.params.floors.number.size.container.width}px"
+      height: "#{@.params.floors.number.size.container.height}px"
+    number_floor_element.css(number_floor_css).get(0)
+
+  hide_number_floor_part: (part, both = false) ->
+    other_part = if part == 'left' then 'right' else 'left'
+    $(".floor-number .#{part}").addClass('hidden')
+    $(".floor-number .#{other_part}").removeClass('hidden') unless both
 
   init_floor_demonstration: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
@@ -615,8 +649,20 @@ $.app.pages.shared.floor_plans =
     @.render()
 
   floor_element_on_click: (floor_number) ->
+    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
     @.house.animate_from_scene floor_number, =>
       @.animate_showed_floor_to_foreground(floor_number)
+
+  floor_element_on_mouse_event: (event) ->
+    fp = $.app.pages.shared.floor_plans
+    return unless fp.valid_event_for 'house', event
+    floor_number = parseInt $(@).text()
+    floor_element = $(fp.house.floors[floor_number - 1].object.solid.element)
+    if event.type == 'mouseover'
+      box_shadow = "inset 0 0 #{Math.round((floor_element.width() + floor_element.height()))}px gold"
+    else
+      box_shadow = 'none'
+    floor_element.css boxShadow: box_shadow
 
   animate_showed_floor_to_foreground: (floor_number) ->
     @.showed_floor.floor = @.house.floor(floor_number)
@@ -732,6 +778,18 @@ $.app.pages.shared.floor_plans =
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors
 
+  update_number_showed_parts: ->
+    floor_number_element = $('.floor-number').last()[0]
+    return unless floor_number_element
+    floor_number_element_position = $(floor_number_element).position().left + $(floor_number_element).width() / 2
+    if @.animated_objects.animated() || @.mode != 'house'
+      @.hide_number_floor_part(part, true) for part in ['left', 'right']
+    else
+      if floor_number_element_position > @.container.width() / 2 + @.params.floors.number.change_part_delay
+        @.hide_number_floor_part 'left'
+      else if floor_number_element_position < @.container.width() / 2 - @.params.floors.number.change_part_delay
+        @.hide_number_floor_part 'right'
+
   animate: ->
     fp = $.app.pages.shared.floor_plans
     requestAnimationFrame(fp.animate)
@@ -741,6 +799,7 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     fp.update_plans_positions_before_render()
     fp.house.update_numbers_positions()
+    fp.update_number_showed_parts()
     fp.renderer.render(fp.scene, fp.camera)
 
 $(document).ready ->
