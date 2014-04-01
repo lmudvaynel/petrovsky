@@ -62,7 +62,7 @@ $.app.pages.shared.floor_plans =
             default: 0
             mouseover: 1
           mouseover:
-            dz: 5
+            dz: 2
       number:
         positions:
           corners:
@@ -345,9 +345,9 @@ $.app.pages.shared.floor_plans =
 
     @.controls.rotateSpeed = 1
     @.controls.minPolarAngle = 3 * Math.PI / 8
-    @.controls.maxPolarAngle = 9 * Math.PI / 16
-    @.controls.minAzimuthalAngle = - Math.PI / 16
-    @.controls.maxAzimuthalAngle = Math.PI / 16
+    @.controls.maxPolarAngle = 3 * Math.PI / 8 # 9 * Math.PI / 16
+    @.controls.minAzimuthalAngle = 0 #- Math.PI / 16
+    @.controls.maxAzimuthalAngle = 0 #Math.PI / 16
     @.controls.noPan = true
     @.controls.noZoom = false
 
@@ -586,14 +586,21 @@ $.app.pages.shared.floor_plans =
     apartment_floor_object.name = "apartment-#{apartment.number}"
     apartment_floor_object.position.x = - @.params.floors.solid.size.width / 2 + apartment.size[0] / 2 + apartment.dx
     apartment_floor_object.position.y = @.params.floors.solid.size.height / 2 - apartment.size[1] / 2 - apartment.dy
+    apartment_floor_object.position.z += @.params.floors.plan.apartment.mouseover.dz
     apartment_floor_object
 
   init_apartnemt_floor_dom_element: (apartment) ->
     apartnemt_floor_element = $('<div/>', class: 'apartment-element', id: apartment.id, 'data-selected': false)
+    if apartment.sold_out
+      apartnemt_floor_element.css
+        'boxShadow': 'inset 0 0 400px black'
+    else
+      apartnemt_floor_element.css
+        'cursor': 'pointer'
     $(apartnemt_floor_element).css
       width: "#{apartment.size[0]}px"
       height: "#{apartment.size[1]}px"
-      opacity: @.params.floors.plan.apartment.opacity.default
+#      opacity: @.params.floors.plan.apartment.opacity.default
       'background-image': "url(/uploads/apartment/image/#{apartment.image})"
     apartnemt_floor_element.get(0)
 
@@ -673,12 +680,12 @@ $.app.pages.shared.floor_plans =
     @.render()
 
   floor_element_on_click: (floor_number) ->
-    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
+#    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
     @.house.animate_from_scene floor_number, =>
       @.animate_showed_floor_to_foreground(floor_number)
 
   show_house_floor_on_click: (floor_number) ->
-    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
+#    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
     @.animate_house_floor_to_foreground(floor_number)
 
   floor_element_on_mouse_event: (event) ->
@@ -687,10 +694,10 @@ $.app.pages.shared.floor_plans =
     floor_number = parseInt $(@).text()
     floor_element = $(fp.house.floors[floor_number - 1].object.solid.element)
     if event.type == 'mouseover'
-      box_shadow = "inset 0 0 #{Math.round((floor_element.width() + floor_element.height()))}px gold"
+#      box_shadow = "inset 0 0 #{Math.round((floor_element.width() + floor_element.height()))}px gold"
     else
-      box_shadow = 'none'
-    floor_element.css boxShadow: box_shadow
+#      box_shadow = 'none'
+#    floor_element.css boxShadow: box_shadow
 
   animate_showed_floor_to_foreground: (floor_number) ->
     @.showed_floor.floor = @.house.floor(floor_number)
@@ -797,6 +804,7 @@ $.app.pages.shared.floor_plans =
         return apartment
 
   apartment_element_on_mouse_event: (event) ->
+    return # !!!
     fp = $.app.pages.shared.floor_plans
     return unless fp.valid_event_for 'floor-foreground', event
     return unless fp.showed_floor.floor
@@ -804,20 +812,20 @@ $.app.pages.shared.floor_plans =
     if event.type == 'mouseover'
       if $(@).data('selected') then return else $(@).data('selected', true)
       if apartment.sold_out then shadow_color = 'red' else shadow_color = 'green'
-      shadow = "inset 0 0 #{Math.round((apartment.size[0] + apartment.size[1]) / 4)}px #{shadow_color}"
+      shadow = "inset 0 0 #{Math.round((apartment.size[0] + apartment.size[1]) / 4)}px gray"# #{shadow_color}"
       $(@).css
-        boxShadow: shadow
+#        boxShadow: shadow
         opacity: fp.params.floors.plan.apartment.opacity.mouseover
       sign_dz = 1
     else
       if $(@).data('selected') then $(@).data('selected', false) else return
       $(@).css
-        boxShadow: 'none'
+#        boxShadow: 'none'
         opacity: fp.params.floors.plan.apartment.opacity.default
       sign_dz = -1
     plan_object = fp.scene.getObjectByName("plan-#{apartment.floor_number}")
     object = plan_object.getObjectByName("apartment-#{apartment.number}")
-    object.position.z += sign_dz * fp.params.floors.plan.apartment.mouseover.dz if object
+#    object.position.z += sign_dz * fp.params.floors.plan.apartment.mouseover.dz if object
     fp.render()
 
   apartment_element_on_click: (event) ->
