@@ -17,9 +17,23 @@
     <% end %>
   </div>
 </section>
-<section id="controls-container" class="hidden">
-  <%= link_to 'Back to house', '#', id: 'back-to-house' %>
-  <%= link_to 'Show 3D', '#', :id => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
+<section id="floors-controls-container" class="hidden">
+  <%= link_to 'Back to house', '#', class: 'back-to-house' %>
+  <%= link_to 'Show 3D', '#', :class => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
+</section>
+<section id="house-controls-container" class="hidden">
+  <%= link_to 'Back to house', '#', class: 'back-to-house' %>
+  <%= link_to 'Show 3D', '#', :class => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
+</section>
+<section id="house-image-container">
+  <div id="house-image-controls">
+    <% (1..6).to_a.reverse.each do |floor_number| %>
+      <div id="floor-<%= floor_number %>">
+        <%= link_to floor_number, '#', :class => 'show-house-floor', 'data-floor-number' => floor_number %>
+      </div>
+    <% end %>
+    ЭТАЖИ
+  </div>
 </section>
 <section>
   <%= @page.try(:content) %>

@@ -32,6 +32,7 @@ $.app.pages.shared.floor_plans =
           to_above_the_scene: 50
           to_under_the_scene: 50
           to_center_of_scene: 50
+          to_hidden: 50
       house:
         delay:
           to_scene: 200
@@ -124,6 +125,14 @@ $.app.pages.shared.floor_plans =
     floor_position_under_the_scene.position.y -= @.params.scene.distance * 3
     floor_position_under_the_scene
 
+  floor_position_hidden: ->
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: - Math.cos(@.params.scene.yz_angle) - Math.PI/2, y: 0, z: 0
+
   floor_position_preforeground: ->
     position:
       x: 0
@@ -170,8 +179,8 @@ $.app.pages.shared.floor_plans =
 
     @.init_house()
     @.house.add_to_scene()
-    @.house.animate_to_scene 0, =>
-      @.end_house_animate_to_scene()
+#    @.house.animate_to_scene 0, =>
+#      @.end_house_animate_to_scene()
 
   init_container: ->
     @.container.css
@@ -219,11 +228,17 @@ $.app.pages.shared.floor_plans =
     @.container.on 'mouseout', '.apartment-element', @.apartment_element_on_mouse_event
     @.container.on 'click', '.apartment-element', @.apartment_element_on_click
 
-    controls = $('#controls-container')
-    controls.on 'click', 'a#back-to-house', (event) ->
+    house_controls = $('#house-controls-container')
+    house_controls.on 'click', '.back-to-house', (event) ->
       return unless fp.valid_event_for 'floor-foreground', event
       fp.back_to_house_on_click()
-    controls.on 'click', 'a#toggle-dimensions', fp.toggle_dimensions_on_click
+    house_controls.on 'click', '.toggle-dimensions', fp.toggle_dimensions_on_click
+
+    floors = $('#house-image-container')
+    floors.on 'click', '.show-house-floor', (event) ->
+      return unless fp.valid_event_for 'house', event
+      floor_number = parseInt $(@).data('floorNumber')
+      fp.show_house_floor_on_click floor_number
 
   init_animated_objects: ->
     fp = $.app.pages.shared.floor_plans
@@ -380,6 +395,8 @@ $.app.pages.shared.floor_plans =
       remove_from_scene_by: (floor_number) ->
         for floor, i in @.floors
           floor.remove_from_scene() unless i == floor_number - 1
+      move_to: (position) ->
+        floor.move_to(position) for floor in @.floors
       update_numbers_positions: ->
         @.floors[@.floors.length - 1].calculate_nearest_number_position()
         corner = 3 if fp.animated_objects.animated()
@@ -436,6 +453,11 @@ $.app.pages.shared.floor_plans =
         if object_type == 'plan'
           object.remove apartment for apartment in object.getDescendants()
         else
+    move_to: (position) ->
+      floor_number = parseInt $(@.object.number.element).text()
+      for option in fp.location.options
+        for coord in fp.location.coords
+          @.object.solid[option][coord] = fp["floor_position_#{position}"](floor_number)[option][coord]
     toggle_to_scene: (toggle, callback) ->
       for object_type, object of @.object
         if object_type == 'solid' then cb = callback else cb = null
@@ -526,6 +548,8 @@ $.app.pages.shared.floor_plans =
       @.animate_to 'above_the_scene', name, callbacks
     animate_to_under_the_scene: (name = 'house', callbacks = []) ->
       @.animate_to 'under_the_scene', name, callbacks
+    animate_to_hidden: (name = 'house', callbacks = []) ->
+      @.animate_to 'hidden', name, callbacks
 
   init_floor_object: (floor_number, position) ->
     solid: @.init_solid_floor_object(floor_number, position)
@@ -653,6 +677,10 @@ $.app.pages.shared.floor_plans =
     @.house.animate_from_scene floor_number, =>
       @.animate_showed_floor_to_foreground(floor_number)
 
+  show_house_floor_on_click: (floor_number) ->
+    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
+    @.animate_house_floor_to_foreground(floor_number)
+
   floor_element_on_mouse_event: (event) ->
     fp = $.app.pages.shared.floor_plans
     return unless fp.valid_event_for 'house', event
@@ -679,7 +707,37 @@ $.app.pages.shared.floor_plans =
           @.change_mode_to 'floor-foreground'
       , 100
 
+  animate_house_floor_to_foreground: (floor_number) ->
+    @.toggle_house_image_controls_container('hide')
+    @.showed_floor.floor = @.house.floor(floor_number)
+    @.showed_floor.floor.hide_number()
+    @.showed_floor.number = floor_number
+    @.showed_floor.floor.object.solid.position.set(0, 0, 0)
+    @.showed_floor.floor.object.solid.rotation = @.camera.rotation.clone()
+    @.showed_floor.floor.object.solid.rotation.x -= Math.PI / 2;
+
+    @.showed_floor.floor.animate_to_preforeground 'floor-preforeground', =>
+      setTimeout =>
+        @.showed_floor.floor.animate_to_foreground 'floor', =>
+          @.house.remove_from_scene_by(@.showed_floor.number)
+          @.unblock_controls_for_floor_foreground()
+          @.toggle_house_controls_container 'show'
+          @.change_mode_to 'floor-foreground'
+      , 100
+
   back_to_house_on_click: ->
+    @.toggle_house_controls_container 'hide'
+    @.animate_camera_to_start()
+    @.showed_floor.floor.animate_to_hidden 'floor', =>
+      @.showed_floor.floor.show_number()
+      @.init_house @.showed_floor
+      @.house.add_to_scene_by(@.showed_floor.number)
+      @.house.move_to('above_the_scene');
+      @.clear_showed_floor()
+      @.change_mode_to 'house'
+      @.toggle_house_image_controls_container('show')
+
+  back_to_house_floors_on_click: ->
     @.toggle_controls_container 'hide'
     @.animate_camera_to_start()
     @.showed_floor.floor.animate_to_center_of_scene 'floor', =>
@@ -691,9 +749,13 @@ $.app.pages.shared.floor_plans =
         @.clear_showed_floor()
         @.change_mode_to 'house'
 
-  toggle_controls_container: (position) ->
+  toggle_house_controls_container: (position) ->
     if position == 'show' then action = 'remove' else action = 'add'
-    $('#controls-container')["#{action}Class"]('hidden')
+    $('#house-controls-container')["#{action}Class"]('hidden')
+
+  toggle_house_image_controls_container: (position) ->
+    if position == 'show' then top = '50%' else top = '-50%'
+    $('#house-image-container').css('top', top)
 
   end_house_animate_to_scene: ->
     @.unblock_controls_for_house()
@@ -702,7 +764,7 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     if $(@).data('toggle-direction') == 'to-3d'
       return unless fp.valid_event_for 'floor-foreground', event
-      $('#back-to-house').addClass('hidden')
+      $('.back-to-house').addClass('hidden')
       fp.animate_camera_to_start()
       fp.showed_floor.floor.animate_to_demonstration 'floor', =>
         fp.init_floor_demonstration(fp.showed_floor.number)
@@ -722,7 +784,7 @@ $.app.pages.shared.floor_plans =
 
           $(@).text('Show 3D').data('toggle-direction', 'to-3d')
           fp.change_mode_to 'floor-foreground'
-          $('#back-to-house').removeClass('hidden')
+          $('.back-to-house').removeClass('hidden')
 
   clear_showed_floor: ->
     @.showed_floor =
