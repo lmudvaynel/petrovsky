@@ -24,27 +24,43 @@
   font-size: 40px;
   padding-top: 10px;
   text-align: center;
-  border: 2px solid darkgoldenrod;
-  color: darkgoldenrod;
+  border: 2px solid gray;
+  color: gray;
   text-decoration: none;
 }
 .floor-number .show-floor:hover {
-  color: gold;
+  color: darkgray;
 }
 .floor-number .show-floor:active {
-  color: yellow;
+  color: lightgray;
 }
 
-#controls-container {
+#house-image-container {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: -200px;
+}
+
+#house-image-controls {
+  z-index: 2;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#house-controls-container , #floors-controls-container {
   position: absolute;
   bottom: 50px;
   right: 100px;
 }
-#controls-container a {
+#house-controls-container a , #floors-controls-container a {
   font-size: xx-large;
-  color: orangered;
+  color: gray;
   text-decoration: none;
-  border: 4px double orangered;
+  border: 4px double gray;
   padding: 5px;
   margin: 10px;
 }
@@ -57,6 +73,14 @@
   z-index: 100;
   font-size: 48pt;
   font-weight: bold;
-  color: darkgoldenrod;
-  text-shadow: 0 0 10px gold;
+  color: gray;
+  text-shadow: 0 0 10px gray;
+}
+
+.apartment-element .sold-out {
+  inset 0 0 400px black;
+}
+
+.apartment-element .vacant {
+  cursor: pointer;
 }
