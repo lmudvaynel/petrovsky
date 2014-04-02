@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.friendly.find(params[:slug])
-    @apartments_json = Apartment.all.map(&:to_hash).to_json if params[:slug].to_s == 'floor-plans'
+    @apartments_json = Apartment.all.map(&:to_hash).to_json if params[:slug].to_s == 'floor_plans'
   end
 
   def create_order

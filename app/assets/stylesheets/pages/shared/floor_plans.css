@@ -24,15 +24,15 @@
   font-size: 40px;
   padding-top: 10px;
   text-align: center;
-  border: 2px solid darkgoldenrod;
-  color: darkgoldenrod;
+  border: 2px solid gray;
+  color: gray;
   text-decoration: none;
 }
 .floor-number .show-floor:hover {
-  color: gold;
+  color: darkgray;
 }
 .floor-number .show-floor:active {
-  color: yellow;
+  color: lightgray;
 }
 
 #house-image-container {
@@ -58,9 +58,9 @@
 }
 #house-controls-container a , #floors-controls-container a {
   font-size: xx-large;
-  color: orangered;
+  color: gray;
   text-decoration: none;
-  border: 4px double orangered;
+  border: 4px double gray;
   padding: 5px;
   margin: 10px;
 }
@@ -73,8 +73,8 @@
   z-index: 100;
   font-size: 48pt;
   font-weight: bold;
-  color: darkgoldenrod;
-  text-shadow: 0 0 10px gold;
+  color: gray;
+  text-shadow: 0 0 10px gray;
 }
 
 .apartment-element .sold-out {

@@ -14,19 +14,19 @@
   opacity: 0;
 }
 #animated-text-backgrounds .background-0 {
-  background-image: url(../../public/images/presentation/0.jpg);
+  background-image: url(images/presentation/0.jpg);
 }
 #animated-text-backgrounds .background-1 {
-  background-image: url(../../public/images/presentation/1.jpg);
+  background-image: url(images/presentation/1.jpg);
 }
 #animated-text-backgrounds .background-2 {
-  background-image: url(../../public/images/presentation/2.jpg);
+  background-image: url(images/presentation/2.jpg);
 }
 #animated-text-backgrounds .background-3 {
-  background-image: url(../../public/images/presentation/3.jpg);
+  background-image: url(images/presentation/3.jpg);
 }
 #animated-text-backgrounds .background-4 {
-  background-image: url(../../public/images/presentation/4.jpg);
+  background-image: url(images/presentation/4.jpg);
 }
 
 .line {
@@ -104,6 +104,20 @@
   top: 72%;
 }
 .line.description.comfort.fifth {
+  top: 80%;
+}
+
+.line.thesises.title {
+  height: 6%;
+  top: 20%;
+}
+.line.thesises.first {
+  top: 48%;
+}
+.line.thesises.second {
+  top: 64%;
+}
+.line.thesises.third {
   top: 80%;
 }
 

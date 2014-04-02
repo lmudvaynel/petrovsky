@@ -7,7 +7,7 @@ function ObjectAnimations (object) {
     durations: {
       opacity: 1000,
       move: 1000,
-      resize: 200,
+      resize: 100,
     }
   }
 
@@ -103,34 +103,40 @@ function ObjectAnimations (object) {
     this.move(dLeft, dTop, afterAnimationCallback);
   }
 
-  this.resize = function (scale, afterAnimationCallback) {
+  this.resize = function (scale, withoutShift, afterAnimationCallback) {
+
     var objectAnimations = this;
     var oldSize = this.getElementSize();
     var newSize = { width: scale * oldSize.width, height: scale * oldSize.height };
     var nextSize;
     var oldPosition;
-    var framesInStep = parseInt(this.options.durations.resize / (newSize.height - oldSize.height));
+    var framesInStep = Math.abs(parseInt(2 * (this.options.durations.resize/(newSize.height - oldSize.height))));
+//    console.log(framesInStep, this.options.durations.resize, oldSize.height, newSize.height);
+    var resizeSign = newSize.height - oldSize.height >= 0 ? 1 : -1;
+    var resizeShift = withoutShift ? 0 : 1;
     var frame = 0;
 
     var resizeInterval = setInterval(function () {
       frame++;
+      if (frame > objectAnimations.options.durations.resize) {
+        clearInterval(resizeInterval);
+        objectAnimations.recalculateElementParameters();
+        if (afterAnimationCallback) {
+          afterAnimationCallback();
+        }
+      }
       if (frame % framesInStep === 0) {
         oldSize = objectAnimations.getElementSize();
         oldPosition = objectAnimations.getElementPosition();
-        objectAnimations.object.element.height(oldSize.height + 2);
-        objectAnimations.object.element.css({ fontSize: (oldSize.height + 2) + 'px' });
+        objectAnimations.object.element.height(oldSize.height + resizeSign * 2);
+        objectAnimations.object.element.css({ fontSize: (oldSize.height + resizeSign * 2) + 'px' });
         nextSize = objectAnimations.getElementSize();
+//        console.log(oldSize, oldPosition);
+//        console.log(oldSize, oldPosition);
         objectAnimations.object.element.css({
-          left: (oldPosition.left - (nextSize.width - oldSize.width)/2) + 'px',
-          top: (oldPosition.top - (nextSize.height - oldSize.height)/2) + 'px',
+          left: (oldPosition.left - resizeShift * (nextSize.width - oldSize.width)/2) + 'px',
+          top: (oldPosition.top - resizeShift * (nextSize.height - oldSize.height)/2) + 'px',
         });
-        if (objectAnimations.object.element.height() >= newSize.height) {
-          clearInterval(resizeInterval);
-          objectAnimations.recalculateElementParameters();
-          if (afterAnimationCallback) {
-            afterAnimationCallback();
-          }
-        }
       }
     }, 0);
 
