@@ -9,10 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bookblock
- *= require component
- *= require responsive
- *= require style
  *= require pages/shared/floor_plans
  *= require jquery.ui.all
+
+ *= require presentation/reset
+ *= require presentation/style
+ *= require presentation/lines
  */
