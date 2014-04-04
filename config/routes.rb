@@ -1,4 +1,6 @@
 Petrovsky::Application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -7,7 +9,6 @@ Petrovsky::Application.routes.draw do
   root 'pages#index'
 
   get '/home' => redirect('/')
-  get ':slug' => 'pages#show', :as => :slug
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -28,6 +29,8 @@ Petrovsky::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
+  post 'create_order' => 'pages#create_order'
+  get ':slug' => 'pages#show', :as => :slug
 
   resources :pages, only: :index
 

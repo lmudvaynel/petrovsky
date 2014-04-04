@@ -1,311 +1,56 @@
-<header id="header" >
-  <div class="header-holder"style="position:absolute;top:20%;left:10%">
-    <div class="container">
-      <div class="brow">
-        <div id="scroll-wrap" class="container">
-          <div class="main">
-            <div id="bookshelf" class="bookshelf">
+<%= javascript_include_tag 'pages/lines_load.js' %>
 
-
-    <!--           <div class="brick1" style="background:#FFFFFF;opacity:0.0">
-              </div>
- -->
-              <div class="brick1" style="visibility:hidden;">
-              </div>
-              <div class="brick1" style="background:transparent;">
-                <a href="/" class="nav-item clearfix">
-                  <%= image_tag("logo.png", alt:"") %>
-                </a>
-              </div>
-
-              <div class="brick1" style="visibility:hidden;">
-              </div>
-
-              <div class="brick1" style="visibility:hidden;">
-              </div>
-              <!-- one item begin with bookblock -->
-              <div class="withBookblock">
-                <div class="books" data-book="book-1"></div>
-                <div class="brick1" style="opacity:1; background:rgba(218, 81, 92, 0.8)">
-                  <a href="#" class="nav-item clearfix">
-                    <div class="nav-hover"></div>
-                      <div class="page_title">
-                        <span class="blue_span">[</span><span>ENGINEERING</span><span class="blue_span">]</span>
-                      </div>
-                  </a>
-                  <a href="#"></a>
-                </div>
-                <div class="details">
-                  <ul>
-                  </ul>
-                </div>
-              </div>
-                <!-- one item end with bookblock -->
-
-              <div class="brick1 thumb">
-                <div class="nav-item flipX">
-                  <%= image_tag("img-slide1.png", alt:"", class: "img1") %>
-                  <%= image_tag("pf4.png", alt:"", class: "img2") %>
-                </div>
-              </div>
-
-              <!-- <div class="books" ></div>
-              <div class="brick1">
-                <a href="changeURL" class="nav-item">
-                  <div class="nav-hover"></div>
-                  <span>Url</span>
-                </a>
-                <a href="#"></a>
-              </div>
-              <div class="details">
-                <ul>
-                </ul>
-              </div> -->\
-            </div>
-          </div><!-- /main -->
-        </div><!-- /container -->
-      </div>
-
-      <div class="brow">
-        <div id="scroll-wrap" class="container">
-          <div class="main">
-            <div id="bookshelf" class="bookshelf">
-              <div class="brick1 thumb">
-                <div class="nav-item flipX">
-                  <%= image_tag("img-slide2.png", alt:"", class: "img1") %>
-                  <%= image_tag("pf10.png", alt:"", class: "img2") %>
-                </div>
-              </div>
-
-              <!-- one item begin with bookblock -->
-              <div class="withBookblock">
-                <div class="books" data-book="book-1"></div>
-                <div class="brick1" style="opacity:1; background:rgba(216, 33, 62, 0.8);">
-                  <a href="#" class="nav-item">
-                    <div class="nav-hover"></div>
-                      <div class="page_title">
-                        <span class="blue_span">[</span><span>APARTS</span><span class="blue_span">]</span>
-                      </div>
-                  </a>
-                  <a href="#"></a>
-                </div>
-                <div class="details">
-                  <ul>
-                  </ul>
-                </div>
-              </div>
-                <!-- one item end with bookblock -->
-    
-              <!-- one item begin -->
-              <div class="withBookblock">
-                <div class="books" data-book="book-2"></div>
-                <div class="brick1" style="opacity:1; background:rgba(218, 81, 92, 0.8)">
-                  <a href="#" class="nav-item">
-                    <div class="nav-hover"></div>
-                      <div class="page_title">
-                        <span class="blue_span">[</span><span>DESIGN</span><span class="blue_span">]</span>
-                      </div>
-                  </a>
-                  <a href="#"></a>
-                </div>
-                <div class="details">
-                  <ul>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="brick1 thumb">
-                <div class="nav-item flipX">
-                  <%= image_tag("img-slide3.png", alt:"", class: "img1") %>
-                  <%= image_tag("pf11.png", alt:"", class: "img2") %>
-                </div>
-              </div>
-
-              <div class="brick1 thumb">
-                <div class="nav-item flipX">
-                  <%= image_tag("img-slide4.png", alt:"", class: "img1") %>
-                  <%= image_tag("pf8.png", alt:"", class: "img2") %>
-                </div>
-              </div>
-
-              <div class="books" ></div>
-              <div class="brick1" style="opacity:1; background:rgba(216, 33, 62, 0.8)">
-                <a href="/floor-plans" class="nav-item">
-                  <div class="nav-hover"></div>
-                    <div class="page_title">
-                      <span class="blue_span">[</span><span>FLOOR PLANS</span><span class="blue_span">]</span>
-                    </div>
-                </a>
-                <a href="#"></a>
-              </div>
-              <div class="details">
-                <ul>
-                </ul>
-              </div>
-
-              
-            </div>
-          </div><!-- /main -->
-        </div><!-- /container -->
-      </div>
-
-      <div class="brow">
-        <div id="scroll-wrap" class="container">
-          <div class="main">
-            <div id="bookshelf" class="bookshelf">
-              
-              <div class="brick1" style="background:#FFFFFF;opacity:0.0">
-              </div>
-              <div class="brick1" style="background:#FFFFFF;opacity:0.0">
-              </div>
-              <div class="brick1 thumb">
-                <div class="nav-item flipX">
-                  <%= image_tag("img-slide5.png", alt:"", class: "img1") %>
-                  <%= image_tag("pf7.png", alt:"", class: "img2") %>
-                </div>
-              </div>
-
-              <div class="brick1 thumb">
-                <div class="nav-item flipX">
-                  <%= image_tag("img-slide6.png", alt:"", class: "img1") %>
-                  <%= image_tag("pf6.png", alt:"", class: "img2") %>
-                </div>
-              </div>
-
-              <div class="withBookblock">
-                <div class="books" data-book="book-1"></div>
-                <div class="brick1" style="opacity:1; background:rgba(218, 81, 92, 0.8)">
-                  <a href="#" class="nav-item">
-                    <div class="nav-hover"></div>
-                      <div class="page_title">
-                        <span class="blue_span">[</span><span>SERVICE</span><span class="blue_span">]</span>
-                      </div>
-                  </a>
-                  <a href="#"></a>
-                </div>
-                <div class="details">
-                  <ul>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="brick1" style="background:#FFFFFF;opacity:0.0">
-              </div>
-
-            </div>
-          </div><!-- /main -->
-        </div><!-- /container -->
-      </div>
-
-    </div>
+<% content_for :presentation do %>
+  <div id="animated-text-backgrounds">
+    <div class="background-0"></div>
+    <div class="background-1"></div>
+    <div class="background-2"></div>
+    <div class="background-3"></div>
+    <div class="background-4"></div>
   </div>
 
+    <div id="animated-text-container">
+      <div class="line greeting title">PETROVSKY APART HOUSE</div>
+      <div class="line greeting description first">МЫ РАДЫ ПРЕДСТАВИТЬ</div>
+      <div class="line greeting description second">ПРОЕКТ НОВОГО</div>
+      <div class="line greeting description third">УРОВНЯ ЖИЗНИ</div>
+      <div class="line greeting description fourth">В МЕГАПОЛИСЕ</div>
+      <div class="line greeting description fifth thesisWord">PETROVSKY APART HOUSE</div>
 
-<!-- Fullscreen BookBlock -->
-<!-- for demo purpose we repeat each bookblock -->
-<div class="bb-custom-wrapper" id="book-1">
-  <div class="bb-bookblock">
-    <div class="bb-item">
-      <div class="bb-custom-side page-layout-3">
-        <div>
-          <h3>1</h3>
-          <p>Photography (1999 &ndash; 2013)</p>
-        </div>
-      </div>
-      <div class="bb-custom-side page-layout-3">
-      </div>
-    </div>
-    <div class="bb-item">
-      <div class="bb-custom-side page-layout-1">
-        <h3>
-          Chapter 9 <span>Nomadic Lifestyle</span>
-        </h3>
-      </div>
-      <div class="bb-custom-side page-layout-1">
-        <p>Candy canes lollipop macaroon marshmallow gummi bears tiramisu. Dessert croissant cupcake candy canes. Bear claw faworki faworki lemon drops. Faworki marzipan sugar plum jelly-o marzipan cookie.</p>
-      </div>
-    </div>
-    <div class="bb-item">
-      <div class="bb-custom-side page-layout-2">
-        <div>
-          <h3>Aa</h3>
-          <p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-        </div>
-        <div>
-          <h3>Bb</h3>
-          <p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-        </div>
-      </div>
-      <div class="bb-custom-side page-layout-2">
-        <div>
-          <h3>Cc</h3>
-          <p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-        </div>
-        <div>
-          <h3>Dd</h3>
-          <p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-        </div>
-      </div>
-    </div>
-  </div><!-- /bb-bookblock -->
-  <nav>
-    <a href="#" class="bb-nav-prev">Previous</a>
-    <a href="#" class="bb-nav-next">Next</a>
-    <a href="#" class="bb-nav-close">Close</a>
-  </nav>
-</div><!-- /bb-custom-wrapper -->
+      <div class="line thesis harmony">PETROVSKY APART HOUSE – ГАРМОНИЯ</div>
+      <div class="line description harmony first">ЗДЕСЬ УЧТЕНЫ ВСЕ</div>
+      <div class="line description harmony second">АСПЕКТЫ</div>
+      <div class="line description harmony third thesisWord">ГАРМОНИЧНОЙ</div>
+      <div class="line description harmony fourth">ЖИЗНИ</div>
 
-<div class="bb-custom-wrapper" id="book-2">
-  <div class="bb-bookblock">
-    <div class="bb-item">
-      <div class="bb-custom-side page-layout-3">
-        <div>
-          <h3>2</h3>
-          <p>Photography (1999 &ndash; 2013)</p>
-        </div>
-      </div>
-      <div class="bb-custom-side page-layout-3">
-      </div>
-    </div>
-    <div class="bb-item">
-      <div class="bb-custom-side page-layout-1">
-        <h3>
-          Chapter 9 <span>Nomadic Lifestyle</span>
-        </h3>
-      </div>
-      <div class="bb-custom-side page-layout-1">
-        <p>Candy canes lollipop macaroon marshmallow gummi bears tiramisu. Dessert croissant cupcake candy canes. Bear claw faworki faworki lemon drops. Faworki marzipan sugar plum jelly-o marzipan cookie.</p>
-      </div>
-    </div>
-    <div class="bb-item">
-      <div class="bb-custom-side page-layout-2">
-        <div>
-          <h3>Aa</h3>
-          <p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-        </div>
-        <div>
-          <h3>Bb</h3>
-          <p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-        </div>
-      </div>
-      <div class="bb-custom-side page-layout-2">
-        <div>
-          <h3>Cc</h3>
-          <p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-        </div>
-        <div>
-          <h3>Dd</h3>
-          <p>Faworki marzipan sugar plum jelly-o marzipan. Soufflé tootsie roll jelly beans. Sweet icing croissant dessert bear claw. Brownie dessert cheesecake danish jelly pudding bear claw soufflé.</p>
-        </div>
-      </div>
-    </div>
-  </div><!-- /bb-bookblock -->
-  <nav>
-    <a href="#" class="bb-nav-prev">Previous</a>
-    <a href="#" class="bb-nav-next">Next</a>
-    <a href="#" class="bb-nav-close">Close</a>
-  </nav>
-</div><!-- /bb-custom-wrapper -->
+      <div class="line thesis liberty">PETROVSKY APART HOUSE – СВОБОДА</div>
+      <div class="line description liberty first thesisWord">СВОБОДА</div>
+      <div class="line description liberty second">ПЕРЕМЕЩЕНИЯ</div>
+      <div class="line description liberty third">В ПРОСТРАНСТВЕ</div>
 
+      <div class="line thesis comfort">PETROVSKY APART HOUSE – КОМФОРТ</div>
+      <div class="line description comfort first">ФИЛОСОФИЯ</div>
+      <div class="line description comfort second">СТИЛЯ</div>
+      <div class="line description comfort third thesisWord">И КОМФОРТА</div>
+      <div class="line description comfort fourth">В КАЖДОЙ</div>
+      <div class="line description comfort fifth">ДЕТАЛИ</div>
 
-</header> <!-- End header -->
+      <div class="line thesises title">PETROVSKY APART HOUSE</div>
+      <div class="line thesises first">ГАРМОНИЯ</div>
+      <div class="line thesises second">СВОБОДА</div>
+      <div class="line thesises third">КОМФОРТ</div>
+
+      <div class="line conclusion introduction first">PETROVSKY APART HOUSE НОВЫЙ УНИКАЛЬНЫЙ ПРОЕКТ, С ПРОДУМАННОЙ ЭРГОНОМИКОЙ</div>
+      <div class="line conclusion introduction second">И КОМПЛЕКСНЫМ ПОДХОДОМ ДЛЯ ЛЮДЕЙ, ПРЕДПОЧИТАЮЩИХ КОМФОРТНЫЙ, СТИЛЬНЫЙ,</div>
+      <div class="line conclusion introduction third">ДИАМИЧНЫЙ ОБРАЗ ЖИЗНИ.</div>
+      <div class="line conclusion harmony first">ГАРМОНИЯ ЖИЗНИ ДЛЯ ЦЕНИТЕЛЕЙ ПРИРОДНОЙ КРАСОТЫ С ПРЕКРАСНЫМИ ВИДАМИ НА</div>
+      <div class="line conclusion harmony second">ПАРКИ И ИХ ОКРЕСТНОСТИ С ОБЩЕСТВЕННОЙ ТЕРРАСЫ В СТИЛЕ LAND-ART, РАСПОЛОЖЕННОЙ</div>
+      <div class="line conclusion harmony third">НА КРЫШЕ ДОМА.</div>
+      <div class="line conclusion liberty first">СВОБОДА ДЕЙСТВИЙ В ВЫБОРЕ ФУНКЦИОНАЛЬНО-ПЛАНИРОВОЧНЫХ</div>
+      <div class="line conclusion liberty second">РЕШЕНИЙ И СОЗДАНИЙ СОБСТВЕННОГО ДИЗАЙНА.</div>
+      <div class="line conclusion comfort first">КОМФОРТ С ИСПОЛЬЗОВАНИЕМ ЭКСКЛЮЗИВНЫХ ВОЗМОЖНОСТЕЙ</div>
+      <div class="line conclusion comfort second">СЕРВИСА, ПРЕДОСТАВЛЯЕМОГО КОНСЬЕРЖ СЛУЖБОЙ.</div>
+    </div>
+<% end %>
+
+<%= raw(@message.content) if @message %>
