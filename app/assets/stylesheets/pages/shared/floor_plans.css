@@ -67,10 +67,6 @@
   text-shadow: 0 0 10px gray;
 }
 
-.apartment-element .sold-out {
-  inset 0 0 400px black;
-}
-
 .apartment-element .vacant {
   cursor: pointer;
 }
