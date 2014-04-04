@@ -17,7 +17,28 @@
 <% if content_for?(:presentation) %>
   <%= yield :presentation %>
 <% else %>
-  <div class="bg"></div>
+  <% if @page.slug=="floor_plans" %>
+    <div class="fasad bg-item"></div>
+    <div class="floor bg-item" id="floor-1"></div>
+    <div class="floor bg-item" id="floor-2"></div>
+    <div class="floor bg-item" id="floor-3"></div>
+    <div class="floor bg-item" id="floor-4"></div>
+    <div class="floor bg-item" id="floor-5"></div>
+    <div class="floor bg-item" id="floor-6"></div>
+    <div class="floor bg-item" id="floor-7"></div>
+  <% end %>
+  <% if @page.slug=="contacts" %>
+    <div class="bg contact"></div>
+  <% end %>
+  <% if @page.slug=="place" %>
+    <div class="bg"></div>
+  <% end %>
+  <% if @page.slug=="service" %>
+    <div class="bg service"></div>
+  <% end %>
+  <% if @page.slug=="gallery" %>
+    <div class="bg concept"></div>
+  <% end %>
 <% end %>
 
 <div id="wrapper">
@@ -31,17 +52,17 @@
 
 		</div>
 
-		<div class="fr">
-			<div class="phone">
-				8 (495) 215 222 4
-			</div>
-			<div class="callback">
-				<a href="">ЗАКАЗАТЬ ЗВОНОК</a>
-			</div>
-			<div class="music">
-				<a href=""></a>
-			</div>
-		</div>
+    <div class="fr">
+      <div class="phone">
+        8 (495) 215 222 4
+      </div>
+      <div class="callback">
+        <a href="">ЗАКАЗАТЬ ЗВОНОК</a>
+      </div>
+      <div class="music">
+        <a href=""></a>
+      </div>
+    </div>
 
 
 	</div>

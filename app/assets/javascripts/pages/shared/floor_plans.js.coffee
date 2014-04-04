@@ -14,8 +14,8 @@ $.app.pages.shared.floor_plans =
   params:
     container:
       size_in_percents:
-        width: 100
-        height: 100
+        width: 75
+        height: 75
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8
@@ -761,8 +761,8 @@ $.app.pages.shared.floor_plans =
     $('#house-controls-container')["#{action}Class"]('hidden')
 
   toggle_house_image_controls_container: (position) ->
-    if position == 'show' then top = '50%' else top = '-50%'
-    $('#house-image-container').css('top', top)
+    if position == 'show' then visibility = "visible" else visibility = "hidden"
+    $('#house-image-container').css("visibility", visibility)
 
   end_house_animate_to_scene: ->
     @.unblock_controls_for_house()
