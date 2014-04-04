@@ -1,0 +1,76 @@
+.hidden {
+  display: none;
+}
+
+.floor-number {
+  font-weight: bold;
+}
+.floor-number .left {
+  float: left;
+  padding-left: 10px;
+}
+.floor-number .right {
+  float: left;
+  padding-left: 200px;
+}
+.floor-number .floor-number-arrow {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  float: left;
+}
+.floor-number .show-floor {
+  float: left;
+  font-size: 40px;
+  padding-top: 10px;
+  text-align: center;
+  border: 2px solid gray;
+  color: gray;
+  text-decoration: none;
+}
+.floor-number .show-floor:hover {
+  color: darkgray;
+}
+.floor-number .show-floor:active {
+  color: lightgray;
+}
+
+#house-image-controls {
+  z-index: 2;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#house-controls-container , #floors-controls-container {
+  position: absolute;
+  bottom: 50px;
+  right: 100px;
+}
+#house-controls-container a , #floors-controls-container a {
+  font-size: xx-large;
+  color: gray;
+  text-decoration: none;
+  border: 4px double gray;
+  padding: 5px;
+  margin: 10px;
+}
+
+#preloader-container {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  padding-top: 400px;
+  z-index: 100;
+  font-size: 48pt;
+  font-weight: bold;
+  color: gray;
+  text-shadow: 0 0 10px gray;
+}
+
+.apartment-element .sold-out {
+  inset 0 0 400px black;
+}
+
+.apartment-element .vacant {
+  cursor: pointer;
+}
