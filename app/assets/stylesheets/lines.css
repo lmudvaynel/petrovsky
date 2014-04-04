@@ -14,19 +14,19 @@
   opacity: 0;
 }
 #animated-text-backgrounds .background-0 {
-  background-image: url(images/presentation/0.jpg);
+  background-image: url(presentation/0.jpg);
 }
 #animated-text-backgrounds .background-1 {
-  background-image: url(images/presentation/1.jpg);
+  background-image: url(presentation/1.jpg);
 }
 #animated-text-backgrounds .background-2 {
-  background-image: url(images/presentation/2.jpg);
+  background-image: url(presentation/2.jpg);
 }
 #animated-text-backgrounds .background-3 {
-  background-image: url(images/presentation/3.jpg);
+  background-image: url(presentation/3.jpg);
 }
 #animated-text-backgrounds .background-4 {
-  background-image: url(images/presentation/4.jpg);
+  background-image: url(presentation/4.jpg);
 }
 
 .line {

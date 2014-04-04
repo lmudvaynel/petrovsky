@@ -15,3 +15,13 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+body.active_admin {
+  .cke_chrome {
+    width: 78% !important;
+    overflow: hidden;
+  }
+  .cke_dialog_background_cover{
+    background-color: black !important;
+  }
+}
