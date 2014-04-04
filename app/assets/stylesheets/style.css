@@ -1,17 +1,17 @@
 @font-face {
 	font-family: 'PT Sans Normal';
-	src: url('PT-Sans-normal.eot');
-	src: url('PT-Sans-normal.eot?#iefix') format('embedded-opentype'),
-			 url('PT-Sans-normal.ttf') format('truetype');
+	src: url('/images/PT-Sans-normal.eot');
+	src: url('/images/PT-Sans-normal.eot?#iefix') format('embedded-opentype'),
+			 url('/images/PT-Sans-normal.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'PT Sans Bold';
-	src: url('PT-Sans-bold.eot');
-	src: url('PT-Sans-bold.eot?#iefix') format('embedded-opentype'),
-			 url('PT-Sans-bold.ttf') format('truetype');
+	src: url('/images/PT-Sans-bold.eot');
+	src: url('/images/PT-Sans-bold.eot?#iefix') format('embedded-opentype'),
+			 url('/images/PT-Sans-bold.ttf') format('truetype');
 	font-weight: bold;
 	font-style: bold;
 }
