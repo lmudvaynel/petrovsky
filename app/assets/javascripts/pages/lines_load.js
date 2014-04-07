@@ -147,9 +147,9 @@ $(document).ready(function(){
     function () {
       lines.getByElement('thesises second')[0].animations.opacityTo(1, null, callback);
     },
-    function () {
+    /*function () {
       lines.getByElement('thesises third')[0].animations.opacityTo(1, null, callback);
-    },
+    },*/
     function () {
       var thesisesLines = lines.getByElement('thesises');
       var thesisLine = 0;

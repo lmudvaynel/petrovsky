@@ -118,10 +118,12 @@
   top: 20%;
 }
 .line.thesises.first {
-  top: 48%;
+  height: 6%;
+  top: 26%;
 }
 .line.thesises.second {
-  top: 64%;
+  height: 6%;
+  top: 32%;
 }
 .line.thesises.third {
   top: 80%;
