@@ -10,8 +10,10 @@
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  position: absolute;
   opacity: 0;
+  top: 0;
+  left: 0;
+  position: fixed;
 }
 #animated-text-backgrounds .background-0 {
   background-image: url(/images/presentation/0.jpg);
