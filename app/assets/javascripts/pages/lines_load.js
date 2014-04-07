@@ -151,7 +151,6 @@ $(document).ready(function(){
       lines.getByElement('thesises third')[0].animations.opacityTo(1, null, callback);
     },
     function () {
-      document.getElementById('main_hidden_2').style.display='none';
       var thesisesLines = lines.getByElement('thesises');
       var thesisLine = 0;
       var thesisesCallback = function () {};
@@ -227,6 +226,7 @@ $(document).ready(function(){
 
     // Заключение
     function () {
+      document.getElementById('main_hidden_2').style.display='none';
       var conclusionLines = lines.getByElement('line conclusion');
       var showConclusionLineCallback = function (currentConclusionLine) {
         if (currentConclusionLine < conclusionLines.length) {
