@@ -46,5 +46,17 @@ $(document).ready(function(){
 		return false;
 	});
 	
+	try{
+		$("#slider").slides({
+			next: 'next',
+			prev: 'prev',
+			play: 5000
+		});
+	} catch(err) { }
+	
+	try{		
+		$('a.gal').touchTouch();	
+	} catch(err) { }
+	
 	
 });
