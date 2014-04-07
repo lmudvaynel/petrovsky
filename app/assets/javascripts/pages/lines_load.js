@@ -239,6 +239,7 @@ $(document).ready(function(){
         }
       }
       showConclusionLineCallback(0);
+      $('.sale-wrapper').animate({ opacity: 1}, 5000);
     },
   ];
 
