@@ -54,6 +54,7 @@ h5 { font-size:12px; color:#fff; }
 .bg.concept { background:url(/images/bg-concept.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.contact { background:url(/images/bg-contact.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.service { background:url(/images/bg-service.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.place { background:url(/images/bg-place.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
 
 /* HEADER */
 #header { background:url(/images/header-shadow.png) repeat-x top; min-height:125px; padding:25px 50px 0 50px; position:relative; z-index:100}
@@ -108,6 +109,7 @@ h5 { font-size:12px; color:#fff; }
 #center .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:24px; float:left;}
 #center .callback a { display:block; padding:5px 10px; border:2px solid #fff;}
 
+.concept_content { position: absolute; padding-top: 100px; }
 
 .fasad { 
 	background:url(/images/build/fasad-1.jpg) no-repeat center top; 

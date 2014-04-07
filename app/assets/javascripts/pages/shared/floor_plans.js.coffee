@@ -51,7 +51,7 @@ $.app.pages.shared.floor_plans =
       demonstration:
         size:
           width: 1024
-          height: 768
+          height: 553
         opacity:
           hide: 0
           show: 0.75

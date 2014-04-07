@@ -27,8 +27,7 @@
       <% (1..6).to_a.reverse.each do |floor_number| %>
         <li>
           <%= link_to '#', :class => 'show-house-floor', 'data-floor-number' => floor_number, :dataid => floor_number do %>
-            <%= floor_number %>
-            <span></span>
+          <%=floor_number %><span></span>
           <% end %>
         </li>
       <% end %>
