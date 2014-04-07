@@ -143,11 +143,12 @@ h5 { font-size:12px; color:#fff; }
 .floor-control .side-2 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:2px 10px; font-size: 20px;}
 .floor-control .side-2:hover { color:#fffcd9; background:#8a8982;}
 
-
 .tab-list {}
 .tab-list .tab-item { display:none}
 .tab-list .tab-item.current { display:block}
-.tab-list li { background:url(/images/li-icon.png) no-repeat left center; padding-left:100px; min-height:80px; margin: 5px 0}
+
+.tab-list ul.service li { background:url(/images/li-icon.png) no-repeat left center; padding-left:90px; min-height:80px; margin: 5px 0}
+.tab-list ul.location li { background:url(/images/li-location.png) no-repeat 50px center; padding-left:90px; min-height:40px; margin: 5px 0}
 
 .tab-control { text-align:center; position:relative; margin-top:10px}
 .tab-control li { display:inline-block; margin:0 5px}
@@ -174,7 +175,7 @@ h5 { font-size:12px; color:#fff; }
 
 
 #slider .slide a span {
-	background: url(../images/magnify.png) no-repeat scroll -50% center;
+	background: url(/images/magnify.png) no-repeat scroll -50% center;
 	top:0;
 	left:0; 
 	bottom:0; 
