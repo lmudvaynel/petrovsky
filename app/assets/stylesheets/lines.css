@@ -30,6 +30,10 @@
 #animated-text-backgrounds .background-4 {
   background-image: url(/images/presentation/4.jpg);
 }
+#animated-text-backgrounds .background-5 {
+  background-image: url(/images/presentation/5.jpg);
+}
+
 
 .line {
   position: absolute;

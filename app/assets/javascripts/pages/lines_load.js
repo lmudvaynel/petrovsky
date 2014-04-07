@@ -24,9 +24,9 @@ $(document).ready(function(){
     function () {
       lines.getByElement('greeting fourth')[0].animations.opacityTo(1, null, callback);
     },
-//    function () {
-//      lines.getByElement('greeting fifth')[0].animations.opacityTo(1, null, callback);
-//    },
+    function () {
+      lines.getByElement('greeting fifth')[0].animations.opacityTo(1, null, callback);
+    },
     function () {
 //      var thesisLine = lines.getByElement('description greeting thesisWord')[0];
 //      thesisLine.animations.resize(2);
@@ -162,7 +162,7 @@ $(document).ready(function(){
         thesisesLines[thesisLine].animations.resize(3);
         thesisesLines[thesisLine].animations.opacityTo(0, null, thesisesCallback);
         thesisLine++;
-      }, 200);
+      }, 100);
     },
 /*
     function () {
@@ -226,6 +226,7 @@ $(document).ready(function(){
 
     // Заключение
     function () {
+      lines.changeBackgroundImageTo(5);
       document.getElementById('main_hidden_2').style.display='none';
       var conclusionLines = lines.getByElement('line conclusion');
       var showConclusionLineCallback = function (currentConclusionLine) {
