@@ -133,6 +133,7 @@ $(document).ready(function(){
     },
     function () {
       lines.getByElement('thesis comfort')[0].animations.opacityTo(0, null, callback);
+      document.getElementById('main_hidden_1').style.display='none';
     },
 
     // Все тезисы
@@ -225,6 +226,7 @@ $(document).ready(function(){
 
     // Заключение
     function () {
+      document.getElementById('main_hidden_2').style.display='none';
       var conclusionLines = lines.getByElement('line conclusion');
       var showConclusionLineCallback = function (currentConclusionLine) {
         if (currentConclusionLine < conclusionLines.length) {

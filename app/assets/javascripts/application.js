@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require init_app
 //= require menu
+//= require js

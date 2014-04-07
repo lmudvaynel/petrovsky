@@ -6,35 +6,41 @@
 <section id="preloader-container">
   LOADING: <span id="percents">0</span>%
 </section>
-<section id="canvas-container">
-</section>
-<section id="order-form-container" class="hidden">
-  <div id="order-form-dialog">
-    <%= form_for :order, url: create_order_path do |f| %>
-      Ваше имя: <%= f.text_field :name %><br />
-      Ваш e-mail: <%= f.text_field :email %><br />
-      <%= f.hidden_field :apartment_id %>
-    <% end %>
-  </div>
-</section>
-<section id="floors-controls-container" class="hidden">
-  <%= link_to 'Back to house', '#', class: 'back-to-house' %>
-  <%= link_to 'Show 3D', '#', :class => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
-</section>
-<section id="house-controls-container" class="hidden">
-  <%= link_to 'Back to house', '#', class: 'back-to-house' %>
-  <%= link_to 'Show 3D', '#', :class => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
-</section>
-<section id="house-image-container">
-  <div id="house-image-controls">
-    <% (1..6).to_a.reverse.each do |floor_number| %>
-      <div id="floor-<%= floor_number %>">
-        <%= link_to floor_number, '#', :class => 'show-house-floor', 'data-floor-number' => floor_number %>
+<div class="common" style="height:100%">
+  <div class="floor-control">
+    <div id="canvas-container" style="position: absolute;">
+    </div>
+    <section id="order-form-container" class="hidden">
+      <div id="order-form-dialog">
+        <%= form_for :order, url: create_order_path do |f| %>
+          Ваше имя: <%= f.text_field :name %><br />
+          Ваш e-mail: <%= f.text_field :email %><br />
+          <%= f.hidden_field :apartment_id %>
+        <% end %>
       </div>
-    <% end %>
-    ЭТАЖИ
+    </section>
+    <section id="house-controls-container" class="hidden">
+      <%= link_to 'Back to house', '#', class: 'back-to-house' %>
+      <%= link_to 'Show 3D', '#', :class => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
+    </section>
+    <ul id="house-image-container">
+      <% (1..6).to_a.reverse.each do |floor_number| %>
+        <li>
+          <%= link_to '#', :class => 'show-house-floor', 'data-floor-number' => floor_number, :dataid => floor_number do %>
+            <%= floor_number %>
+            <span></span>
+          <% end %>
+        </li>
+      <% end %>
+    <ul>
+    <div class="clear"></div>
+    <span class="floor-text">ЭТАЖИ</span>
+    
+    <a href="#" class="side-1">Фазад со стороны улицы 1</a>
+    <a href="#" class="side-2">Фазад со стороны улицы 2</a>
+    <div class="clear"></div>
+    <section>
+      <%= @page.try(:content) %>
+    </section>
   </div>
-</section>
-<section>
-  <%= @page.try(:content) %>
-</section>
+</div>
