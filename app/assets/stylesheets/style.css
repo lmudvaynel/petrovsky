@@ -103,7 +103,7 @@ h5 { font-size:12px; color:#fff; }
 
 
 #center .block-wrapper { position:relative; margin:50px 0; width:65%  }
-#center .block-wrapper .block-info { border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding:20px; position:relative; z-index:5}
+#center .block-wrapper .block-info { border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 20px 60px; position:relative; z-index:5}
 #center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 
 #center .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left;}
