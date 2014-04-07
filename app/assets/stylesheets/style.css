@@ -2,7 +2,7 @@
 	font-family: 'PT Sans Normal';
 	src: url('/images/PT-Sans-normal.eot');
 	src: url('/images/PT-Sans-normal.eot?#iefix') format('embedded-opentype'),
-			 url('/images/PT-Sans-normal.ttf') format('truetype');
+			 url('/images/PT-Sans-normal.otf') format('opentype');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -11,7 +11,7 @@
 	font-family: 'PT Sans Bold';
 	src: url('/images/PT-Sans-bold.eot');
 	src: url('/images/PT-Sans-bold.eot?#iefix') format('embedded-opentype'),
-			 url('/images/PT-Sans-bold.ttf') format('truetype');
+			 url('/images/PT-Sans-bold.otf') format('opentype');
 	font-weight: bold;
 	font-style: bold;
 }
