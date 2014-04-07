@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	
-
 	// RESIZE BUILD
 	var bodyHeight = $(window).outerHeight(),
 	contentHeight = $('#wrapper').outerHeight(),
@@ -46,17 +45,5 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	try{
-		$("#slider").slides({
-			next: 'next',
-			prev: 'prev',
-			play: 5000
-		});
-	} catch(err) { }
-	
-	try{		
-		$('a.gal').touchTouch();	
-	} catch(err) { }
-	
-	
+
 });
