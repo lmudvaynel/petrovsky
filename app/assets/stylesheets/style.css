@@ -138,9 +138,9 @@ h5 { font-size:12px; color:#fff; }
 .floor-control li a:hover { color:#fffcd9; background:#8a8982;}
 
 .floor-control .floor-text { font-weight:bold; float:left; margin-right:20%; padding:2px 0; margin-left:-10px}
-.floor-control .side-1 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:2px 10px}
+.floor-control .side-1 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:2px 10px; font-size: 20px;}
 .floor-control .side-1:hover { color:#fffcd9; background:#8a8982;}
-.floor-control .side-2 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:2px 10px}
+.floor-control .side-2 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:2px 10px; font-size: 20px;}
 .floor-control .side-2:hover { color:#fffcd9; background:#8a8982;}
 
 
@@ -160,4 +160,32 @@ h5 { font-size:12px; color:#fff; }
 
 @media (max-width: 1400px) {
 	#header .phone { float:none; margin:0}
+}
+
+@media (min-width: 1500px) {
+	.floor-control li { margin:60px 0; }
+}
+
+@media (min-width: 1600px) {
+	.floor-control li { margin:70px 0; }
+}
+
+@media (min-width: 1700px) {
+	.floor-control li { margin:80px 0; }
+}
+
+@media (min-width: 1800px) {
+	.floor-control li { margin:90px 0; }
+}
+
+@media (min-width: 1900px) {
+	.floor-control li { margin:100px 0; }
+}
+
+@media (min-width: 2000px) {
+	.floor-control li { margin:145px  0; }
+}
+
+@media (min-width: 2200px) {
+	.floor-control li { margin:160px 0; }
 }
