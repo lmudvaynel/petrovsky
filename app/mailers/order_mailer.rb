@@ -1,10 +1,10 @@
+# encoding: utf-8
 class OrderMailer < ActionMailer::Base
-  default from: "petrovsky@apart.house.com"
+  default from: "noreply@standee.ru"
 
-  def order_email(user, apartment)
-    @user, @apartment = user, apartment
-
-    mail  to: AdminUser.all.map(&:email),
-          subject: 'Заказ апартаментов'
+  def order_mail(order)
+    @order = order
+    mail :to => AdminUser.all.map(&:email),
+         :subject => "Заказ апартаментов"
   end
 end

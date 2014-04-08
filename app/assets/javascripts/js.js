@@ -44,6 +44,17 @@ $(document).ready(function(){
 		$("#tab").find("#"+curTab).addClass("current");
 		return false;
 	});
+		// callback
+	$('.callback a').click(function(){
+		$(".callback-wrapper").show();
+		return false;
+	});
 	
-
+	$('.callback-shadow').click(function(){
+		$(".callback-wrapper").hide();
+	});
+	
+	$('#cancel_button').click(function(){
+		$(".callback-wrapper").hide();
+	});
 });

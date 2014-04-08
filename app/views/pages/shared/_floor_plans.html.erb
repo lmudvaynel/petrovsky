@@ -35,8 +35,8 @@
     <div class="clear"></div>
     <span class="floor-text">ЭТАЖИ</span>
     
-    <a href="#" class="side-1">Фасад со стороны улицы 1</a>
-    <a href="#" class="side-2">Фасад со стороны улицы 2</a>
+    <a href="#" class="<%= "current_fasad" if @page.slug=="floor_plans_1" %> side-1">Фасад со стороны улицы 1</a>
+    <a href="#" class="<%= "current_fasad" if @page.slug=="floor_plans_2" %> side-2 ">Фасад со стороны улицы 2</a>
     <div class="clear"></div>
     <section>
       <%= @page.try(:content) %>

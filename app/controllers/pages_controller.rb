@@ -10,10 +10,14 @@ class PagesController < ApplicationController
   end
 
   def create_order
-    user = { name: params[:order][:name], email: params[:order][:email] }
-    apartment = Apartment.find(params[:order][:apartment_id])
-    OrderMailer.order_email(user, apartment)
-    redirect_to slug_path('floor-plans')
+    @order = Order.create(params.require(:order).permit(:name, :email, :phone, :content))
+    if @order.save
+      OrderMailer.order_mail(@order).deliver
+      flash[:success] = "Спасибо! Ваш заказ оформлен!"
+      redirect_to root_url
+    else
+      render 'pages/order'
+    end
   end
   private
 

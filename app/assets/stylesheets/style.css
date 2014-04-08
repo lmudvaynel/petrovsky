@@ -86,7 +86,7 @@ h5 { font-size:12px; color:#fff; }
 #header .music a:hover { background-position:0 -49px}
 
 /* CENTER */
-#center { padding:25px 50px; font-size:28px; position:relative;}
+#center { padding:75px 50px; font-size:28px; position:relative;}
 
 #center .sale { position:absolute; right:50px; top:200px; border:5px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding:20px; }
 
@@ -103,14 +103,14 @@ h5 { font-size:12px; color:#fff; }
 #concept-page .common { padding-top:100px}
 
 
-#center .block-wrapper { position:relative; margin:50px 0; width:65%  }
+#center .block-wrapper { position:relative; margin:100px 0; width:65%  }
 #center .block-wrapper .block-info { border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 20px 60px; position:relative; z-index:5}
 #center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 
 #center .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left;}
 #center .callback a { display:block; padding:5px 10px; border:2px solid #fff;}
 
-.concept_content { position: absolute; padding-top: 100px; }
+.concept_content { position: absolute; padding-top: 150px; }
 
 .fasad { 
 	background:url(/images/build/fasad-1.jpg) no-repeat center top; 
@@ -139,10 +139,15 @@ h5 { font-size:12px; color:#fff; }
 .floor-control li a:hover { color:#fffcd9; background:#8a8982;}
 
 .floor-control .floor-text { font-weight:bold; float:left; margin-right:20%; padding:2px 0; margin-left:-10px}
-.floor-control .side-1 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:2px 10px; font-size: 20px;}
-.floor-control .side-1:hover { color:#fffcd9; background:#8a8982;}
-.floor-control .side-2 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:2px 10px; font-size: 20px;}
-.floor-control .side-2:hover { color:#fffcd9; background:#8a8982;}
+.floor-control .side-1 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:5px 10px; font-size: 20px;}
+.floor-control .current_fasad, .side-1:hover { color:#fffcd9; background:#8a8982;}
+.floor-control .side-2 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:5px 10px; font-size: 20px;}
+.floor-control .current_fasad, .side-2:hover { color:#fffcd9; background:#8a8982;}
+
+.petrovsky {
+	font-weight: bold;
+	text-transform: uppercase;
+}
 
 .tab-list {}
 .tab-list .tab-item { display:none}
@@ -199,6 +204,19 @@ h5 { font-size:12px; color:#fff; }
 #slider .pagination li a { border-radius:50%; height:40px; width:40px; display:block; border:2px solid #fff; overflow:hidden; text-indent:300px}
 #slider .pagination li.current a { background:#fff;}
 .slides_control { overflow:hidden}
+
+/* CALLBACK */
+.callback-shadow { background:rgba(0,0,0,0.8); position:fixed; width:100%; height:100%; top:0; left:0; z-index:110; }
+.callback-wrapper { position: absolute; width:100%; height:100%; top:0; left:0; z-index:110; display:none}
+.callback-form .text { font-size:28px; text-align:center; padding-bottom:20px}
+.callback-form { width:600px; margin:100px auto; border:10px solid #cbc4ad;  color:#fffcd9; padding:20px 60px; position:relative; z-index:1000}
+.callback-form .field { padding-bottom:30px;}
+.callback-form .field input { background:#fff; width:580px; margin:0; padding:10px; border:none; font-size:16px;}
+.callback-form .button { padding-top:20px}
+.callback-form .button input { margin:0; padding:0; border:none; font-size:18px}
+.callback-form .button input[type="submit"] { background:#8a8982; width:260px; height:40px; color:#fffcd9; float:left}
+.callback-form .button input[type="reset"] { background:#fffcd9; width:260px; height:40px; color:#8a8982; float:right}
+
 
 @media (max-width: 1400px) {
 	#header .phone { float:none; margin:0}
