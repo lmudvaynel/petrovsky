@@ -173,6 +173,7 @@ $.app.pages.shared.floor_plans =
     @.init_scene()
     @.init_renderer()
     @.init_controls()
+    @.block_controls() # appended
     @.init_events()
     @.init_animation()
     @.init_animated_objects()
@@ -319,6 +320,7 @@ $.app.pages.shared.floor_plans =
     , @.params.animation.speed
 
   block_controls: ->
+    console.log 'Controls blocked'
     return if @.params.controls.blocked
 
     @.controls.rotateSpeed = 0
@@ -328,6 +330,7 @@ $.app.pages.shared.floor_plans =
     @.params.controls.blocked = true
 
   unblock_controls_for_house: ->
+    console.log 'Controls for house unblocked'
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 2
@@ -341,6 +344,7 @@ $.app.pages.shared.floor_plans =
     @.params.controls.blocked = false
 
   unblock_controls_for_floor_foreground: ->
+    console.log 'Controls for floor 01 unblocked'
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 1
@@ -354,6 +358,7 @@ $.app.pages.shared.floor_plans =
     @.params.controls.blocked = false
 
   unblock_controls_for_floor_demonstration: ->
+    console.log 'Controls for floor 02 unblocked'
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 0.2

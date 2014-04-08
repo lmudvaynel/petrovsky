@@ -5,7 +5,7 @@ function ObjectAnimations (object) {
       symbol: 10,
     },
     durations: {
-      opacity: 1000,
+      opacity: 700,
       move: 1000,
       resize: 100,
     }
