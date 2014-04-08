@@ -7,10 +7,10 @@
   LOADING: <span id="percents">0</span>%
 </section>
 <div class="common" style="height:100%">
-  <div class="floor-control">
+  <div class="floor-control" id="floor-control">
     <div id="canvas-container" style="position: absolute;">
     </div>
-    <section id="order-form-container" class="hidden">
+  <!--  <section id="order-form-container" class="hidden">
       <div id="order-form-dialog">
         <%= form_for :order, url: create_order_path do |f| %>
           Ваше имя: <%= f.text_field :name %><br />
@@ -19,6 +19,7 @@
         <% end %>
       </div>
     </section>
+  -->
     <section id="house-controls-container" class="hidden">
       <%= link_to 'ПЛАН ЗДАНИЯ', '#', class: 'back-to-house' %>
       <%= link_to 'ПОКАЗАТЬ 3D', '#', :class => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %>
@@ -35,11 +36,70 @@
     <div class="clear"></div>
     <span class="floor-text">ЭТАЖИ</span>
     
-    <a href="#" class="<%= "current_fasad" if @page.slug=="floor_plans_1" %> side-1">Фасад со стороны улицы 1</a>
-    <a href="#" class="<%= "current_fasad" if @page.slug=="floor_plans_2" %> side-2 ">Фасад со стороны улицы 2</a>
+    <a href='#' class="side-1 current_fasad" 
+      onclick="fasad_to_1()">Фасад со стороны улицы 1</a>
+    <a href="#" class="side-2" 
+      onclick="fasad_to_2()">Фасад со стороны улицы 2</a>
     <div class="clear"></div>
     <section>
       <%= @page.try(:content) %>
     </section>
   </div>
-</div>
+<script type="text/javascript">
+  function fasad_to_2(){
+    $('#floor-1').animate({ opacity: 0 }, 10);
+    $('#inset-floor-1').animate({ opacity: 1 }, 10);
+    $('#floor-2').animate({ opacity: 0 }, 10);
+    $('#inset-floor-2').animate({ opacity: 1 }, 10);
+    $('#floor-3').animate({ opacity: 0 }, 10);
+    $('#inset-floor-3').animate({ opacity: 1 }, 10);
+    $('#floor-4').animate({ opacity: 0 }, 10);
+    $('#inset-floor-4').animate({ opacity: 1 }, 10);
+    $('#floor-5').animate({ opacity: 0 }, 10);
+    $('#inset-floor-5').animate({ opacity: 1 }, 10);
+    $('#floor-6').animate({ opacity: 0 }, 10);
+    $('#inset-floor-6').animate({ opacity: 1 }, 10);
+    $('.fasad').animate({ opacity: 0 }, 1000);
+    $('.fasad-2').animate({ opacity: 1 }, 1000);
+    $('#floor-control').removeClass('floor-control');
+    $('#floor-control').addClass('floor-control-2');
+    $('.side-1').removeClass('current_fasad');
+    $('.side-2').addClass('current_fasad');
+    $(".floor-control-2 ul li a")
+      .mouseover(function(){
+        var curFloor = parseInt($(this).attr("dataid"));
+        $("#inset-floor-"+curFloor).addClass("active");
+      })
+      .mouseout(function(){
+        $(".floor-2").removeClass("active");
+      });
+  };
+  function fasad_to_1(){
+    $('#floor-1').animate({ opacity: 1 }, 10);
+    $('#inset-floor-1').animate({ opacity: 0 }, 10);
+    $('#floor-2').animate({ opacity: 1 }, 10);
+    $('#inset-floor-2').animate({ opacity: 0 }, 10);
+    $('#floor-3').animate({ opacity: 1 }, 10);
+    $('#inset-floor-3').animate({ opacity: 0 }, 10);
+    $('#floor-4').animate({ opacity: 1 }, 10);
+    $('#inset-floor-4').animate({ opacity: 0 }, 10);
+    $('#floor-5').animate({ opacity: 1 }, 10);
+    $('#inset-floor-5').animate({ opacity: 0 }, 10);
+    $('#floor-6').animate({ opacity: 1 }, 10);
+    $('#inset-floor-6').animate({ opacity: 0 }, 10);
+    $('.fasad-2').animate({ opacity: 0 }, 1000);
+    $('.fasad').animate({ opacity: 1 }, 1000);
+    $('#floor-control').removeClass('floor-control-2');
+    $('#floor-control').addClass('floor-control');
+    $('.side-2').removeClass('current_fasad');
+    $('.side-1').addClass('current_fasad');
+    $(".floor-control ul li a")
+    .mouseover(function(){
+      var curFloor = parseInt($(this).attr("dataid"));
+      $("#floor-"+curFloor).addClass("active");
+    })
+    .mouseout(function(){
+      $(".floor").removeClass("active");
+    });
+  };
+</script>

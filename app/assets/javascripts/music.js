@@ -10,7 +10,7 @@ $$r(function() {
     onready:function() {
       flag =($.cookie('cookie_name'));
       if ((flag=="true")||(flag==undefined)) {
-        modules.sound.start({'music':'http://sfmv.ru/music/3.mp3'});
+        modules.sound.start({'music':'http://sfmv.ru/music/petrovsky_ah.mp3'});
         $('#mp3button').addClass('play_music');
       }
       $$e.add($$('mp3button'),'click',playmp3rand);//добавляю событие кнопке после загрузки скрипта
@@ -27,7 +27,7 @@ var playmp3rand = function (event) {
     flag="false";
   } else {
     flag="true";
-    modules.sound.start({'music':'http://sfmv.ru/music/3.mp3'});
+    modules.sound.start({'music':'http://sfmv.ru/music/petrovsky_ah.mp3'});
     $('#mp3button').addClass('play_music')
   }
   ($.cookie('cookie_name', flag));

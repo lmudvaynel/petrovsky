@@ -834,16 +834,8 @@ $.app.pages.shared.floor_plans =
     return unless fp.showed_floor.floor
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     return if apartment.sold_out
-    $('#order-form-dialog').dialog
-      width: 400
-      modal: true
-      buttons:
-        'Отправить заявку': ->
-          $(@).find('#order_apartment_id').val(apartment.id)
-          $(@).find('form').submit()
-          $(@).dialog 'close'
-        'Отменить': -> $(@).dialog 'close'
-      close: -> $(@).find('input').val('')
+    $(".callback-wrapper").show();
+    return false;
 
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors

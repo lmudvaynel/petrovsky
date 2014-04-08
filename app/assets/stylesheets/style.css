@@ -79,7 +79,8 @@ h5 { font-size:12px; color:#fff; }
 #header .phone { font-family: 'PT Sans Bold', sans-serif; font-size:20px; float:left; margin:22px 20px 0 0;}
 
 #header .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left; margin-top:15px}
-#header .callback a { display:block; padding:5px 10px; border:2px solid #fff;}
+#header .callback a {background: rgba(0, 0, 0, 0.3); display:block; padding:5px 10px; border:2px solid #fff;}
+#header .callback a:hover {text-decoration:underline;}
 
 #header .music { float:left; margin:12px 0 0 20px;}
 #header .music a { background:url(/images/icon-music.png) no-repeat 0 0; height:49px; width:49px; display:block}
@@ -90,7 +91,7 @@ h5 { font-size:12px; color:#fff; }
 
 #center .sale { position:absolute; right:50px; top:200px; border:5px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding:20px; }
 
-#center .sale-wrapper {opacity: 0; position: relative; margin-top: 23%; float: right; left: 20px; }
+#center .sale-wrapper {opacity: 0; position: relative; margin-top: 23%; float: right; left: 20px; cursor: pointer; }
 #center .sale-wrapper .sale-info { border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding:20px; position:relative; z-index:5}
 #center .sale-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 #center .sale-info h3 { font-size:72px; color:#fffcd9; border-bottom:4px solid #fffcd9; padding-bottom:2px}
@@ -143,6 +144,35 @@ h5 { font-size:12px; color:#fff; }
 .floor-control .current_fasad, .side-1:hover { color:#fffcd9; background:#8a8982;}
 .floor-control .side-2 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:5px 10px; font-size: 20px;}
 .floor-control .current_fasad, .side-2:hover { color:#fffcd9; background:#8a8982;}
+
+/* FASAD 2*/
+.fasad-2 { background:url(/images/build/fasad-2.jpg) no-repeat center top; top:0; left:0; opacity: 0; position: absolute; width:100%; height:100%; background-size: cover;}
+.floor-2 { top:0; left:0; position:absolute; width:100%; height:100%; background-size: cover; z-index:-5}
+.floor-2.active { z-index:10}
+
+#inset-floor-1 { background:url(/images/build/inset-floor-1.png) no-repeat center top; background-size: cover; }
+#inset-floor-2 { background:url(/images/build/inset-floor-2.png) no-repeat center top; background-size: cover; }
+#inset-floor-3 { background:url(/images/build/inset-floor-3.png) no-repeat center top; background-size: cover; }
+#inset-floor-4 { background:url(/images/build/inset-floor-4.png) no-repeat center top; background-size: cover; }
+#inset-floor-5 { background:url(/images/build/inset-floor-5.png) no-repeat center top; background-size: cover; }
+#inset-floor-6 { background:url(/images/build/inset-floor-6.png) no-repeat center top; background-size: cover; }
+#inset-floor-7 { background:url(/images/build/inset-floor-7.png) no-repeat center top; background-size: cover; }
+
+.floor-control-2 { position:relative; z-index:100; padding-left:200px}
+.floor-control-2 li { margin:50px 0; height:46px }
+.floor-control-2 li a { display:block; width:53px; height:46px; text-align:center; line-height:46px; background:#fffcd9; color:#8a8982; text-decoration:none; font-weight:bold; position:relative; float:left; margin-right:5px}
+.floor-control-2 li span { display:block; background:url(/images/floor-arrow.png) no-repeat right center; top:0; right:-5px; width:6px; height:46px; position:absolute }
+.floor-control-2 li a:hover span { background-position: 0px center; }
+.floor-control-2 li a:hover { color:#fffcd9; background:#8a8982;}
+
+.floor-control-2 li a.penthouse { float:left; width:150px; margin-left:-155px}
+
+.floor-control-2 .floor-text { font-weight:bold; float:left; margin-right:20%; padding:2px 0; margin-left:-10px}
+.floor-control-2 .side-1 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:5px 10px; font-size: 20px;}
+.floor-control-2 .current_fasad, .side-1:hover { color:#fffcd9; background:#8a8982;}
+.floor-control-2 .side-2 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:5px 10px; font-size: 20px;}
+.floor-control-2 .current_fasad, .side-2:hover { color:#fffcd9; background:#8a8982;}
+
 
 .petrovsky {
 	font-weight: bold;
