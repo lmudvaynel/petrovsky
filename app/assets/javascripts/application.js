@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require slides.min.jquery
+//= require touchTouch.jquery
 //= require init_app
 //= require menu
 //= require js
+

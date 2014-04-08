@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	
-
 	// RESIZE BUILD
 	var bodyHeight = $(window).outerHeight(),
 	contentHeight = $('#wrapper').outerHeight(),
@@ -46,5 +45,5 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	
+
 });
