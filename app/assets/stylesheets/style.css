@@ -83,7 +83,7 @@ h5 { font-size:12px; color:#fff; }
 
 #header .music { float:left; margin:12px 0 0 20px;}
 #header .music a { background:url(/images/icon-music.png) no-repeat 0 0; height:49px; width:49px; display:block}
-#header .music a:hover { background-position:0 -49px}
+#header .music a:hover,  #header .music a.play_music { background-position:0 -49px}
 
 /* CENTER */
 #center { padding:75px 50px; font-size:28px; position:relative;}

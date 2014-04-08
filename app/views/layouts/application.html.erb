@@ -5,7 +5,7 @@
     <%= content_for?(:title) ? yield(:title) : 'Petrovsky Apart House' %>
   </title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%#= stylesheet_link_tag "style" %>
+  <%= javascript_include_tag "http://scriptjava.net/source/scriptjava/scriptjava.js" %>
   <%#= stylesheet_link_tag "responsive" %>
   <%#= stylesheet_link_tag "component" %>
   <%#= stylesheet_link_tag "bookblock" %>
@@ -63,7 +63,7 @@
         <a href="">ЗАКАЗАТЬ ЗВОНОК</a>
       </div>
       <div class="music">
-        <a href=""></a>
+        <a class="" href="#" id="mp3button"></a>
       </div>
     </div>
 

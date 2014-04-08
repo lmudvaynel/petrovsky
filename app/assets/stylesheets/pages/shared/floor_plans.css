@@ -44,15 +44,22 @@
 #house-controls-container , #floors-controls-container {
   position: absolute;
   bottom: 50px;
-  right: 100px;
+  right: 33%;
 }
 #house-controls-container a , #floors-controls-container a {
-  font-size: xx-large;
-  color: gray;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #8a8982;
   text-decoration: none;
-  border: 4px double gray;
-  padding: 5px;
+  background: #fffcd9;
+  padding: 5px 20px;
   margin: 10px;
+  text-align: center;
+}
+
+#house-controls-container a:hover , #floors-controls-container a:hover {
+  color: #fffcd9;
+  background: #8a8982;
 }
 
 #preloader-container {
