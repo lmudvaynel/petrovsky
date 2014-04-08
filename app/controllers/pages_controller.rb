@@ -14,9 +14,10 @@ class PagesController < ApplicationController
     if @order.save
       OrderMailer.order_mail(@order).deliver
       flash[:success] = "Спасибо! Ваш заказ оформлен!"
-      redirect_to root_url
+      redirect_to root_path
     else
-      render 'pages/order'
+      flash[:error] = "В оформлении заказа допущены ошибки!"
+      redirect_to root_path
     end
   end
   private
