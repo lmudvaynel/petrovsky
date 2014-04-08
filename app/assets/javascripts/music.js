@@ -27,7 +27,7 @@ var playmp3rand = function (event) {
     flag="false";
   } else {
     flag="true";
-    modules.sound.start({'music':'http://goldenland.onfind.net/2/3/3.mp3'});
+    modules.sound.start({'music':'http://sfmv.ru/music/3.mp3'});
     $('#mp3button').addClass('play_music')
   }
   ($.cookie('cookie_name', flag));
