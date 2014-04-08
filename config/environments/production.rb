@@ -27,7 +27,7 @@ Petrovsky::Application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   config.assets.precompile = [/^[a-z0-9\/]*[a-z0-9]\w+.([a-z0-9\/]*[a-z0-9]\w)+.(css|js)$/]
   
@@ -71,6 +71,10 @@ Petrovsky::Application.configure do
   # the I18n.default_locale when a translation can not be found).
   config.i18n.fallbacks = true
 
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 

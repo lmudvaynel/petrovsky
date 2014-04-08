@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 pages_names = {
-  home: 'КОНЦЕПЦИЯ',
+  home: 'ГЛАВНАЯ',
+  concept: 'КОНЦЕПЦИЯ',
   place: 'РАСПОЛОЖЕНИЕ',
   floor_plans: 'ПЛАНИРОВКА',
   service: 'СЕРВИС',
