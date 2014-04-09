@@ -784,7 +784,7 @@ $.app.pages.shared.floor_plans =
         fp.showed_floor.floor.hide_from_scene()
         fp.unblock_controls_for_floor_demonstration()
 
-        $(@).text('Show 2D').data('toggle-direction', 'to-2d')
+        $(@).text('Показать 2D').data('toggle-direction', 'to-2d')
         fp.change_mode_to 'floor-demonstration'
     else
       return unless fp.valid_event_for 'floor-demonstration', event
