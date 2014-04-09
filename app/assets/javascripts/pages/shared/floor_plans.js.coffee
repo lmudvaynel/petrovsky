@@ -51,10 +51,10 @@ $.app.pages.shared.floor_plans =
       demonstration:
         size:
           width: 1024
-          height: 553
+          height: 270
         opacity:
           hide: 0
-          show: 0.75
+          show: 0.95
           speed: 1000
       plan:
         apartment:

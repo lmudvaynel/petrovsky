@@ -133,11 +133,11 @@ $(document).ready(function(){
     },
     function () {
       lines.getByElement('thesis comfort')[0].animations.opacityTo(0, null, callback);
+      document.getElementById('main_hidden_1').style.display='none';
     },
 
     // Все тезисы
     function () {
-      document.getElementById('main_hidden_1').style.display='none';
       lines.changeBackgroundImageTo(4);
       lines.getByElement('thesises title')[0].animations.opacityTo(1, null, callback);
     },

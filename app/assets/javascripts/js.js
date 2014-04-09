@@ -72,4 +72,5 @@ $(document).ready(function(){
 	$('#cancel_button').click(function(){
 		$(".callback-wrapper").hide();
 	});
+	
 });
