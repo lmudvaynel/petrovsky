@@ -77,11 +77,11 @@ h5 { font-size:12px; color:#fff; }
 
 #header .phone { font-family: 'PT Sans Bold', sans-serif; font-size:24px; float:left; margin:22px 20px 0 0;}
 
-#header .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:24px; float:left; margin-top:15px}
+#header .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left; margin-top: 15px}
 #header .callback a {background: rgba(0, 0, 0, 0.3); display:block; padding:5px 10px; border:2px solid #fff;}
 #header .callback a:hover {text-decoration:underline;}
 
-#header .music { float:left; margin:12px 0 0 20px;}
+#header .music { float:left; margin:10px 0 0 20px;}
 #header .music a { background:url(/images/icon-music.png) no-repeat 0 0; height:49px; width:49px; display:block}
 #header .music a:hover,  #header .music a.play_music { background-position:0 -49px}
 
@@ -103,7 +103,7 @@ h5 { font-size:12px; color:#fff; }
 #concept-page .common { font-family: 'PT Sans Normal'; padding-top:100px}
 
 
-#center .block-wrapper { position:relative; margin:100px 0; width:65%  }
+#center .block-wrapper { position:relative; margin:100px 0; width: 750px }
 #center .block-wrapper .block-info { border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 20px 60px; position:relative; z-index:5}
 #center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 
@@ -196,7 +196,7 @@ h5 { font-size:12px; color:#fff; }
 /* SLIDER */
 #slider { width:1260px; height: auto; margin:auto }
 #slider .slide {width:1260px; position:relative; margin:auto; }
-#slider .slide a { float:left; width:600px; position:relative; margin:1%; display:block;  background:#000; 	
+#slider .slide a { opacity: 0.85; float:left; width:600px; position:relative; margin:1%; display:block;  background:#000; 	
 	}
 #slider .slide a img { 
 	width:100%; height:100%; opacity:1; 
@@ -247,7 +247,7 @@ h5 { font-size:12px; color:#fff; }
 
 
 @media (max-width: 1400px) {
-	#header .phone { float:none; margin:0}
+	#header .phone { float:none; margin:0; margin-left: 3px;}
 }
 
 @media (min-width: 1500px) {
