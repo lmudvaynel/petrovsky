@@ -8,7 +8,10 @@ function ObjectAnimations (object) {
       opacity: 700,
       move: 1000,
       resize: 100,
-    }
+    },
+    speed: {
+      resize: 2,
+    },
   }
 
   this.init = function () {
@@ -103,7 +106,7 @@ function ObjectAnimations (object) {
     this.move(dLeft, dTop, afterAnimationCallback);
   }
 
-  this.resize = function (scale, withoutShift, afterAnimationCallback) {
+  this.resize = function (scale, afterAnimationCallback) {
 
     var objectAnimations = this;
     var element = objectAnimations.object.element;
@@ -112,7 +115,7 @@ function ObjectAnimations (object) {
     size.end = { width: scale * size.start.width, height: scale * size.start.height };
     var position = {};
     var resizeSign = size.end.height - size.start.height < 0 ? -1 : 1;
-    var dHeightSpeed = 2;
+    var dHeightSpeed = this.options.speed.resize;
     var dh = resizeSign * dHeightSpeed * 2;
     var dWidth, dHeight;
     var frames = Math.round((size.end.height - size.start.height)/dh);

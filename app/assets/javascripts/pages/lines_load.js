@@ -158,8 +158,8 @@ $(document).ready(function(){
           clearInterval(thesisesInterval);
           thesisesCallback = callback;
         }
-        thesisesLines[thesisLine].animations.resize(2);
-        thesisesLines[thesisLine].animations.opacityTo(0, null, thesisesCallback);
+        thesisesLines[thesisLine].animations.resize(2, thesisesCallback);
+        thesisesLines[thesisLine].animations.opacityTo(0);
         thesisLine++;
       }, 100);
     },
