@@ -184,9 +184,9 @@ $.app.pages.shared.floor_plans =
 #      @.end_house_animate_to_scene()
 
   init_container: ->
-    @.container.css
-      width: window.innerWidth * @.params.container.size_in_percents.width / 100
-      height: window.innerHeight * @.params.container.size_in_percents.height / 100
+#    @.container.css
+#      width: window.innerWidth * @.params.container.size_in_percents.width / 100
+#      height: window.innerHeight * @.params.container.size_in_percents.height / 100
 
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
