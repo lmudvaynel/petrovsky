@@ -15,10 +15,8 @@ class PagesController < ApplicationController
     @order = Order.create(params.require(:order).permit(:name, :email, :phone, :content))
     if @order.save
       OrderMailer.order_mail(@order).deliver
-      flash[:success] = "Спасибо! Ваш заказ оформлен!"
       redirect_to root_path
     else
-      flash[:error] = "В оформлении заказа допущены ошибки!"
       redirect_to root_path
     end
   end

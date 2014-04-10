@@ -1,23 +1,22 @@
 @font-face {
 	font-family: 'PT Sans Normal';
-	src: url('/images/PT-Sans-normal.eot');
-	src: url('/images/PT-Sans-normal.eot?#iefix') format('embedded-opentype'),
-			 url('/images/PT-Sans-normal.otf') format('opentype');
+	src: url('/fonts/PT-Sans-normal.eot');
+	src: url('/fonts/PT-Sans-normal.eot?#iefix') format('embedded-opentype'),
+			 url('/fonts/PT-Sans-normal.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'PT Sans Bold';
-	src: url('/images/PT-Sans-bold.eot');
-	src: url('/images/PT-Sans-bold.eot?#iefix') format('embedded-opentype'),
-			 url('/images/PT-Sans-bold.otf') format('opentype');
+	src: url('/fonts/PT-Sans-bold.eot');
+	src: url('/fonts/PT-Sans-bold.eot?#iefix') format('embedded-opentype'),
+			 url('/fonts/PT-Sans-bold.ttf') format('truetype');
 	font-weight: bold;
 	font-style: bold;
 }
-
 /* NEW CSS */
-body { font-family: 'PT Sans Normal', sans-serif; padding:0; color:#fff;}
+body { font-family: 'Arial', sans-serif; padding:0; color:#fff;}
 td, th { font-family: 'PT Sans Normal', sans-serif; color:#fff;}
 
 
@@ -63,7 +62,7 @@ h5 { font-size:12px; color:#fff; }
 
 #header .menu { float:left; padding-top:3px}
 #header .menu li { float:left; width:100px;}
-#header .menu li a { font-family: 'PT Sans Bold', sans-serif; display:block; text-align:center; color:#757575; text-transform:uppercase; font-size:11px}
+#header .menu li a { font-family: 'PT Sans Bold', sans-serif; display:block; text-align:center; color:#757575; text-transform:uppercase; font-size:14px}
 #header .menu li a span { display:block; width:60px; height:60px; background-position:0 0; background-repeat:no-repeat; margin:0 auto 5px auto}
 
 #header .menu li.icon-1 span { background-image:url(/images/icon-1.png);}
@@ -76,21 +75,22 @@ h5 { font-size:12px; color:#fff; }
 #header .menu li a:hover span, #header .menu li.current a span { background-position:0 -60px}
 #header .menu li a:hover, #header .menu li.current a { color:#fff}
 
-#header .phone { font-family: 'PT Sans Bold', sans-serif; font-size:20px; float:left; margin:22px 20px 0 0;}
+#header .phone { font-family: 'PT Sans Bold', sans-serif; font-size:24px; float:left; margin:22px 20px 0 0;}
 
-#header .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left; margin-top:15px}
-#header .callback a { display:block; padding:5px 10px; border:2px solid #fff;}
+#header .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left; margin-top: 15px}
+#header .callback a {background: rgba(0, 0, 0, 0.3); display:block; padding:5px 10px; border:2px solid #fff;}
+#header .callback a:hover {text-decoration:underline;}
 
-#header .music { float:left; margin:12px 0 0 20px;}
+#header .music { float:left; margin:10px 0 0 20px;}
 #header .music a { background:url(/images/icon-music.png) no-repeat 0 0; height:49px; width:49px; display:block}
 #header .music a:hover,  #header .music a.play_music { background-position:0 -49px}
 
 /* CENTER */
-#center { padding:75px 50px; font-size:28px; position:relative;}
+#center { font-family: 'PT Sans Normal'; padding:75px 50px; font-size:28px; position:relative;}
 
 #center .sale { position:absolute; right:50px; top:200px; border:5px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding:20px; }
 
-#center .sale-wrapper {opacity: 0; position: relative; margin-top: 23%; float: right; left: 20px; }
+#center .sale-wrapper {font-family: 'PT Sans Normal'; opacity: 0; position: relative; margin-top: 19%; float: right; cursor: pointer; }
 #center .sale-wrapper .sale-info { border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding:20px; position:relative; z-index:5}
 #center .sale-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 #center .sale-info h3 { font-size:72px; color:#fffcd9; border-bottom:4px solid #fffcd9; padding-bottom:2px}
@@ -100,10 +100,10 @@ h5 { font-size:12px; color:#fff; }
 #center .sale-info .more:hover { text-decoration:none}
 
 
-#concept-page .common { padding-top:100px}
+#concept-page .common { font-family: 'PT Sans Normal'; padding-top:100px}
 
 
-#center .block-wrapper { position:relative; margin:100px 0; width:65%  }
+#center .block-wrapper { position:relative; margin:100px 0; width: 750px }
 #center .block-wrapper .block-info { border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 20px 60px; position:relative; z-index:5}
 #center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 
@@ -112,14 +112,10 @@ h5 { font-size:12px; color:#fff; }
 
 .concept_content { position: absolute; padding-top: 150px; }
 
-.fasad { 
-	background:url(/images/build/fasad-1.jpg) no-repeat center top; 
-	top:0; 
-	left:0; 
-	position: absolute; 
-	width:100%; height:100%; 
-	background-size: cover;
-}
+
+/* FASAD 1*/
+
+.fasad { background:url(/images/build/fasad-1.jpg) no-repeat center top; top:0; left:0; position: absolute; width:100%; height:100%; background-size: cover;}
 .floor { top:0; left:0; position:absolute; width:100%; height:100%; background-size: cover; z-index:-5}
 .floor.active { z-index:10}
 
@@ -132,17 +128,49 @@ h5 { font-size:12px; color:#fff; }
 #floor-7 { background:url(/images/build/floor-7.png) no-repeat center top;  background-size: cover; }
 
 .floor-control { position:relative; z-index:100; padding-left:200px}
-.floor-control li { margin:50px 0; }
-.floor-control li a { display:block; width:53px; height:46px; text-align:center; line-height:46px; background:#fffcd9; color:#8a8982; text-decoration:none; font-weight:bold; position:relative}
-.floor-control li span { display:block; background:url(/images/floor-arrow.png) no-repeat right center; top:0; right:-5px; width:6px; height:46px; position:absolute }
+.floor-control li { margin:50px 0; height:46px}
+.floor-control li a { display:block; width:53px; height:46px; text-align:center; line-height:46px; background:rgba(0,0,0,0.8); color:#8a8982; text-decoration:none; font-weight:bold; position:relative; float:left; margin-right:5px; border:4px solid #fffcd9;}
+.floor-control li span { display:block; background:url(/images/floor-arrow.png) no-repeat right center; top:0; right:-9px; width:6px; height:46px; position:absolute }
 .floor-control li a:hover span { background-position: 0px center; }
-.floor-control li a:hover { color:#fffcd9; background:#8a8982;}
+.floor-control li a:hover { color:#fffcd9; border:4px solid #8a8982;}
+
+.floor-control li a.penthouse { float:left; width:150px; margin-left:-163px }
+
 
 .floor-control .floor-text { font-weight:bold; float:left; margin-right:20%; padding:2px 0; margin-left:-10px}
-.floor-control .side-1 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:5px 10px; font-size: 20px;}
-.floor-control .current_fasad, .side-1:hover { color:#fffcd9; background:#8a8982;}
-.floor-control .side-2 { background:#fffcd9; color:#8a8982; float:left; margin-right:5%; padding:5px 10px; font-size: 20px;}
-.floor-control .current_fasad, .side-2:hover { color:#fffcd9; background:#8a8982;}
+.floor-control .side-1 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:2px 10px}
+.floor-control .current_fasad, .side-1:hover { color:#fffcd9;border:4px solid #8a8982;}
+.floor-control .side-2 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:20px 10px}
+.floor-control .current_fasad, .side-2:hover { color:#fffcd9;border:4px solid #8a8982;}
+
+/* FASAD 2*/
+.fasad-2 { background:url(/images/build/fasad-2.jpg) no-repeat center top; top:0; left:0; position: absolute; width:100%; height:100%; background-size: cover;}
+.floor-2 { top:0; left:0; position:absolute; width:100%; height:100%; background-size: cover; z-index:-5}
+.floor-2.active { z-index:10}
+
+#inset-floor-1 { background:url(/images/build/inset-floor-1.png) no-repeat center top;  background-size: cover; }
+#inset-floor-2 { background:url(/images/build/inset-floor-2.png) no-repeat center top;  background-size: cover; }
+#inset-floor-3 { background:url(/images/build/inset-floor-3.png) no-repeat center top;  background-size: cover; }
+#inset-floor-4 { background:url(/images/build/inset-floor-4.png) no-repeat center top;  background-size: cover; }
+#inset-floor-5 { background:url(/images/build/inset-floor-5.png) no-repeat center top;  background-size: cover; }
+#inset-floor-6 { background:url(/images/build/inset-floor-6.png) no-repeat center top;  background-size: cover; }
+#inset-floor-7 { background:url(/images/build/inset-floor-7.png) no-repeat center top;  background-size: cover; }
+
+.floor-control-2 { position:relative; z-index:100; padding-left:200px}
+.floor-control-2 li { margin:50px 0; height:46px }
+.floor-control-2 li a { display:block; width:53px; height:46px; text-align:center; line-height:46px; background:rgba(0,0,0,0.8); color:#8a8982; text-decoration:none; font-weight:bold; position:relative; float:left; margin-right:5px; border:4px solid #fffcd9;}
+.floor-control-2 li span { display:block; background:url(/images/floor-arrow.png) no-repeat right center; top:0; right:-9px; width:6px; height:46px; position:absolute }
+.floor-control-2 li a:hover span { background-position: 0px center; }
+.floor-control-2 li a:hover { color:#fffcd9; border:4px solid #8a8982;}
+
+.floor-control-2 li a.penthouse { display:none; float:left; width:150px; margin-left:-163px }
+
+.floor-control-2 .floor-text { font-weight:bold; float:left; margin-right:20%; padding:2px 0; margin-left:-10px}
+.floor-control-2 .side-1 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:2px 10px}
+.floor-control-2 .current_fasad, .side-1:hover { color:#fffcd9;border:4px solid #8a8982;}
+.floor-control-2 .side-2 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:20px 10px}
+.floor-control-2 .current_fasad, .side-2:hover { color:#fffcd9;border:4px solid #8a8982;}
+
 
 .petrovsky {
 	font-weight: bold;
@@ -154,11 +182,14 @@ h5 { font-size:12px; color:#fff; }
 .tab-list .tab-item.current { display:block}
 
 .tab-list ul.service li { background:url(/images/li-icon.png) no-repeat left center; padding-left:90px; min-height:80px; margin: 5px 0}
-.tab-list ul.location li { background:url(/images/li-location.png) no-repeat 50px center; padding-left:90px; min-height:40px; margin: 5px 0}
+.tab-list ul.location li { background: url(/images/li-location.png) no-repeat 20px center; padding-left: 90px; padding-top: 8px; height: 45px; margin: 20px 0; }
+
+.lineheight-serv { line-height: 75px;}
+.lineheight-loc { line-height: 23px}
 
 .tab-control { text-align:center; position:relative; margin-top:10px}
 .tab-control li { display:inline-block; margin:0 5px}
-.tab-control li a { border-radius:50%; height:40px; width:40px; display:block; border:2px solid #fff;}
+.tab-control li a { border-radius:50%; height:25px; width:25px; display:block; border:2px solid #fff;}
 .tab-control li a.current { background:#fff;}
 
 /* FOOTER */
@@ -168,7 +199,7 @@ h5 { font-size:12px; color:#fff; }
 /* SLIDER */
 #slider { width:1260px; height: auto; margin:auto }
 #slider .slide {width:1260px; position:relative; margin:auto; }
-#slider .slide a { float:left; width:600px; position:relative; margin:1%; display:block;  background:#000; 	
+#slider .slide a { opacity: 0.85; float:left; width:600px; position:relative; margin:1%; display:block;  background:#000; 	
 	}
 #slider .slide a img { 
 	width:100%; height:100%; opacity:1; 
@@ -201,7 +232,7 @@ h5 { font-size:12px; color:#fff; }
 
 #slider .pagination { display:block; width:100%; text-align:center; margin-top:20px; z-index:20 }
 #slider .pagination li { display:inline-block; margin:0px 2px;}
-#slider .pagination li a { border-radius:50%; height:40px; width:40px; display:block; border:2px solid #fff; overflow:hidden; text-indent:300px}
+#slider .pagination li a { border-radius:50%; height:25px; width:25px; display:block; border:2px solid #fff; overflow:hidden; text-indent:300px}
 #slider .pagination li.current a { background:#fff;}
 .slides_control { overflow:hidden}
 
@@ -209,7 +240,7 @@ h5 { font-size:12px; color:#fff; }
 .callback-shadow { background:rgba(0,0,0,0.8); position:fixed; width:100%; height:100%; top:0; left:0; z-index:110; }
 .callback-wrapper { position: absolute; width:100%; height:100%; top:0; left:0; z-index:110; display:none}
 .callback-form .text { font-size:28px; text-align:center; padding-bottom:20px}
-.callback-form { width:600px; margin:100px auto; border:10px solid #cbc4ad;  color:#fffcd9; padding:20px 60px; position:relative; z-index:1000}
+.callback-form { background: #000; width:600px; margin:100px auto; border:10px solid #cbc4ad;  color:#fffcd9; padding:20px 60px; position:relative; z-index:1000}
 .callback-form .field { padding-bottom:30px;}
 .callback-form .field input { background:#fff; width:580px; margin:0; padding:10px; border:none; font-size:16px;}
 .callback-form .button { padding-top:20px}
@@ -219,33 +250,41 @@ h5 { font-size:12px; color:#fff; }
 
 
 @media (max-width: 1400px) {
-	#header .phone { float:none; margin:0}
+	#header .phone { float:none; margin:0; margin-left: 3px;}
 }
 
 @media (min-width: 1500px) {
 	.floor-control li { margin:60px 0; }
+	.floor-control-2 li { margin:60px 0; }
 }
 
 @media (min-width: 1600px) {
 	.floor-control li { margin:70px 0; }
+	.floor-control-2 li { margin:70px 0; }
 }
 
 @media (min-width: 1700px) {
 	.floor-control li { margin:80px 0; }
+	.floor-control-2 li { margin:80px 0; }
 }
 
 @media (min-width: 1800px) {
 	.floor-control li { margin:90px 0; }
+	.floor-control-2 li { margin:90px 0; }
 }
 
 @media (min-width: 1900px) {
+	#center .common-wrapper { padding-top: 100px;}
+
 	.floor-control li { margin:100px 0; }
+	.floor-control-2 li { margin:100px 0; }
 }
 
 @media (min-width: 2000px) {
 	.floor-control li { margin:145px  0; }
+	.floor-control-2 li { margin:145px  0; }
 }
-
 @media (min-width: 2200px) {
 	.floor-control li { margin:160px 0; }
+	.floor-control-2 li { margin:160px 0; }
 }

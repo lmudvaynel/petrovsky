@@ -5,10 +5,13 @@ function ObjectAnimations (object) {
       symbol: 10,
     },
     durations: {
-      opacity: 1000,
+      opacity: 700,
       move: 1000,
       resize: 100,
-    }
+    },
+    speed: {
+      resize: 2,
+    },
   }
 
   this.init = function () {
@@ -17,7 +20,7 @@ function ObjectAnimations (object) {
     this.options = Hash.merge(this.options, animationOptions);
   }
 
-  this.opacityTo = function (resultOpacity, params, afterAnimationCallback) {
+  this.opacityTo = function (resultOpacity, params, afterAnimationCallback, duration) {
 
     params = params ? params : {};
     var wordFrom = params.wordFrom || 0;
@@ -29,7 +32,7 @@ function ObjectAnimations (object) {
     }
 //    var symbols = this.object.element.find('.symbol');
 
-    var symbol, dOpacity, durationOpacity = this.options.durations.opacity;
+    var symbol, dOpacity, durationOpacity = duration || this.options.durations.opacity;
     var animatedSymbol = 0;
     var callback = function () {};
     var showInterval = setInterval(function () {
@@ -103,15 +106,55 @@ function ObjectAnimations (object) {
     this.move(dLeft, dTop, afterAnimationCallback);
   }
 
-  this.resize = function (scale, withoutShift, afterAnimationCallback) {
+  this.resize = function (scale, afterAnimationCallback) {
 
+    var objectAnimations = this;
+    var element = objectAnimations.object.element;
+    var size = { current: this.getElementSize() };
+    size.start = size.current;
+    size.end = { width: scale * size.start.width, height: scale * size.start.height };
+    var position = {};
+    var resizeSign = size.end.height - size.start.height < 0 ? -1 : 1;
+    var dHeightSpeed = this.options.speed.resize;
+    var dh = resizeSign * dHeightSpeed * 2;
+    var dWidth, dHeight;
+    var frames = Math.round((size.end.height - size.start.height)/dh);
+    
+//    console.log(dh, frames, size);
+    
+    var resizeInterval = setInterval(function () {
+      frames--;
+      if (frames < 0) {
+        clearInterval(resizeInterval);
+//        objectAnimations.recalculateElementParameters();
+        if (afterAnimationCallback) {
+          afterAnimationCallback();
+        }
+      }
+      size.prev = objectAnimations.getElementSize();
+      position.prev = objectAnimations.getElementPosition();
+//      console.log(element.attr('class'), '; before: ', element.position().left, element.position().top, element.width(), element.height(), element.css('fontSize'));
+      element.css({
+        height: (size.prev.height + dh) + 'px',
+        fontSize: (size.prev.height + dh) + 'px',
+      });
+      size.next = objectAnimations.getElementSize();
+      dWidth = (size.next.width - size.prev.width)/2;
+      dHeight = (size.next.height - size.prev.height)/2;
+      element.css({
+        left: (position.prev.left - dWidth) + 'px',
+        top: (position.prev.top - dHeight) + 'px',
+      });
+//      console.log(element.attr('class'), '; after: ', element.position().left, element.position().top, element.width(), element.height(), element.css('fontSize'));
+    }, 1);
+
+/*
     var objectAnimations = this;
     var oldSize = this.getElementSize();
     var newSize = { width: scale * oldSize.width, height: scale * oldSize.height };
     var nextSize;
     var oldPosition;
     var framesInStep = Math.abs(parseInt(2 * (this.options.durations.resize/(newSize.height - oldSize.height))));
-//    console.log(framesInStep, this.options.durations.resize, oldSize.height, newSize.height);
     var resizeSign = newSize.height - oldSize.height >= 0 ? 1 : -1;
     var resizeShift = withoutShift ? 0 : 1;
     var frame = 0;
@@ -131,14 +174,13 @@ function ObjectAnimations (object) {
         objectAnimations.object.element.height(oldSize.height + resizeSign * 2);
         objectAnimations.object.element.css({ fontSize: (oldSize.height + resizeSign * 2) + 'px' });
         nextSize = objectAnimations.getElementSize();
-//        console.log(oldSize, oldPosition);
-//        console.log(oldSize, oldPosition);
         objectAnimations.object.element.css({
           left: (oldPosition.left - resizeShift * (nextSize.width - oldSize.width)/2) + 'px',
           top: (oldPosition.top - resizeShift * (nextSize.height - oldSize.height)/2) + 'px',
         });
       }
     }, 0);
+*/
 
 /*
     var oldWidth = this.object.element.width(), oldHeight = this.object.element.height();

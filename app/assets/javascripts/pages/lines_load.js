@@ -89,7 +89,7 @@ $(document).ready(function(){
     },
     function () {
       var thesisLine = lines.getByElement('description liberty thesisWord')[0];
-      thesisLine.animations.resize(3);
+      thesisLine.animations.resize(2);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description liberty');
       for (var i in harmonyDescriptionLines) {
@@ -123,7 +123,7 @@ $(document).ready(function(){
     },
     function () {
       var thesisLine = lines.getByElement('description comfort thesisWord')[0];
-      thesisLine.animations.resize(3);
+      thesisLine.animations.resize(2);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description comfort');
       for (var i in harmonyDescriptionLines) {
@@ -132,10 +132,9 @@ $(document).ready(function(){
       lines.getByElement('thesis comfort')[0].animations.opacityTo(1, null, callback);
     },
     function () {
+      setTimeout(function(){document.getElementById('main_hidden_1').style.display='none';}, 1000)
       lines.getByElement('thesis comfort')[0].animations.opacityTo(0, null, callback);
-      document.getElementById('main_hidden_1').style.display='none';
     },
-
     // Все тезисы
     function () {
       lines.changeBackgroundImageTo(4);
@@ -159,8 +158,8 @@ $(document).ready(function(){
           clearInterval(thesisesInterval);
           thesisesCallback = callback;
         }
-        thesisesLines[thesisLine].animations.resize(3);
-        thesisesLines[thesisLine].animations.opacityTo(0, null, thesisesCallback);
+        thesisesLines[thesisLine].animations.resize(2, thesisesCallback);
+        thesisesLines[thesisLine].animations.opacityTo(0);
         thesisLine++;
       }, 100);
     },
