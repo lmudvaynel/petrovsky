@@ -182,8 +182,10 @@ h5 { font-size:12px; color:#fff; }
 .tab-list .tab-item.current { display:block}
 
 .tab-list ul.service li { background:url(/images/li-icon.png) no-repeat left center; padding-left:90px; min-height:80px; margin: 5px 0}
-.tab-list ul.location li { background: url(/images/li-location.png) no-repeat 50px center; padding-left: 90px; padding-top: 8px; height: 45px; margin: 20px 0; }
-.lineheight {line-height: 23px}
+.tab-list ul.location li { background: url(/images/li-location.png) no-repeat 20px center; padding-left: 90px; padding-top: 8px; height: 45px; margin: 20px 0; }
+
+.lineheight-serv { line-height: 75px;}
+.lineheight-loc { line-height: 23px}
 
 .tab-control { text-align:center; position:relative; margin-top:10px}
 .tab-control li { display:inline-block; margin:0 5px}
