@@ -89,7 +89,7 @@ $(document).ready(function(){
     },
     function () {
       var thesisLine = lines.getByElement('description liberty thesisWord')[0];
-      thesisLine.animations.resize(3);
+      thesisLine.animations.resize(2);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description liberty');
       for (var i in harmonyDescriptionLines) {
@@ -123,7 +123,7 @@ $(document).ready(function(){
     },
     function () {
       var thesisLine = lines.getByElement('description comfort thesisWord')[0];
-      thesisLine.animations.resize(3);
+      thesisLine.animations.resize(2);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description comfort');
       for (var i in harmonyDescriptionLines) {
@@ -158,7 +158,7 @@ $(document).ready(function(){
           clearInterval(thesisesInterval);
           thesisesCallback = callback;
         }
-        thesisesLines[thesisLine].animations.resize(3);
+        thesisesLines[thesisLine].animations.resize(2);
         thesisesLines[thesisLine].animations.opacityTo(0, null, thesisesCallback);
         thesisLine++;
       }, 100);
