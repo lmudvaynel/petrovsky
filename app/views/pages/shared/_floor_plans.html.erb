@@ -40,11 +40,10 @@
     <ul>
     <div class="clear"></div>
     <span class="floor-text">ЭТАЖИ</span>
-    
-    <a href='#' class="side-1 current_fasad" 
-      onclick="fasad_to_1()">Фасад со стороны Петровского проезда</a>
     <a href="#" class="side-2" 
-      onclick="fasad_to_2()">Фасад со стороны внутреннего двора</a>
+      onclick="fasad_to_2()">Внутренний двор</a>
+    <a href='#' class="side-1 current_fasad" 
+      onclick="fasad_to_1()">Старый Петровский проезд</a>
     <div class="clear"></div>
     <section>
       <%= @page.try(:content) %>
