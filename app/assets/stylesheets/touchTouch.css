@@ -61,7 +61,7 @@
 
 #gallerySlider .placeholder img{
 	display: inline-block;
-	max-height: 80%;
+	height: 80%;
 	max-width: 80%;
 	width: auto !important;
 	vertical-align: middle;
@@ -137,4 +137,10 @@
 #nextArrow{
 	background-position:right top;
 	right:40px;
+}
+
+@media (min-width: 1900px) {
+
+	#gallerySlider .placeholder img{ height: 70%; }
+
 }

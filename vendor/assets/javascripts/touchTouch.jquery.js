@@ -39,7 +39,7 @@
 	
 		// Hide the gallery if the background is touched / clicked
 		slider.append(placeholders).on('click',function(e){
-
+		$('#slider').animate({ opacity: 1 }, 1000);
 			if(!$(e.target).is('img')){
 				hideOverlay();
 			}
@@ -91,7 +91,7 @@
 				galleryName,
 				selectorType,
 				$closestGallery = $this.parent().closest('[data-gallery]');
-
+				$('#slider').animate({ opacity: 0 }, 1000);
 			// Find gallery name and change items object to only have 
 			// that gallery
 

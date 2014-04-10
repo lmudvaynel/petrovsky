@@ -33,6 +33,16 @@ $(document).ready(function(){
 		$(".floor").removeClass("active");
 	});
 	
+	// FLOOR CONTROL
+	$(".floor-control-2 ul li a")
+	.mouseover(function(){
+		var curFloor = parseInt($(this).attr("dataid"));
+		$("#inset-floor-"+curFloor).addClass("active");
+	})
+	.mouseout(function(){
+		$(".floor-2").removeClass("active");
+	});
+
 	// TAB
 	$(".tab-control a").click(function(){
 		var curTab = $(this).attr('rel');
@@ -53,8 +63,14 @@ $(document).ready(function(){
 	$('.callback-shadow').click(function(){
 		$(".callback-wrapper").hide();
 	});
+
+	$('.sale-wrapper').click(function(){
+		$(".callback-wrapper").show();
+		return false;
+	});
 	
 	$('#cancel_button').click(function(){
 		$(".callback-wrapper").hide();
 	});
+	
 });

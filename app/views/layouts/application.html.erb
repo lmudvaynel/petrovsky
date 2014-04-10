@@ -18,6 +18,7 @@
   <%= yield :presentation %>
 <% else %>
   <% if @page.slug=="floor_plans" %>
+    <div class="fasad-2 bg-item"></div>
     <div class="fasad bg-item"></div>
     <div class="floor bg-item" id="floor-1"></div>
     <div class="floor bg-item" id="floor-2"></div>
@@ -25,7 +26,12 @@
     <div class="floor bg-item" id="floor-4"></div>
     <div class="floor bg-item" id="floor-5"></div>
     <div class="floor bg-item" id="floor-6"></div>
-    <div class="floor bg-item" id="floor-7"></div>
+    <div class="floor-2 bg-item" id="inset-floor-1"></div>
+    <div class="floor-2 bg-item" id="inset-floor-2"></div>
+    <div class="floor-2 bg-item" id="inset-floor-3"></div>
+    <div class="floor-2 bg-item" id="inset-floor-4"></div>
+    <div class="floor-2 bg-item" id="inset-floor-5"></div>
+    <div class="floor-2 bg-item" id="inset-floor-6"></div>
   <% end %>
   <% if @page.slug=="contacts" %>
     <div class="bg contact"></div>
@@ -57,7 +63,7 @@
 
     <div class="fr">
       <div class="phone">
-        8 (495) 215 222 4
+        8 (495) 726-72-16
       </div>
       <div class="callback">
         <a href="">ЗАКАЗАТЬ ЗВОНОК</a>
@@ -71,11 +77,7 @@
 	</div>
 
 	<div id="center">
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
       <%= yield %>
-
 		</div>
 
 	</div>

@@ -132,10 +132,9 @@ $(document).ready(function(){
       lines.getByElement('thesis comfort')[0].animations.opacityTo(1, null, callback);
     },
     function () {
+      setTimeout(function(){document.getElementById('main_hidden_1').style.display='none';}, 1000)
       lines.getByElement('thesis comfort')[0].animations.opacityTo(0, null, callback);
-      document.getElementById('main_hidden_1').style.display='none';
     },
-
     // Все тезисы
     function () {
       lines.changeBackgroundImageTo(4);

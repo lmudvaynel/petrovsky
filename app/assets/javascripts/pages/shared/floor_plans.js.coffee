@@ -51,10 +51,10 @@ $.app.pages.shared.floor_plans =
       demonstration:
         size:
           width: 1024
-          height: 553
+          height: 270
         opacity:
           hide: 0
-          show: 0.75
+          show: 0.95
           speed: 1000
       plan:
         apartment:
@@ -839,16 +839,8 @@ $.app.pages.shared.floor_plans =
     return unless fp.showed_floor.floor
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     return if apartment.sold_out
-    $('#order-form-dialog').dialog
-      width: 400
-      modal: true
-      buttons:
-        'Отправить заявку': ->
-          $(@).find('#order_apartment_id').val(apartment.id)
-          $(@).find('form').submit()
-          $(@).dialog 'close'
-        'Отменить': -> $(@).dialog 'close'
-      close: -> $(@).find('input').val('')
+    $(".callback-wrapper").show();
+    return false;
 
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors
