@@ -64,11 +64,20 @@ $(document).ready(function(){
 		$(".callback-wrapper").hide();
 	});
 
+	$('.buy-shadow').click(function(){
+		$(".buy-wrapper").hide();
+	});
+
 	$('.sale-wrapper').click(function(){
 		$(".callback-wrapper").show();
 		return false;
 	});
-	
+
+	$('#order-apart').click(function(){
+		$(".buy-wrapper").hide();
+		$(".callback-wrapper").show();
+		return false;
+	});
 	$('#cancel_button').click(function(){
 		$(".callback-wrapper").hide();
 	});

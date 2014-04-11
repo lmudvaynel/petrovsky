@@ -128,7 +128,12 @@
 
 .line.conclusion {
   height: 3%;
+  z-index: 1000;
 }
+.concl-link, .concl-link:hover {
+  font-family: Arial;
+}
+
 .line.conclusion.introduction.first {
   top: 30%;
 }

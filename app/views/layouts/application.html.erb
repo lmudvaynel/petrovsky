@@ -50,6 +50,7 @@
   <% end %>
 <% end %>
 <%= render 'shared/callback' %>
+<%= render 'shared/apart_info' %>
 <div id="wrapper">
 	<!--CONTENT-->
 	<div id="header">
@@ -75,8 +76,13 @@
 
 
 	</div>
-
-	<div id="center">
+  <% if @page.slug=="gallery" %>
+	  <div id="gallery-wrap">
+  <% elsif @page.slug=="floor_plans"%>
+    <div id="floor-plans-wrap">
+  <% else %>
+    <div id="center">
+  <% end %>
       <%= yield %>
 		</div>
 

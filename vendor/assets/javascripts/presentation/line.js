@@ -1,22 +1,20 @@
-function Line (lineElement) {
 
+function Line (lineElement) {
   this.init = function () {
     if (!lineElement) { return; }
     this.element = lineElement;
     this.container = $('#animated-text-container');
-
     this.text = lineElement.text() || '';
     this.symbols = this.text.match(/\S/g);
     this.letters = this.text.match(/[a-zA-Zа-яА-Я]/g);
     this.initWords();
-
-    this.updateElement();
+    this.updateElement(this.text);
   }
 
   this.initWords = function () {
+    var j;
     var words = this.text.match(/([a-zA-Zа-яА-Я]+)|(\S)|(\s+)/g);
     if (!words) { return; }
-
     this.words = [];
     var wordType;
     for (var i = 0; i < words.length; i++) {
@@ -30,11 +28,28 @@ function Line (lineElement) {
   }
 
   this.updateElement = function () {
-    var wrapper = $('<div>'), wordSpan, symbolSpan;
+    var wrapper = $('<div>'), wordDiv_1,wordDiv_2,wordDiv_3,wordDiv_4, wordSpan, symbolSpan;
     var wordClass, wordNumber = 0;
+    wordDiv_1=$('<a class="concl-link" href="/concept">');
+    wordDiv_2=$('<a class="concl-link" href="/gallery">');
+    wordDiv_3=$('<a class="concl-link" href="/floor_plans">');
+    wordDiv_4=$('<a class="concl-link" href="/service">');
+    if (this.text=="PETROVSKY APART HOUSE КАЧЕСТВЕННО НОВЫЙ УНИКАЛЬНЫЙ ПРОДУКТ,") {
+      wrapper.append(wordDiv_1);
+    }
+    if (this.text=="ГАРМОНИЯ ЖИЗНИ В ВОЗМОЖНОСТИ УЕДИНЕНИЯ В СОБСТВЕННОМ ") {
+      wrapper.append(wordDiv_2);
+    }
+    if (this.text=="СВОБОДА ДЕЙСТВИЙ В ВЫБОРЕ ФУНКЦИОНАЛЬНО-ПЛАНИРОВОЧНЫХ РЕШЕНИЙ ") {
+      wrapper.append(wordDiv_3);
+    }
+    if (this.text=="КОМФОРТ С ИСПОЛЬЗОВАНИЕМ ЭКСКЛЮЗИВНЫХ ВОЗМОЖНОСТЕЙ") {
+      wrapper.append(wordDiv_4);
+    }
     for (var i = 0; i < this.words.length; i++) {
       wordSpan = $('<span>');
       wordSpan[0].dataset.type = this.words[i].type;
+
       if (this.words[i].type != 'space') {
         wordSpan.addClass('word');
         wordSpan[0].dataset.number = wordNumber;
@@ -46,7 +61,16 @@ function Line (lineElement) {
         symbolSpan.text(this.words[i].symbols[j]);
         wordSpan.append(symbolSpan);
       }
-      wrapper.append(wordSpan);
+      if ((this.text=="PETROVSKY APART HOUSE КАЧЕСТВЕННО НОВЫЙ УНИКАЛЬНЫЙ ПРОДУКТ,")&&(i<5))
+        { wordDiv_1.append(wordSpan); }
+      else if ((this.text=="ГАРМОНИЯ ЖИЗНИ В ВОЗМОЖНОСТИ УЕДИНЕНИЯ В СОБСТВЕННОМ ")&&(i<2))
+        { wordDiv_2.append(wordSpan); }
+      else if ((this.text=="СВОБОДА ДЕЙСТВИЙ В ВЫБОРЕ ФУНКЦИОНАЛЬНО-ПЛАНИРОВОЧНЫХ РЕШЕНИЙ ")&&(i<2))
+         { wordDiv_3.append(wordSpan); }
+      else if ((this.text=="КОМФОРТ С ИСПОЛЬЗОВАНИЕМ ЭКСКЛЮЗИВНЫХ ВОЗМОЖНОСТЕЙ")&&(i<2))
+        { wordDiv_4.append(wordSpan); }
+      else 
+        {wrapper.append(wordSpan)}
     }
     this.element.html(wrapper.html());
   }
@@ -111,7 +135,6 @@ function Line (lineElement) {
       height: heightInPercents,
     });
   }
-
   this.init();
 
   this.animations = new ObjectAnimations(this);

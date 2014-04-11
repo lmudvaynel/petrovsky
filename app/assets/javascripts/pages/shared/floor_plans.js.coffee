@@ -41,7 +41,7 @@ $.app.pages.shared.floor_plans =
       count: 6
       solid:
         size:
-          width: 1023
+          width: 850
           height: 544
         opacity:
           hide: 0
@@ -838,8 +838,12 @@ $.app.pages.shared.floor_plans =
     return unless fp.valid_event_for 'floor-foreground', event
     return unless fp.showed_floor.floor
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
+    $('.floor-number').text(apartment.floor_number);
+    $('.apart-number').text(apartment.number);
+    $('.apart-price').text(apartment.price);
+    $('.apart-area').text(apartment.area);
     return if apartment.sold_out
-    $(".callback-wrapper").show();
+    $(".buy-wrapper").show();
     return false;
 
   update_plans_positions_before_render: ->

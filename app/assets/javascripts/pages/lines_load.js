@@ -183,23 +183,23 @@ $(document).ready(function(){
 */
 /*
     function () {
-      var moveToLeft = parseFloat(lines.getByElement('conclusion introduction first')[0].element.css('left'));
+      var moveToLeft = parseFloat(lines.getByElement('introduction introduction first')[0].element.css('left'));
       var animatedLines = [
         {
           line: lines.getByElement('thesises title')[0],
-          moveToTop: parseFloat(lines.getByElement('conclusion introduction first')[0].element.css('top')),
+          moveToTop: parseFloat(lines.getByElement('introduction introduction first')[0].element.css('top')),
         },
         {
           line: lines.getByElement('thesises first')[0],
-          moveToTop: parseFloat(lines.getByElement('conclusion harmony first')[0].element.css('top')),
+          moveToTop: parseFloat(lines.getByElement('introduction harmony first')[0].element.css('top')),
         },
         {
           line: lines.getByElement('thesises second')[0],
-          moveToTop: parseFloat(lines.getByElement('conclusion liberty first')[0].element.css('top')),
+          moveToTop: parseFloat(lines.getByElement('introduction liberty first')[0].element.css('top')),
         },
         {
           line: lines.getByElement('thesises third')[0],
-          moveToTop: parseFloat(lines.getByElement('conclusion comfort first')[0].element.css('top')),
+          moveToTop: parseFloat(lines.getByElement('introduction comfort first')[0].element.css('top')),
         },
       ];
       var animatedLine, lineCallback = function () {};
@@ -226,19 +226,23 @@ $(document).ready(function(){
     // Заключение
     function () {
       lines.changeBackgroundImageTo(5);
-      document.getElementById('main_hidden_2').style.display='none';
-      var conclusionLines = lines.getByElement('line conclusion');
-      var showConclusionLineCallback = function (currentConclusionLine) {
-        if (currentConclusionLine < conclusionLines.length) {
-          conclusionLines[currentConclusionLine].animations.opacityTo(1, null, function () {
-            showConclusionLineCallback(currentConclusionLine + 1);
-          });
-        } else {
-          callback();
-        }
-      }
-      showConclusionLineCallback(0);
       $('.sale-wrapper').animate({ opacity: 1}, 5000);
+      lines.getByElement('line conclusion introduction first')[0].animations.opacityTo(1, null);
+      lines.getByElement('line conclusion introduction second')[0].animations.opacityTo(1, null);
+      lines.getByElement('line conclusion introduction third')[0].animations.opacityTo(1, null, callback);
+    },
+    function () {
+      lines.getByElement('conclusion harmony first')[0].animations.opacityTo(1, null);
+      lines.getByElement('conclusion harmony second')[0].animations.opacityTo(1, null, callback);
+    },
+    function () {
+      lines.getByElement('conclusion liberty first')[0].animations.opacityTo(1, null);
+      lines.getByElement('conclusion liberty second')[0].animations.opacityTo(1, null, callback);
+    },
+    function () {
+      lines.getByElement('line conclusion comfort first')[0].animations.opacityTo(1, null);
+      lines.getByElement('line conclusion comfort second')[0].animations.opacityTo(1, null);
+      lines.getByElement('line conclusion comfort third')[0].animations.opacityTo(1, null, callback);
     },
   ];
 

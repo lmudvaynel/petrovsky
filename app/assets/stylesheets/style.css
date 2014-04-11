@@ -86,7 +86,14 @@ h5 { font-size:12px; color:#fff; }
 #header .music a:hover,  #header .music a.play_music { background-position:0 -49px}
 
 /* CENTER */
-#center { font-family: 'PT Sans Normal'; padding:75px 50px; font-size:28px; position:relative;}
+#floor-plans-wrap { 
+font-family: 'PT Sans Normal';
+padding: 75px 50px;
+font-size: 28px;
+position: relative;
+}
+
+#center { font-family: 'PT Sans Normal'; padding:0px 50px; font-size:28px; position:relative; padding-top: 75px;}
 
 #center .sale { position:absolute; right:50px; top:200px; border:5px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding:20px; }
 
@@ -103,8 +110,8 @@ h5 { font-size:12px; color:#fff; }
 #concept-page .common { font-family: 'PT Sans Normal'; padding-top:100px}
 
 
-#center .block-wrapper { position:relative; margin:100px 0; width: 750px }
-#center .block-wrapper .block-info { border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 20px 60px; position:relative; z-index:5}
+#center .block-wrapper { position:relative; margin:100px 0; width: 750px; height: 340px; }
+#center .block-wrapper .block-info {width: 610px; height: 321px; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 0 60px; position:relative; z-index:5}
 #center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 
 #center .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left;}
@@ -112,7 +119,7 @@ h5 { font-size:12px; color:#fff; }
 
 .concept_content { position: absolute; padding-top: 150px; }
 
-
+.contact-info { padding: 18px 0;}
 /* FASAD 1*/
 
 .fasad { background:url(/images/build/fasad-1.jpg) no-repeat center top; top:0; left:0; position: absolute; width:100%; height:100%; background-size: cover;}
@@ -140,7 +147,7 @@ h5 { font-size:12px; color:#fff; }
 .floor-control .floor-text { font-weight:bold; float:left; margin-right:20%; padding:2px 0; margin-left:-10px}
 .floor-control .side-1 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:2px 10px}
 .floor-control .current_fasad, .side-1:hover { color:#fffcd9;border:4px solid #8a8982;}
-.floor-control .side-2 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:20px 10px}
+.floor-control .side-2 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:2px 10px}
 .floor-control .current_fasad, .side-2:hover { color:#fffcd9;border:4px solid #8a8982;}
 
 /* FASAD 2*/
@@ -166,9 +173,9 @@ h5 { font-size:12px; color:#fff; }
 .floor-control-2 li a.penthouse { display:none; float:left; width:150px; margin-left:-163px }
 
 .floor-control-2 .floor-text { font-weight:bold; float:left; margin-right:20%; padding:2px 0; margin-left:-10px}
-.floor-control-2 .side-1 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:2px 10px}
+.floor-control-2 .side-1 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:2px 10px;}
 .floor-control-2 .current_fasad, .side-1:hover { color:#fffcd9;border:4px solid #8a8982;}
-.floor-control-2 .side-2 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:20px 10px}
+.floor-control-2 .side-2 { width: 264px; text-align: center; border:4px solid #fffcd9; background:rgba(0,0,0,0.8); color:#8a8982; float:left; margin-right:5%; padding:2px 10px;}
 .floor-control-2 .current_fasad, .side-2:hover { color:#fffcd9;border:4px solid #8a8982;}
 
 
@@ -180,14 +187,14 @@ h5 { font-size:12px; color:#fff; }
 .tab-list {}
 .tab-list .tab-item { display:none}
 .tab-list .tab-item.current { display:block}
-
+.tab-list ul.service  {padding: 33px 0;}
 .tab-list ul.service li { background:url(/images/li-icon.png) no-repeat left center; padding-left:90px; min-height:80px; margin: 5px 0}
 .tab-list ul.location li { background: url(/images/li-location.png) no-repeat 20px center; padding-left: 90px; padding-top: 8px; height: 45px; margin: 20px 0; }
 
 .lineheight-serv { line-height: 75px;}
 .lineheight-loc { line-height: 23px}
 
-.tab-control { text-align:center; position:relative; margin-top:10px}
+.tab-control { text-align:center; position:relative; margin-top:60px}
 .tab-control li { display:inline-block; margin:0 5px}
 .tab-control li a { border-radius:50%; height:25px; width:25px; display:block; border:2px solid #fff;}
 .tab-control li a.current { background:#fff;}
@@ -197,6 +204,8 @@ h5 { font-size:12px; color:#fff; }
 #footer a { }
 
 /* SLIDER */
+#gallery-wrap { font-family: 'PT Sans Normal'; font-size:28px; position:relative; }
+
 #slider { width:1260px; height: auto; margin:auto }
 #slider .slide {width:1260px; position:relative; margin:auto; }
 #slider .slide a { opacity: 0.85; float:left; width:600px; position:relative; margin:1%; display:block;  background:#000; 	
@@ -230,23 +239,36 @@ h5 { font-size:12px; color:#fff; }
 
 #slider .next, #slider .prev { display:none }
 
-#slider .pagination { display:block; width:100%; text-align:center; margin-top:20px; z-index:20 }
+#slider .pagination { display:block; width:100%; text-align:center; z-index:20 }
 #slider .pagination li { display:inline-block; margin:0px 2px;}
 #slider .pagination li a { border-radius:50%; height:25px; width:25px; display:block; border:2px solid #fff; overflow:hidden; text-indent:300px}
 #slider .pagination li.current a { background:#fff;}
 .slides_control { overflow:hidden}
 
 /* CALLBACK */
+
 .callback-shadow { background:rgba(0,0,0,0.8); position:fixed; width:100%; height:100%; top:0; left:0; z-index:110; }
 .callback-wrapper { position: absolute; width:100%; height:100%; top:0; left:0; z-index:110; display:none}
-.callback-form .text { font-size:28px; text-align:center; padding-bottom:20px}
-.callback-form { background: #000; width:600px; margin:100px auto; border:10px solid #cbc4ad;  color:#fffcd9; padding:20px 60px; position:relative; z-index:1000}
-.callback-form .field { padding-bottom:30px;}
+.callback-form .text { font-size:26px; text-align:center; padding-bottom:20px; line-height: 30px;}
+.callback-form {position: fixed; top:50%; left:50%;margin-left: -370px; margin-top: -261px; background: #000; width:600px; border:10px solid #cbc4ad;  color:#fffcd9; padding:20px 60px; z-index:1000}
+.callback-form .field { padding-bottom:25px;}
 .callback-form .field input { background:#fff; width:580px; margin:0; padding:10px; border:none; font-size:16px;}
-.callback-form .button { padding-top:20px}
+
+/* .callback-form .button { padding-top:20px} */
+
 .callback-form .button input { margin:0; padding:0; border:none; font-size:18px}
 .callback-form .button input[type="submit"] { background:#8a8982; width:260px; height:40px; color:#fffcd9; float:left}
 .callback-form .button input[type="reset"] { background:#fffcd9; width:260px; height:40px; color:#8a8982; float:right}
+
+/*APART INFO */
+
+.buy-wrapper {font-family: 'PT Sans Normal'; position: fixed; width:100%; height:100%; top:0; left:0; z-index:110; display:none;}
+.buy-wrapper h2 { font-size:24px; text-transform:uppercase; font-weight:bold}
+.buy-shadow { background:rgba(0,0,0,0.8); position:fixed; width:100%; height:100%; top:0; left:0; z-index:110; }
+.buy-form { background: #000; position: fixed; top:50%; left:50%;margin-left: -269px; margin-top: -150px; width:400px; border:10px solid #cbc4ad;  color:#fffcd9; padding:20px 60px; position:relative; z-index:1000}
+.buy-form .text { font-size:20px; text-align:left; padding-bottom:20px}
+.buy-form .button input { margin:0; padding:0; border:none; font-size:18px; cursor:pointer}
+.buy-form .button input[type="submit"] { background:#8a8982; width:260px; height:40px; color:#fffcd9; float:left}
 
 
 @media (max-width: 1400px) {
@@ -271,6 +293,7 @@ h5 { font-size:12px; color:#fff; }
 @media (min-width: 1800px) {
 	.floor-control li { margin:90px 0; }
 	.floor-control-2 li { margin:90px 0; }
+	.concept_content { padding-top: 400px; }
 }
 
 @media (min-width: 1900px) {
