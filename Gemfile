@@ -14,6 +14,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster.
 # Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -24,6 +25,9 @@ gem 'unicorn'
 gem 'factory_girl_rails'
 gem 'faker'
 gem 'friendly_id'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'rmagick', '2.13.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

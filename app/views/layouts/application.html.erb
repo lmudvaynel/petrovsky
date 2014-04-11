@@ -4,22 +4,89 @@
   <title>
     <%= content_for?(:title) ? yield(:title) : 'Petrovsky Apart House' %>
   </title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "http://scriptjava.net/source/scriptjava/scriptjava.js" %>
+  <%#= stylesheet_link_tag "responsive" %>
+  <%#= stylesheet_link_tag "component" %>
+  <%#= stylesheet_link_tag "bookblock" %>
   <%= render 'shared/javascripts' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header>
-    <%= render 'shared/header' %>
-  </header>
-  <nav>
-    <%= render 'shared/menu' %>
-  </nav>
-  <section>
-    <%= yield %>
-  </section>
-  <footer>
-    <%= render 'shared/footer' %>
-  </footer>
+
+<% if content_for?(:presentation) %>
+  <%= yield :presentation %>
+<% else %>
+  <% if @page.slug=="floor_plans" %>
+    <div class="fasad-2 bg-item"></div>
+    <div class="fasad bg-item"></div>
+    <div class="floor bg-item" id="floor-1"></div>
+    <div class="floor bg-item" id="floor-2"></div>
+    <div class="floor bg-item" id="floor-3"></div>
+    <div class="floor bg-item" id="floor-4"></div>
+    <div class="floor bg-item" id="floor-5"></div>
+    <div class="floor bg-item" id="floor-6"></div>
+    <div class="floor-2 bg-item" id="inset-floor-1"></div>
+    <div class="floor-2 bg-item" id="inset-floor-2"></div>
+    <div class="floor-2 bg-item" id="inset-floor-3"></div>
+    <div class="floor-2 bg-item" id="inset-floor-4"></div>
+    <div class="floor-2 bg-item" id="inset-floor-5"></div>
+    <div class="floor-2 bg-item" id="inset-floor-6"></div>
+  <% end %>
+  <% if @page.slug=="contacts" %>
+    <div class="bg contact"></div>
+  <% end %>
+  <% if @page.slug=="place" %>
+    <div class="bg place"></div>
+  <% end %>
+  <% if @page.slug=="service" %>
+    <div class="bg service"></div>
+  <% end %>
+  <% if @page.slug=="gallery" %>
+    <div class="bg gallery"></div>
+  <% end %>  
+  <% if @page.slug=="concept" %>
+    <div class="bg concept"></div>
+  <% end %>
+<% end %>
+<%= render 'shared/callback' %>
+<div id="wrapper">
+	<!--CONTENT-->
+	<div id="header">
+
+		<div class="fl">
+
+			<div class="logo"><a href="/"><img src="images/logo.png" alt="" /></a></div>
+      <%= render 'shared/menu' %>
+
+		</div>
+
+    <div class="fr">
+      <div class="phone">
+        8 (495) 726-72-16
+      </div>
+      <div class="callback">
+        <a href="">ЗАКАЗАТЬ ЗВОНОК</a>
+      </div>
+      <div class="music">
+        <a class="" href="#" id="mp3button"></a>
+      </div>
+    </div>
+
+
+	</div>
+
+	<div id="center">
+      <%= yield %>
+		</div>
+
+	</div>
+
+	<%= render 'shared/footer' %>
+	<!--END CONTENT-->
+</div>
+  <%#= javascript_include_tag "bookblock.min" %>
+  <%#= javascript_include_tag "classie" %>
+  <%#= javascript_include_tag "bookshelf" %>
 </body>
 </html>

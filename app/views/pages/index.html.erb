@@ -1,0 +1,60 @@
+<%= javascript_include_tag 'pages/lines_load.js' %>
+
+<% content_for :presentation do %>
+  <div id="animated-text-backgrounds">
+    <div class="background-0"></div>
+    <div class="background-1"></div>
+    <div class="background-2"></div>
+    <div class="background-3"></div>
+    <div class="background-4"></div>
+    <div class="background-5"></div>
+  </div>
+    <div id="animated-text-container">
+      <div id="main_hidden_1">
+        <div class="line greeting title">PETROVSKY APART HOUSE</div>
+        <div class="line greeting description first">МЫ РАДЫ ПРЕДСТАВИТЬ</div>
+        <div class="line greeting description second">ПРОЕКТ НОВОГО</div>
+        <div class="line greeting description third">УРОВНЯ ЖИЗНИ</div>
+        <div class="line greeting description fourth">В МЕГАПОЛИСЕ</div>
+        <div class="line greeting description fifth thesisWord">PETROVSKY APART HOUSE</div>
+
+        <div class="line thesis harmony">PETROVSKY APART HOUSE – ГАРМОНИЯ</div>
+        <div class="line description harmony first">ЗДЕСЬ УЧТЕНЫ ВСЕ</div>
+        <div class="line description harmony second">АСПЕКТЫ</div>
+        <div class="line description harmony third thesisWord">ГАРМОНИЧНОЙ</div>
+        <div class="line description harmony fourth">ЖИЗНИ</div>
+
+        <div class="line thesis liberty">PETROVSKY APART HOUSE – СВОБОДА</div>
+        <div class="line description liberty first thesisWord">СВОБОДА</div>
+        <div class="line description liberty second">ПЕРЕМЕЩЕНИЯ</div>
+        <div class="line description liberty third">В ПРОСТРАНСТВЕ</div>
+
+        <div class="line thesis comfort">PETROVSKY APART HOUSE – КОМФОРТ</div>
+        <div class="line description comfort first">ФИЛОСОФИЯ</div>
+        <div class="line description comfort second">СТИЛЯ</div>
+        <div class="line description comfort third thesisWord">И КОМФОРТА</div>
+        <div class="line description comfort fourth">В КАЖДОЙ</div>
+        <div class="line description comfort fifth">ДЕТАЛИ</div>
+      </div>
+      <div id="main_hidden_2">
+        <div class="line thesises title">PETROVSKY APART HOUSE</div>
+        <div class="line thesises first">ОЩУЩЕНИЕ ГАРМОНИИ,</div>
+        <div class="line thesises second">СВОБОДЫ И КОМФОРТА</div>
+      </div>
+      <div class="line conclusion introduction first">PETROVSKY APART HOUSE  КАЧЕСТВЕННО НОВЫЙ УНИКАЛЬНЫЙ ПРОДУКТ,</div>
+
+      <div class="line conclusion introduction second"> С ПРОДУМАННОЙ ЭРГОНОМИКОЙ И КОМПЛЕКСНЫМ ПОДХОДОМ ДЛЯ ЛЮДЕЙ,</div>
+      <div class="line conclusion introduction third">ПРЕДПОЧИТАЮЩИХ КОМФОРТНЫЙ, СТИЛЬНЫЙ И ДИНАМИЧНЫЙ ОБРАЗ ЖИЗНИ.</div>
+
+      <div class="line conclusion harmony first">ГАРМОНИЯ ЖИЗНИ В ВОЗМОЖНОСТИ УЕДИНЕНИЯ В СОБСТВЕННОМ </div>
+      <div class="line conclusion harmony second">ОАЗИСЕ - ЗЕЛЕНОЙ ОБУСТРОЕННОЙ ТЕРРАСЕ НА КРЫШЕ.</div>
+
+      <div class="line conclusion liberty first">СВОБОДА ДЕЙСТВИЙ В ВЫБОРЕ ФУНКЦИОНАЛЬНО-ПЛАНИРОВОЧНЫХ РЕШЕНИЙ </div>
+      <div class="line conclusion liberty second">И РАЗРАБОТКЕ СОБСТВЕННОГО ДИЗАЙНА.</div>
+
+      <div class="line conclusion comfort first">КОМФОРТ С ИСПОЛЬЗОВАНИЕМ ЭКСКЛЮЗИВНЫХ ВОЗМОЖНОСТЕЙ</div>
+
+      <div class="line conclusion comfort second"> СЕРВИСА, ПРЕДОСТАВЛЯЕМОГО УПРАВЛЯЮЩЕЙ КОМПАНИЕЙ.</div>
+    </div>
+<% end %>
+<%= raw(@message.content) if @message %>
