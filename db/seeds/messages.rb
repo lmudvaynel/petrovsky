@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 Message.reset_column_information
 content = <<-HTML
 <div class="sale-wrapper">

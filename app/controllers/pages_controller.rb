@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PagesController < ApplicationController
   def index
     @page = Page.find_by_slug(:home)

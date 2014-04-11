@@ -184,9 +184,9 @@ $.app.pages.shared.floor_plans =
 #      @.end_house_animate_to_scene()
 
   init_container: ->
-    @.container.css
-      width: window.innerWidth * @.params.container.size_in_percents.width / 100
-      height: window.innerHeight * @.params.container.size_in_percents.height / 100
+#    @.container.css
+#      width: window.innerWidth * @.params.container.size_in_percents.width / 100
+#      height: window.innerHeight * @.params.container.size_in_percents.height / 100
 
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
@@ -784,7 +784,7 @@ $.app.pages.shared.floor_plans =
         fp.showed_floor.floor.hide_from_scene()
         fp.unblock_controls_for_floor_demonstration()
 
-        $(@).text('Показать 2D').data('toggle-direction', 'to-2d')
+        $(@).text('Показать в 2D').data('toggle-direction', 'to-2d')
         fp.change_mode_to 'floor-demonstration'
     else
       return unless fp.valid_event_for 'floor-demonstration', event
@@ -794,7 +794,7 @@ $.app.pages.shared.floor_plans =
         fp.showed_floor.floor.animate_to_foreground 'floor', =>
           fp.unblock_controls_for_floor_foreground()
 
-          $(@).text('Show 3D').data('toggle-direction', 'to-3d')
+          $(@).text('Показать в 3D').data('toggle-direction', 'to-3d')
           fp.change_mode_to 'floor-foreground'
           $('.back-to-house').removeClass('hidden')
 
