@@ -93,7 +93,11 @@ font-size: 28px;
 position: relative;
 }
 
-#center { font-family: 'PT Sans Normal'; padding:0px 50px; font-size:28px; position:relative; padding-top: 75px;}
+#center { font-family: 'PT Sans Normal';
+padding: 0px 50px;
+font-size: 28px;
+position: relative;
+padding-top: 0px;}
 
 #center .sale { position:absolute; right:50px; top:200px; border:5px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding:20px; }
 
@@ -110,7 +114,7 @@ position: relative;
 #concept-page .common { font-family: 'PT Sans Normal'; padding-top:100px}
 
 
-#center .block-wrapper { position:relative; margin:100px 0; width: 750px; height: 340px; }
+#center .block-wrapper { position:relative; margin-top:35px; width: 750px; height: 340px; }
 #center .block-wrapper .block-info {width: 610px; height: 321px; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 0 60px; position:relative; z-index:5}
 #center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 
@@ -194,7 +198,7 @@ position: relative;
 .lineheight-serv { line-height: 75px;}
 .lineheight-loc { line-height: 23px}
 
-.tab-control { text-align:center; position:relative; margin-top:60px}
+.tab-control { text-align:center; position:relative; margin-top:50px}
 .tab-control li { display:inline-block; margin:0 5px}
 .tab-control li a { border-radius:50%; height:25px; width:25px; display:block; border:2px solid #fff;}
 .tab-control li a.current { background:#fff;}
@@ -283,6 +287,8 @@ position: relative;
 @media (min-width: 1600px) {
 	.floor-control li { margin:70px 0; }
 	.floor-control-2 li { margin:70px 0; }
+	#center .block-wrapper {margin-top:100px;}
+	#center {padding-top: 100px;}
 }
 
 @media (min-width: 1700px) {

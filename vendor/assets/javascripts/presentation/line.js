@@ -30,20 +30,24 @@ function Line (lineElement) {
   this.updateElement = function () {
     var wrapper = $('<div>'), wordDiv_1,wordDiv_2,wordDiv_3,wordDiv_4, wordSpan, symbolSpan;
     var wordClass, wordNumber = 0;
+    var text=["PETROVSKY APART HOUSE КАЧЕСТВЕННО НОВЫЙ УНИКАЛЬНЫЙ ПРОДУКТ,",
+              "ГАРМОНИЯ ЖИЗНИ В ВОЗМОЖНОСТИ УЕДИНЕНИЯ В СОБСТВЕННОМ ",
+              "СВОБОДА ДЕЙСТВИЙ В ВЫБОРЕ ФУНКЦИОНАЛЬНО-ПЛАНИРОВОЧНЫХ РЕШЕНИЙ ",
+              "КОМФОРТ С ИСПОЛЬЗОВАНИЕМ ЭКСКЛЮЗИВНЫХ ВОЗМОЖНОСТЕЙ"]
     wordDiv_1=$('<a class="concl-link" href="/concept">');
     wordDiv_2=$('<a class="concl-link" href="/gallery">');
     wordDiv_3=$('<a class="concl-link" href="/floor_plans">');
     wordDiv_4=$('<a class="concl-link" href="/service">');
-    if (this.text=="PETROVSKY APART HOUSE КАЧЕСТВЕННО НОВЫЙ УНИКАЛЬНЫЙ ПРОДУКТ,") {
+    if (this.text==text[0]) {
       wrapper.append(wordDiv_1);
     }
-    if (this.text=="ГАРМОНИЯ ЖИЗНИ В ВОЗМОЖНОСТИ УЕДИНЕНИЯ В СОБСТВЕННОМ ") {
+    if (this.text==text[1]) {
       wrapper.append(wordDiv_2);
     }
-    if (this.text=="СВОБОДА ДЕЙСТВИЙ В ВЫБОРЕ ФУНКЦИОНАЛЬНО-ПЛАНИРОВОЧНЫХ РЕШЕНИЙ ") {
+    if (this.text==text[2]) {
       wrapper.append(wordDiv_3);
     }
-    if (this.text=="КОМФОРТ С ИСПОЛЬЗОВАНИЕМ ЭКСКЛЮЗИВНЫХ ВОЗМОЖНОСТЕЙ") {
+    if (this.text==text[3]) {
       wrapper.append(wordDiv_4);
     }
     for (var i = 0; i < this.words.length; i++) {
@@ -61,13 +65,13 @@ function Line (lineElement) {
         symbolSpan.text(this.words[i].symbols[j]);
         wordSpan.append(symbolSpan);
       }
-      if ((this.text=="PETROVSKY APART HOUSE КАЧЕСТВЕННО НОВЫЙ УНИКАЛЬНЫЙ ПРОДУКТ,")&&(i<5))
+      if (this.text==text[0])
         { wordDiv_1.append(wordSpan); }
-      else if ((this.text=="ГАРМОНИЯ ЖИЗНИ В ВОЗМОЖНОСТИ УЕДИНЕНИЯ В СОБСТВЕННОМ ")&&(i<2))
+      else if (this.text==text[1])
         { wordDiv_2.append(wordSpan); }
-      else if ((this.text=="СВОБОДА ДЕЙСТВИЙ В ВЫБОРЕ ФУНКЦИОНАЛЬНО-ПЛАНИРОВОЧНЫХ РЕШЕНИЙ ")&&(i<2))
+      else if (this.text==text[2])
          { wordDiv_3.append(wordSpan); }
-      else if ((this.text=="КОМФОРТ С ИСПОЛЬЗОВАНИЕМ ЭКСКЛЮЗИВНЫХ ВОЗМОЖНОСТЕЙ")&&(i<2))
+      else if (this.text==text[3])
         { wordDiv_4.append(wordSpan); }
       else 
         {wrapper.append(wordSpan)}
