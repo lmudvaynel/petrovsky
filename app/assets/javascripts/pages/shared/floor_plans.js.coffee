@@ -42,7 +42,7 @@ $.app.pages.shared.floor_plans =
       solid:
         size:
           width: 850
-          height: 544
+          height: 500
         opacity:
           hide: 0
           show: 0.75
@@ -231,6 +231,8 @@ $.app.pages.shared.floor_plans =
 
     house_controls = $('#house-controls-container')
     house_controls.on 'click', '.back-to-house', (event) ->
+      $('.fasad-wrap').show();
+      $("#canvas-container").zIndex(10)
       return unless fp.valid_event_for 'floor-foreground', event
       fp.back_to_house_on_click()
     house_controls.on 'click', '.toggle-dimensions', fp.toggle_dimensions_on_click
@@ -691,6 +693,8 @@ $.app.pages.shared.floor_plans =
 
   show_house_floor_on_click: (floor_number) ->
 #    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
+    $("#canvas-container").zIndex(800)
+    $('.fasad-wrap').hide();
     @.animate_house_floor_to_foreground(floor_number)
 
   floor_element_on_mouse_event: (event) ->
