@@ -12,6 +12,7 @@ $(document).ready(function(){
   animations = [
     // "Приветствие"
     function () {
+      document.getElementById('main_hidden_3').style.display='none';
       lines.changeBackgroundImageTo(0);
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);
     },
@@ -162,6 +163,7 @@ $(document).ready(function(){
         thesisesLines[thesisLine].animations.opacityTo(0);
         thesisLine++;
       }, 100);
+      document.getElementById('main_hidden_3').style.display='block';
     },
 /*
     function () {
