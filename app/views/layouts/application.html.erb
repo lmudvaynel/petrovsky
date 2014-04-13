@@ -51,6 +51,10 @@
 <% end %>
 <%= render 'shared/callback' %>
 <%= render 'shared/apart_info' %>
+<% if @page.slug=="floor_plans" %>
+<div id="canvas-container" style="position: absolute;">
+</div>
+<% end %>
 <div id="wrapper">
 	<!--CONTENT-->
 	<div id="header">

@@ -14,8 +14,8 @@ $.app.pages.shared.floor_plans =
   params:
     container:
       size_in_percents:
-        width: 75
-        height: 75
+        width:100 
+        height:100
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8

@@ -8,8 +8,6 @@
 </section>
 <div class="common" style="height:100%">
   <div class="floor-control" id="floor-control">
-    <div id="canvas-container" style="position: absolute;">
-    </div>
   <!--  <section id="order-form-container" class="hidden">
       <div id="order-form-dialog">
         <%= form_for :order, url: create_order_path do |f| %>
@@ -37,14 +35,16 @@
           <% end %>
         </li>
       <% end %>
-    <ul>
+    </ul>
     <div class="clear"></div>
-    <span class="floor-text">ЭТАЖИ</span>
-    <a href="#" class="side-2" 
-      onclick="fasad_to_2()">Внутренний двор</a>
-    <a href='#' class="side-1 current_fasad" 
-      onclick="fasad_to_1()">Старопетровский проезд</a>
-    <div class="clear"></div>
+    <div class="fasad-wrap">
+      <span class="floor-text">ЭТАЖИ</span>
+      <a href="#" class="side-2" 
+        onclick="fasad_to_2()">Внутренний двор</a>
+      <a href='#' class="side-1 current_fasad" 
+        onclick="fasad_to_1()">Старопетровский проезд</a>
+      <div class="clear"></div>
+    </div>
     <section>
       <%= @page.try(:content) %>
     </section>
