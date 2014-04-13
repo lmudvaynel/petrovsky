@@ -346,10 +346,6 @@ padding-top: 0px;}
 	.floor-control-2 li { margin:40px 0; height:46px }
 }
 
-@media (min-width: 1366px) {
-	.floor-control li { margin:50px 0; height:46px }
-	.floor-control-2 li { margin:50px 0; height:46px }
-}
 
 @media (max-width: 1400px) {
 	#header .phone { float:none; margin:0; margin-left: 3px;}
