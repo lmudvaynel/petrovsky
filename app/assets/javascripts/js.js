@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	// RESIZE BUILD
+	/*/ RESIZE BUILD
 	var bodyHeight = $(window).outerHeight(),
 	contentHeight = $('#wrapper').outerHeight(),
 	biuldHeight = $('.bg-item');
@@ -22,7 +22,7 @@ $(document).ready(function(){
 			biuldHeight.css('height',contentHeight);	
 		}
 	});
-
+*/
 	// FLOOR CONTROL
 	$(".floor-control ul li a")
 	.mouseover(function(){
