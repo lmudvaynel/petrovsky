@@ -5,8 +5,17 @@
  * @url			http://tutorialzine.com/2012/04/mobile-touch-gallery/
  * @license		MIT License
  */
-
-
+ $(document).ready(function(){
+	$(".slide a").mouseenter(function(){
+		$(this).stop().animate({
+			opacity:1
+			},500);	
+	}).mouseleave(function(){
+		$(this).stop().animate({
+			opacity:0.3
+		},500);
+	});
+ });
 (function(){
 
 	/* Private variables */
@@ -16,10 +25,6 @@
 		prevArrow = $('<a id="prevArrow"></a>'),
 		nextArrow = $('<a id="nextArrow"></a>'),
 		overlayVisible = false;
-		
-		
-	/* Creating the plugin */
-	
 	$.fn.touchTouch = function(){
 
 		var placeholders = $([]),

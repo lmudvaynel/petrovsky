@@ -114,7 +114,7 @@ padding-top: 0px;}
 #concept-page .common { font-family: 'PT Sans Normal'; padding-top:100px}
 
 
-#center .block-wrapper { position:relative; margin-top:35px; width: 750px; height: 340px; }
+#center .block-wrapper { position:relative; margin-top:25px; width: 750px; height: 340px; }
 #center .block-wrapper .block-info {width: 610px; height: 321px; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 0 60px; position:relative; z-index:5}
 #center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 
@@ -212,8 +212,9 @@ padding-top: 0px;}
 
 #slider { width:1260px; height: auto; margin:auto }
 #slider .slide {width:1260px; position:relative; margin:auto; }
-#slider .slide a { opacity: 0.85; float:left; width:600px; position:relative; margin:1%; display:block;  background:#000; 	
+#slider .slide a { opacity: 0.3; float:left; width:600px; position:relative; margin:1%; display:block;  background:#000; 	
 	}
+
 #slider .slide a img { 
 	width:100%; height:100%; opacity:1; 
 	-webkit-transition: all 0.5s ease;
@@ -221,7 +222,7 @@ padding-top: 0px;}
 	-o-transition: all 0.5s ease;
 	-ms-transition: all 0.5s ease;
 	transition: all 0.5s ease;}
-#slider .slide a:hover img { opacity:0.6}
+#slider .slide a:hover img { opacity:1}
 
 
 #slider .slide a span {
