@@ -50,11 +50,11 @@ h5 { font-size:12px; color:#fff; }
 */
 
 .bg { background:url(/images/bg.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
-.bg.concept { background:url(/images/bg-concept.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
-.bg.contact { background:url(/images/bg-contact.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
-.bg.service { background:url(/images/bg-service.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
-.bg.place { background:url(/images/bg-place.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
-.bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.concept { background:url(/images/bg-concept.jpg) no-repeat center; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.contact { background:url(/images/bg-contact.jpg) no-repeat center; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.service { background:url(/images/bg-service.jpg) no-repeat center; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.place { background:url(/images/bg-place.jpg) no-repeat center; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat center; top:0; left:0; position:fixed; width:100%; height:100%; background-size: cover;}
 
 /* HEADER */
 #header { background:url(/images/header-shadow.png) repeat-x top; min-height:125px; padding:25px 50px 0 50px; position:relative; z-index:1900}
@@ -357,8 +357,7 @@ padding-top: 0px;}
 }
 
 @media (min-width: 1600px) {
-	#center .block-wrapper {margin-top:100px;}
-	#center {padding-top: 100px;}
+
 }
 
 @media (min-width: 1700px) {
@@ -370,10 +369,10 @@ padding-top: 0px;}
 	.concept_content { padding-top: 400px; }
 	.floor-control li { margin:80px 0; height:46px }
 	.floor-control-2 li { margin:80px 0; height:46px }
+
 }
 
 @media (min-width: 1900px) {
-	#center .common-wrapper { padding-top: 100px;}
 	.floor-control li { margin:85px 0; height:46px }
 	.floor-control-2 li { margin:85px 0; height:46px }
 }
@@ -382,5 +381,12 @@ padding-top: 0px;}
 	.floor-control li { margin:130px 0;}
 	.floor-control-2 li { margin:130px 0; }
 }
-@media (min-width: 2200px) {
+
+@media  (min-height: 1200px) {
+	#center {padding-top: 100px;}
+	#center .block-wrapper {margin-top:100px;}
+	#center .common-wrapper { padding-top: 100px;}
+	#slider { width:1200px;}
+	#slider .slides_control { height: 780px;}
+	#slider .slide a { width:600px;}
 }
