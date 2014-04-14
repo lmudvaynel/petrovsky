@@ -17,4 +17,5 @@
 //= require init_app
 //= require menu
 //= require js
-
+//= require music
+//= require jquery.cookie

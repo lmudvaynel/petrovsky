@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	// RESIZE BUILD
+	/*/ RESIZE BUILD
 	var bodyHeight = $(window).outerHeight(),
 	contentHeight = $('#wrapper').outerHeight(),
 	biuldHeight = $('.bg-item');
@@ -22,7 +22,7 @@ $(document).ready(function(){
 			biuldHeight.css('height',contentHeight);	
 		}
 	});
-
+*/
 	// FLOOR CONTROL
 	$(".floor-control ul li a")
 	.mouseover(function(){
@@ -33,6 +33,16 @@ $(document).ready(function(){
 		$(".floor").removeClass("active");
 	});
 	
+	// FLOOR CONTROL
+	$(".floor-control-2 ul li a")
+	.mouseover(function(){
+		var curFloor = parseInt($(this).attr("dataid"));
+		$("#inset-floor-"+curFloor).addClass("active");
+	})
+	.mouseout(function(){
+		$(".floor-2").removeClass("active");
+	});
+
 	// TAB
 	$(".tab-control a").click(function(){
 		var curTab = $(this).attr('rel');
@@ -44,6 +54,32 @@ $(document).ready(function(){
 		$("#tab").find("#"+curTab).addClass("current");
 		return false;
 	});
+		// callback
+	$('.callback a').click(function(){
+		$(".callback-wrapper").show();
+		return false;
+	});
 	
+	$('.callback-shadow').click(function(){
+		$(".callback-wrapper").hide();
+	});
 
+	$('.buy-shadow').click(function(){
+		$(".buy-wrapper").hide();
+	});
+
+	$('.sale-wrapper').click(function(){
+		$(".callback-wrapper").show();
+		return false;
+	});
+
+	$('#order-apart').click(function(){
+		$(".buy-wrapper").hide();
+		$(".callback-wrapper").show();
+		return false;
+	});
+	$('#cancel_button').click(function(){
+		$(".callback-wrapper").hide();
+	});
+	
 });

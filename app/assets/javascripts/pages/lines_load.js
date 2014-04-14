@@ -12,6 +12,7 @@ $(document).ready(function(){
   animations = [
     // "Приветствие"
     function () {
+      document.getElementById('main_hidden_3').style.display='none';
       lines.changeBackgroundImageTo(0);
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);
     },
@@ -89,7 +90,7 @@ $(document).ready(function(){
     },
     function () {
       var thesisLine = lines.getByElement('description liberty thesisWord')[0];
-      thesisLine.animations.resize(3);
+      thesisLine.animations.resize(2);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description liberty');
       for (var i in harmonyDescriptionLines) {
@@ -123,7 +124,7 @@ $(document).ready(function(){
     },
     function () {
       var thesisLine = lines.getByElement('description comfort thesisWord')[0];
-      thesisLine.animations.resize(3);
+      thesisLine.animations.resize(2);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description comfort');
       for (var i in harmonyDescriptionLines) {
@@ -132,10 +133,9 @@ $(document).ready(function(){
       lines.getByElement('thesis comfort')[0].animations.opacityTo(1, null, callback);
     },
     function () {
+      setTimeout(function(){document.getElementById('main_hidden_1').style.display='none';}, 1000)
       lines.getByElement('thesis comfort')[0].animations.opacityTo(0, null, callback);
-      document.getElementById('main_hidden_1').style.display='none';
     },
-
     // Все тезисы
     function () {
       lines.changeBackgroundImageTo(4);
@@ -159,10 +159,11 @@ $(document).ready(function(){
           clearInterval(thesisesInterval);
           thesisesCallback = callback;
         }
-        thesisesLines[thesisLine].animations.resize(3);
-        thesisesLines[thesisLine].animations.opacityTo(0, null, thesisesCallback);
+        thesisesLines[thesisLine].animations.resize(2, thesisesCallback);
+        thesisesLines[thesisLine].animations.opacityTo(0);
         thesisLine++;
       }, 100);
+      document.getElementById('main_hidden_3').style.display='block';
     },
 /*
     function () {
@@ -184,23 +185,23 @@ $(document).ready(function(){
 */
 /*
     function () {
-      var moveToLeft = parseFloat(lines.getByElement('conclusion introduction first')[0].element.css('left'));
+      var moveToLeft = parseFloat(lines.getByElement('introduction introduction first')[0].element.css('left'));
       var animatedLines = [
         {
           line: lines.getByElement('thesises title')[0],
-          moveToTop: parseFloat(lines.getByElement('conclusion introduction first')[0].element.css('top')),
+          moveToTop: parseFloat(lines.getByElement('introduction introduction first')[0].element.css('top')),
         },
         {
           line: lines.getByElement('thesises first')[0],
-          moveToTop: parseFloat(lines.getByElement('conclusion harmony first')[0].element.css('top')),
+          moveToTop: parseFloat(lines.getByElement('introduction harmony first')[0].element.css('top')),
         },
         {
           line: lines.getByElement('thesises second')[0],
-          moveToTop: parseFloat(lines.getByElement('conclusion liberty first')[0].element.css('top')),
+          moveToTop: parseFloat(lines.getByElement('introduction liberty first')[0].element.css('top')),
         },
         {
           line: lines.getByElement('thesises third')[0],
-          moveToTop: parseFloat(lines.getByElement('conclusion comfort first')[0].element.css('top')),
+          moveToTop: parseFloat(lines.getByElement('introduction comfort first')[0].element.css('top')),
         },
       ];
       var animatedLine, lineCallback = function () {};
@@ -227,19 +228,23 @@ $(document).ready(function(){
     // Заключение
     function () {
       lines.changeBackgroundImageTo(5);
-      document.getElementById('main_hidden_2').style.display='none';
-      var conclusionLines = lines.getByElement('line conclusion');
-      var showConclusionLineCallback = function (currentConclusionLine) {
-        if (currentConclusionLine < conclusionLines.length) {
-          conclusionLines[currentConclusionLine].animations.opacityTo(1, null, function () {
-            showConclusionLineCallback(currentConclusionLine + 1);
-          });
-        } else {
-          callback();
-        }
-      }
-      showConclusionLineCallback(0);
       $('.sale-wrapper').animate({ opacity: 1}, 5000);
+      lines.getByElement('line conclusion introduction first')[0].animations.opacityTo(1, null);
+      lines.getByElement('line conclusion introduction second')[0].animations.opacityTo(1, null);
+      lines.getByElement('line conclusion introduction third')[0].animations.opacityTo(1, null, callback);
+    },
+    function () {
+      lines.getByElement('conclusion harmony first')[0].animations.opacityTo(1, null);
+      lines.getByElement('conclusion harmony second')[0].animations.opacityTo(1, null, callback);
+    },
+    function () {
+      lines.getByElement('conclusion liberty first')[0].animations.opacityTo(1, null);
+      lines.getByElement('conclusion liberty second')[0].animations.opacityTo(1, null, callback);
+    },
+    function () {
+      lines.getByElement('line conclusion comfort first')[0].animations.opacityTo(1, null);
+      lines.getByElement('line conclusion comfort second')[0].animations.opacityTo(1, null);
+      lines.getByElement('line conclusion comfort third')[0].animations.opacityTo(1, null, callback);
     },
   ];
 

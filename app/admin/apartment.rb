@@ -1,6 +1,6 @@
 # encoding: utf-8
 ActiveAdmin.register Apartment do
-  permit_params :image, :dx, :dy, :number, :floor_number, :sold_out
+  permit_params :image, :dx, :dy, :number, :floor_number, :sold_out, :price, :area
 
   index do
     column :image do |apartment|
@@ -28,6 +28,8 @@ ActiveAdmin.register Apartment do
       row :sold_out do
         apartment.sold_out ? 'YES' : 'NO'
       end
+      row :price
+      row :area
     end
   end
 

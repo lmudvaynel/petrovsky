@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PagesController < ApplicationController
   def index
     @page = Page.find_by_slug(:home)
@@ -10,10 +12,13 @@ class PagesController < ApplicationController
   end
 
   def create_order
-    user = { name: params[:order][:name], email: params[:order][:email] }
-    apartment = Apartment.find(params[:order][:apartment_id])
-    OrderMailer.order_email(user, apartment)
-    redirect_to slug_path('floor-plans')
+    @order = Order.create(params.require(:order).permit(:name, :email, :phone, :content))
+    if @order.save
+      OrderMailer.order_mail(@order).deliver
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
   private
 

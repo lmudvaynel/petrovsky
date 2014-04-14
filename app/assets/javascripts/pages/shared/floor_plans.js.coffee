@@ -14,8 +14,8 @@ $.app.pages.shared.floor_plans =
   params:
     container:
       size_in_percents:
-        width: 75
-        height: 75
+        width:100 
+        height:100
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8
@@ -41,8 +41,8 @@ $.app.pages.shared.floor_plans =
       count: 6
       solid:
         size:
-          width: 1023
-          height: 544
+          width: 850
+          height: 500
         opacity:
           hide: 0
           show: 0.75
@@ -51,10 +51,10 @@ $.app.pages.shared.floor_plans =
       demonstration:
         size:
           width: 1024
-          height: 553
+          height: 270
         opacity:
           hide: 0
-          show: 0.75
+          show: 0.95
           speed: 1000
       plan:
         apartment:
@@ -173,6 +173,7 @@ $.app.pages.shared.floor_plans =
     @.init_scene()
     @.init_renderer()
     @.init_controls()
+    @.block_controls() # appended
     @.init_events()
     @.init_animation()
     @.init_animated_objects()
@@ -183,9 +184,9 @@ $.app.pages.shared.floor_plans =
 #      @.end_house_animate_to_scene()
 
   init_container: ->
-    @.container.css
-      width: window.innerWidth * @.params.container.size_in_percents.width / 100
-      height: window.innerHeight * @.params.container.size_in_percents.height / 100
+#    @.container.css
+#      width: window.innerWidth * @.params.container.size_in_percents.width / 100
+#      height: window.innerHeight * @.params.container.size_in_percents.height / 100
 
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
@@ -230,6 +231,8 @@ $.app.pages.shared.floor_plans =
 
     house_controls = $('#house-controls-container')
     house_controls.on 'click', '.back-to-house', (event) ->
+      $('.fasad-wrap').show();
+      $("#canvas-container").zIndex(10)
       return unless fp.valid_event_for 'floor-foreground', event
       fp.back_to_house_on_click()
     house_controls.on 'click', '.toggle-dimensions', fp.toggle_dimensions_on_click
@@ -319,6 +322,7 @@ $.app.pages.shared.floor_plans =
     , @.params.animation.speed
 
   block_controls: ->
+    console.log 'Controls blocked'
     return if @.params.controls.blocked
 
     @.controls.rotateSpeed = 0
@@ -328,6 +332,7 @@ $.app.pages.shared.floor_plans =
     @.params.controls.blocked = true
 
   unblock_controls_for_house: ->
+    console.log 'Controls for house unblocked'
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 2
@@ -341,6 +346,7 @@ $.app.pages.shared.floor_plans =
     @.params.controls.blocked = false
 
   unblock_controls_for_floor_foreground: ->
+    console.log 'Controls for floor 01 unblocked'
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 1
@@ -354,6 +360,7 @@ $.app.pages.shared.floor_plans =
     @.params.controls.blocked = false
 
   unblock_controls_for_floor_demonstration: ->
+    console.log 'Controls for floor 02 unblocked'
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 0.2
@@ -686,6 +693,8 @@ $.app.pages.shared.floor_plans =
 
   show_house_floor_on_click: (floor_number) ->
 #    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
+    $("#canvas-container").zIndex(800)
+    $('.fasad-wrap').hide();
     @.animate_house_floor_to_foreground(floor_number)
 
   floor_element_on_mouse_event: (event) ->
@@ -779,7 +788,7 @@ $.app.pages.shared.floor_plans =
         fp.showed_floor.floor.hide_from_scene()
         fp.unblock_controls_for_floor_demonstration()
 
-        $(@).text('Show 2D').data('toggle-direction', 'to-2d')
+        $(@).text('Показать в 2D').data('toggle-direction', 'to-2d')
         fp.change_mode_to 'floor-demonstration'
     else
       return unless fp.valid_event_for 'floor-demonstration', event
@@ -789,7 +798,7 @@ $.app.pages.shared.floor_plans =
         fp.showed_floor.floor.animate_to_foreground 'floor', =>
           fp.unblock_controls_for_floor_foreground()
 
-          $(@).text('Show 3D').data('toggle-direction', 'to-3d')
+          $(@).text('Показать в 3D').data('toggle-direction', 'to-3d')
           fp.change_mode_to 'floor-foreground'
           $('.back-to-house').removeClass('hidden')
 
@@ -833,17 +842,13 @@ $.app.pages.shared.floor_plans =
     return unless fp.valid_event_for 'floor-foreground', event
     return unless fp.showed_floor.floor
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
+    $('.floor-number').text(apartment.floor_number);
+    $('.apart-number').text(apartment.number);
+    $('.apart-price').text(apartment.price);
+    $('.apart-area').text(apartment.area);
     return if apartment.sold_out
-    $('#order-form-dialog').dialog
-      width: 400
-      modal: true
-      buttons:
-        'Отправить заявку': ->
-          $(@).find('#order_apartment_id').val(apartment.id)
-          $(@).find('form').submit()
-          $(@).dialog 'close'
-        'Отменить': -> $(@).dialog 'close'
-      close: -> $(@).find('input').val('')
+    $(".buy-wrapper").show();
+    return false;
 
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors

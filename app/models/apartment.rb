@@ -12,7 +12,9 @@ class Apartment < ActiveRecord::Base
       dy: dy,
       number: number,
       floor_number: floor_number,
-      sold_out: sold_out
+      sold_out: sold_out,
+      price: price,
+      area: area
     }
   end
 end
