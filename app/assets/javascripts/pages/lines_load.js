@@ -1,6 +1,8 @@
 var lines;
 
-$(document).ready(function(){
+$( document ).ready(start_animation());
+
+function start_animation(){
   var lines = new Lines();
   var currentAnimation = 0;
   var animationInProgress = false;
@@ -119,9 +121,9 @@ $(document).ready(function(){
     function () {
       lines.getByElement('description comfort fourth')[0].animations.opacityTo(1, null, callback);
     },
-    function () {
-      lines.getByElement('description comfort fifth')[0].animations.opacityTo(1, null, callback);
-    },
+//  function () {
+//    lines.getByElement('description comfort fifth')[0].animations.opacityTo(1, null, callback);
+//  },
     function () {
       var thesisLine = lines.getByElement('description comfort thesisWord')[0];
       thesisLine.animations.resize(2);
@@ -274,4 +276,4 @@ $(document).ready(function(){
     });
   });
 */
-});
+};
