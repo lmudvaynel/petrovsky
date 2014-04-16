@@ -134,6 +134,10 @@
   font-family: Arial;
 }
 
+.concl-link:hover {
+  font-weight: bold;
+}
+
 .line.conclusion.introduction.first {
   top: 30%;
 }
