@@ -9,7 +9,8 @@
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto 100%;
+  background-position: center;
   opacity: 0;
   top: 0;
   left: 0;
@@ -20,6 +21,7 @@
 }
 #animated-text-backgrounds .background-1 {
   background-image: url(/images/presentation/1.jpg);
+  background-position: top right;
 }
 #animated-text-backgrounds .background-2 {
   background-image: url(/images/presentation/2.jpg);
@@ -132,6 +134,10 @@
 }
 .concl-link, .concl-link:hover {
   font-family: Arial;
+}
+
+.concl-link:hover {
+  font-weight: bold;
 }
 
 .line.conclusion.introduction.first {
