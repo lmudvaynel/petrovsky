@@ -14,7 +14,6 @@ function start_animation(){
   animations = [
     // "Приветствие"
     function () {
-      document.getElementById('main_hidden_3').style.display='none';
       lines.changeBackgroundImageTo(0);
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);
     },
@@ -22,6 +21,7 @@ function start_animation(){
       lines.getByElement('greeting second')[0].animations.opacityTo(1, null, callback);
     },
     function () {
+      document.getElementById('main_hidden_3').style.display='none';
       lines.getByElement('greeting third')[0].animations.opacityTo(1, null, callback);
     },
     function () {
