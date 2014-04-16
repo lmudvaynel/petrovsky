@@ -83,7 +83,7 @@ function Lines (options) {
   this.updateFontsSizes = function () {
     var linesElements = this.container.find('.line');
     for (var i = 0; i < linesElements.length; i++) {
-      $(linesElements[i]).css('fontSize', $(linesElements[i]).height());
+      $(linesElements[i]).css('fontSize', $(linesElements[i]).height() < 18 ? 18 : $(linesElements[i]).height());
     }
   }
 
