@@ -51,8 +51,8 @@ h5 { font-size:12px; color:#fff; }
 
 .bg { background:url(/images/bg.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: auto 100%;}
 .bg.concept { background:url(/images/bg-concept.jpg) no-repeat top right; position:fixed; width:100%; height:100%; background-size: cover;}
-.bg.contact { background:url(/images/bg-contacts.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: auto 100%;}
-.bg.service { background:url(/images/bg-service.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: auto 100%;}
+.bg.contact { background:url(/images/bg-contacts.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.service { background:url(/images/bg-service.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.place { background:url(/images/bg-place.jpg) no-repeat center; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat top right; position:fixed; width:100%; height:100%; background-size: cover;}
 
@@ -170,7 +170,7 @@ padding-top: 0px;}
 .floor-control li a:hover span { background-position: 0px center; }
 .floor-control li a:hover { color:#fffcd9; border:4px solid #8a8982;}
 
-.floor-control li a.penthouse { float:left; width:150px; margin-left:-163px }
+.floor-control li a.penthouse { float: left; width: 280px; margin-left: -227px; }
 
 
 .floor-control .floor-text { font-weight:bold; float:left; margin-right:10%; padding:2px 0; margin-left:50px}
@@ -221,6 +221,7 @@ padding-top: 0px;}
 .floor-control-2 li span { display:block; background:url(/images/floor-arrow.png) no-repeat right center; top:0; right:-9px; width:6px; height:46px; position:absolute }
 .floor-control-2 li a:hover span { background-position: 0px center; }
 .floor-control-2 li a:hover { color:#fffcd9; border:4px solid #8a8982;}
+.floor-control ul li a.floor_6{ display: none;}
 
 .floor-control-2 li a.penthouse { display:none; float:left; width:150px; margin-left:-163px }
 
@@ -357,7 +358,8 @@ padding-top: 0px;}
 }
 
 @media (min-width: 1600px) {
-	#slider { width:1200px;}
+	#slider { width:1244px;}
+	#slider .slide { width:1244px; }
 	#slider .slides_control { height: 780px;}
 	#slider .slide a { width:600px;}
 }
