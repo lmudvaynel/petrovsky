@@ -399,4 +399,5 @@ padding-top: 0px;}
 	#slider .slide { width:1244px; }
 	#slider .slides_control { height: 780px; }
 	#slider .slide a { width:600px; }
+	#slider .pagination { margin-top: 50px; }
 }
