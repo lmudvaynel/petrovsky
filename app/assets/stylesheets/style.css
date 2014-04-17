@@ -394,6 +394,7 @@ padding-top: 0px;}
 	#center .block-wrapper { margin-top:100px; }
 	#center .common-wrapper { padding-top: 100px;}
 	#slider { width:1244px; }
+	#slider .slide { width:1244px; }
 	#slider .slides_control { height: 780px; }
 	#slider .slide a { width:600px; }
 }
