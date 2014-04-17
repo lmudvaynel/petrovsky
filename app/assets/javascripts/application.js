@@ -19,3 +19,4 @@
 //= require js
 //= require music
 //= require jquery.cookie
+//= require soundmanager2
