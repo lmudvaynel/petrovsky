@@ -50,11 +50,11 @@ h5 { font-size:12px; color:#fff; }
 */
 
 .bg { background:url(/images/bg.jpg) no-repeat center top; top:0; left:0; position:fixed; width:100%; height:100%; background-size: auto 100%;}
-.bg.concept { background:url(/images/bg-concept.jpg) no-repeat center; top:0; left:0; position:fixed; width:100%; height:100%; background-size: auto 100%;}
-.bg.contact { background:url(/images/contacts_m.jpg) no-repeat center right; top:0; left:0; position:fixed; width:100%; height:100%; background-size: auto 100%;}
-.bg.service { background:url(/images/service_m.jpg) no-repeat center right; top:0; left:0; position:fixed; width:100%; height:100%; background-size: auto 100%;}
-.bg.place { background:url(/images/bg-place.jpg) no-repeat center; top:0; left:0; position:fixed; width:100%; height:100%; background-size: auto 100%;}
-.bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat center; top:0; left:0; position:fixed; width:100%; height:100%; background-size: auto 100%;}
+.bg.concept { background:url(/images/bg-concept.jpg) no-repeat top right; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.contact { background:url(/images/bg-contacts.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: auto 100%;}
+.bg.service { background:url(/images/bg-service.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: auto 100%;}
+.bg.place { background:url(/images/bg-place.jpg) no-repeat center; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat top right; position:fixed; width:100%; height:100%; background-size: cover;}
 
 /* HEADER */
 #header { background:url(/images/header-shadow.png) repeat-x top; min-height:125px; padding:25px 50px 0 50px; position:relative; z-index:1900}
@@ -394,6 +394,7 @@ padding-top: 0px;}
 	#center .block-wrapper { margin-top:100px; }
 	#center .common-wrapper { padding-top: 100px;}
 	#slider { width:1244px; }
+	#slider .slide { width:1244px; }
 	#slider .slides_control { height: 780px; }
 	#slider .slide a { width:600px; }
 }
