@@ -75,7 +75,49 @@ $(function() {
 		$("#tab").find("#"+curTab).addClass("current");
 		return false;
 	});
-		// callback
+	// Index link 
+
+	$("#concept_link")
+	.mouseover(function(){
+		$("#header .menu li.icon-1 span").css('background-position', '0 -60px');
+		$("#header .menu li.icon-1 a").css('color', '#fff');
+	})
+	.mouseout(function(){
+		$("#header .menu li.icon-1 span").css('background-position', '');
+		$("#header .menu li.icon-1 a").css('color', '');
+	});
+
+	$("#gallery_link")
+	.mouseover(function(){
+		$("#header .menu li.icon-5 span").css('background-position', '0 -60px');
+		$("#header .menu li.icon-5 a").css('color', '#fff');
+	})
+	.mouseout(function(){
+		$("#header .menu li.icon-5 span").css('background-position', '');
+		$("#header .menu li.icon-5 a").css('color', '');
+	});
+
+	$("#floorplans_link")
+	.mouseover(function(){
+		$("#header .menu li.icon-3 span").css('background-position', '0 -60px');
+		$("#header .menu li.icon-3 a").css('color', '#fff');
+	})
+	.mouseout(function(){
+		$("#header .menu li.icon-3 span").css('background-position', '');
+		$("#header .menu li.icon-3 a").css('color', '');
+	});
+
+	$("#service_link")
+	.mouseover(function(){
+		$("#header .menu li.icon-4 span").css('background-position', '0 -60px');
+		$("#header .menu li.icon-4 a").css('color', '#fff');
+	})
+	.mouseout(function(){
+		$("#header .menu li.icon-4 span").css('background-position', '');
+		$("#header .menu li.icon-4 a").css('color', '');
+	});
+
+	// callback
 	$('.callback a').click(function(){
 		$(".callback-wrapper").show();
 		return false;
