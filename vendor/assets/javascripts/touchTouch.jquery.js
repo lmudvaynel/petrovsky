@@ -17,9 +17,7 @@
 	});
  });
 (function(){
-
 	/* Private variables */
-	
 	var overlay = $('<div id="galleryOverlay">'),
 		slider = $('<div id="gallerySlider">'),
 		prevArrow = $('<a id="prevArrow"></a>'),

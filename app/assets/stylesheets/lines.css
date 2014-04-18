@@ -139,8 +139,8 @@
   font-family: Arial;
 }
 
-.concl-link:hover {
-  font-weight: bold;
+.concl-link:hover > div {
+  text-shadow: 2px 2px 2px black;
 }
 
 .line.conclusion.introduction.first {

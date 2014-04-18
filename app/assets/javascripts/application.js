@@ -19,3 +19,6 @@
 //= require js
 //= require music
 //= require jquery.cookie
+//= require soundmanager2
+//= require video-js
+//= require bigvideo

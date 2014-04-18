@@ -22,11 +22,11 @@
       <% (1..6).to_a.reverse.each do |floor_number| %>
         <li> 
           <% if floor_number==6 %>
-            <%= link_to '#', :class => 'penthouse', 'data-floor-number' => floor_number, :dataid => floor_number do %>
-              Пентхаус<span></span>
+            <%= link_to '#', :class => 'show-house-floor penthouse', 'data-floor-number' => floor_number, :dataid => floor_number do %>
+              Апартаменты с террасами<span></span>
             <% end %>
-          <% end %>
-          <%= link_to '#', :class => 'show-house-floor', 'data-floor-number' => floor_number, :dataid => floor_number do %>
+            <% end %>
+          <%= link_to '#', :class => 'floor_'+floor_number.to_s+' show-house-floor', 'data-floor-number' => floor_number, :dataid => floor_number do %>
           <%=floor_number %><span></span>
           <% end %>
         </li>

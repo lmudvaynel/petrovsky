@@ -1,5 +1,26 @@
+function start_video () {
+	$('#wrapper').hide();
+	$('.place').hide();
+	$('#big-video-wrap ').show();
+	BV.getPlayer().currentTime(0);
+	BV.getPlayer().play();
+	setTimeout(function(){
+	  $('#wrapper').show();
+	  $('.place').show();
+	  BV.getPlayer().pause();
+	  BV.getPlayer().currentTime(0);
+	 	$('#big-video-wrap ').hide();
+	}, 1150)
+}
 $(document).ready(function(){
-	
+$(function() {
+ BV = new $.BigVideo({
+		useFlashForFirefox:false,
+		});
+    BV.init();
+       BV.show('video/first.mp4', {altSource:'video/first.webm'}, {ambient:true});
+    BV.getPlayer().pause();
+});
 	/*/ RESIZE BUILD
 	var bodyHeight = $(window).outerHeight(),
 	contentHeight = $('#wrapper').outerHeight(),
