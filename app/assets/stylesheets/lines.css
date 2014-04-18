@@ -18,12 +18,10 @@
 }
 #animated-text-backgrounds .background-0 {
   background-image: url(/images/presentation/0.jpg);
-  background-size: auto 100%;
 }
 #animated-text-backgrounds .background-1 {
   background-image: url(/images/presentation/1.jpg);
   background-position: top right;
-  background-size: auto 100%;
 }
 #animated-text-backgrounds .background-2 {
   background-image: url(/images/presentation/2.jpg);
