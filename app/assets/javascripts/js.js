@@ -18,7 +18,7 @@ $(function() {
 		useFlashForFirefox:false,
 		});
     BV.init();
-    BV.show('video/first.mp4', {ambient:true});
+       BV.show('video/first.mp4', {altSource:'video/first.webm'}, {ambient:true});
     BV.getPlayer().pause();
 });
 	/*/ RESIZE BUILD
