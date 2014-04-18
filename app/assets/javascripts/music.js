@@ -11,9 +11,37 @@ function mp3_start (){
     $.cookie("mp3_play",1)
     $('#mp3button').addClass('play_music');}
 }
-  $(document).ready(function(){
+
+$(document).ready(function(){
+    var winLoc = window.location.toString();    
+
+if (winLoc.match(/flash9/i)) {
+
+  soundManager.setup({
+    preferFlash: true,
+    flashVersion: 9
+  });
+
+  if (winLoc.match(/highperformance/i)) {
+    soundManager.setup({
+      useHighPerformance: true
+    });
+
+  }
+
+} else if (winLoc.match(/flash8/i)) {
+
+  soundManager.setup({
+    preferFlash: true,
+    flashVersion: 8
+  });
+
+}
     soundManager.setup({
     url: 'swf/',
+    useFlashBlock: false,
+    html5PollingInterval: (winLoc.match(/html5PollingInterval/i) ? 20 : null),
+    debugMode: true,
     onready: function() {
       var mySound = soundManager.createSound({
         id:  'aSound',
