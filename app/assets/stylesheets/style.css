@@ -24,7 +24,7 @@ a { font-family: 'PT Sans Normal', sans-serif; text-decoration:none; color:#fff;
 a:hover { font-family: 'PT Sans Normal', sans-serif; text-decoration:none; color:#fff; }
 
 .clear   { clear:both}
-#wrapper { position:relative; min-width:1260px}
+#wrapper { position:relative; min-width:1260px; display: block;}
 
 a, img, input, button, textarea, select { outline: none; resize:none }
 strong, b { font-weight:bold; }
@@ -53,7 +53,7 @@ h5 { font-size:12px; color:#fff; }
 .bg.concept { background:url(/images/bg-concept.jpg) no-repeat top right; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.contact { background:url(/images/bg-contacts.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.service { background:url(/images/bg-service.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
-.bg.place { background:url(/images/bg-place.jpg) no-repeat center; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.place {display: block; background:url(/images/bg-place.jpg) no-repeat center; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat top right; position:fixed; width:100%; height:100%; background-size: cover;}
 
 /* HEADER */
@@ -328,6 +328,18 @@ padding-top: 0px;}
 	margin-top: -50px;
 	display: block;
 }
+
+#big-video-wrap {
+display: none;
+position: absolute;
+top: 0;
+left: 0;
+width: 100% !important;
+height: 100% !important;
+overflow: hidden;
+z-index: -10;
+}
+
 @media (max-width: 800px) {
 	.floor-control li { margin:1px 0;}
 	.floor-control li a { font-size: 10px; z-index: 1010; display:block; width:20px; height:20px; text-align:center; line-height:20px; background:rgba(0,0,0,0.8); color:#8a8982; text-decoration:none; font-weight:bold; position:relative; float:left; margin-right:5px; border:1px solid #fffcd9;}
