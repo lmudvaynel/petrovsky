@@ -16,7 +16,7 @@ function start_animation(){
       lines.changeBackgroundImageTo(0);
       $('#main').animate({ opacity: 0 }, 1000);
        setTimeout(function(){
-      lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);},1000);
+      lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);},500);
     },
     function () {
       lines.getByElement('greeting second')[0].animations.opacityTo(1, null, callback);
