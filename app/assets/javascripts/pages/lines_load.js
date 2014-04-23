@@ -4,7 +4,6 @@ $( document ).ready(start_animation());
 function start_animation(){
   var lines = new Lines();
   var currentAnimation = 0;
-  lines.changeBackgroundImageTo(0);
   var animationInProgress = false;
   document.getElementById('main_hidden_3').style.display='none';
   var callback = function () {
@@ -276,6 +275,6 @@ function start_animation(){
     });
   });
 */
-}, 9999999);
+}, 1500);
 };
 
