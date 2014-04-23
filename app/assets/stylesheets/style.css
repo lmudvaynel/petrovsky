@@ -359,8 +359,17 @@ padding-top: 0px;}
 }
 
 
+@media (min-height: 1300px) {
+	#house-image-container { margin-top: 400px; }
+	.floor-control li { margin:85px 0;}
+	.floor-control-2 li { margin:80px 0;}
+}
+@media (min-width: 2400px) {
+	#house-image-container { margin-top: 400px; }
+	.floor-control li { margin:85px 0;}
+	.floor-control-2 li { margin:80px 0;}
+}
 
- 
 @media (min-width: 1200px) {
 	#house-image-container { margin-top: 140px; }
 }
