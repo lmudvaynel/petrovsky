@@ -191,7 +191,7 @@ path.stroke-thin {
   top: 148px;
 }
 
-.main {
+#main {
   position: fixed;
   width: 100%;
   top: 0px;
