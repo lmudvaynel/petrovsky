@@ -14,7 +14,7 @@ function start_animation(){
     // "Приветствие"
     function () {
       lines.changeBackgroundImageTo(0);
-      $('#main').animate({ opacity: 0 }, 400);
+      $('#main').animate({ opacity: 0 }, 1000);
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);
     },
     function () {
