@@ -1,7 +1,6 @@
 var lines;
 
 $( document ).ready(start_animation());
-
 function start_animation(){
   var lines = new Lines();
   var currentAnimation = 0;
@@ -14,8 +13,8 @@ function start_animation(){
   animations = [
     // "Приветствие"
     function () {
-      $('#main').animate({ opacity: 0 }, 1000);
       lines.changeBackgroundImageTo(0);
+      $('#main').animate({ opacity: 0 }, 400);
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);
     },
     function () {
