@@ -330,14 +330,17 @@ padding-top: 0px;}
 }
 
 #big-video-wrap {
-display: none;
-position: absolute;
-top: 0;
-left: 0;
-width: 100% !important;
-height: 100% !important;
-overflow: hidden;
-z-index: -10;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	overflow: hidden;
+	z-index: -10;
+}
+.fasad-bg-wrap {
+	display: block;
 }
 
 @media (max-width: 800px) {

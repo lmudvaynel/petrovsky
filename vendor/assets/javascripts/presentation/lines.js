@@ -65,7 +65,7 @@ function Lines (options) {
   this.updateContainerSize = function () {
     var width = Math.round(this.size.container.width * window.innerWidth);
     var height = Math.round(this.size.container.height * window.innerHeight);
-    this.container.width(width).height(height);
+    this.container.width(width / height <= 1.3 ? width - 140 : width).height(width / height <= 1.3 ? height - 100 : height);
   }
 
   this.initLines = function () {

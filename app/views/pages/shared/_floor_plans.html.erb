@@ -65,6 +65,23 @@
     $('#floor-control').addClass('floor-control-2');
     $('.side-1').removeClass('current_fasad');
     $('.side-2').addClass('current_fasad');
+    $('#wrapper').hide();
+    $('.fasad-bg-wrap').hide();
+    $('#big-video-wrap ').show();
+    BV.getPlayer().currentTime(0);
+    BV.getPlayer().play();
+    setTimeout(function(){
+      BV = new $.BigVideo({
+        useFlashForFirefox:false,
+      });
+      BV.init();
+      BV.show('video/second.webm', {altSource:'video/second.ogv'}, {ambient:true});
+      BV.getPlayer().pause();
+      $('#wrapper').show();
+      $('.fasad-bg-wrap').show();
+      BV.getPlayer().remove();
+      $('#big-video-wrap ').hide();
+    }, 2100);
     $(".floor-control-2 ul li a")
       .mouseover(function(){
         var curFloor = parseInt($(this).attr("dataid"));
@@ -93,6 +110,23 @@
     $('#floor-control').addClass('floor-control');
     $('.side-2').removeClass('current_fasad');
     $('.side-1').addClass('current_fasad');
+    $('#wrapper').hide();
+    $('.fasad-bg-wrap').hide();
+    $('#big-video-wrap ').show();
+    BV.getPlayer().currentTime(0);
+    BV.getPlayer().play();
+    setTimeout(function(){
+      BV = new $.BigVideo({
+        useFlashForFirefox:false,
+      });
+      BV.init();
+      BV.show('video/first.webm', {altSource:'video/first.ogv'}, {ambient:true});
+      BV.getPlayer().pause();
+      $('#wrapper').show();
+      $('.fasad-bg-wrap').show();
+      BV.getPlayer().remove();
+      $('#big-video-wrap ').hide();
+    }, 2100);
     $(".floor-control ul li a")
     .mouseover(function(){
       var curFloor = parseInt($(this).attr("dataid"));

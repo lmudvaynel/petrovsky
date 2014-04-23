@@ -15,13 +15,13 @@ function start_animation(){
     // "Приветствие"
     function () {
       lines.changeBackgroundImageTo(0);
+      document.getElementById('main_hidden_3').style.display='none';
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);
     },
     function () {
       lines.getByElement('greeting second')[0].animations.opacityTo(1, null, callback);
     },
     function () {
-      document.getElementById('main_hidden_3').style.display='none';
       lines.getByElement('greeting third')[0].animations.opacityTo(1, null, callback);
     },
     function () {
