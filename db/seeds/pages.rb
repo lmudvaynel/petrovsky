@@ -8,6 +8,7 @@ pages_names = {
   service: 'СЕРВИС',
   gallery: 'ГАЛЕРЕЯ',
   contacts: 'КОНТАКТЫ',
+  main: 'ГЛАВНАЯ',
 }
 Page.reset_column_information
 pages_names.each do |page_slug, page_name|

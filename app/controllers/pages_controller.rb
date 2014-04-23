@@ -5,6 +5,10 @@ class PagesController < ApplicationController
     @page = Page.find_by_slug(:home)
     @message = Message.showed.first
   end
+  def main
+    @page = Page.find_by_slug(:main)
+    @message = Message.showed.first
+  end
   def show
     @page = Page.friendly.find(params[:slug])
     render params[:slug] if controller_view_exists?(params[:slug])
