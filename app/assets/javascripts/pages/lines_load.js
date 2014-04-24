@@ -3,12 +3,17 @@ if ( $.cookie("timer")==undefined) {$.cookie("timer",1500);}
 if ( $.cookie("number")==undefined) {$.cookie("number",0);}
 var number = $.cookie("number");
 var timer = $.cookie("timer");
+
 $( document ).ready(start_animation(number,timer));
+function reset_animation(){
+  $.cookie('number',0);
+  $.cookie('timer',1500);
+}
 function start_animation(number,timer){
   var lines = new Lines();
   var currentAnimation = number;
   var animationInProgress = false;
-  document.getElementById('main_hidden_3').style.display='none';
+  document.getElementById('main_hidden_3').style.opacity='0';
   var callback = function () {
     animationInProgress = false;
   }
@@ -168,7 +173,7 @@ function start_animation(number,timer){
         thesisesLines[thesisLine].animations.opacityTo(0);
         thesisLine++;
       }, 100);
-      document.getElementById('main_hidden_3').style.display='block';
+      document.getElementById('main_hidden_3').style.opacity='1';
     },
 /*
     function () {

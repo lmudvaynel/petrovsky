@@ -14,7 +14,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 </head>
 <body>
-<% if content_for?(:presentation) %>
+  <% if content_for?(:presentation) %>
   <%= yield :presentation %>
 <% else %>
   <% if @page.slug=="floor_plans" %>
@@ -81,6 +81,9 @@
       <div class="music">
         <a class="play_music" href="#" id="mp3button" onclick="mp3_start ()">
           </a>
+      </div>
+      <div class="camera">
+        <a class="" href="/" onclick="reset_animation()"></a>
       </div>
     </div>
 
