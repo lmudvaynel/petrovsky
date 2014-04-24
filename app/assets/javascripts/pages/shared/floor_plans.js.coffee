@@ -607,8 +607,6 @@ $.app.pages.shared.floor_plans =
     $(apartnemt_floor_element).css
       width: "#{apartment.size[0]}px"
       height: "#{apartment.size[1]}px"
-#      opacity: @.params.floors.plan.apartment.opacity.default
-      'background-image': "url(/uploads/apartment/image/#{apartment.image})"
     apartnemt_floor_element.get(0)
 
   init_number_floor_object: (floor_number) ->
