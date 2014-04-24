@@ -380,6 +380,9 @@ padding-top: 0px;}
 	#header .phone { float:none; margin:0; margin-left: 3px;}
 }
 
+@media (min-width: 1300px) {
+	#center .sale-wrapper { margin-top: 18%;}
+}
 @media (min-width: 1500px) {
 	.fasad-wrap {	margin-top: -30px;	display: block;}	
   .floor-control-2 .fasad-wrap {margin-top: 30px;	display: block;}
