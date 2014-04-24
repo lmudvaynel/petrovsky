@@ -24,7 +24,7 @@ function start_animation(number,timer){
       $.cookie("number",27);
       $.cookie("timer",1);
       lines.changeBackgroundImageTo(0);
-      $('#main').animate({ opacity: 0 }, 1000);
+      $('#main').fadeOut();
        setTimeout(function(){
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);},500);
     },
