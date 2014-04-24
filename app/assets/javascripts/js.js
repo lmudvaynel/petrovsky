@@ -1,3 +1,7 @@
+function reset_animation(){
+  $.cookie('number',0);
+  $.cookie('timer',1500);
+}
 $(document).ready(function(){
 $(function() {
  BV = new $.BigVideo({

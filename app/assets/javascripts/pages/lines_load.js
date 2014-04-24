@@ -3,12 +3,7 @@ if ( $.cookie("timer")==undefined) {$.cookie("timer",1500);}
 if ( $.cookie("number")==undefined) {$.cookie("number",0);}
 var number = $.cookie("number");
 var timer = $.cookie("timer");
-
 $( document ).ready(start_animation(number,timer));
-function reset_animation(){
-  $.cookie('number',0);
-  $.cookie('timer',1500);
-}
 function start_animation(number,timer){
   var lines = new Lines();
   var currentAnimation = number;
