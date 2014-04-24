@@ -21,6 +21,8 @@ function start_animation(number,timer){
   animations = [
     // "Приветствие"
     function () {
+      $.cookie("number",27);
+      $.cookie("timer",1);
       lines.changeBackgroundImageTo(0);
       $('#main').animate({ opacity: 0 }, 1000);
        setTimeout(function(){
@@ -238,8 +240,6 @@ function start_animation(number,timer){
     // Заключение
     function () {
       lines.changeBackgroundImageTo(5);
-      $.cookie("number",27);
-      $.cookie("timer",1);
       $('.sale-wrapper').animate({ opacity: 1}, 5000);
       lines.getByElement('line conclusion introduction first')[0].animations.opacityTo(1, null);
       lines.getByElement('line conclusion introduction second')[0].animations.opacityTo(1, null);
