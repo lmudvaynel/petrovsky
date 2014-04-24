@@ -1,9 +1,12 @@
 var lines;
-
-$( document ).ready(start_animation());
-function start_animation(){
+if ( $.cookie("timer")==undefined) {$.cookie("timer",1500);}
+if ( $.cookie("number")==undefined) {$.cookie("number",0);}
+var number = $.cookie("number");
+var timer = $.cookie("timer");
+$( document ).ready(start_animation(number,timer));
+function start_animation(number,timer){
   var lines = new Lines();
-  var currentAnimation = 0;
+  var currentAnimation = number;
   var animationInProgress = false;
   document.getElementById('main_hidden_3').style.display='none';
   var callback = function () {
@@ -230,6 +233,8 @@ function start_animation(){
     // Заключение
     function () {
       lines.changeBackgroundImageTo(5);
+      $.cookie("number",27);
+      $.cookie("timer",1);
       $('.sale-wrapper').animate({ opacity: 1}, 5000);
       lines.getByElement('line conclusion introduction first')[0].animations.opacityTo(1, null);
       lines.getByElement('line conclusion introduction second')[0].animations.opacityTo(1, null);
@@ -276,6 +281,6 @@ function start_animation(){
     });
   });
 */
-}, 1500);
+}, timer);
 };
 

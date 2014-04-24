@@ -2,7 +2,7 @@
 <script type="text/javascript">
   $( window ).resize(function() {
     $('#main').css('margin-left', (-2560+$(window).width())/2);
-    console.log($(window).width());
+    if ($.cookie("number")==27) {$('#main').hide();}
   });
 </script>
 <div id="main" class="main">
@@ -94,7 +94,6 @@
     <path fill="none" stroke="#201600" stroke-miterlimit="10" d="M1164,504l30.75-12.75v22l-30.5,11.25L1164,504z"/>
 </g>
 </svg>
-</svg>
     <script src="http://tympanus.net/Development/SVGDrawingAnimation/js/classie.js"></script>
     <script src="http://tympanus.net/Development/SVGDrawingAnimation/js/svganimations.js"></script>
 </div>
@@ -163,4 +162,5 @@
       </div>
     </div>
 <% end %>
+
 <%= raw(@message.content) if @message %>
