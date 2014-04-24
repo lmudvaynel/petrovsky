@@ -136,9 +136,11 @@
 .concl-link, .concl-link:hover {
   font-family: Arial;
 }
-
-.concl-link:hover > div {
+.concl-link > div {
   text-shadow: 2px 2px 2px black;
+}
+.concl-link:hover > div {
+  color: lightgray;
 }
 
 .line.conclusion.introduction.first {
