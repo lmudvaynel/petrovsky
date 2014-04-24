@@ -348,6 +348,11 @@ padding-top: 0px;}
 	display: block;
 }
 
+#main_hidden_3 {
+	pointer-events: none;
+	cursor: default;
+}
+
  @media (min-height: 670px) {
 	#house-image-container { margin-top: 140px; }
 }

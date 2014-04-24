@@ -176,6 +176,8 @@ function start_animation(number,timer){
         thesisLine++;
       }, 100);
       document.getElementById('main_hidden_3').style.opacity='1';
+      document.getElementById('main_hidden_3').style.cursor='pointer';
+      document.getElementById('main_hidden_3').style.pointerEvents='auto';
     },
 /*
     function () {
