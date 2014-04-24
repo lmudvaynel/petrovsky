@@ -363,6 +363,7 @@ padding-top: 0px;}
 	#house-image-container { margin-top: 400px; }
 	.floor-control li { margin:85px 0;}
 	.floor-control-2 li { margin:80px 0;}
+	#center .sale-wrapper { margin-top: 18%;}
 }
 @media (min-width: 2400px) {
 	#house-image-container { margin-top: 400px; }
