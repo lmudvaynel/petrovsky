@@ -1,22 +1,22 @@
 var lines;
 
 $( document ).ready(start_animation());
-
 function start_animation(){
   var lines = new Lines();
   var currentAnimation = 0;
   var animationInProgress = false;
-
+  document.getElementById('main_hidden_3').style.display='none';
   var callback = function () {
     animationInProgress = false;
   }
-
+  setTimeout(function(){
   animations = [
     // "Приветствие"
     function () {
       lines.changeBackgroundImageTo(0);
-      document.getElementById('main_hidden_3').style.display='none';
-      lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);
+      $('#main').animate({ opacity: 0 }, 1000);
+       setTimeout(function(){
+      lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);},500);
     },
     function () {
       lines.getByElement('greeting second')[0].animations.opacityTo(1, null, callback);
@@ -276,4 +276,6 @@ function start_animation(){
     });
   });
 */
+}, 1500);
 };
+

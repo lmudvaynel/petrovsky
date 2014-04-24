@@ -30,6 +30,7 @@ $(function() {
 		}
 	});
 */
+
 	// FLOOR CONTROL
 	$(".floor-control ul li a")
 	.mouseover(function(){
