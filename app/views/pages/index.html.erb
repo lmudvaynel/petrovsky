@@ -2,7 +2,7 @@
 <script type="text/javascript">
   $( window ).resize(function() {
     $('#main').css('margin-left', (-2560+$(window).width())/2);
-    if ($.cookie("number")==27) {$('#main').hide();}
+    if ($.cookie("number")!=27) {$('#main').show();}
   });
 </script>
 <div id="main" class="main">

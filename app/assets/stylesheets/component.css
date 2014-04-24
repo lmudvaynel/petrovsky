@@ -196,7 +196,7 @@ path.stroke-thin {
   width: 100%;
   top: 0px;
   left: 0px;
-  display: block;
+  display: none;
 }
 
 #demo-link-1 {
