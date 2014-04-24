@@ -1,11 +1,13 @@
 function ObjectAnimations (object) {
+  
+ $.cookie("number")==27 ? speed=100 : speed=700;
 
   this.options = {
     frames: {
       symbol: 10,
     },
     durations: {
-      opacity: 700,
+      opacity: speed,
       move: 1000,
       resize: 100,
     },
