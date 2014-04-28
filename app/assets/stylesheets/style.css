@@ -465,21 +465,4 @@ padding-top: 0px;}
 	.floor-control-2 li { margin:58px 0; height:35px; }
 	#house-image-container { margin-top: 250px; }
 	.floor-control-2 { padding-left: 20%; }
-
-}
-
-@media (min-width: 1930px) {
-	.floor-control li { margin:85px 0; height:46px; }
-	.floor-control-2 li { margin:85px 0; height:46px; }
-}
-
-@media (min-width: 2000px) {
-	.floor-control li { margin:130px 0; }
-	.floor-control-2 li { margin:130px 0; }
-}
-
-@media (min-width: 2400px) {
-	#house-image-container { margin-top: 400px; }
-	.floor-control li { margin:85px 0;}
-	.floor-control-2 li { margin:80px 0;}
 }
