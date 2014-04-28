@@ -440,13 +440,6 @@ padding-top: 0px;}
 	#header .phone { float:none; margin:0; margin-left: 3px; }
 }
 
-@media (min-width: 1500px) {
-	.fasad-wrap {	margin-top: -30px;	display: block; }	
-  .floor-control-2 .fasad-wrap {margin-top: 30px;	display: block; }
-	.floor-control li { margin:70px 0; }
-	.floor-control-2 li { margin:70px 0; }
-}
-
 @media (min-width: 1600px) {
 	#slider { width:1244px; }
 	#slider .slide { width:1244px; }
