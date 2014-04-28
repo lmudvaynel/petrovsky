@@ -3,12 +3,7 @@ if ( $.cookie("timer")==undefined) {$.cookie("timer",1500);}
 if ( $.cookie("number")==undefined) {$.cookie("number",0);}
 var number = $.cookie("number");
 var timer = $.cookie("timer");
-
 $( document ).ready(start_animation(number,timer));
-function reset_animation(){
-  $.cookie('number',0);
-  $.cookie('timer',1500);
-}
 function start_animation(number,timer){
   var lines = new Lines();
   var currentAnimation = number;
@@ -24,7 +19,7 @@ function start_animation(number,timer){
       $.cookie("number",27);
       $.cookie("timer",1);
       lines.changeBackgroundImageTo(0);
-      $('#main').animate({ opacity: 0 }, 1000);
+      $('#main').fadeOut();
        setTimeout(function(){
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);},500);
     },

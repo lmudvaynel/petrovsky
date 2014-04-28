@@ -198,6 +198,10 @@ padding-top: 0px;}
 .floor-2 { top:0; left:0; position:absolute; width:100%; height:100%; background-size: cover; z-index:-5}
 .floor-2.active { z-index:10}
 
+.current_fasad {
+	cursor: default;
+	pointer-events: none;
+}
 #inset-floor-1 {position: fixed; background:url(/images/build/inset-floor-1.png) no-repeat center left
 ; 
  background-size: cover; }
@@ -360,7 +364,7 @@ padding-top: 0px;}
     right: 0;
     bottom: 0;
     background: #fff;
-    z-index: 100500;
+    z-index: 3000;
 }
 
 #page-preloader .spinner {

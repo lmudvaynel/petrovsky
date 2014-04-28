@@ -84,3 +84,6 @@
 .apartment-element .vacant {
   cursor: pointer;
 }
+.apartment-element:hover{
+  background-color:red;
+}

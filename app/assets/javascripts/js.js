@@ -1,3 +1,7 @@
+function reset_animation(){
+  $.cookie('number',0);
+  $.cookie('timer',1500);
+}
 $(document).ready(function(){
 $(function() {
  BV = new $.BigVideo({
@@ -35,7 +39,7 @@ $(window).on('load', function () {
     var $preloader = $('#page-preloader'),
         $spinner   = $preloader.find('.spinner');
     $spinner.fadeOut();
-    $preloader.delay(350).fadeOut('slow');
+    $preloader.delay(10).fadeOut('slow');
 });
 	// FLOOR CONTROL
 	$(".floor-control ul li a")
