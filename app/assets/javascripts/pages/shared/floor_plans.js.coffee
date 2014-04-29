@@ -880,6 +880,7 @@ $(document).ready ->
   images = []
   for floor_number in [1..fp.params.floors.count]
     images.push "/images/floor-#{floor_number}.png"
+    images.push "/images/floor-#{floor_number}-hover.png"
     images.push "/images/floor-demonstration-#{floor_number}.png"
   for apartment in fp.apartments
     images.push "/uploads/apartment/image/#{apartment.image}"
