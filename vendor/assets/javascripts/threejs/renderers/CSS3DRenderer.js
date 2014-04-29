@@ -111,7 +111,7 @@ THREE.CSS3DRenderer = function () {
 			epsilon( elements[ 11 ] ) + ',' +
 			epsilon( elements[ 12 ] ) + ',' +
 			epsilon( - elements[ 13 ] ) + ',' +
-			epsilon( elements[ 14 ] ) + ',' +
+			epsilon( elements[ 14 ]-600 ) + ',' +
 			epsilon( elements[ 15 ] ) +
 		')';
 
