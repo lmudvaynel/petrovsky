@@ -41,11 +41,11 @@ $.app.pages.shared.floor_plans =
       count: 6
       solid:
         size:
-          width: 850
-          height: 500
+          width: 2171
+          height: 613
         opacity:
           hide: 0
-          show: 0.75
+          show: 1
           speed: 1000
         gap: 100
       demonstration:
@@ -571,7 +571,7 @@ $.app.pages.shared.floor_plans =
     solid_floor_object
 
   init_solid_floor_dom_element: (floor_number) ->
-    solid_floor_element = $('<div/>', class: 'floor-element')
+    solid_floor_element = $('<div/>', class: 'floor-element-'+floor_number)
     solid_floor_css =
       width: "#{@.params.floors.solid.size.width}px"
       height: "#{@.params.floors.solid.size.height}px"
@@ -597,7 +597,7 @@ $.app.pages.shared.floor_plans =
     apartment_floor_object
 
   init_apartnemt_floor_dom_element: (apartment) ->
-    apartnemt_floor_element = $('<div/>', class: 'apartment-element', id: apartment.id, 'data-selected': false)
+    apartnemt_floor_element = $('<div/>', class: 'apartment-element', num: apartment.id, id: 'apart-'+apartment.floor_number+'-'+apartment.number, 'data-selected': false)
     if apartment.sold_out
       apartnemt_floor_element.css
         'boxShadow': 'inset 0 0 400px black'
@@ -839,7 +839,7 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     return unless fp.valid_event_for 'floor-foreground', event
     return unless fp.showed_floor.floor
-    apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
+    apartment = fp.get_apartment_by_id parseInt($(@).attr('num'))
     $('.floor-number').text(apartment.floor_number);
     $('.apart-number').text(apartment.number);
     $('.apart-price').text(apartment.price);
