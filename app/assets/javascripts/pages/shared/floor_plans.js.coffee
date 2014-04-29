@@ -41,11 +41,11 @@ $.app.pages.shared.floor_plans =
       count: 6
       solid:
         size:
-          width: 850
-          height: 500
+          width: 2300
+          height: 1200
         opacity:
           hide: 0
-          show: 0.75
+          show: 1
           speed: 1000
         gap: 100
       demonstration:

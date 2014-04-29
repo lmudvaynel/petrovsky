@@ -3,6 +3,14 @@ function reset_animation(){
   $.cookie('timer',1500);
 }
 $(document).ready(function(){
+	$(".floor-element")
+	.mouseover(function(){
+		$(this).css('backgroundImage', 'url(/images/floor-4-hover.png)');
+	})
+	.mouseleave(function(){
+		$(this).css('backgroundImage', 'url(/images/floor-4.png)');
+	});
+
 $(function() {
  BV = new $.BigVideo({
 		useFlashForFirefox:false,
