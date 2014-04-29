@@ -134,6 +134,13 @@ $(window).on('load', function () {
 		$(".common-wrapper .map-btn-wrap .content-link").css('color', '');
 	});
 
+	// Map and bg
+	$('#maps-link').click(function(){
+		$( "#bg-place" ).fadeToggle();
+		$( "#map" ).fadeToggle();
+		$( ".shadow-text" ).toggleClass( "bounce" )
+	});
+
 	// callback
 	$('.callback a').click(function(){
 		$(".callback-wrapper").show();

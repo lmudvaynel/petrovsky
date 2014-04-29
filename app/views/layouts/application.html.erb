@@ -6,6 +6,7 @@
   </title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "http://scriptjava.net/source/scriptjava/scriptjava.js" %>
+  <%= javascript_include_tag  "http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" %>
   <%#= stylesheet_link_tag "responsive" %>
   <%#= stylesheet_link_tag "component" %>
   <%#= stylesheet_link_tag "bookblock" %>
@@ -42,7 +43,8 @@
     <div class="bg contact"></div>
   <% end %>
   <% if @page.slug=="place" %>
-    <div class="bg place"></div>
+    <div class="bg place" id="bg-place"></div>
+    <div id="map"></div>
   <% end %>
   <% if @page.slug=="service" %>
     <div class="bg service"></div>
