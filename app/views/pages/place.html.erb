@@ -1,12 +1,13 @@
     <div class="common-wrapper">
 
-      <span class="petrovsky">Petrovsky Apart House</span> расположен в динамично развивающейся части<br />
+      <div class="shadow-text"><span class="petrovsky">Petrovsky Apart House</span> расположен в динамично развивающейся части<br />
       САО столицы с развитой инфраструктурой и высокой транспортной доступностью,<br />
       в 3 минутах ходьбы от метро Войковская и непосредственной близости к<br />
       основным транспортным магистралям Москвы.
-      <div class="map-btn-wrap">
-        <span class="place-icon"></span>
-        <a href="#" class="content-link" id="maps-link">Посмотреть на карте</a>
+        <div class="map-btn-wrap">
+          <span class="place-icon"></span>
+          <a href="#" class="content-link" id="maps-link">Посмотреть на карте</a>
+        </div>
       </div>
       <div class="block-wrapper">
         <div class="block-shadow"></div>
@@ -41,3 +42,24 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+     ymaps.ready(init);
+     
+     function init () {
+      var myMap = new ymaps.Map("map", {
+          center: [55.823156,37.500881],
+          zoom: 15
+        }),
+        myPlacemark = new ymaps.Placemark([55.823156,37.500881], {
+          // Чтобы балун и хинт открывались на метке, необходимо задать ей определенные свойства.
+          //balloonContentHeader: "Спортивное питание в Калининграде",
+          //balloonContentBody: "г. Калининград, пр-т Калинина, 3 ор-р магазин Трикотаж<br />тел: (4012) 64-64-51",
+          // balloonContentFooter: "Подвал",
+          // hintContent: "Хинт метки"
+        });
+        
+        myMap.controls.add("zoomControl");
+     
+      myMap.geoObjects.add(myPlacemark);
+     }
+     </script>
