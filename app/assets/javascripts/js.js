@@ -146,9 +146,19 @@ $(window).on('load', function () {
 		$(".callback-wrapper").show();
 		return false;
 	});
-	
+
+	$('.action-call').click(function(){
+		$(".action-wrapper").hide();
+		$(".callback-wrapper").show();
+		return false;
+	});
+
 	$('.callback-shadow').click(function(){
 		$(".callback-wrapper").hide();
+	});
+
+	$('.callback-shadow').click(function(){
+		$(".action-wrapper").hide();
 	});
 
 	$('.buy-shadow').click(function(){
@@ -156,7 +166,7 @@ $(window).on('load', function () {
 	});
 
 	$('.sale-wrapper').click(function(){
-		$(".callback-wrapper").show();
+		$(".action-wrapper").show();
 		return false;
 	});
 
