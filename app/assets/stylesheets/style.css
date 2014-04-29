@@ -424,7 +424,18 @@ padding-top: 0px;}
 }
 
  @media (min-height: 670px) {
-	#house-image-container { margin-top: 140px; }
+	.floor-control { margin-top: 140px; }
+	.floor-control-2 { margin-top: 190px; }
+	.floor-control-2 li {	margin: 10px 0;height: 40px; }
+}
+
+ @media (min-height: 750px) {
+	.floor-control { margin-top: 215px; }
+	.floor-control li { margin:40px 0; height:46px; }
+
+	.floor-control-2 {margin-top: 320px; padding-left: 20%; }
+	.floor-control-2 li { margin:25px 0; height:35px; }
+	.floor-control-2 .fasad-wrap { margin-top: 60px; }
 }
 
 @media (max-width: 800px) {
@@ -450,13 +461,16 @@ padding-top: 0px;}
 @media (min-height: 900px) {
 	.concept_content { padding-top: 400px; }
 	.floor-control li { margin:58px 0; height:46px; }
-	.floor-control-2 li { margin:58px 0; height:35px; }
+
+	.floor-control-2 { margin-top: 395px; }
+	.floor-control-2 li { margin:30px 0; height:35px; }
 	.floor-control-2 { padding-left: 20%; }
+	.floor-control-2 .fasad-wrap {margin-top: 60px; }
 }
 
 @media  (min-height: 1000px) {
-	.floor-control li { margin:58px 0; height:46px }
-	#house-image-container { margin-top: 250px; }
+	.floor-control li { margin:58px 0; height:45px }
+	.floor-control { margin-top: 240px; }
 	#center { padding-top: 100px; }
 	#center .block-wrapper { margin-top:30px; }
 	#center .common-wrapper { padding-top: 100px;}
@@ -468,9 +482,12 @@ padding-top: 0px;}
 }
 
 @media (min-height: 1200px) {
-	#house-image-container { margin-top: 400px; }
+	.floor-control { margin-top: 400px; }
 	.floor-control li { margin:85px 0; }
-	.floor-control-2 li { margin:80px 0; }
+
+	.floor-control-2 { margin-top: 550px; }
+	.floor-control-2 li { margin:50px 0; }
+	.floor-control-2 .fasad-wrap {margin-top: 100px; }
 }
 
 @media (min-width: 1300px) {
