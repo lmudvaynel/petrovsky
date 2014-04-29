@@ -114,6 +114,26 @@ $(window).on('load', function () {
 		$("#header .menu li.icon-4 a").css('color', '');
 	});
 
+	$("#dwn-link")
+	.mouseover(function(){
+		$(".concept_content .presentation .present-icon").css('background-position', '0 0');
+		$(".concept_content .presentation .content-link").css('color', '#757575');
+	})
+	.mouseout(function(){
+		$(".concept_content .presentation .present-icon").css('background-position', '');
+		$(".concept_content .presentation .content-link").css('color', '');
+	});
+
+	$("#maps-link")
+	.mouseover(function(){
+		$(".common-wrapper .map-btn-wrap .place-icon").css('background-position', '0 0');
+		$(".common-wrapper .map-btn-wrap .content-link").css('color', '#757575');
+	})
+	.mouseout(function(){
+		$(".common-wrapper .map-btn-wrap .place-icon").css('background-position', '');
+		$(".common-wrapper .map-btn-wrap .content-link").css('color', '');
+	});
+
 	// callback
 	$('.callback a').click(function(){
 		$(".callback-wrapper").show();
