@@ -572,11 +572,18 @@ $.app.pages.shared.floor_plans =
 
   init_solid_floor_dom_element: (floor_number) ->
     solid_floor_element = $('<div/>', class: 'floor-element-'+floor_number)
-    solid_floor_css =
-      width: "#{@.params.floors.solid.size.width}px"
-      height: "#{@.params.floors.solid.size.height}px"
-      opacity: @.params.floors.solid.opacity.show
-      'background-image': "url(/images/floor-#{floor_number}.png)"
+    if floor_number==6
+      solid_floor_css =
+        height: "1300px"
+        width: "#{@.params.floors.solid.size.width}px"
+        opacity: @.params.floors.solid.opacity.show
+        'background-image': "url(/images/floor-#{floor_number}.png)"
+    else
+      solid_floor_css =
+        height: "#{@.params.floors.solid.size.height}px"
+        width: "#{@.params.floors.solid.size.width}px"
+        opacity: @.params.floors.solid.opacity.show
+        'background-image': "url(/images/floor-#{floor_number}.png)"     
     $(solid_floor_element).css(solid_floor_css).get(0)
 
   init_plan_floor_object: (floor_number, position) ->
