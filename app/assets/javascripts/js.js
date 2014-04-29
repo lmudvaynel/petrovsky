@@ -3,13 +3,20 @@ function reset_animation(){
   $.cookie('timer',1500);
 }
 $(document).ready(function(){
-	$(".floor-element")
-	.mouseover(function(){
-		$(this).css('backgroundImage', 'url(/images/floor-4-hover.png)');
-	})
-	.mouseleave(function(){
-		$(this).css('backgroundImage', 'url(/images/floor-4.png)');
-	});
+	$('#canvas-container').mouseover(function () {
+		$(this).find('.floor-element').mouseover(function () {
+			$(this).css('backgroundImage', 'url(/images/floor-4-hover.png)');
+		}).mouseleave(function () {
+			$(this).css('backgroundImage', 'url(/images/floor-4.png)');
+		});
+  });
+	$('#canvas-container').mouseover(function () {
+		$(this).find('.apartment-element').mouseover(function () {
+			$(this).css('backgroundImage', 'url(/images/floor-4-hover.png)');
+		}).mouseleave(function () {
+			$(this).css('backgroundImage', 'url(/images/floor-4-hover.png)');
+		});
+  });
 
 $(function() {
  BV = new $.BigVideo({
