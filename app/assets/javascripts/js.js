@@ -178,14 +178,31 @@ $(window).on('load', function () {
 		$(".common-wrapper .map-btn-wrap .content-link").css('color', '');
 	});
 
+	// Map and bg
+	$('#maps-link').click(function(){
+		$( "#bg-place" ).fadeToggle();
+		$( "#map" ).fadeToggle();
+		$( ".shadow-text" ).toggleClass( "bounce" )
+	});
+
 	// callback
 	$('.callback a').click(function(){
 		$(".callback-wrapper").show();
 		return false;
 	});
-	
+
+	$('.action-call').click(function(){
+		$(".action-wrapper").hide();
+		$(".callback-wrapper").show();
+		return false;
+	});
+
 	$('.callback-shadow').click(function(){
 		$(".callback-wrapper").hide();
+	});
+
+	$('.callback-shadow').click(function(){
+		$(".action-wrapper").hide();
 	});
 
 	$('.buy-shadow').click(function(){
@@ -193,7 +210,7 @@ $(window).on('load', function () {
 	});
 
 	$('.sale-wrapper').click(function(){
-		$(".callback-wrapper").show();
+		$(".action-wrapper").show();
 		return false;
 	});
 
