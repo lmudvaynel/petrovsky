@@ -57,7 +57,8 @@ function Lines (options) {
     var lines = this;
     $(window).resize(function () {
       lines.updateContainerSize();
-      lines.updateFontsSizes();
+      lines.updateFontsSizes('.line');
+      lines.updateFontsSizes('.conclusion');
 //      lines.updateLinesElementsSize();
     });
   }
@@ -80,8 +81,8 @@ function Lines (options) {
 //    this.updateLinesElementsPosition();
   }
 
-  this.updateFontsSizes = function () {
-    var linesElements = this.container.find('.line');
+  this.updateFontsSizes = function (container) {
+    var linesElements = this.container.find(container);
     for (var i = 0; i < linesElements.length; i++) {
       $(linesElements[i]).css('fontSize', $(linesElements[i]).height() < 18 ? 18 : $(linesElements[i]).height());
     }
@@ -157,7 +158,7 @@ function Lines (options) {
     return lines;
   }
 
-  this.changeBackgroundImageTo = function (backgroundId) {
+  this.changeBackgroundImageTo = function (backgroundId,speed) {
 /*
     var container = this.container;
     container.animate({ opacity: 0 }, 1000, "linear", function(){
@@ -166,9 +167,9 @@ function Lines (options) {
     });
 */
     if (backgroundId > 0) {
-      $('#animated-text-backgrounds .background-' + (backgroundId - 1)).animate({ opacity: 0 }, 1000);
+      $('#animated-text-backgrounds .background-' + (backgroundId - 1)).animate({ opacity: 0 }, speed);
     }
-    $('#animated-text-backgrounds .background-' + backgroundId).animate({ opacity: 1 }, 1000);
+    $('#animated-text-backgrounds .background-' + backgroundId).animate({ opacity: 1 }, speed);
 //    this.container.css('backgroundImage', 'url(images/presentation/' + name +')');
   }
 
