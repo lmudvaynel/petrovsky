@@ -3,12 +3,12 @@ if ( $.cookie("timer")==undefined) {$.cookie("timer",1500);}
 if ( $.cookie("number")==undefined) {$.cookie("number",0);}
 var number = $.cookie("number");
 var timer = $.cookie("timer");
+number==27 ? $(".conclusion").removeClass("line") : number=0
 $( document ).ready(start_animation(number,timer));
 function start_animation(number,timer){
   var lines = new Lines();
   var currentAnimation = number;
   var animationInProgress = false;
-  document.getElementById('main_hidden_3').style.opacity='0';
   var callback = function () {
     animationInProgress = false;
   }
@@ -18,8 +18,9 @@ function start_animation(number,timer){
     function () {
       $.cookie("number",27);
       $.cookie("timer",1);
-      lines.changeBackgroundImageTo(0);
+      lines.changeBackgroundImageTo(0,1000);
       $('#main').fadeOut();
+      $('#main_2').fadeOut();
        setTimeout(function(){
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);},500);
     },
@@ -51,7 +52,7 @@ function start_animation(number,timer){
 
     // Первый тезис: ГАРМОНИЯ
     function () {
-      lines.changeBackgroundImageTo(1);
+      lines.changeBackgroundImageTo(1,1000);
 //      lines.getByElement('greeting title')[0].animations.opacityTo(0);
 //      lines.getByElement('greeting title')[0].opacityTo(0);
 //      lines.getByElement('thesis harmony')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
@@ -83,7 +84,7 @@ function start_animation(number,timer){
 
     // Второй тезис: СВОБОДА
     function () {
-      lines.changeBackgroundImageTo(2);
+      lines.changeBackgroundImageTo(2,1000);
 //      lines.getByElement('thesis harmony')[0].opacityTo(0);
 //      lines.getByElement('thesis liberty')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
 //      lines.getByElement('thesis liberty')[0].animations.opacityTo(0, { wordFrom: 0, wordTo: 2 });
@@ -111,7 +112,7 @@ function start_animation(number,timer){
 
     // Третий тезис: КОМФОРТ
     function () {
-      lines.changeBackgroundImageTo(3);
+      lines.changeBackgroundImageTo(3,1000);
 //      lines.getByElement('thesis liberty')[0].opacityTo(0);
 //      lines.getByElement('thesis comfort')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
 //      lines.getByElement('thesis comfort')[0].animations.opacityTo(0, { wordFrom: 0, wordTo: 2 });
@@ -170,7 +171,6 @@ function start_animation(number,timer){
         thesisesLines[thesisLine].animations.opacityTo(0);
         thesisLine++;
       }, 100);
-      document.getElementById('main_hidden_3').style.opacity='1';
       document.getElementById('main_hidden_3').style.cursor='pointer';
       document.getElementById('main_hidden_3').style.pointerEvents='auto';
     },
@@ -236,11 +236,12 @@ function start_animation(number,timer){
 
     // Заключение
     function () {
-      lines.changeBackgroundImageTo(5);
+      number==27 ? lines.changeBackgroundImageTo(5,500) : lines.changeBackgroundImageTo(5,1000);
+      $('#main_hidden_3').animate({opacity: 1}, 500)
       $('.sale-wrapper').animate({ opacity: 1}, 5000);
-      lines.getByElement('line conclusion introduction first')[0].animations.opacityTo(1, null);
-      lines.getByElement('line conclusion introduction second')[0].animations.opacityTo(1, null);
-      lines.getByElement('line conclusion introduction third')[0].animations.opacityTo(1, null, callback);
+      lines.getByElement('conclusion introduction first')[0].animations.opacityTo(1, null);
+      lines.getByElement('conclusion introduction second')[0].animations.opacityTo(1, null);
+      lines.getByElement('conclusion introduction third')[0].animations.opacityTo(1, null, callback);
     },
     function () {
       lines.getByElement('conclusion harmony first')[0].animations.opacityTo(1, null);
@@ -251,9 +252,9 @@ function start_animation(number,timer){
       lines.getByElement('conclusion liberty second')[0].animations.opacityTo(1, null, callback);
     },
     function () {
-      lines.getByElement('line conclusion comfort first')[0].animations.opacityTo(1, null);
-      lines.getByElement('line conclusion comfort second')[0].animations.opacityTo(1, null);
-      lines.getByElement('line conclusion comfort third')[0].animations.opacityTo(1, null, callback);
+      lines.getByElement('conclusion comfort first')[0].animations.opacityTo(1, null);
+      lines.getByElement('conclusion comfort second')[0].animations.opacityTo(1, null);
+      lines.getByElement('conclusion comfort third')[0].animations.opacityTo(1, null, callback);
     },
   ];
 

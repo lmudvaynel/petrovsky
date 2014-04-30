@@ -129,9 +129,11 @@
   top: 44%;
 }
 
-.line.conclusion {
+.conclusion {
   height: 3%;
+  position: absolute;
   z-index: 1000;
+  left: 4%;
 }
 .concl-link, .concl-link:hover {
   font-family: Arial;
@@ -143,52 +145,52 @@
   color: lightgray;
 }
 
-.line.conclusion.introduction.first {
+.conclusion.introduction.first {
   top: 30%;
 }
-.line.conclusion.introduction.second {
+.conclusion.introduction.second {
   top: 33%;
 }
-.line.conclusion.introduction.third {
+.conclusion.introduction.third {
   top: 36%;
 }
-.line.conclusion.harmony.first {
+.conclusion.harmony.first {
   top: 46%;
 }
-.line.conclusion.harmony.second {
+.conclusion.harmony.second {
   top: 49%;
 }
-.line.conclusion.harmony.third {
+.conclusion.harmony.third {
   top: 49%;
 }
-.line.conclusion.liberty.first {
+.conclusion.liberty.first {
   top: 58%;
 }
-.line.conclusion.liberty.second {
+.conclusion.liberty.second {
   top: 61%;
 }
-.line.conclusion.comfort.first {
+.conclusion.comfort.first {
   top: 70%;
 }
-.line.conclusion.comfort.second {
+.conclusion.comfort.second {
   top: 73%;
 }
 
-.line.conclusion.introduction.first span[data-number="0"] {
+.conclusion.introduction.first span[data-number="0"] {
   font-weight: bold;
 }
-.line.conclusion.introduction.first span[data-number="1"] {
+.conclusion.introduction.first span[data-number="1"] {
   font-weight: bold;
 }
-.line.conclusion.introduction.first span[data-number="2"] {
+.conclusion.introduction.first span[data-number="2"] {
   font-weight: bold;
 }
-.line.conclusion.harmony.first span[data-number="0"] {
+.conclusion.harmony.first span[data-number="0"] {
   font-weight: bold;
 }
-.line.conclusion.liberty.first span[data-number="0"] {
+.conclusion.liberty.first span[data-number="0"] {
   font-weight: bold;
 }
-.line.conclusion.comfort.first span[data-number="0"] {
+.conclusion.comfort.first span[data-number="0"] {
   font-weight: bold;
 }

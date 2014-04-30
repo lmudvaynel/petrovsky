@@ -401,6 +401,7 @@ padding-top: 0px;}
 #main_hidden_3 {
 	pointer-events: none;
 	cursor: default;
+	opacity: 0;
 }
 
 #page-preloader {
