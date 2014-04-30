@@ -18,8 +18,9 @@ function start_animation(number,timer){
     function () {
       $.cookie("number",27);
       $.cookie("timer",1);
-      lines.changeBackgroundImageTo(0);
+      lines.changeBackgroundImageTo(0,1000);
       $('#main').fadeOut();
+      $('#main_2').fadeOut();
        setTimeout(function(){
       lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);},500);
     },
@@ -51,7 +52,7 @@ function start_animation(number,timer){
 
     // Первый тезис: ГАРМОНИЯ
     function () {
-      lines.changeBackgroundImageTo(1);
+      lines.changeBackgroundImageTo(1,1000);
 //      lines.getByElement('greeting title')[0].animations.opacityTo(0);
 //      lines.getByElement('greeting title')[0].opacityTo(0);
 //      lines.getByElement('thesis harmony')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
@@ -83,7 +84,7 @@ function start_animation(number,timer){
 
     // Второй тезис: СВОБОДА
     function () {
-      lines.changeBackgroundImageTo(2);
+      lines.changeBackgroundImageTo(2,1000);
 //      lines.getByElement('thesis harmony')[0].opacityTo(0);
 //      lines.getByElement('thesis liberty')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
 //      lines.getByElement('thesis liberty')[0].animations.opacityTo(0, { wordFrom: 0, wordTo: 2 });
@@ -111,7 +112,7 @@ function start_animation(number,timer){
 
     // Третий тезис: КОМФОРТ
     function () {
-      lines.changeBackgroundImageTo(3);
+      lines.changeBackgroundImageTo(3,1000);
 //      lines.getByElement('thesis liberty')[0].opacityTo(0);
 //      lines.getByElement('thesis comfort')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
 //      lines.getByElement('thesis comfort')[0].animations.opacityTo(0, { wordFrom: 0, wordTo: 2 });
@@ -235,7 +236,7 @@ function start_animation(number,timer){
 
     // Заключение
     function () {
-      lines.changeBackgroundImageTo(5,500);
+      number==27 ? lines.changeBackgroundImageTo(5,500) : lines.changeBackgroundImageTo(5,1000);
       $('#main_hidden_3').animate({opacity: 1}, 500)
       $('.sale-wrapper').animate({ opacity: 1}, 5000);
       lines.getByElement('conclusion introduction first')[0].animations.opacityTo(1, null);
