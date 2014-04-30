@@ -166,8 +166,7 @@ padding-top: 0px;}
 /* FASAD 1*/
 
 .fasad { 
-	background:url(/images/build/fasad-1.jpg) no-repeat center left
-;
+	background:url(/images/build/fasad-1.jpg) no-repeat center left;
 	width: 100%;
 	height: 100%;
 	background-repeat: no-repeat;
@@ -439,20 +438,6 @@ padding-top: 0px;}
 	.floor-control-2 .fasad-wrap { margin-top: 60px; }
 }
 
-@media (max-width: 800px) {
-	.floor-control li { margin:1px 0;}
-	.floor-control li a { font-size: 10px; z-index: 1010; display:block; width:20px; height:20px; text-align:center; line-height:20px; background:rgba(0,0,0,0.8); color:#8a8982; text-decoration:none; font-weight:bold; position:relative; float:left; margin-right:5px; border:1px solid #fffcd9; }
-	.floor-control li span { display:block; background:url(/images/floor-arrow.png) no-repeat right center; top:0; right:-9px; width:6px; height:20px; position:absolute; }
-	.floor-control li a:hover span { background-position: 0px center; }
-	.floor-control li a:hover { color:#fffcd9; border:1px solid #8a8982; }
-
-	.floor-control-2 li { margin:1px 0; }
-	.floor-control-2 li a { font-size: 10px; z-index: 1010; display:block; width:20px; height:20px; text-align:center; line-height:20px; background:rgba(0,0,0,0.8); color:#8a8982; text-decoration:none; font-weight:bold; position:relative; float:left; margin-right:5px; border:1px solid #fffcd9;}
-	.floor-control-2 li span { display:block; background:url(/images/floor-arrow.png) no-repeat right center; top:0; right:-9px; width:6px; height:20px; position:absolute; }
-	.floor-control-2 li a:hover span { background-position: 0px center; }
-	.floor-control-2 li a:hover { color:#fffcd9; border:1px solid #8a8982; }
-}
-
 @media  (min-height: 820px) {
 	#center { padding-top: 50px; }
 	#center .block-wrapper { margin-top:30px; }
@@ -492,6 +477,7 @@ padding-top: 0px;}
 }
 
 @media (min-width: 1300px) {
+	#header { min-width:1360px; }
 	#center .sale-wrapper { margin-top: 18%;}
 }
 
