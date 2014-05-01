@@ -96,12 +96,14 @@ $(function() {
 */
 
 $(window).on('load', function () {
+		var timer;
     var $preloader = $('#page-preloader'),
-    		$svg = $('#svg'),
-        $spinner   = $preloader.find('.spinner');
+    		$spinner   = $preloader.find('.spinner');
     $spinner.fadeOut();
+    $svg = $('#svg')
+    $("#svg").length==0 ? timer=10 : timer=1100
     $svg.delay(1500).fadeOut('slow')
-    $preloader.delay(1100).fadeOut('slow');
+    $preloader.delay(timer).fadeOut('slow');
 });
 	// FLOOR CONTROL
 	$(".floor-control ul li a")
