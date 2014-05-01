@@ -2,6 +2,22 @@ function reset_animation(){
   $.cookie('number',0);
   $.cookie('timer',1500);
 }
+// place this before all of your code, outside of document ready.
+
+$.fn.clicktoggle = function(a,b){
+    return this.each(function(){
+        var clicked = false;
+        $(this).bind("click",function(){
+            if (clicked) {
+                clicked = false;
+                return b.apply(this,arguments);
+            }
+            clicked = true;
+            return a.apply(this,arguments);
+        });
+    });// fixed typo here, was missing )
+};
+
 $(document).ready(function(){
 		$('#canvas-container').mouseover(function () {
 			$(this).find('.floor-element-1').mouseover(function () {
@@ -181,12 +197,20 @@ $(window).on('load', function () {
 	});
 
 	// Map and bg
-	$('#maps-link').click(function(){
-		$( "#bg-place" ).fadeToggle();
-		$( "#map" ).fadeToggle();
-		$( ".shadow-text" ).toggleClass( "bounce" )
-	});
 
+	$("#maps-link").clicktoggle(
+		function() {
+			$( "#bg-place" ).fadeOut();
+			$( "#map" ).fadeIn();
+			$( ".shadow-text" ).addClass( "bounce" );
+		  $(this).text('Скрыть карту');
+		},
+		function() {
+			$( "#bg-place" ).fadeIn();
+			$( "#map" ).fadeOut();
+			$( ".shadow-text" ).removeClass( "bounce" );
+		  $(this).text('Посмотреть на карте');
+		});
 	// callback
 	$('.callback a').click(function(){
 		$(".callback-wrapper").show();

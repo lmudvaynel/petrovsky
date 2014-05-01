@@ -42,7 +42,6 @@
   <% end %>
   <% if @page.slug=="place" %>
     <div class="bg place" id="bg-place"></div>
-    <div id="map"></div>
   <% end %>
   <% if @page.slug=="service" %>
     <div class="bg service"></div>
@@ -67,6 +66,9 @@
 <% end %>
 <div id="wrapper">
 	<!--CONTENT-->
+  <% if @page.slug=="place" %>
+    <div id="map"></div>
+  <% end %>
 	<div id="header">
 
 		<div class="fl">
