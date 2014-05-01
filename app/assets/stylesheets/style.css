@@ -492,11 +492,10 @@ padding-top: 0px;}
 }
 
 @media (min-width: 1300px) {
-	#header { min-width:1360px; }
 	#center .sale-wrapper { margin-top: 18%;}
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1500px) {
 	#header .phone { float:none; margin:0; margin-left: 3px; }
 }
 

@@ -81,9 +81,11 @@ $(function() {
 
 $(window).on('load', function () {
     var $preloader = $('#page-preloader'),
+    		$svg = $('#svg'),
         $spinner   = $preloader.find('.spinner');
     $spinner.fadeOut();
-    $preloader.delay(10).fadeOut('slow');
+    $svg.delay(1500).fadeOut('slow')
+    $preloader.delay(1100).fadeOut('slow');
 });
 	// FLOOR CONTROL
 	$(".floor-control ul li a")
