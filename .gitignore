@@ -9,5 +9,4 @@ capybara-*.html
 /log/*
 /tmp/*
 database.yml
-deploy.rb
 *~
