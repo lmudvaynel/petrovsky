@@ -2,7 +2,7 @@
   <div class="callback-shadow"></div>
     <div class="action-form">
       <div class="text">
-        <%= raw @message.description %>
+        <%= raw(@message.description) if @message %>
       </div>
       <a href="#" class="action-call">Заказать звонок</a>
   </div>
