@@ -1,21 +1,27 @@
-floors_count = 6
+floors_number = 3
 aparts_positions = {
-  1 => [123, 172],
-  2 => [609, 172]
+  1 => [428, 262],
+  2 => [951, 262],
+  4 => [1370, -266],
+  5 => [1995, 262],
+  6 => [1688, 575],
+  7 => [1377, 575],
+  8 => [1168, 575],
+  9 => [749, 575],
+  10 => [329, 575],
+  13 => [103, 262]
 }
 sold_out = false
 
 Apartment.reset_column_information
-(1..floors_count).each do |floor_number|
-  aparts_positions.each do |number, position|
-    path = "public/uploads/apartment/image"
-    apartment = Apartment.create! image: open(File.join(Rails.root, path, "#{floor_number}-#{number}.png")),
-                                  dx: position.first,
-                                  dy: position.second,
-                                  number: number,
-                                  floor_number: floor_number,
-                                  sold_out: sold_out
-    sold_out = !sold_out
-  end
-  sold_out = !sold_out
+aparts_positions.each do |number, position|
+  path = "public/uploads/apartment/image"
+  apartment = Apartment.create! image: open(File.join(Rails.root, path, "#{floor_number}-#{number}.png")),
+                                dx: position.first,
+                                dy: position.second,
+                                number: number,
+                                floor_number: floor_number,
+                                area: 10,
+                                price: 10,
+                                sold_out: sold_out
 end
