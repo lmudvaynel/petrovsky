@@ -249,12 +249,16 @@ $.app.pages.shared.floor_plans =
 
   floor_numbers_sizes_correcting: ->
     dHeight = Math.round(Math.max(window.innerWidth * 0.002 - 1.5, 0) * 4)
-    $('.floor-control li').css
-      'height': 52 + dHeight + 'px'
-      'margin': 22 + dHeight + 'px'
-    $('.floor-control li a').css
-      'height': 36 + dHeight + 'px'
-      'line-height': 36 + dHeight + 'px'
+    elements = $('.floor-control li')
+    for element, i in elements
+      if i > 0
+        $(element).css
+          'height': 52 + dHeight + 'px'
+          'margin-top': 22 + dHeight + 'px'
+          'margin-bottom': 22 + dHeight + 'px'
+        $(element).find('a').css
+          'height': 36 + dHeight + 'px'
+          'line-height': 36 + dHeight + 'px'
 
   init_animated_objects: ->
     fp = $.app.pages.shared.floor_plans
