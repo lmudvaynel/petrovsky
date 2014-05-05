@@ -2,7 +2,7 @@ floor_number = 3
 aparts_positions = {
   1 => [428, 262],
   2 => [951, 262],
-  4 => [1370, -266],
+  4 => [1370, -226],
   5 => [1995, 262],
   6 => [1688, 575],
   7 => [1377, 575],
@@ -17,6 +17,7 @@ Apartment.reset_column_information
 aparts_positions.each do |number, position|
   path = "public/uploads/apartment/image"
   apartment = Apartment.create! image: open(File.join(Rails.root, path, "#{floor_number}-#{number}.png")),
+                                image: open(File.join(Rails.root, path, "#{floor_number}-#{number}-sold.png")),
                                 dx: position.first,
                                 dy: position.second,
                                 number: number,

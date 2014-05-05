@@ -1,6 +1,6 @@
 # encoding: utf-8
 ActiveAdmin.register Apartment do
-  permit_params :image, :dx, :dy, :number, :floor_number, :sold_out, :price, :area
+  permit_params :image, :image_sold, :dx, :dy, :number, :floor_number, :sold_out, :price, :area
 
   index do
     column :image do |apartment|
@@ -20,6 +20,9 @@ ActiveAdmin.register Apartment do
     attributes_table do
       row 'Image' do
         image_tag apartment.image.url
+      end
+      row 'Image Sold' do
+        image_tag apartment.image_sold.url
       end
       row :dx
       row :dy
