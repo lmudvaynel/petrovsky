@@ -1,4 +1,4 @@
-floors_number = 3
+floor_number = 3
 aparts_positions = {
   1 => [428, 262],
   2 => [951, 262],
