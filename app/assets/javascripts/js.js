@@ -26,14 +26,14 @@ $(document).ready(function(){
 				$(this).css('backgroundImage', 'url(/images/floor-1.png)');
 			});
 	  });
-	  		$('#canvas-container').mouseover(function () {
+	  $('#canvas-container').mouseover(function () {
 			$(this).find('.floor-element-2').mouseover(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-2-hover.png)');
 			}).mouseleave(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-2.png)');
 			});
 	  });
-	  				$('#canvas-container').mouseover(function () {
+	  $('#canvas-container').mouseover(function () {
 			$(this).find('.floor-element-3').mouseover(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-3-hover.png)');
 			}).mouseleave(function () {
@@ -41,21 +41,21 @@ $(document).ready(function(){
 			});
 	  });
 
-	  						$('#canvas-container').mouseover(function () {
+	  $('#canvas-container').mouseover(function () {
 			$(this).find('.floor-element-4').mouseover(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-4-hover.png)');
 			}).mouseleave(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-4.png)');
 			});
 	  });
-	  								$('#canvas-container').mouseover(function () {
+	  $('#canvas-container').mouseover(function () {
 			$(this).find('.floor-element-5').mouseover(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-5-hover.png)');
 			}).mouseleave(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-5.png)');
 			});
 	  });
-	  										$('#canvas-container').mouseover(function () {
+	  $('#canvas-container').mouseover(function () {
 			$(this).find('.floor-element-6').mouseover(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-6-hover.png)');
 			}).mouseleave(function () {

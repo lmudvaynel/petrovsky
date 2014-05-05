@@ -574,7 +574,7 @@ $.app.pages.shared.floor_plans =
     solid_floor_element = $('<div/>', class: 'floor-element-'+floor_number)
     if floor_number==6
       solid_floor_css =
-        height: "1300px"
+        height: "1200px"
         width: "#{@.params.floors.solid.size.width}px"
         opacity: @.params.floors.solid.opacity.show
         'background-image': "url(/images/floor-#{floor_number}.png)"
