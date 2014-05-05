@@ -1,6 +1,6 @@
 # encoding: utf-8
 ActiveAdmin.register Message do
-  permit_params :content, :showed
+  permit_params :content, :showed, :description
 
   index do
     column :id do |message|
@@ -16,6 +16,7 @@ ActiveAdmin.register Message do
     f.inputs "Сообщение" do
       f.input :content
       f.input :showed
+      f.input :description
     end
     f.actions
   end
