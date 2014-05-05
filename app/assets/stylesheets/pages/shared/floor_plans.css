@@ -84,37 +84,6 @@
 .apartment-element .vacant {
   cursor: pointer;
 }
-
-#apart-4-1:hover {
-  background-image: url(/uploads/apartment/image/4-1.png);
-}
-#apart-4-2:hover {
-  background-image: url(/uploads/apartment/image/4-2.png);
-}
-#apart-4-3:hover {
-  background-image: url(/uploads/apartment/image/4-3.png);
-}
-#apart-4-4:hover {
-  background-image: url(/uploads/apartment/image/4-4.png);
-}
-#apart-4-5:hover {
-  background-image: url(/uploads/apartment/image/4-5.png);
-}
-#apart-4-6:hover {
-  background-image: url(/uploads/apartment/image/4-6.png);
-}
-#apart-4-7:hover {
-  background-image: url(/uploads/apartment/image/4-7.png);
-}
-#apart-4-8:hover {
-  background-image: url(/uploads/apartment/image/4-8.png);
-}
-#apart-4-9:hover {
-  background-image: url(/uploads/apartment/image/4-9.png);
-}
-#apart-4-10:hover {
-  background-image: url(/uploads/apartment/image/4-10.png);
-}
-#apart-4-11:hover {
-  background-image: url(/uploads/apartment/image/4-11.png);
+.apartment-element {
+  opacity: 0;
 }

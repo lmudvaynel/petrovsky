@@ -19,25 +19,29 @@ $.fn.clicktoggle = function(a,b){
 };
 
 $(document).ready(function(){
+		$('.apartment-element').mouseenter(function () {
+			$(this).addClass('current');
+		}).mouseleave(function () {
+			$(this).removeClass('current');
+		});
 		$('#canvas-container').mouseover(function () {
 			$(this).find('.floor-element-1').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-1-hover.png)');
 			}).mouseleave(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-1.png)');
 			});
 	  });
 	  $('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-2').mouseover(function () {
+			$(this).find('.floor-element-2').mouseenter(function () {
 				$(this).css('backgroundImage', 'url(/images/floor-2-hover.png)');
-			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-2.png)');
-			});
+			})
 	  });
-	  $('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-3').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-3-hover.png)');
+	  $('#canvas-container').mouseenter(function () {
+			$(this).find('.floor-element-3').mouseenter(function () {
+				$('.apartment-element').animate({opacity: 1}, 100);
 			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-3.png)');
+				$('.apartment-element').each(function() {
+  				$(this).animate({opacity: 0}, 100);
+				});
 			});
 	  });
 

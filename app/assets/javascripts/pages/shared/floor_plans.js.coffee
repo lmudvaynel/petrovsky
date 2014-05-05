@@ -41,7 +41,7 @@ $.app.pages.shared.floor_plans =
       count: 6
       solid:
         size:
-          width: 2171
+          width: 2320
           height: 613
         opacity:
           hide: 0
@@ -572,7 +572,7 @@ $.app.pages.shared.floor_plans =
 
   init_solid_floor_dom_element: (floor_number) ->
     solid_floor_element = $('<div/>', class: 'floor-element-'+floor_number)
-    if floor_number==6
+    if floor_number==6 or floor_number==3
       solid_floor_css =
         height: "1210px"
         width: "#{@.params.floors.solid.size.width}px"
@@ -607,11 +607,12 @@ $.app.pages.shared.floor_plans =
     apartnemt_floor_element = $('<div/>', class: 'apartment-element', num: apartment.id, id: 'apart-'+apartment.floor_number+'-'+apartment.number, 'data-selected': false)
     if apartment.sold_out
       apartnemt_floor_element.css
-        'boxShadow': 'inset 0 0 400px black'
+        'background-image': "url(/uploads/apartment/image/#{apartment.floor_number}-#{apartment.number}-sold.png)"
     else
       apartnemt_floor_element.css
-        'cursor': 'pointer'
+        'background-image': "url(/uploads/apartment/image/#{apartment.floor_number}-#{apartment.number}.png)"
     $(apartnemt_floor_element).css
+      'cursor': 'pointer'
       width: "#{apartment.size[0]}px"
       height: "#{apartment.size[1]}px"
     apartnemt_floor_element.get(0)
@@ -851,7 +852,10 @@ $.app.pages.shared.floor_plans =
     $('.apart-number').text(apartment.number);
     $('.apart-price').text(apartment.price);
     $('.apart-area').text(apartment.area);
-    return if apartment.sold_out
+    if apartment.sold_out
+      $('.apart-sold').text("проданы");
+    else
+      $('.apart-sold').text("");
     $(".buy-wrapper").show();
     return false;
 
@@ -887,7 +891,6 @@ $(document).ready ->
   images = []
   for floor_number in [1..fp.params.floors.count]
     images.push "/images/floor-#{floor_number}.png"
-    images.push "/images/floor-#{floor_number}-hover.png"
     images.push "/images/floor-demonstration-#{floor_number}.png"
   for apartment in fp.apartments
     images.push "/uploads/apartment/image/#{apartment.image}"
