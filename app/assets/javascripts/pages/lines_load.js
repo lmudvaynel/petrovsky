@@ -16,25 +16,18 @@ function start_animation(number,timer){
   animations = [
     // "Приветствие"
     function () {
-      $.cookie("number",27);
-      $.cookie("timer",1);
+//      $.cookie("number",27);//////////////////////////////////////////////////
+//      $.cookie("timer",1);////////////////////////////////////////////////////
       lines.changeBackgroundImageTo(0,1000);
       $('#main').fadeOut();
       $('#main_2').fadeOut();
-       setTimeout(function(){
-      lines.getByElement('greeting first')[0].animations.opacityTo(1, null, callback);},500);
-    },
-    function () {
-      lines.getByElement('greeting second')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('greeting third')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('greeting fourth')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('greeting fifth')[0].animations.opacityTo(1, null, callback);
+      setTimeout(function(){
+        lines.getByElement('greeting first')[0].animations.opacityTo(1);
+        lines.getByElement('greeting second')[0].animations.opacityTo(1);
+        lines.getByElement('greeting third')[0].animations.opacityTo(1);
+        lines.getByElement('greeting fourth')[0].animations.opacityTo(1);
+        lines.getByElement('greeting fifth')[0].animations.opacityTo(1, null, callback);
+      },500);
     },
     function () {
 //      var thesisLine = lines.getByElement('description greeting thesisWord')[0];
@@ -57,20 +50,14 @@ function start_animation(number,timer){
 //      lines.getByElement('greeting title')[0].opacityTo(0);
 //      lines.getByElement('thesis harmony')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
 //      lines.getByElement('thesis harmony')[0].animations.opacityTo(0, { wordFrom: 0, wordTo: 2 });
-      lines.getByElement('description harmony first')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('description harmony second')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('description harmony third')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
+      lines.getByElement('description harmony first')[0].animations.opacityTo(1);
+      lines.getByElement('description harmony second')[0].animations.opacityTo(1);
+      lines.getByElement('description harmony third')[0].animations.opacityTo(1);
       lines.getByElement('description harmony fourth')[0].animations.opacityTo(1, null, callback);
     },
     function () {
       var thesisLine = lines.getByElement('description harmony thesisWord')[0];
-      thesisLine.animations.resize(2);
+      thesisLine.animations.resize(10);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description harmony');
       for (var i in harmonyDescriptionLines) {
@@ -88,17 +75,13 @@ function start_animation(number,timer){
 //      lines.getByElement('thesis harmony')[0].opacityTo(0);
 //      lines.getByElement('thesis liberty')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
 //      lines.getByElement('thesis liberty')[0].animations.opacityTo(0, { wordFrom: 0, wordTo: 2 });
-      lines.getByElement('description liberty first')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('description liberty second')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
+      lines.getByElement('description liberty first')[0].animations.opacityTo(1);
+      lines.getByElement('description liberty second')[0].animations.opacityTo(1);
       lines.getByElement('description liberty third')[0].animations.opacityTo(1, null, callback);
     },
     function () {
       var thesisLine = lines.getByElement('description liberty thesisWord')[0];
-      thesisLine.animations.resize(2);
+      thesisLine.animations.resize(10);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description liberty');
       for (var i in harmonyDescriptionLines) {
@@ -116,15 +99,9 @@ function start_animation(number,timer){
 //      lines.getByElement('thesis liberty')[0].opacityTo(0);
 //      lines.getByElement('thesis comfort')[0].opacityTo(1, { wordFrom: 0, wordTo: 2 });
 //      lines.getByElement('thesis comfort')[0].animations.opacityTo(0, { wordFrom: 0, wordTo: 2 });
-      lines.getByElement('description comfort first')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('description comfort second')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('description comfort third')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
+      lines.getByElement('description comfort first')[0].animations.opacityTo(1);
+      lines.getByElement('description comfort second')[0].animations.opacityTo(1);
+      lines.getByElement('description comfort third')[0].animations.opacityTo(1);
       lines.getByElement('description comfort fourth')[0].animations.opacityTo(1, null, callback);
     },
 //  function () {
@@ -132,7 +109,7 @@ function start_animation(number,timer){
 //  },
     function () {
       var thesisLine = lines.getByElement('description comfort thesisWord')[0];
-      thesisLine.animations.resize(2);
+      thesisLine.animations.resize(10);
       thesisLine.animations.opacityTo(0);
       var harmonyDescriptionLines = lines.getByElement('description comfort');
       for (var i in harmonyDescriptionLines) {
@@ -147,12 +124,8 @@ function start_animation(number,timer){
     // Все тезисы
     function () {
       lines.changeBackgroundImageTo(4);
-      lines.getByElement('thesises title')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
-      lines.getByElement('thesises first')[0].animations.opacityTo(1, null, callback);
-    },
-    function () {
+      lines.getByElement('thesises title')[0].animations.opacityTo(1);
+      lines.getByElement('thesises first')[0].animations.opacityTo(1);
       lines.getByElement('thesises second')[0].animations.opacityTo(1, null, callback);
     },
     /*function () {
@@ -167,8 +140,8 @@ function start_animation(number,timer){
           clearInterval(thesisesInterval);
           thesisesCallback = callback;
         }
-        thesisesLines[thesisLine].animations.resize(2, thesisesCallback);
-        thesisesLines[thesisLine].animations.opacityTo(0);
+        thesisesLines[thesisLine].animations.resize(10);
+        thesisesLines[thesisLine].animations.opacityTo(0, {}, thesisesCallback, 250);
         thesisLine++;
       }, 100);
       document.getElementById('main_hidden_3').style.cursor='pointer';

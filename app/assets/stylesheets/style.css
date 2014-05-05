@@ -16,7 +16,7 @@
 	font-style: bold;
 }
 /* NEW CSS */
-body { font-family: 'Arial', sans-serif; padding:0; color:#fff;}
+body { font-family: 'Arial', sans-serif; padding:0; color:#fff; overflow:hidden; }
 td, th { font-family: 'PT Sans Normal', sans-serif; color:#fff;}
 
 
