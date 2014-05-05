@@ -14,8 +14,8 @@ $.app.pages.shared.floor_plans =
   params:
     container:
       size_in_percents:
-        width: 100
-        height: 100
+        width:100 
+        height:100
     scene:
       distance: 1000
       yz_angle: 3 * Math.PI / 8
@@ -32,6 +32,7 @@ $.app.pages.shared.floor_plans =
           to_above_the_scene: 50
           to_under_the_scene: 50
           to_center_of_scene: 50
+          to_hidden: 50
       house:
         delay:
           to_scene: 200
@@ -40,20 +41,20 @@ $.app.pages.shared.floor_plans =
       count: 6
       solid:
         size:
-          width: 1023
-          height: 544
+          width: 2171
+          height: 613
         opacity:
           hide: 0
-          show: 0.75
+          show: 1
           speed: 1000
         gap: 100
       demonstration:
         size:
           width: 1024
-          height: 768
+          height: 270
         opacity:
           hide: 0
-          show: 0.75
+          show: 0.95
           speed: 1000
       plan:
         apartment:
@@ -61,7 +62,7 @@ $.app.pages.shared.floor_plans =
             default: 0
             mouseover: 1
           mouseover:
-            dz: 5
+            dz: 2
       number:
         positions:
           corners:
@@ -73,8 +74,14 @@ $.app.pages.shared.floor_plans =
             6: [[0, 0], [1023, 0], [1023, 544], [0, 544]]
           current: 3
         change_position_delay: 200
-        font_size:
-          px: 50
+        change_part_delay: 10
+        size:
+          number:
+            width: 140
+            height: 40
+          container:
+            width: 400
+            height: 50
   house: {}
   showed_floor:
     floor: null
@@ -85,6 +92,12 @@ $.app.pages.shared.floor_plans =
 
   change_mode_to: (new_mode) ->
     @.mode = new_mode
+
+  objects_positions_is_equal: (first_object, second_object) ->
+    for option in @.location.options
+      for coord in @.location.coords
+        return false if Math.abs(first_object[option][coord] - second_object[option][coord]) > 0.2
+    true
 
   camera_position_start: ->
     position:
@@ -112,6 +125,14 @@ $.app.pages.shared.floor_plans =
     floor_position_under_the_scene.position.y -= @.params.scene.distance * 3
     floor_position_under_the_scene
 
+  floor_position_hidden: ->
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: - Math.cos(@.params.scene.yz_angle) - Math.PI/2, y: 0, z: 0
+
   floor_position_preforeground: ->
     position:
       x: 0
@@ -131,10 +152,12 @@ $.app.pages.shared.floor_plans =
   floor_position_demonstration: ->
     position:
       x: -50
-      y: 85
-      z: 40
+      y: 90
+      z: 0
     rotation:
-      x: @.params.scene.yz_angle - 120 * Math.PI / 200, y: -10 * Math.PI / 600, z: - 95 * Math.PI / 600
+      x: -0.7968583470577033
+      y: -0.032359877559829886
+      z: -0.49741883681838395
 
   floor_demonstration_position_foreground: ->
     position:
@@ -150,19 +173,20 @@ $.app.pages.shared.floor_plans =
     @.init_scene()
     @.init_renderer()
     @.init_controls()
+    @.block_controls() # appended
     @.init_events()
     @.init_animation()
     @.init_animated_objects()
 
     @.init_house()
     @.house.add_to_scene()
-    @.house.animate_to_scene 0, =>
-      @.end_house_animate_to_scene()
+#    @.house.animate_to_scene 0, =>
+#      @.end_house_animate_to_scene()
 
   init_container: ->
-    @.container.css
-      width: window.innerWidth * @.params.container.size_in_percents.width / 100
-      height: window.innerHeight * @.params.container.size_in_percents.height / 100
+#    @.container.css
+#      width: window.innerWidth * @.params.container.size_in_percents.width / 100
+#      height: window.innerHeight * @.params.container.size_in_percents.height / 100
 
   init_camera: ->
     aspect = @.container.innerWidth() / @.container.innerHeight()
@@ -195,19 +219,29 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
 
     @.container.on 'resize', @.on_window_resize
-    @.container.on 'click', 'a.show-floor', (event) ->
+    @.container.on 'click', '.show-floor', (event) ->
       return unless fp.valid_event_for 'house', event
       floor_number = parseInt $(@).text()
       fp.floor_element_on_click floor_number
+    @.container.on 'mouseover', '.show-floor', @.floor_element_on_mouse_event
+    @.container.on 'mouseout', '.show-floor', @.floor_element_on_mouse_event
     @.container.on 'mouseover', '.apartment-element', @.apartment_element_on_mouse_event
     @.container.on 'mouseout', '.apartment-element', @.apartment_element_on_mouse_event
     @.container.on 'click', '.apartment-element', @.apartment_element_on_click
 
-    controls = $('#controls-container')
-    controls.on 'click', 'a#back-to-house', (event) ->
+    house_controls = $('#house-controls-container')
+    house_controls.on 'click', '.back-to-house', (event) ->
+      $('.fasad-wrap').show();
+      $("#canvas-container").zIndex(10)
       return unless fp.valid_event_for 'floor-foreground', event
       fp.back_to_house_on_click()
-    controls.on 'click', 'a#toggle-dimensions', fp.toggle_dimensions_on_click
+    house_controls.on 'click', '.toggle-dimensions', fp.toggle_dimensions_on_click
+
+    floors = $('#house-image-container')
+    floors.on 'click', '.show-house-floor', (event) ->
+      return unless fp.valid_event_for 'house', event
+      floor_number = parseInt $(@).data('floorNumber')
+      fp.show_house_floor_on_click floor_number
 
   init_animated_objects: ->
     fp = $.app.pages.shared.floor_plans
@@ -288,6 +322,7 @@ $.app.pages.shared.floor_plans =
     , @.params.animation.speed
 
   block_controls: ->
+    console.log 'Controls blocked'
     return if @.params.controls.blocked
 
     @.controls.rotateSpeed = 0
@@ -297,45 +332,59 @@ $.app.pages.shared.floor_plans =
     @.params.controls.blocked = true
 
   unblock_controls_for_house: ->
+    console.log 'Controls for house unblocked'
     return unless @.params.controls.blocked
 
-    @.controls.rotateSpeed = 1
+    @.controls.rotateSpeed = 2
     @.controls.minPolarAngle = @.params.scene.yz_angle
     @.controls.maxPolarAngle = @.params.scene.yz_angle
+    @.controls.minAzimuthalAngle = - Math.PI
+    @.controls.maxAzimuthalAngle = Math.PI
     @.controls.noPan = true
     @.controls.noZoom = false
 
     @.params.controls.blocked = false
 
   unblock_controls_for_floor_foreground: ->
+    console.log 'Controls for floor 01 unblocked'
     return unless @.params.controls.blocked
 
     @.controls.rotateSpeed = 1
-    @.controls.minPolarAngle = Math.PI / 4
-    @.controls.maxPolarAngle = 9 * Math.PI / 16
+    @.controls.minPolarAngle = 3 * Math.PI / 8
+    @.controls.maxPolarAngle = 3 * Math.PI / 8 # 9 * Math.PI / 16
+    @.controls.minAzimuthalAngle = 0 #- Math.PI / 16
+    @.controls.maxAzimuthalAngle = 0 #Math.PI / 16
     @.controls.noPan = true
     @.controls.noZoom = false
 
     @.params.controls.blocked = false
 
   unblock_controls_for_floor_demonstration: ->
+    console.log 'Controls for floor 02 unblocked'
     return unless @.params.controls.blocked
 
-    @.controls.rotateSpeed = 0
-    @.controls.minPolarAngle = @.params.scene.yz_angle
-    @.controls.maxPolarAngle = @.params.scene.yz_angle
+    @.controls.rotateSpeed = 0.2
+    @.controls.minPolarAngle = 3 * Math.PI / 8
+    @.controls.maxPolarAngle = 7 * Math.PI / 16
+    @.controls.minAzimuthalAngle = - Math.PI / 32
+    @.controls.maxAzimuthalAngle = Math.PI / 32
     @.controls.noPan = true
     @.controls.noZoom = false
 
     @.params.controls.blocked = false
 
-  animate_camera_to_start: ->
+  camera_on_start_position: ->
+    @.objects_positions_is_equal(@.camera, @.camera_position_start())
+
+  animate_camera_to_start: (callbacks = []) ->
+    return if @.camera_on_start_position()
     animated_camera = @.animated_objects.get_by_name 'camera'
     animated_camera = @.init_animated_object 'camera' unless animated_camera
     animated_camera.set_scene_objects
       object: @.camera
       position_of_arrival: @.camera_position_start()
       frames: @.params.animation.frames.camera
+    animated_camera.set_callbacks callbacks
     @.animated_objects.set animated_camera
     animated_camera.animation_start()
 
@@ -353,9 +402,12 @@ $.app.pages.shared.floor_plans =
       remove_from_scene_by: (floor_number) ->
         for floor, i in @.floors
           floor.remove_from_scene() unless i == floor_number - 1
+      move_to: (position) ->
+        floor.move_to(position) for floor in @.floors
       update_numbers_positions: ->
         @.floors[@.floors.length - 1].calculate_nearest_number_position()
-        floor.update_number_position() for floor in @.floors
+        corner = 3 if fp.animated_objects.animated()
+        floor.update_number_position(corner) for floor in @.floors
       set_delay_timeout_to_animations: (i, animations, direction, callbacks = []) ->
         setTimeout =>
           for floor_id, animation of animations
@@ -408,6 +460,11 @@ $.app.pages.shared.floor_plans =
         if object_type == 'plan'
           object.remove apartment for apartment in object.getDescendants()
         else
+    move_to: (position) ->
+      floor_number = parseInt $(@.object.number.element).text()
+      for option in fp.location.options
+        for coord in fp.location.coords
+          @.object.solid[option][coord] = fp["floor_position_#{position}"](floor_number)[option][coord]
     toggle_to_scene: (toggle, callback) ->
       for object_type, object of @.object
         if object_type == 'solid' then cb = callback else cb = null
@@ -440,7 +497,7 @@ $.app.pages.shared.floor_plans =
         corner_position_by_params = fp.params.floors.number.positions.corners[floor_number][corner]
         corner_positions[corner] =
           x: @.object.solid.position.x - floor.half_width + corner_position_by_params[0]
-          y: @.object.solid.position.y + fp.params.floors.number.font_size.px / 2
+          y: @.object.solid.position.y
           z: @.object.solid.position.z - floor.half_height + corner_position_by_params[1]
       corner_positions
     calculate_distance_to_corner_position: (corner_positions, corner) ->
@@ -467,14 +524,14 @@ $.app.pages.shared.floor_plans =
       current_corner = fp.params.floors.number.positions.current
       current_corner = @.recalculate_current_corner(corner_positions, current_corner)
       fp.params.floors.number.positions.current = current_corner
-    update_number_position: ->
+    update_number_position: (corner) ->
       @.object.number.rotation = fp.camera.rotation.clone()
       floor_number = parseInt $(@.object.number.element).text()
-      current_corner = fp.params.floors.number.positions.current
+      current_corner = corner || fp.params.floors.number.positions.current
       for coord in fp.location.coords
         @.object.number.position[coord] = @.calculate_number_corner_positions(floor_number)[current_corner][coord]
     animate_to: (position, name = 'house', callbacks = []) ->
-      floor_number = @.object.number.element.textContent
+      floor_number = parseInt $(@.object.number.element).text()
       animated_floor = fp.animated_objects.get_by_name(name)
       unless animated_floor
         animated_floor = fp.init_animated_object name, callbacks
@@ -498,6 +555,8 @@ $.app.pages.shared.floor_plans =
       @.animate_to 'above_the_scene', name, callbacks
     animate_to_under_the_scene: (name = 'house', callbacks = []) ->
       @.animate_to 'under_the_scene', name, callbacks
+    animate_to_hidden: (name = 'house', callbacks = []) ->
+      @.animate_to 'hidden', name, callbacks
 
   init_floor_object: (floor_number, position) ->
     solid: @.init_solid_floor_object(floor_number, position)
@@ -512,14 +571,20 @@ $.app.pages.shared.floor_plans =
     solid_floor_object
 
   init_solid_floor_dom_element: (floor_number) ->
-    solid_floor_element = document.createElement('div')
-    solid_floor_css =
-      width: "#{@.params.floors.solid.size.width}px"
-      height: "#{@.params.floors.solid.size.height}px"
-      opacity: @.params.floors.solid.opacity.show
-      'background-image': "url(/images/floor-#{floor_number}.png)"
-    $(solid_floor_element).addClass('floor-element').css solid_floor_css
-    solid_floor_element
+    solid_floor_element = $('<div/>', class: 'floor-element-'+floor_number)
+    if floor_number==6
+      solid_floor_css =
+        height: "1210px"
+        width: "#{@.params.floors.solid.size.width}px"
+        opacity: @.params.floors.solid.opacity.show
+        'background-image': "url(/images/floor-#{floor_number}.png)"
+    else
+      solid_floor_css =
+        height: "#{@.params.floors.solid.size.height}px"
+        width: "#{@.params.floors.solid.size.width}px"
+        opacity: @.params.floors.solid.opacity.show
+        'background-image': "url(/images/floor-#{floor_number}.png)"     
+    $(solid_floor_element).css(solid_floor_css).get(0)
 
   init_plan_floor_object: (floor_number, position) ->
     plan_floor_object = new THREE.Object3D()
@@ -535,15 +600,20 @@ $.app.pages.shared.floor_plans =
     apartment_floor_object.name = "apartment-#{apartment.number}"
     apartment_floor_object.position.x = - @.params.floors.solid.size.width / 2 + apartment.size[0] / 2 + apartment.dx
     apartment_floor_object.position.y = @.params.floors.solid.size.height / 2 - apartment.size[1] / 2 - apartment.dy
+    apartment_floor_object.position.z += @.params.floors.plan.apartment.mouseover.dz
     apartment_floor_object
 
   init_apartnemt_floor_dom_element: (apartment) ->
-    apartnemt_floor_element = $('<div/>', class: 'apartment-element', id: apartment.id)
+    apartnemt_floor_element = $('<div/>', class: 'apartment-element', num: apartment.id, id: 'apart-'+apartment.floor_number+'-'+apartment.number, 'data-selected': false)
+    if apartment.sold_out
+      apartnemt_floor_element.css
+        'boxShadow': 'inset 0 0 400px black'
+    else
+      apartnemt_floor_element.css
+        'cursor': 'pointer'
     $(apartnemt_floor_element).css
       width: "#{apartment.size[0]}px"
       height: "#{apartment.size[1]}px"
-      opacity: @.params.floors.plan.apartment.opacity.default
-      'background-image': "url(/uploads/apartment/image/#{apartment.image})"
     apartnemt_floor_element.get(0)
 
   init_number_floor_object: (floor_number) ->
@@ -551,15 +621,38 @@ $.app.pages.shared.floor_plans =
     floor_number_object = new THREE.CSS3DObject(floor_number_element)
     floor_number_object
 
+  init_show_floor_link_dom_element: (floor_number) ->
+    show_floor_link_element = $("<div/>", class: 'show-floor')
+    show_floor_link_element.text("#{floor_number} этаж")
+    show_floor_link_css =
+      width: "#{@.params.floors.number.size.number.width}px"
+      height: "#{@.params.floors.number.size.number.height}px"
+    show_floor_link_element.css(show_floor_link_css)
+
+  init_number_floor_arrow_dom_element: (arrow_direction) ->
+    number_floor_arrow_element = $('<img/>', class: 'floor-number-arrow')
+    number_floor_arrow_element.attr('src', "images/floor-number-#{arrow_direction}-arrow.png")
+    number_floor_arrow_element
+
   init_number_floor_dom_element: (floor_number) ->
-    number_floor_element = document.createElement('a')
+    number_floor_element = $('<div/>', class: 'floor-number')
+    number_floor_left_element = $('<div/>', class: 'left')
+    number_floor_element.append(number_floor_left_element)
+    number_floor_left_element.append(@.init_show_floor_link_dom_element(floor_number))
+    number_floor_left_element.append(@.init_number_floor_arrow_dom_element('right'))
+    number_floor_right_element = $('<div/>', class: 'right')
+    number_floor_element.append(number_floor_right_element)
+    number_floor_right_element.append(@.init_number_floor_arrow_dom_element('left'))
+    number_floor_right_element.append(@.init_show_floor_link_dom_element(floor_number))
     number_floor_css =
-      width: "#{@.params.floors.number.font_size.px}px"
-      height: "#{@.params.floors.number.font_size.px}px"
-      'font-size': "#{@.params.floors.number.font_size.px}px"
-    $(number_floor_element).attr('href', '#').addClass('show-floor')
-    $(number_floor_element).text(floor_number).css number_floor_css
-    number_floor_element
+      width: "#{@.params.floors.number.size.container.width}px"
+      height: "#{@.params.floors.number.size.container.height}px"
+    number_floor_element.css(number_floor_css).get(0)
+
+  hide_number_floor_part: (part, both = false) ->
+    other_part = if part == 'left' then 'right' else 'left'
+    $(".floor-number .#{part}").addClass('hidden')
+    $(".floor-number .#{other_part}").removeClass('hidden') unless both
 
   init_floor_demonstration: (floor_number) ->
     fp = $.app.pages.shared.floor_plans
@@ -584,14 +677,13 @@ $.app.pages.shared.floor_plans =
     floor_demonstration_object
 
   init_floor_demonstration_dom_element: (floor_number) ->
-    floor_demonstration_element = document.createElement('div')
+    floor_demonstration_element = $('<div/>', class: 'floor-demonstration-element')
     floor_demonstration_css =
       width: "#{@.params.floors.demonstration.size.width}px"
       height: "#{@.params.floors.demonstration.size.height}px"
       opacity: @.params.floors.demonstration.opacity.hide
       'background-image': "url(/images/floor-demonstration-#{floor_number}.png)"
-    $(floor_demonstration_element).addClass('floor-demonstration-element').css floor_demonstration_css
-    floor_demonstration_element
+    $(floor_demonstration_element).css(floor_demonstration_css).get(0)
 
   on_window_resize: ->
     @.camera.aspect = @.container.innerWidth() / @.container.innerHeight()
@@ -600,8 +692,26 @@ $.app.pages.shared.floor_plans =
     @.render()
 
   floor_element_on_click: (floor_number) ->
+#    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
     @.house.animate_from_scene floor_number, =>
       @.animate_showed_floor_to_foreground(floor_number)
+
+  show_house_floor_on_click: (floor_number) ->
+#    $(@.house.floors[floor_number - 1].object.solid.element).css boxShadow: 'none'
+    $("#canvas-container").zIndex(800)
+    $('.fasad-wrap').hide();
+    @.animate_house_floor_to_foreground(floor_number)
+
+  floor_element_on_mouse_event: (event) ->
+    fp = $.app.pages.shared.floor_plans
+    return unless fp.valid_event_for 'house', event
+    floor_number = parseInt $(@).text()
+    floor_element = $(fp.house.floors[floor_number - 1].object.solid.element)
+    if event.type == 'mouseover'
+#      box_shadow = "inset 0 0 #{Math.round((floor_element.width() + floor_element.height()))}px gold"
+    else
+#      box_shadow = 'none'
+#    floor_element.css boxShadow: box_shadow
 
   animate_showed_floor_to_foreground: (floor_number) ->
     @.showed_floor.floor = @.house.floor(floor_number)
@@ -618,7 +728,37 @@ $.app.pages.shared.floor_plans =
           @.change_mode_to 'floor-foreground'
       , 100
 
+  animate_house_floor_to_foreground: (floor_number) ->
+    @.toggle_house_image_controls_container('hide')
+    @.showed_floor.floor = @.house.floor(floor_number)
+    @.showed_floor.floor.hide_number()
+    @.showed_floor.number = floor_number
+    @.showed_floor.floor.object.solid.position.set(0, 0, 0)
+    @.showed_floor.floor.object.solid.rotation = @.camera.rotation.clone()
+    @.showed_floor.floor.object.solid.rotation.x -= Math.PI / 2;
+
+    @.showed_floor.floor.animate_to_preforeground 'floor-preforeground', =>
+      setTimeout =>
+        @.showed_floor.floor.animate_to_foreground 'floor', =>
+          @.house.remove_from_scene_by(@.showed_floor.number)
+          @.unblock_controls_for_floor_foreground()
+          @.toggle_house_controls_container 'show'
+          @.change_mode_to 'floor-foreground'
+      , 100
+
   back_to_house_on_click: ->
+    @.toggle_house_controls_container 'hide'
+    @.animate_camera_to_start()
+    @.showed_floor.floor.animate_to_hidden 'floor', =>
+      @.showed_floor.floor.show_number()
+      @.init_house @.showed_floor
+      @.house.add_to_scene_by(@.showed_floor.number)
+      @.house.move_to('above_the_scene');
+      @.clear_showed_floor()
+      @.change_mode_to 'house'
+      @.toggle_house_image_controls_container('show')
+
+  back_to_house_floors_on_click: ->
     @.toggle_controls_container 'hide'
     @.animate_camera_to_start()
     @.showed_floor.floor.animate_to_center_of_scene 'floor', =>
@@ -630,9 +770,13 @@ $.app.pages.shared.floor_plans =
         @.clear_showed_floor()
         @.change_mode_to 'house'
 
-  toggle_controls_container: (position) ->
+  toggle_house_controls_container: (position) ->
     if position == 'show' then action = 'remove' else action = 'add'
-    $('#controls-container')["#{action}Class"]('hidden')
+    $('#house-controls-container')["#{action}Class"]('hidden')
+
+  toggle_house_image_controls_container: (position) ->
+    if position == 'show' then visibility = "visible" else visibility = "hidden"
+    $('#house-image-container').css("visibility", visibility)
 
   end_house_animate_to_scene: ->
     @.unblock_controls_for_house()
@@ -641,15 +785,15 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     if $(@).data('toggle-direction') == 'to-3d'
       return unless fp.valid_event_for 'floor-foreground', event
+      $('.back-to-house').addClass('hidden')
       fp.animate_camera_to_start()
-      $('#back-to-house').addClass('hidden')
       fp.showed_floor.floor.animate_to_demonstration 'floor', =>
         fp.init_floor_demonstration(fp.showed_floor.number)
         fp.floor_demonstration.add_to_scene()
         fp.showed_floor.floor.hide_from_scene()
         fp.unblock_controls_for_floor_demonstration()
 
-        $(@).text('Show 2D').data('toggle-direction', 'to-2d')
+        $(@).text('Показать в 2D').data('toggle-direction', 'to-2d')
         fp.change_mode_to 'floor-demonstration'
     else
       return unless fp.valid_event_for 'floor-demonstration', event
@@ -659,9 +803,9 @@ $.app.pages.shared.floor_plans =
         fp.showed_floor.floor.animate_to_foreground 'floor', =>
           fp.unblock_controls_for_floor_foreground()
 
-          $(@).text('Show 3D').data('toggle-direction', 'to-3d')
+          $(@).text('Показать в 3D').data('toggle-direction', 'to-3d')
           fp.change_mode_to 'floor-foreground'
-          $('#back-to-house').removeClass('hidden')
+          $('.back-to-house').removeClass('hidden')
 
   clear_showed_floor: ->
     @.showed_floor =
@@ -674,46 +818,57 @@ $.app.pages.shared.floor_plans =
         return apartment
 
   apartment_element_on_mouse_event: (event) ->
+    return # !!!
     fp = $.app.pages.shared.floor_plans
     return unless fp.valid_event_for 'floor-foreground', event
     return unless fp.showed_floor.floor
     apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
     if event.type == 'mouseover'
+      if $(@).data('selected') then return else $(@).data('selected', true)
       if apartment.sold_out then shadow_color = 'red' else shadow_color = 'green'
-      shadow = "inset 0 0 #{Math.round((apartment.size[0] + apartment.size[1]) / 4)}px #{shadow_color}"
+      shadow = "inset 0 0 #{Math.round((apartment.size[0] + apartment.size[1]) / 4)}px gray"# #{shadow_color}"
       $(@).css
-        boxShadow: shadow
+#        boxShadow: shadow
         opacity: fp.params.floors.plan.apartment.opacity.mouseover
       sign_dz = 1
     else
+      if $(@).data('selected') then $(@).data('selected', false) else return
       $(@).css
-        boxShadow: 'none'
+#        boxShadow: 'none'
         opacity: fp.params.floors.plan.apartment.opacity.default
       sign_dz = -1
     plan_object = fp.scene.getObjectByName("plan-#{apartment.floor_number}")
     object = plan_object.getObjectByName("apartment-#{apartment.number}")
-    object.position.z += sign_dz * fp.params.floors.plan.apartment.mouseover.dz if object
+#    object.position.z += sign_dz * fp.params.floors.plan.apartment.mouseover.dz if object
     fp.render()
 
   apartment_element_on_click: (event) ->
     fp = $.app.pages.shared.floor_plans
     return unless fp.valid_event_for 'floor-foreground', event
     return unless fp.showed_floor.floor
-    apartment = fp.get_apartment_by_id parseInt($(@).attr('id'))
+    apartment = fp.get_apartment_by_id parseInt($(@).attr('num'))
+    $('.floor-number').text(apartment.floor_number);
+    $('.apart-number').text(apartment.number);
+    $('.apart-price').text(apartment.price);
+    $('.apart-area').text(apartment.area);
     return if apartment.sold_out
-    $('#order-form-dialog').dialog
-      width: 400
-      modal: true
-      buttons:
-        'Отправить заявку': ->
-          $(@).find('#order_apartment_id').val(apartment.id)
-          $(@).find('form').submit()
-          $(@).dialog 'close'
-        'Отменить': -> $(@).dialog 'close'
-      close: -> $(@).find('input').val('')
+    $(".buy-wrapper").show();
+    return false;
 
   update_plans_positions_before_render: ->
     floor.update_plan_position(i + 1) for floor, i in @.house.floors
+
+  update_number_showed_parts: ->
+    floor_number_element = $('.floor-number').last()[0]
+    return unless floor_number_element
+    floor_number_element_position = $(floor_number_element).position().left + $(floor_number_element).width() / 2
+    if @.animated_objects.animated() || @.mode != 'house'
+      @.hide_number_floor_part(part, true) for part in ['left', 'right']
+    else
+      if floor_number_element_position > @.container.width() / 2 + @.params.floors.number.change_part_delay
+        @.hide_number_floor_part 'left'
+      else if floor_number_element_position < @.container.width() / 2 - @.params.floors.number.change_part_delay
+        @.hide_number_floor_part 'right'
 
   animate: ->
     fp = $.app.pages.shared.floor_plans
@@ -724,6 +879,7 @@ $.app.pages.shared.floor_plans =
     fp = $.app.pages.shared.floor_plans
     fp.update_plans_positions_before_render()
     fp.house.update_numbers_positions()
+    fp.update_number_showed_parts()
     fp.renderer.render(fp.scene, fp.camera)
 
 $(document).ready ->
@@ -731,6 +887,7 @@ $(document).ready ->
   images = []
   for floor_number in [1..fp.params.floors.count]
     images.push "/images/floor-#{floor_number}.png"
+    images.push "/images/floor-#{floor_number}-hover.png"
     images.push "/images/floor-demonstration-#{floor_number}.png"
   for apartment in fp.apartments
     images.push "/uploads/apartment/image/#{apartment.image}"

@@ -12,5 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require slides.min.jquery
+//= require touchTouch.jquery
 //= require init_app
 //= require menu
+//= require js
+//= require music
+//= require jquery.cookie
+//= require soundmanager2
+//= require video-js
+//= require bigvideo
+//= require classie
+//= require svganimations

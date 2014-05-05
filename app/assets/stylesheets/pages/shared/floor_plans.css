@@ -2,29 +2,119 @@
   display: none;
 }
 
-.show-floor {
-  text-align: center;
+.floor-number {
   font-weight: bold;
+}
+.floor-number .left {
+  float: left;
+  padding-left: 10px;
+}
+.floor-number .right {
+  float: left;
+  padding-left: 200px;
+}
+.floor-number .floor-number-arrow {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  float: left;
+}
+.floor-number .show-floor {
+  float: left;
+  font-size: 40px;
+  padding-top: 10px;
+  text-align: center;
+  border: 2px solid gray;
+  color: gray;
   text-decoration: none;
-  color: darkgoldenrod;
 }
-.show-floor:hover {
-  color: gold;
+.floor-number .show-floor:hover {
+  color: darkgray;
 }
-.show-floor:active {
-  color: yellow;
+.floor-number .show-floor:active {
+  color: lightgray;
 }
 
-#controls-container {
+#canvas-container {
+  width: 100%;
+  height: 100%;
+  z-index: 90;
+}
+
+#house-image-controls {
+  z-index: 2;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#house-controls-container , #floors-controls-container {
   position: absolute;
   bottom: 50px;
-  right: 100px;
+  right: 33%;
+  z-index: 1100;
 }
-#controls-container a {
-  font-size: xx-large;
-  color: orangered;
+#house-controls-container a , #floors-controls-container a {
+  font-size: 24px;
+  text-transform: uppercase;
+  border:4px solid #fffcd9; 
+  background:rgba(0,0,0,0.8); 
   text-decoration: none;
-  border: 4px double orangered;
-  padding: 5px;
+  padding: 5px 20px;
   margin: 10px;
+  text-align: center;
+  z-index: 1200;
+}
+
+#house-controls-container a:hover , #floors-controls-container a:hover {
+  color: #fffcd9;
+  background: #8a8982;
+}
+
+#preloader-container {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  padding-top: 400px;
+  z-index: 100;
+  font-size: 48pt;
+  font-weight: bold;
+  color: gray;
+  text-shadow: 0 0 10px gray;
+}
+.apartment-element .vacant {
+  cursor: pointer;
+}
+
+#apart-4-1:hover {
+  background-image: url(/uploads/apartment/image/4-1.png);
+}
+#apart-4-2:hover {
+  background-image: url(/uploads/apartment/image/4-2.png);
+}
+#apart-4-3:hover {
+  background-image: url(/uploads/apartment/image/4-3.png);
+}
+#apart-4-4:hover {
+  background-image: url(/uploads/apartment/image/4-4.png);
+}
+#apart-4-5:hover {
+  background-image: url(/uploads/apartment/image/4-5.png);
+}
+#apart-4-6:hover {
+  background-image: url(/uploads/apartment/image/4-6.png);
+}
+#apart-4-7:hover {
+  background-image: url(/uploads/apartment/image/4-7.png);
+}
+#apart-4-8:hover {
+  background-image: url(/uploads/apartment/image/4-8.png);
+}
+#apart-4-9:hover {
+  background-image: url(/uploads/apartment/image/4-9.png);
+}
+#apart-4-10:hover {
+  background-image: url(/uploads/apartment/image/4-10.png);
+}
+#apart-4-11:hover {
+  background-image: url(/uploads/apartment/image/4-11.png);
 }

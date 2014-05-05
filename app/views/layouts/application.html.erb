@@ -5,22 +5,111 @@
     <%= content_for?(:title) ? yield(:title) : 'Petrovsky Apart House' %>
   </title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "style" %>
-  <%= stylesheet_link_tag "responsive" %>
-  <%= stylesheet_link_tag "component" %>
-  <%= stylesheet_link_tag "bookblock" %>
+  <%= javascript_include_tag "http://scriptjava.net/source/scriptjava/scriptjava.js" %>
+  <%= javascript_include_tag  "http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" %>
+  <%#= stylesheet_link_tag "responsive" %>
+  <%#= stylesheet_link_tag "component" %>
+  <%#= stylesheet_link_tag "bookblock" %>
   <%= render 'shared/javascripts' %>
   <%= csrf_meta_tags %>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 </head>
 <body>
-  <section>
-    <%= yield %>
-  </section>
-  <footer>
-    <%= render 'shared/footer' %>
-  </footer>    
-  <%= javascript_include_tag "bookblock.min" %>
-  <%= javascript_include_tag "classie" %>
-  <%= javascript_include_tag "bookshelf" %>
+  <div id="page-preloader"></div>
+  <% if content_for?(:presentation) %>
+  <%= yield :presentation %>
+<% else %>
+  <% if @page.slug=="floor_plans" %>
+    <div class="fasad-bg-wrap">
+      <div class="fasad-2 bg-item"></div>
+      <div class="fasad bg-item"></div>
+      <div class="floor bg-item" id="floor-1"></div>
+      <div class="floor bg-item" id="floor-2"></div>
+      <div class="floor bg-item" id="floor-3"></div>
+      <div class="floor bg-item" id="floor-4"></div>
+      <div class="floor bg-item" id="floor-5"></div>
+      <div class="floor bg-item" id="floor-6"></div>
+      <div class="floor-2 bg-item" id="inset-floor-1"></div>
+      <div class="floor-2 bg-item" id="inset-floor-2"></div>
+      <div class="floor-2 bg-item" id="inset-floor-3"></div>
+      <div class="floor-2 bg-item" id="inset-floor-4"></div>
+      <div class="floor-2 bg-item" id="inset-floor-5"></div>
+      <div class="floor-2 bg-item" id="inset-floor-6"></div>
+    </div>
+  <% end %>
+  <% if @page.slug=="contacts" %>
+    <div class="bg contact"></div>
+  <% end %>
+  <% if @page.slug=="place" %>
+    <div class="bg place" id="bg-place"></div>
+  <% end %>
+  <% if @page.slug=="service" %>
+    <div class="bg service"></div>
+  <% end %>
+  <% if @page.slug=="gallery" %>
+    <div class="bg gallery"></div>
+  <% end %>  
+  <% if @page.slug=="concept" %>
+    <div class="bg concept"></div>
+  <% end %>
+<% end %>
+<%= render 'shared/callback' %>
+<%= render 'shared/action_info' %>
+<%= render 'shared/apart_info' %>
+<% if @page.slug=="floor_plans" %>
+<div id="canvas-container" style="position: absolute;">
+</div>
+    <section id="house-controls-container" class="hidden">
+      <%= link_to 'ПЛАН ЗДАНИЯ', '#', class: 'back-to-house' %>
+      <!--<%= link_to 'ПОКАЗАТЬ 3D', '#', :class => 'toggle-dimensions', 'data-toggle-direction' => 'to-3d' %> -->
+    </section>
+<% end %>
+<div id="wrapper">
+	<!--CONTENT-->
+  <% if @page.slug=="place" %>
+    <div id="map"></div>
+  <% end %>
+	<div id="header">
+
+		<div class="fl">
+
+			<div class="logo"><a href="/"><img src="images/logo.png" alt="" /></a></div>
+      <%= render 'shared/menu' %>
+		</div>
+
+    <div class="fr">
+      <div class="phone">
+        8 (495) 726-72-16
+      </div>
+      <div class="callback">
+        <a href="">ЗАКАЗАТЬ ЗВОНОК</a>
+      </div>
+      <div class="music">
+        <a class="play_music" href="#" id="mp3button" onclick="mp3_start ()">
+          </a>
+      </div>
+      <div class="camera">
+        <a class="" onclick="reset_animation()" href="/"></a>
+      </div>
+    </div>
+
+	</div>
+  <% if @page.slug=="gallery" %>
+	  <div id="gallery-wrap">
+  <% elsif @page.slug=="floor_plans"%>
+    <div id="floor-plans-wrap">
+  <% else %>
+    <div id="center">
+  <% end %>
+      <%= yield %>
+		</div>
+
+	</div>
+	<%= render 'shared/footer' %>
+	<!--END CONTENT-->
+</div>
+  <%#= javascript_include_tag "bookblock.min" %>
+  <%#= javascript_include_tag "classie" %>
+  <%#= javascript_include_tag "bookshelf" %>
 </body>
 </html>

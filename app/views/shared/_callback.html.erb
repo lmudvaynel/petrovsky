@@ -1,0 +1,28 @@
+<div class="callback-wrapper" id="callback_h">
+  <div class="callback-shadow"></div>
+  <div class="callback-form">
+  <div class="text">
+  Оставьте свою контактную информацию<br />
+   и наш менеджер свяжется с вами<br />
+  в удобное для вас время. <br />
+  <br />
+  Спасибо!
+  </div>
+    <%= form_for :order, url: create_order_path do |f| %>
+      <div class="field">
+        <%= f.text_field :name, :placeholder => "Ваше имя" %>
+      </div>
+      <div class="field">
+        <%= f.text_field :phone, :placeholder => "Ваш номер телефона" %>
+      </div>
+      <div class="field">
+        <%= f.text_field :content, :placeholder => "Когда Вам удобно позвонить?" %>
+      </div>
+      <div class="button">
+        <%= f.submit "ОТПРАВИТЬ", :name => "" %>
+        <%= f.submit "ОТМЕНИТЬ", :name => "", :type => "reset", id: "cancel_button" %>
+        <div class="clear"></div>
+      </div>
+    <% end %>
+  </div>
+</div>
