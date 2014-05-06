@@ -589,7 +589,7 @@ $.app.pages.shared.floor_plans =
     solid_floor_object
 
   init_solid_floor_dom_element: (floor_number) ->
-    solid_floor_element = $('<div/>', class: 'floor-element-'+floor_number)
+    solid_floor_element = $('<div/>', class: 'floor-element')
     solid_floor_css =
       height: "#{@.params.floors.solid.size.height}px"
       width: "#{@.params.floors.solid.size.width}px"
