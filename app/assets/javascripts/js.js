@@ -37,9 +37,9 @@ $(document).ready(function(){
 	  });
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-3').mouseenter(function () {
-				$('.apartment-element').animate({opacity: 1}, 100);
+				$('.apartment-element').stop().animate({opacity: 1}, 100);
 			}).mouseleave(function () {
-				$('.apartment-element').each(function() {
+				$('.apartment-element').stop().each(function() {
   				$(this).animate({opacity: 0}, 100);
 				});
 			});
