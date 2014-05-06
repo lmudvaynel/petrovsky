@@ -1,12 +1,17 @@
 # encoding: utf-8
 
-pages_names = [
-  'index',
-  'characters'
-]
-
+pages_names = {
+  home: 'ГЛАВНАЯ',
+  concept: 'КОНЦЕПЦИЯ',
+  place: 'РАСПОЛОЖЕНИЕ',
+  floor_plans: 'ПЛАНИРОВКА',
+  service: 'СЕРВИС',
+  gallery: 'ГАЛЕРЕЯ',
+  contacts: 'КОНТАКТЫ',
+  main: 'ГЛАВНАЯ',
+}
 Page.reset_column_information
-pages_names.each do |page_slug|
+pages_names.each do |page_slug, page_name|
   parent_page = Page.create! slug: page_slug, name: page_name, title: page_name, content: ''
 end
 
