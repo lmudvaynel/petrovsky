@@ -168,6 +168,8 @@ $.app.pages.shared.floor_plans =
       x: @.params.scene.yz_angle - Math.PI / 2, y: 0, z: 0
 
   init: ->
+    @.floor_numbers_sizes_correcting()
+    
     @.init_container()
     @.init_camera()
     @.init_scene()
@@ -242,6 +244,21 @@ $.app.pages.shared.floor_plans =
       return unless fp.valid_event_for 'house', event
       floor_number = parseInt $(@).data('floorNumber')
       fp.show_house_floor_on_click floor_number
+
+    $(window).on 'resize', fp.floor_numbers_sizes_correcting
+
+  floor_numbers_sizes_correcting: ->
+    dHeight = Math.round(Math.max(window.innerWidth * 0.002 - 1.5, 0) * 4)
+    elements = $('.floor-control li')
+    for element, i in elements
+      if i > 0
+        $(element).css
+          'height': 52 + dHeight + 'px'
+          'margin-top': 22 + dHeight + 'px'
+          'margin-bottom': 22 + dHeight + 'px'
+        $(element).find('a').css
+          'height': 36 + dHeight + 'px'
+          'line-height': 36 + dHeight + 'px'
 
   init_animated_objects: ->
     fp = $.app.pages.shared.floor_plans
