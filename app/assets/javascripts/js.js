@@ -26,56 +26,56 @@ $(document).ready(function(){
 		});
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-1').mouseenter(function () {
-				$('.apartment-element').stop().animate({opacity: 1}, 100);
+				$('.apartment-element').stop().animate({opacity: 1}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
-  				$(this).animate({opacity: 0}, 100);
+  				$(this).animate({opacity: 0}, 300);
 				});
 			});
 	  });
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-2').mouseenter(function () {
-				$('.apartment-element').stop().animate({opacity: 1}, 100);
+				$('.apartment-element').stop().animate({opacity: 1}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
-  				$(this).animate({opacity: 0}, 100);
+  				$(this).animate({opacity: 0}, 300);
 				});
 			});
 	  });
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-3').mouseenter(function () {
-				$('.apartment-element').stop().animate({opacity: 1}, 100);
+				$('.apartment-element').stop().animate({opacity: 1}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
-  				$(this).animate({opacity: 0}, 100);
+  				$(this).animate({opacity: 0}, 300);
 				});
 			});
 	  });
 
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-4').mouseenter(function () {
-				$('.apartment-element').stop().animate({opacity: 1}, 100);
+				$('.apartment-element').stop().animate({opacity: 1}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
-  				$(this).animate({opacity: 0}, 100);
+  				$(this).animate({opacity: 0}, 300);
 				});
 			});
 	  });
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-5').mouseenter(function () {
-				$('.apartment-element').stop().animate({opacity: 1}, 100);
+				$('.apartment-element').stop().animate({opacity: 1}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
-  				$(this).animate({opacity: 0}, 100);
+  				$(this).animate({opacity: 0}, 300);
 				});
 			});
 	  });
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-6').mouseenter(function () {
-				$('.apartment-element').stop().animate({opacity: 1}, 100);
+				$('.apartment-element').stop().animate({opacity: 1}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
-  				$(this).animate({opacity: 0}, 100);
+  				$(this).animate({opacity: 0}, 300);
 				});
 			});
 	  });
