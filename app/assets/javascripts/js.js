@@ -24,16 +24,23 @@ $(document).ready(function(){
 		}).mouseleave(function () {
 			$(this).removeClass('current');
 		});
-		$('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-1').mouseover(function () {
+	  $('#canvas-container').mouseenter(function () {
+			$(this).find('.floor-element-1').mouseenter(function () {
+				$('.apartment-element').stop().animate({opacity: 1}, 100);
 			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-1.png)');
+				$('.apartment-element').stop().each(function() {
+  				$(this).animate({opacity: 0}, 100);
+				});
 			});
 	  });
-	  $('#canvas-container').mouseover(function () {
+	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-2').mouseenter(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-2-hover.png)');
-			})
+				$('.apartment-element').stop().animate({opacity: 1}, 100);
+			}).mouseleave(function () {
+				$('.apartment-element').stop().each(function() {
+  				$(this).animate({opacity: 0}, 100);
+				});
+			});
 	  });
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-3').mouseenter(function () {
@@ -45,11 +52,13 @@ $(document).ready(function(){
 			});
 	  });
 
-	  $('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-4').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-4-hover.png)');
+	  $('#canvas-container').mouseenter(function () {
+			$(this).find('.floor-element-4').mouseenter(function () {
+				$('.apartment-element').stop().animate({opacity: 1}, 100);
 			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-4.png)');
+				$('.apartment-element').stop().each(function() {
+  				$(this).animate({opacity: 0}, 100);
+				});
 			});
 	  });
 	  $('#canvas-container').mouseenter(function () {
