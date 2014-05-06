@@ -1,9 +1,9 @@
 var lines;
-if ( $.cookie("timer")==undefined) {$.cookie("timer",1500);}
+if ( $.cookie("timer")==undefined) {$.cookie("timer",1800);}
 if ( $.cookie("number")==undefined) {$.cookie("number",0);}
 var number = $.cookie("number");
 var timer = $.cookie("timer");
-number==17 ? $(".conclusion").removeClass("line") : number=0
+number==13 ? $(".conclusion").removeClass("line") : number=0
 $( document ).ready(start_animation(number,timer));
 function start_animation(number,timer){
   var lines = new Lines();
@@ -16,8 +16,8 @@ function start_animation(number,timer){
   animations = [
     // "Приветствие"
     function () {
-//      $.cookie("number",17); // ЧТО ЭТО?
-//      $.cookie("timer",1); // ЧТО ЭТО?
+      $.cookie("number",13); // ЧТО ЭТО?
+      $.cookie("timer",1); // ЧТО ЭТО?
       lines.changeBackgroundImageTo(0,1000);
       $('#main').fadeOut();
       $('#main_2').fadeOut();
