@@ -4,7 +4,7 @@ ActiveAdmin.register Apartment do
 
   index do
     column :image do |apartment|
-      link_to image_tag(apartment.image.thumb.url), admin_apartment_path(apartment)
+      link_to image_tag(apartment.image.url, class: "admin_img"), admin_apartment_path(apartment)
     end
     column :floor_number
     column :number
