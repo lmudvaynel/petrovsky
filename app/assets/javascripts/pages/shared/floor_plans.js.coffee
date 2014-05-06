@@ -871,9 +871,10 @@ $.app.pages.shared.floor_plans =
     $('.apart-area').text(apartment.area);
     if apartment.sold_out
       $('.apart-sold').text("проданы");
+      $(".buy-wrapper-sold").show();
     else
       $('.apart-sold').text("");
-    $(".buy-wrapper").show();
+      $(".buy-wrapper").show();
     return false;
 
   update_plans_positions_before_render: ->

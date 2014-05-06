@@ -239,6 +239,7 @@ $(window).on('load', function () {
 
 	$('.buy-shadow').click(function(){
 		$(".buy-wrapper").hide();
+		$(".buy-wrapper-sold").hide();
 	});
 
 	$('.sale-wrapper').click(function(){
@@ -246,8 +247,9 @@ $(window).on('load', function () {
 		return false;
 	});
 
-	$('#order-apart').click(function(){
+	$('.order-apart').click(function(){
 		$(".buy-wrapper").hide();
+		$(".buy-wrapper-sold").hide();
 		$(".callback-wrapper").show();
 		return false;
 	});
