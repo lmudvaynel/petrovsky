@@ -52,11 +52,13 @@ $(document).ready(function(){
 				$(this).css('backgroundImage', 'url(/images/floor-4.png)');
 			});
 	  });
-	  $('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-5').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-5-hover.png)');
+	  $('#canvas-container').mouseenter(function () {
+			$(this).find('.floor-element-5').mouseenter(function () {
+				$('.apartment-element').stop().animate({opacity: 1}, 100);
 			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-5.png)');
+				$('.apartment-element').stop().each(function() {
+  				$(this).animate({opacity: 0}, 100);
+				});
 			});
 	  });
 	  $('#canvas-container').mouseenter(function () {
