@@ -11,6 +11,7 @@ $.app.pages.shared.floor_plans =
   location:
     options: ['position', 'rotation']
     coords: ['x', 'y', 'z']
+  imit: 0
   params:
     container:
       size_in_percents:
@@ -622,6 +623,9 @@ $.app.pages.shared.floor_plans =
 
   init_apartnemt_floor_dom_element: (apartment) ->
     apartnemt_floor_element = $('<div/>', class: 'apartment-element', num: apartment.id, id: 'apart-'+apartment.floor_number+'-'+apartment.number, 'data-selected': false)
+    if @.imit == 1
+      apartnemt_floor_element.css
+        'background-color': "green"
     if apartment.sold_out
       apartnemt_floor_element.css
         'background-image': "url(/uploads/apartment/image/#{apartment.floor_number}-#{apartment.number}-sold.png)"
