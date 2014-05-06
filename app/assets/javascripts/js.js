@@ -19,17 +19,29 @@ $.fn.clicktoggle = function(a,b){
 };
 
 $(document).ready(function(){
-		$('.apartment-element').mouseenter(function () {
-			$(this).addClass('current');
-		}).mouseleave(function () {
-			$(this).removeClass('current');
-		});
+  	$('#canvas-container').on('mouseover', '.apartment-element', function (event) {
+      $(this).addClass('current');
+	  	$('.apartment-element').stop().each(function() {
+				if (!$(this).hasClass('current'))
+					{$(this).animate({opacity: 0}, 300);}
+				else
+					{$(this).animate({opacity: 1}, 300);}
+			});
+    });
+    $('#canvas-container').on('mouseout', '.apartment-element', function (event) {
+      $(this).removeClass('current');
+      $('.apartment-element').stop().each(function() {
+				$(this).animate({opacity: 1}, 300);
+			});
+    });
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element-1').mouseenter(function () {
 				$('.apartment-element').stop().animate({opacity: 1}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
-  				$(this).animate({opacity: 0}, 300);
+  				if (!$(this).hasClass('current'))
+  					{
+  						$(this).animate({opacity: 0}, 300);}
 				});
 			});
 	  });
@@ -75,7 +87,9 @@ $(document).ready(function(){
 				$('.apartment-element').stop().animate({opacity: 1}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
-  				$(this).animate({opacity: 0}, 300);
+					if (!$(this).hasClass('current'))
+						{
+							$(this).animate({opacity: 0}, 300);}
 				});
 			});
 	  });
