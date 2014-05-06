@@ -29,7 +29,7 @@ function Lines (options) {
   // Relative sizes
   this.size = {
     container: {
-      width: 1,
+      width: 0.9,
       height: 1,
     },
     line: {
