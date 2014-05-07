@@ -17,7 +17,12 @@ $.fn.clicktoggle = function(a,b){
         });
     });// fixed typo here, was missing )
 };
-
+$( window ).resize(function() {
+	var wWidth=$(window).width()
+	wLeft=(wWidth/100)*21
+	console.log(wWidth)
+	$('.floor_number').css('left', wLeft	+ 'px');
+});
 $(document).ready(function(){
   	$('#canvas-container').on('mouseover', '.apartment-element', function (event) {
       $(this).addClass('current');

@@ -7,7 +7,6 @@
   LOADING: <span id="percents">0</span>%
 </section>
 <div class="common" style="height:100%">
-  <div class="floor-control" id="floor-control">
   <!--  <section id="order-form-container" class="hidden">
       <div id="order-form-dialog">
         <%= form_for :order, url: create_order_path do |f| %>
@@ -18,9 +17,9 @@
       </div>
     </section>
   -->
-    <ul id="house-image-container">
+    <div id="house-image-container">
       <% (1..6).to_a.reverse.each do |floor_number| %>
-        <li> 
+        <div class="floor_number n_<%= floor_number %>"> 
           <% if floor_number==6 %>
             <%= link_to '#', :class => 'show-house-floor penthouse', 'data-floor-number' => floor_number, :dataid => floor_number do %>
               Апартаменты с террасами<span></span>
@@ -29,9 +28,9 @@
           <%= link_to '#', :class => 'floor_'+floor_number.to_s+' show-house-floor', 'data-floor-number' => floor_number, :dataid => floor_number do %>
           <%=floor_number %><span></span>
           <% end %>
-        </li>
+        </div>
       <% end %>
-    </ul>
+    </div>
     <div class="clear"></div>
     <div class="fasad-wrap">
       <span class="floor-text">ЭТАЖИ</span>
@@ -44,7 +43,6 @@
     <section>
       <%= @page.try(:content) %>
     </section>
-  </div>
 <script type="text/javascript">
   function fasad_to_2(){
     $('#floor-1').animate({ opacity: 0 }, 2000);
