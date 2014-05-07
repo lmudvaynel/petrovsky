@@ -20,10 +20,13 @@ $.fn.clicktoggle = function(a,b){
 $( window ).resize(function() {
 	var wWidth=$(window).width()
 	wLeft=(wWidth/100)*21
-	wLeft_6=(wWidth/100)*6.8
 	console.log(wWidth)
-	$('.floor_number').css('left', wLeft	+ 'px');
-	$('.floor_number_6').css('left', wLeft_6	+ 'px');
+	$('.floor_number').each(function() {
+		if ($(this).hasClass('n_6'))
+			{$(this).css('left', wLeft-226+40	+ 'px');}
+		else
+			{$(this).css('left', wLeft	+ 'px');}
+	});
 });
 $(document).ready(function(){
   	$('#canvas-container').on('mouseover', '.apartment-element', function (event) {
@@ -52,7 +55,7 @@ $(document).ready(function(){
 				});
 			});
 	  });
-
+});
 $(function() {
  BV = new $.BigVideo({
 		useFlashForFirefox:false,
@@ -95,8 +98,9 @@ $(window).on('load', function () {
     $svg.delay(1500).fadeOut('slow')
     $preloader.delay(timer).fadeOut('slow');
 });
+$(document).ready(function(){
 	// FLOOR CONTROL
-	$(".floor-control ul li a")
+	$(".house-image-container .floor_number a")
 	.mouseover(function(){
 		var curFloor = parseInt($(this).attr("dataid"));
 		$("#floor-"+curFloor).addClass("active");
@@ -106,7 +110,7 @@ $(window).on('load', function () {
 	});
 	
 	// FLOOR CONTROL
-	$(".floor-control-2 ul li a")
+	$(".house-image-container-2 .floor_number a")
 	.mouseover(function(){
 		var curFloor = parseInt($(this).attr("dataid"));
 		$("#inset-floor-"+curFloor).addClass("active");

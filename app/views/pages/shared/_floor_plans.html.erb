@@ -17,18 +17,17 @@
       </div>
     </section>
   -->
-    <div id="house-image-container">
+    <div id="house-image-container" class="house-image-container">
       <% (1..6).to_a.reverse.each do |floor_number| %>
-        <div class="floor_number<%= "_6" if floor_number==6 %> n_<%= floor_number %>"> 
+        <div class="floor_number n_<%= floor_number %>"> 
           <% if floor_number==6 %>
             <%= link_to '#', :class => 'show-house-floor penthouse', 'data-floor-number' => floor_number, :dataid => floor_number do %>
               Апартаменты с террасами<span></span>
             <% end %>
-          <% else %>
+            <% end %>
           <%= link_to '#', :class => 'floor_'+floor_number.to_s+' show-house-floor', 'data-floor-number' => floor_number, :dataid => floor_number do %>
           <%=floor_number %><span></span>
           <% end %>
-           <% end %>
         </div>
       <% end %>
     </div>
@@ -60,8 +59,8 @@
     $('#inset-floor-6').animate({ opacity: 1 }, 2000);
     $('.fasad').animate({ opacity: 0 }, 2000);
     $('.fasad-2').animate({ opacity: 1 }, 2000);
-    $('#floor-control').removeClass('floor-control');
-    $('#floor-control').addClass('floor-control-2');
+    $('#house-image-container').removeClass('house-image-container');
+    $('#house-image-container').addClass('house-image-container-2 ');
     $('.side-1').removeClass('current_fasad');
     $('.side-2').addClass('current_fasad');
     $('#wrapper').hide();
@@ -105,8 +104,8 @@
     $('#inset-floor-6').animate({ opacity: 0 }, 2000);
     $('.fasad-2').animate({ opacity: 0 }, 2000);
     $('.fasad').animate({ opacity: 1 }, 2000);
-    $('#floor-control').removeClass('floor-control-2');
-    $('#floor-control').addClass('floor-control');
+    $('#house-image-container').removeClass('house-image-container-2');
+    $('#house-image-container').addClass('house-image-container');
     $('.side-2').removeClass('current_fasad');
     $('.side-1').addClass('current_fasad');
     $('#wrapper').hide();
