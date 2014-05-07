@@ -20,8 +20,10 @@ $.fn.clicktoggle = function(a,b){
 $( window ).resize(function() {
 	var wWidth=$(window).width()
 	wLeft=(wWidth/100)*21
+	wLeft_6=(wWidth/100)*6.8
 	console.log(wWidth)
 	$('.floor_number').css('left', wLeft	+ 'px');
+	$('.floor_number_6').css('left', wLeft_6	+ 'px');
 });
 $(document).ready(function(){
   	$('#canvas-container').on('mouseover', '.apartment-element', function (event) {

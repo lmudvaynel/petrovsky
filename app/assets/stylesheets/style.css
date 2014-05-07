@@ -208,17 +208,30 @@ h5 { font-size:12px; color:#fff; }
 	width: 100%;
 	position: absolute;
 }
-.floor_number {
+.floor_number,.floor_number_6 {
+	z-index: 1010; 
+	display:block; 
+	background:rgba(0,0,0,0.8); 
+	text-decoration:none; 
+	font-weight:bold; 
+	border:4px solid #fffcd9;
 	position: absolute;
 	width: 40px;
 	height: 40px;
-	background: url('../i/sprite.png') -55px -205px;
-	font-size: 30px;
+	font-size: 22px;
 	color: #fff;
 	text-align: center;
 	line-height: 40px;
 	cursor: pointer;
-	left: 0;
+}
+.floor_number a, .floor_number_6 a { 
+	color:#8a8982; 
+
+}
+
+.floor_number:hover, .floor_number_6:hover { 
+	font-color:#fffcd9; 
+	border:4px solid #8a8982;
 }
 .n_1 {
 	top: 85%;
@@ -236,8 +249,7 @@ h5 { font-size:12px; color:#fff; }
 	top: 45%;
 }
 .n_6 {
-	top: 30%;
-	left: 13%;
+	top: 35%;
 	width: 226px;
 }
 .floor-control { position:relative; z-index:100; padding-left: 20%; z-index: 1000;}
