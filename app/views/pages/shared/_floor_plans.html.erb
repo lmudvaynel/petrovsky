@@ -80,7 +80,17 @@
       BV.getPlayer().remove();
       $('#big-video-wrap ').hide();
     }, 2100);
-    $(".floor-control-2 ul li a")
+    var wWidth=$(window).width()
+    wLeft=(wWidth/100)*21
+    console.log(wWidth)
+    $('.house-image-container').find('.floor_number').each(function() {
+      if ($(this).hasClass('n_6'))
+        {$(this).css('left', wLeft-226+40 + 'px');}
+      else
+        {$(this).css('left', wLeft  + 'px');}
+    });
+    $('.house-image-container-2').find('.floor_number').css('left', wLeft + 'px');
+    $(".house-image-container-2 .floor_number a")
       .mouseover(function(){
         var curFloor = parseInt($(this).attr("dataid"));
         $("#inset-floor-"+curFloor).addClass("active");
@@ -125,7 +135,17 @@
       BV.getPlayer().remove();
       $('#big-video-wrap ').hide();
     }, 2100);
-    $(".floor-control ul li a")
+      var wWidth=$(window).width()
+      wLeft=(wWidth/100)*21
+      console.log(wWidth)
+      $('.house-image-container').find('.floor_number').each(function() {
+        if ($(this).hasClass('n_6'))
+          {$(this).css('left', wLeft-226+40 + 'px');}
+        else
+          {$(this).css('left', wLeft  + 'px');}
+      });
+      $('.house-image-container-2').find('.floor_number').css('left', wLeft + 'px');
+      $(".house-image-container .floor_number a")
     .mouseover(function(){
       var curFloor = parseInt($(this).attr("dataid"));
       $("#floor-"+curFloor).addClass("active");

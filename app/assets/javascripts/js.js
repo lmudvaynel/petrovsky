@@ -21,12 +21,13 @@ $( window ).resize(function() {
 	var wWidth=$(window).width()
 	wLeft=(wWidth/100)*21
 	console.log(wWidth)
-	$('.floor_number').each(function() {
+	$('.house-image-container').find('.floor_number').each(function() {
 		if ($(this).hasClass('n_6'))
 			{$(this).css('left', wLeft-226+40	+ 'px');}
 		else
 			{$(this).css('left', wLeft	+ 'px');}
 	});
+	$('.house-image-container-2').find('.floor_number').css('left', wLeft	+ 'px');
 });
 $(document).ready(function(){
   	$('#canvas-container').on('mouseover', '.apartment-element', function (event) {
