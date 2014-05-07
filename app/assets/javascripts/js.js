@@ -55,7 +55,7 @@ $(document).ready(function(){
 				});
 			});
 	  });
-});
+
 $(function() {
  BV = new $.BigVideo({
 		useFlashForFirefox:false,
@@ -98,7 +98,6 @@ $(window).on('load', function () {
     $svg.delay(1500).fadeOut('slow')
     $preloader.delay(timer).fadeOut('slow');
 });
-$(document).ready(function(){
 	// FLOOR CONTROL
 	$(".house-image-container .floor_number a")
 	.mouseover(function(){
