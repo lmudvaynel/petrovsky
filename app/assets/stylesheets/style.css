@@ -421,8 +421,8 @@ h5 { font-size:12px; color:#fff; }
 /* .callback-form .button { padding-top:20px} */
 
 .callback-form .button input { cursor: pointer;	font-family: 'PT Sans Normal'; margin:0; padding:0; border:none; font-size:18px}
-.callback-form .button input[type="submit"] { background:#000; width:260px; height:40px; color:#8a8982; float:left; border: 2px solid #fff;}
-.callback-form .button input[type="reset"] { background:#000; width:260px; height:40px; color:#8a8982; float:right; border: 2px solid #fff;}
+.callback-form .button input[type="submit"] {font-weight: bold; background:#000; width:260px; height:40px; color:#8a8982; float:left; border: 2px solid #fff;}
+.callback-form .button input[type="reset"] { font-weight: bold; background:#000; width:260px; height:40px; color:#8a8982; float:right; border: 2px solid #fff;}
 
 .callback-form .button input[type="submit"]:hover, .callback-form .button input[type="reset"]:hover {color:#fff; border: 2px solid #8a8982;}
 /* ACTION */
