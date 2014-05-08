@@ -221,7 +221,7 @@ h5 { font-size:12px; color:#fff; }
 	text-decoration:none; 
 	font-weight:bold; 
 	position: absolute;
-	font-size: 22px;
+	font-size: 21px;
 	color: #fff;
 	text-align: center;
 	cursor: pointer;
@@ -229,7 +229,7 @@ h5 { font-size:12px; color:#fff; }
 .house-image-container .floor_number {
 	height: 40px;
 	border:4px solid #fffcd9;
-	line-height: 40px;
+	line-height: 41px;
 }
 .house-image-container-2 .floor_number {
 	height: 30px;

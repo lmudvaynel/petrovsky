@@ -42,12 +42,12 @@ $(document).ready(function(){
     $('#canvas-container').on('mouseout', '.apartment-element', function (event) {
       $(this).removeClass('current');
       $('.apartment-element').stop().each(function() {
-				$(this).animate({opacity: 1}, 300);
+				$(this).animate({opacity: 0.7}, 300);
 			});
     });
 	  $('#canvas-container').mouseenter(function () {
 			$(this).find('.floor-element').mouseenter(function () {
-				$('.apartment-element').stop().animate({opacity: 1}, 300);
+				$('.apartment-element').stop().animate({opacity: 0.7}, 300);
 			}).mouseleave(function () {
 				$('.apartment-element').stop().each(function() {
   				if (!$(this).hasClass('current'))
