@@ -16,6 +16,7 @@
 //= require touchTouch.jquery
 //= require init_app
 //= require menu
+//= require main
 //= require js
 //= require music
 //= require jquery.cookie
