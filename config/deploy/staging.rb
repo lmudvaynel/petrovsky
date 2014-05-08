@@ -3,7 +3,7 @@ role :app, ""
 role :db,  "", :primary => true
 
 set :rails_env, "staging"
-set :branch, "stage"
+set :branch, "kondin"
 
 set :deploy_to, "#{base_directory}/#{application}_#{stage}"
 
