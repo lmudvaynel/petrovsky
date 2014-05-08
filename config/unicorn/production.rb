@@ -1,4 +1,4 @@
-app_dir = "/var/www/apps/petrovsky_kondin_production"
+app_dir = "/var/www/apps/petrovsky_kondin_staging"
 
 # Set unicorn options
 worker_processes 4
