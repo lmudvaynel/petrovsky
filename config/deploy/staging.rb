@@ -1,6 +1,6 @@
-role :web, ""
-role :app, ""
-role :db,  "", :primary => true
+role :web, "5.9.50.131"
+role :app, "5.9.50.131"
+role :db,  "5.9.50.131", :primary => true
 
 set :rails_env, "staging"
 set :branch, "kondin"
