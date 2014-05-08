@@ -214,6 +214,8 @@ $(window).on('load', function () {
 	});
 
 	$('.action-call').click(function(){
+		$(".buy-wrapper").hide();
+		$(".buy-wrapper-sold").hide();
 		$(".action-wrapper").hide();
 		$(".callback-wrapper").show();
 		return false;
