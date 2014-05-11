@@ -17,18 +17,6 @@ $.fn.clicktoggle = function(a,b){
         });
     });// fixed typo here, was missing )
 };
-$( window ).resize(function() {
-	var wWidth=$(window).width()
-	wLeft=(wWidth/100)*21
-	console.log(wWidth)
-	$('.house-image-container').find('.floor_number').each(function() {
-		if ($(this).hasClass('n_6'))
-			{$(this).css('left', wLeft-226+40	+ 'px');}
-		else
-			{$(this).css('left', wLeft	+ 'px');}
-	});
-	$('.house-image-container-2').find('.floor_number').css('left', wLeft	+ 'px');
-});
 $(document).ready(function(){
   	$('#canvas-container').on('mouseover', '.apartment-element', function (event) {
       $(this).addClass('current');
@@ -249,4 +237,21 @@ $(window).on('load', function () {
 		$(".callback-wrapper").hide();
 	});
 	
+});
+$( window ).resize(function() {
+	var wWidth=$(window).width(),
+			topFont=wWidth*0.036,
+			botFont=wWidth*0.01384
+	wLeft=(wWidth/100)*21
+	$('.house-image-container').find('.floor_number').each(function() {
+		if ($(this).hasClass('n_6'))
+			{$(this).css('left', wLeft-226+40	+ 'px');}
+		else
+			{$(this).css('left', wLeft	+ 'px');}
+	});
+	$('.house-image-container-2').find('.floor_number').css('left', wLeft	+ 'px');
+	$('.sale-wrapper .sale-info h3').css('font-size',topFont + 'px')
+																					.css('line-height',topFont + 'px');
+	$('.sale-wrapper .sale-info .info').css('font-size',botFont + 'px');
+	$('.sale-wrapper .sale-info .more').css('font-size',botFont + 'px');
 });
