@@ -16,5 +16,5 @@ module PageHelper
     if File.exist? Rails.root.join('app', 'assets', 'javascripts', "#{js_fullname}.js.coffee")
       javascript_include_tag js_fullname
     end
-  end
+  end 
 end
