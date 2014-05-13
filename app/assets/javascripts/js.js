@@ -24,7 +24,7 @@ $(document).ready(function(){
 				if (!$(this).hasClass('current'))
 					{$(this).animate({opacity: 0}, 300);}
 				else
-					{$(this).animate({opacity: 1}, 300);}
+					{$(this).animate({opacity: 0.8}, 300);}
 			});
     });
     $('#canvas-container').on('mouseout', '.apartment-element', function (event) {
