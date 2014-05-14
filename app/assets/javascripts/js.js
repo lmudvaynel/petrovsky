@@ -236,6 +236,12 @@ $(window).on('load', function () {
 	$('#cancel_button').click(function(){
 		$(".callback-wrapper").hide();
 	});
+	$('.cancel-form').click(function(){
+		$(".action-wrapper").hide();
+		$(".buy-wrapper").hide();
+		$(".buy-wrapper-sold").hide();
+		$(".callback-wrapper").hide();
+	});
 	
 });
 $( window ).resize(function() {
