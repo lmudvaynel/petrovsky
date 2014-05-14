@@ -866,6 +866,14 @@ $.app.pages.shared.floor_plans =
     $('.apart-number').text(apartment.number);
     $('.apart-price').text(apartment.price);
     $('.apart-area').text(apartment.area);
+    if apartment.floor_number==1 
+      $('.apart_type').text("Помещение");
+      $('.sold').text("о");
+      $('.apart-type-call').text("проекте PETROVSKY APART HOUSE")
+    else
+      $('.apart_type').text("Апартаменты");
+      $('.sold').text("ы");
+      $('.apart-type-call').text("свободных апартаментах")
     if apartment.sold_out
       $('.apart-sold').text("проданы");
       $(".buy-wrapper-sold").show();
