@@ -54,7 +54,7 @@ h5 { font-size:12px; color:#fff; }
 .bg.contact { background:url(/images/bg-contacts.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.service { background:url(/images/bg-service.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.place {display: block; background:url(/images/bg-place.jpg) no-repeat center; position:fixed; width:100%; height:100%; background-size: cover;}
-.bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat top right; position:fixed; width:100%; height:100%; background-size: cover;}
 #map {
 	display: none;
 	position: fixed;

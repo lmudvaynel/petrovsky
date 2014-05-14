@@ -20,7 +20,6 @@ function start_animation(number,timer){
       $.cookie("timer",1); // ЧТО ЭТО?
       lines.changeBackgroundImageTo(0,1000);
       $('#main').fadeOut();
-      $('#main_2').fadeOut();
       setTimeout(function(){
         lines.getByElement('greeting first')[0].animations.opacityTo(1);
         lines.getByElement('greeting second')[0].animations.opacityTo(1);
