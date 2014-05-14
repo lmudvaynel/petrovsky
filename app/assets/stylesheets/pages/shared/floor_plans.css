@@ -50,7 +50,7 @@
 #house-controls-container , #floors-controls-container {
   position: absolute;
   bottom: 80px;
-  right: 33%;
+  right: 25%;
   z-index: 1100;
 }
 #house-controls-container a , #floors-controls-container a {
