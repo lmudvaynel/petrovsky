@@ -84,6 +84,7 @@ $(window).on('load', function () {
     $spinner.fadeOut();
     $svg = $('#svg')
     $("#svg").length==0 ? timer=10 : timer=1100
+    $svg.delay(1500).fadeOut('slow')
     $preloader.delay(timer).fadeOut('slow');
 });
 	// FLOOR CONTROL
