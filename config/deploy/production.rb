@@ -3,7 +3,7 @@ role :app, "5.9.50.131"
 role :db,  "5.9.50.131", :primary => true
 
 set :rails_env, "production"
-set :branch, "kondin"
+set :branch, "apt"
 
 set :deploy_to, "#{base_directory}/#{application}_#{stage}"
 
