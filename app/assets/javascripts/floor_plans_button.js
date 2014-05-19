@@ -1,4 +1,3 @@
-<script type="text/javascript">
   function fasad_to_2(){
     $('#floor-1').animate({ opacity: 0 }, 2000);
     $('#inset-floor-1').animate({ opacity: 1 }, 2000);
@@ -109,4 +108,3 @@
       $(".floor").removeClass("active");
     });
   };
-</script>
