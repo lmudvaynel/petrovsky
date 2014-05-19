@@ -34,6 +34,18 @@ function resize_2620_right () {
      $('#svg').attr('width', $(window).height()*2620/1200);
      $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())+'px')}
 }
+function resize_1920_left () {
+  var x_y=1920/1080,
+  winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1080/1920);
+     $('#main').css('margin-top',-($(window).width()*1080/1920-$(window).height())/2+'px')}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*1920/1080);
+		}
+}
 function resize_1920 () {
   var x_y=1920/1080,
       winx_winy=$(window).width()/$(window).height()
@@ -133,7 +145,7 @@ $(window).on('load', function () {
     $spinner.fadeOut();
     $svg = $('#svg')
     $("#svg").length==0 ? timer=10 : timer=1100
-    $svg.delay(1500).fadeOut('slow')
+    $svg.delay(2000).fadeOut('slow')
     $preloader.delay(timer).fadeOut('slow');
 });
 	// FLOOR CONTROL
