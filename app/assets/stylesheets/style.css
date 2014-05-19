@@ -214,7 +214,7 @@ h5 { font-size:12px; color:#fff; }
 	position: absolute;
 }
 
-.house-image-container .floor_number a.penthouse { float: left; width: 226px; overflow: hidden; }
+.house-image-container .floor_number a.penthouse { float: left; width: 100px; overflow: hidden; }
 .house-image-container .floor_number .floor_6 { display: none; }
 
 .house-image-container-2 .floor_number a.penthouse { display:none; float:left; width:150px; margin-left:-163px }

@@ -23,5 +23,3 @@
 //= require soundmanager2
 //= require video-js
 //= require bigvideo
-//= require classie
-//= require svganimations

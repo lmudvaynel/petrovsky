@@ -1,3 +1,52 @@
+function resize_2620()  {
+  var x_y=2620/1200,
+  winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1200/2620);
+     $('#main').css('margin-top',-($(window).width()*1200/2620-$(window).height())/2+'px')}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*2620/1200);
+     $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())/2+'px')
+   }
+}
+function resize_1920_right_top () {
+  var x_y=1920/1080,
+      winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1080/1920);}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*1920/1080);
+     $('#main').css('margin-left',-($(window).height()*1920/1080-$(window).width())+'px')}
+}
+function resize_2620_right () {
+  var x_y=2620/1200,
+  winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1200/2620);
+     $('#main').css('margin-top',-($(window).width()*1200/2620-$(window).height())/2+'px')}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*2620/1200);
+     $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())+'px')}
+}
+function resize_1920 () {
+  var x_y=1920/1080,
+      winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1080/1920);
+     $('#main').css('margin-top',-($(window).width()*1080/1920-$(window).height())/2+'px')}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*1920/1080);
+     $('#main').css('margin-left',-($(window).height()*1920/1080-$(window).width())/2+'px')}
+  $('#main').show();
+}
 function reset_animation(){
   $.cookie('number',0);
   $.cookie('timer',1500);
@@ -251,7 +300,7 @@ $( window ).resize(function() {
 	wLeft=(wWidth/100)*21
 	$('.house-image-container').find('.floor_number').each(function() {
 		if ($(this).hasClass('n_6'))
-			{$(this).css('left', wLeft-226+40	+ 'px');}
+			{$(this).css('left', wLeft-100+40	+ 'px');}
 		else
 			{$(this).css('left', wLeft	+ 'px');}
 	});
