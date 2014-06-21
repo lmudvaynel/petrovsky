@@ -10,16 +10,19 @@
   </div>
     <%= form_for :order, url: create_order_path do |f| %>
       <div class="field">
-        <%= f.text_field :name, :placeholder => "Ваше имя" %>
+        <%= f.text_field :name, :placeholder => "Ваше имя *" %>
       </div>
       <div class="field">
-        <%= f.text_field :phone, :placeholder => "Ваш номер телефона" %>
+        <%= f.text_field :email, :placeholder => "Ваш email" %>
+      </div>
+      <div class="field">
+        <%= f.text_field :phone, :placeholder => "Ваш номер телефона *" %>
       </div>
       <div class="field">
         <%= f.text_field :content, :placeholder => "Когда Вам удобно позвонить?" %>
       </div>
       <div class="button">
-        <%= f.submit "ОТПРАВИТЬ", :name => "" %>
+        <%= f.submit "ОТПРАВИТЬ", :name => ""%>
         <%= f.submit "ОТМЕНИТЬ", :name => "", :type => "reset", id: "cancel_button" %>
         <div class="clear"></div>
       </div>

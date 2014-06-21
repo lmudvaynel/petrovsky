@@ -1,6 +1,6 @@
 function ObjectAnimations (object) {
   
- $.cookie("number")==27 ? speed=1 : speed=700;
+ $.cookie("number")==17 ? speed=1 : speed=1000;
 
   this.options = {
     frames: {

@@ -19,7 +19,6 @@ module ApplicationHelper
     file_name = "#{action_name}.js.coffee"
     File.exist? Rails.root.join('app', 'assets', 'javascripts', controller_name, file_name)
   end
-
   def javascript_require_action
     return unless javascript_action_exist?
     javascript_include_tag "#{controller_name}/#{action_name}"

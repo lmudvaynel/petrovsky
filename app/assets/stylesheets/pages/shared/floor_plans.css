@@ -49,14 +49,15 @@
 
 #house-controls-container , #floors-controls-container {
   position: absolute;
-  bottom: 50px;
-  right: 33%;
+  bottom: 80px;
+  right: 25%;
   z-index: 1100;
 }
 #house-controls-container a , #floors-controls-container a {
   font-size: 24px;
   text-transform: uppercase;
-  border:4px solid #fffcd9; 
+  color: #8a8982;
+  border:4px solid #fffcd9;
   background:rgba(0,0,0,0.8); 
   text-decoration: none;
   padding: 5px 20px;
@@ -67,7 +68,7 @@
 
 #house-controls-container a:hover , #floors-controls-container a:hover {
   color: #fffcd9;
-  background: #8a8982;
+  border:4px solid #8a8982; 
 }
 
 #preloader-container {
@@ -84,37 +85,7 @@
 .apartment-element .vacant {
   cursor: pointer;
 }
+.apartment-element {
+  opacity: 0;
+}
 
-#apart-4-1:hover {
-  background-image: url(/uploads/apartment/image/4-1.png);
-}
-#apart-4-2:hover {
-  background-image: url(/uploads/apartment/image/4-2.png);
-}
-#apart-4-3:hover {
-  background-image: url(/uploads/apartment/image/4-3.png);
-}
-#apart-4-4:hover {
-  background-image: url(/uploads/apartment/image/4-4.png);
-}
-#apart-4-5:hover {
-  background-image: url(/uploads/apartment/image/4-5.png);
-}
-#apart-4-6:hover {
-  background-image: url(/uploads/apartment/image/4-6.png);
-}
-#apart-4-7:hover {
-  background-image: url(/uploads/apartment/image/4-7.png);
-}
-#apart-4-8:hover {
-  background-image: url(/uploads/apartment/image/4-8.png);
-}
-#apart-4-9:hover {
-  background-image: url(/uploads/apartment/image/4-9.png);
-}
-#apart-4-10:hover {
-  background-image: url(/uploads/apartment/image/4-10.png);
-}
-#apart-4-11:hover {
-  background-image: url(/uploads/apartment/image/4-11.png);
-}

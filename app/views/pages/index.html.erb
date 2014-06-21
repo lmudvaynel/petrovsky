@@ -1,8 +1,7 @@
-<%= javascript_include_tag 'pages/lines_load.js' %>
 <script type="text/javascript">
-  $( window ).resize(function() {
-    $('#main').css('margin-left', (-2560+$(window).width())/2);
-    if ($.cookie("number")!=27) {$('#main').show();$('#main_2').show();}
+  $(window).resize(resize_2620);
+  $(document).ready(function () {
+    if ($.cookie("number")!=13) {$('#main').show()}
   });
 </script>
 <style type="text/css">
@@ -21,7 +20,7 @@
 }
 </style>
 <div id="main">
-<svg id="main_2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="2560" viewBox="0 0 2320 1200" enable-background="new 0 0 2320 1200" xml:space="preserve">
+<svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="2320" viewBox="0 0 2320 1200" enable-background="new 0 0 2320 1200" xml:space="preserve">
 <g id="Общий_x5F_контур_x5F_здания">
     <path fill="none" stroke="#201600" stroke-miterlimit="10" d="M830.667,332.667l-3,809.334l532.666,33.332l234-76.667
         l0.667-286.333l-12.667-30.666l-1-11.667l12.334-4.667l-30.001-70.666l-18.996,5.182l-0.004-9.182l15.334-4l-35-81.333l-23,9.333
@@ -131,8 +130,8 @@
     <path fill="none" stroke="#201600" stroke-miterlimit="10" d="M891.75,488v21.5l-17,7.75v-20.5L891.75,488z"/>
 </g>
 </svg>
-    <script src="http://tympanus.net/Development/SVGDrawingAnimation/js/classie.js"></script>
-    <script src="http://tympanus.net/Development/SVGDrawingAnimation/js/svganimations.js"></script>
+    <%= javascript_include_tag 'svganimations.js' %>
+    <%= javascript_include_tag 'classie.js' %>
 </div>
 <% content_for :presentation do %>
   <div id="animated-text-backgrounds">
@@ -199,5 +198,5 @@
       </div>
     </div>
 <% end %>
-
+<%= javascript_include_tag 'pages/lines_load.js' %>
 <%= raw(@message.content) if @message %>

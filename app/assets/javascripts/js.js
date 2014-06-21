@@ -1,3 +1,64 @@
+function resize_2620()  {
+  var x_y=2620/1200,
+  winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1200/2620);
+     $('#main').css('margin-top',-($(window).width()*1200/2620-$(window).height())/2+'px')}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*2620/1200);
+     $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())/2+'px')
+   }
+}
+function resize_1920_right_top () {
+  var x_y=1920/1080,
+      winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1080/1920);}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*1920/1080);
+     $('#main').css('margin-left',-($(window).height()*1920/1080-$(window).width())+'px')}
+}
+function resize_2620_right () {
+  var x_y=2620/1200,
+  winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1200/2620);
+     $('#main').css('margin-top',-($(window).width()*1200/2620-$(window).height())/2+'px')}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*2620/1200);
+     $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())+'px')}
+}
+function resize_1920_left () {
+  var x_y=1920/1080,
+  winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1080/1920);
+     $('#main').css('margin-top',-($(window).width()*1080/1920-$(window).height())/2+'px')}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*1920/1080);
+		}
+}
+function resize_1920 () {
+  var x_y=1920/1080,
+      winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('#svg').attr('width', $(window).width());
+     $('#svg').attr('height', $(window).width()*1080/1920);
+     $('#main').css('margin-top',-($(window).width()*1080/1920-$(window).height())/2+'px')}
+  else
+    {$('#svg').attr('height', $(window).height());
+     $('#svg').attr('width', $(window).height()*1920/1080);
+     $('#main').css('margin-left',-($(window).height()*1920/1080-$(window).width())/2+'px')}
+  $('#main').show();
+}
 function reset_animation(){
   $.cookie('number',0);
   $.cookie('timer',1500);
@@ -17,49 +78,31 @@ $.fn.clicktoggle = function(a,b){
         });
     });// fixed typo here, was missing )
 };
-
 $(document).ready(function(){
-		$('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-1').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-1-hover.png)');
-			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-1.png)');
+  	$('#canvas-container').on('mouseover', '.apartment-element', function (event) {
+      $(this).addClass('current');
+	  	$('.apartment-element').stop().each(function() {
+				if (!$(this).hasClass('current'))
+					{$(this).animate({opacity: 0}, 300);}
+				else
+					{$(this).animate({opacity: 0.8}, 300);}
 			});
-	  });
-	  		$('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-2').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-2-hover.png)');
-			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-2.png)');
+    });
+    $('#canvas-container').on('mouseout', '.apartment-element', function (event) {
+      $(this).removeClass('current');
+      $('.apartment-element').stop().each(function() {
+				$(this).animate({opacity: 0.7}, 300);
 			});
-	  });
-	  				$('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-3').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-3-hover.png)');
+    });
+	  $('#canvas-container').mouseenter(function () {
+			$(this).find('.floor-element').mouseenter(function () {
+				$('.apartment-element').stop().animate({opacity: 0.7}, 300);
 			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-3.png)');
-			});
-	  });
-
-	  						$('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-4').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-4-hover.png)');
-			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-4.png)');
-			});
-	  });
-	  								$('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-5').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-5-hover.png)');
-			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-5.png)');
-			});
-	  });
-	  										$('#canvas-container').mouseover(function () {
-			$(this).find('.floor-element-6').mouseover(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-6-hover.png)');
-			}).mouseleave(function () {
-				$(this).css('backgroundImage', 'url(/images/floor-6.png)');
+				$('.apartment-element').stop().each(function() {
+  				if (!$(this).hasClass('current'))
+  					{
+  						$(this).animate({opacity: 0}, 300);}
+				});
 			});
 	  });
 
@@ -96,13 +139,17 @@ $(function() {
 */
 
 $(window).on('load', function () {
+		var timer;
     var $preloader = $('#page-preloader'),
-        $spinner   = $preloader.find('.spinner');
+    		$spinner   = $preloader.find('.spinner');
     $spinner.fadeOut();
-    $preloader.delay(10).fadeOut('slow');
+    $svg = $('#svg')
+    $("#svg").length==0 ? timer=10 : timer=1100
+    $svg.delay(2000).fadeOut('slow')
+    $preloader.delay(timer).fadeOut('slow');
 });
 	// FLOOR CONTROL
-	$(".floor-control ul li a")
+	$(".house-image-container .floor_number a")
 	.mouseover(function(){
 		var curFloor = parseInt($(this).attr("dataid"));
 		$("#floor-"+curFloor).addClass("active");
@@ -112,7 +159,7 @@ $(window).on('load', function () {
 	});
 	
 	// FLOOR CONTROL
-	$(".floor-control-2 ul li a")
+	$(".house-image-container-2 .floor_number a")
 	.mouseover(function(){
 		var curFloor = parseInt($(this).attr("dataid"));
 		$("#inset-floor-"+curFloor).addClass("active");
@@ -216,6 +263,8 @@ $(window).on('load', function () {
 	});
 
 	$('.action-call').click(function(){
+		$(".buy-wrapper").hide();
+		$(".buy-wrapper-sold").hide();
 		$(".action-wrapper").hide();
 		$(".callback-wrapper").show();
 		return false;
@@ -231,6 +280,7 @@ $(window).on('load', function () {
 
 	$('.buy-shadow').click(function(){
 		$(".buy-wrapper").hide();
+		$(".buy-wrapper-sold").hide();
 	});
 
 	$('.sale-wrapper').click(function(){
@@ -238,13 +288,37 @@ $(window).on('load', function () {
 		return false;
 	});
 
-	$('#order-apart').click(function(){
+	$('.order-apart').click(function(){
 		$(".buy-wrapper").hide();
+		$(".buy-wrapper-sold").hide();
 		$(".callback-wrapper").show();
 		return false;
 	});
 	$('#cancel_button').click(function(){
 		$(".callback-wrapper").hide();
 	});
+	$('.cancel-form').click(function(){
+		$(".action-wrapper").hide();
+		$(".buy-wrapper").hide();
+		$(".buy-wrapper-sold").hide();
+		$(".callback-wrapper").hide();
+	});
 	
+});
+$( window ).resize(function() {
+	var wWidth=$(window).width(),
+			topFont=wWidth*0.036,
+			botFont=wWidth*0.01384
+	wLeft=(wWidth/100)*21
+	$('.house-image-container').find('.floor_number').each(function() {
+		if ($(this).hasClass('n_6'))
+			{$(this).css('left', wLeft-100+40	+ 'px');}
+		else
+			{$(this).css('left', wLeft	+ 'px');}
+	});
+	$('.house-image-container-2').find('.floor_number').css('left', wLeft	+ 'px');
+	$('.sale-wrapper .sale-info h3').css('font-size',topFont + 'px')
+																					.css('line-height',topFont + 'px');
+	$('.sale-wrapper .sale-info .info').css('font-size',botFont + 'px');
+	$('.sale-wrapper .sale-info .more').css('font-size',botFont + 'px');
 });

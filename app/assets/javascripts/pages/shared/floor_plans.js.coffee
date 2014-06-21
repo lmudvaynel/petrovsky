@@ -11,6 +11,7 @@ $.app.pages.shared.floor_plans =
   location:
     options: ['position', 'rotation']
     coords: ['x', 'y', 'z']
+  imit: 0
   params:
     container:
       size_in_percents:
@@ -41,8 +42,8 @@ $.app.pages.shared.floor_plans =
       count: 6
       solid:
         size:
-          width: 2171
-          height: 613
+          width: 2320
+          height: 1210
         opacity:
           hide: 0
           show: 1
@@ -168,6 +169,8 @@ $.app.pages.shared.floor_plans =
       x: @.params.scene.yz_angle - Math.PI / 2, y: 0, z: 0
 
   init: ->
+    @.floor_numbers_sizes_correcting()
+    
     @.init_container()
     @.init_camera()
     @.init_scene()
@@ -242,6 +245,21 @@ $.app.pages.shared.floor_plans =
       return unless fp.valid_event_for 'house', event
       floor_number = parseInt $(@).data('floorNumber')
       fp.show_house_floor_on_click floor_number
+
+    $(window).on 'resize', fp.floor_numbers_sizes_correcting
+
+  floor_numbers_sizes_correcting: ->
+    dHeight = Math.round(Math.max(window.innerWidth * 0.002 - 1.5, 0) * 4)
+    elements = $('.floor-control li')
+    for element, i in elements
+      if i > 0
+        $(element).css
+          'height': 52 + dHeight + 'px'
+          'margin-top': 22 + dHeight + 'px'
+          'margin-bottom': 22 + dHeight + 'px'
+        $(element).find('a').css
+          'height': 36 + dHeight + 'px'
+          'line-height': 36 + dHeight + 'px'
 
   init_animated_objects: ->
     fp = $.app.pages.shared.floor_plans
@@ -571,19 +589,12 @@ $.app.pages.shared.floor_plans =
     solid_floor_object
 
   init_solid_floor_dom_element: (floor_number) ->
-    solid_floor_element = $('<div/>', class: 'floor-element-'+floor_number)
-    if floor_number==6
-      solid_floor_css =
-        height: "1300px"
-        width: "#{@.params.floors.solid.size.width}px"
-        opacity: @.params.floors.solid.opacity.show
-        'background-image': "url(/images/floor-#{floor_number}.png)"
-    else
-      solid_floor_css =
-        height: "#{@.params.floors.solid.size.height}px"
-        width: "#{@.params.floors.solid.size.width}px"
-        opacity: @.params.floors.solid.opacity.show
-        'background-image': "url(/images/floor-#{floor_number}.png)"     
+    solid_floor_element = $('<div/>', class: 'floor-element')
+    solid_floor_css =
+      height: "#{@.params.floors.solid.size.height}px"
+      width: "#{@.params.floors.solid.size.width}px"
+      opacity: @.params.floors.solid.opacity.show
+      'background-image': "url(/images/floor-#{floor_number}.png)"     
     $(solid_floor_element).css(solid_floor_css).get(0)
 
   init_plan_floor_object: (floor_number, position) ->
@@ -605,13 +616,17 @@ $.app.pages.shared.floor_plans =
 
   init_apartnemt_floor_dom_element: (apartment) ->
     apartnemt_floor_element = $('<div/>', class: 'apartment-element', num: apartment.id, id: 'apart-'+apartment.floor_number+'-'+apartment.number, 'data-selected': false)
+    if @.imit == 1
+      apartnemt_floor_element.css
+        'background-color': "green"
     if apartment.sold_out
       apartnemt_floor_element.css
-        'boxShadow': 'inset 0 0 400px black'
+        'background-image': "url(/uploads/apartment/image/#{apartment.floor_number}-#{apartment.number}-sold.png)"
     else
       apartnemt_floor_element.css
-        'cursor': 'pointer'
+        'background-image': "url(/uploads/apartment/image/#{apartment.floor_number}-#{apartment.number}.png)"
     $(apartnemt_floor_element).css
+      'cursor': 'pointer'
       width: "#{apartment.size[0]}px"
       height: "#{apartment.size[1]}px"
     apartnemt_floor_element.get(0)
@@ -851,8 +866,20 @@ $.app.pages.shared.floor_plans =
     $('.apart-number').text(apartment.number);
     $('.apart-price').text(apartment.price);
     $('.apart-area').text(apartment.area);
-    return if apartment.sold_out
-    $(".buy-wrapper").show();
+    if apartment.floor_number==1 
+      $('.apart_type').text("Помещение");
+      $('.sold').text("о");
+      $('.apart-type-call').text("проекте PETROVSKY APART HOUSE")
+    else
+      $('.apart_type').text("Апартаменты");
+      $('.sold').text("ы");
+      $('.apart-type-call').text("свободных апартаментах")
+    if apartment.sold_out
+      $('.apart-sold').text("проданы");
+      $(".buy-wrapper-sold").show();
+    else
+      $('.apart-sold').text("");
+      $(".buy-wrapper").show();
     return false;
 
   update_plans_positions_before_render: ->
@@ -887,7 +914,6 @@ $(document).ready ->
   images = []
   for floor_number in [1..fp.params.floors.count]
     images.push "/images/floor-#{floor_number}.png"
-    images.push "/images/floor-#{floor_number}-hover.png"
     images.push "/images/floor-demonstration-#{floor_number}.png"
   for apartment in fp.apartments
     images.push "/uploads/apartment/image/#{apartment.image}"

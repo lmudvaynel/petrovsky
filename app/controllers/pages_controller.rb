@@ -3,7 +3,7 @@
 class PagesController < ApplicationController
   def index
     @page = Page.find_by_slug(:home)
-    @message = Message.showed.first
+    @message = Message.showed.last
   end
   def show
     @page = Page.friendly.find(params[:slug])
