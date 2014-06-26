@@ -55,6 +55,7 @@ h5 { font-size:12px; color:#fff; }
 .bg.service { background:url(/images/bg-service.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.place {display: block; background:url(/images/bg-place.jpg) no-repeat center; position:fixed; width:100%; height:100%; background-size: cover;}
 .bg.gallery { background:url(/images/bg-gallery.jpg) no-repeat center right; position:fixed; width:100%; height:100%; background-size: cover;}
+.bg.penthouse { background:url(/images/bg-penthouses.jpg) no-repeat top right; position:fixed; width:100%; height:100%; background-size: cover;}
 #map {
 	display: none;
 	position: fixed;
@@ -81,6 +82,7 @@ h5 { font-size:12px; color:#fff; }
 #header .menu li.icon-4 span { background-image:url(/images/icon-4.png);}
 #header .menu li.icon-5 span { background-image:url(/images/icon-5.png);}
 #header .menu li.icon-6 span { background-image:url(/images/icon-6.png);}
+#header .menu li.icon-8 span { background-image:url(/images/icon-8.png);}
 
 #header .menu li a:hover span, #header .menu li.current a span { background-position:0 -60px; }
 #header .menu li a:hover, #header .menu li.current a { color:#fff; }
@@ -159,6 +161,8 @@ h5 { font-size:12px; color:#fff; }
 }
 #center .block-wrapper { position:relative; margin-top:25px; width: 750px; height: 340px; }
 #center .block-wrapper .block-info {width: 610px; height: 321px; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 0 60px; position:relative; z-index:5}
+#center .block-wrapper .penthouses-block-info {width: 750px; height: 321px; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 0 60px; position:relative; z-index:5}
+
 #center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
 
 #center .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left;}
@@ -332,6 +336,9 @@ h5 { font-size:12px; color:#fff; }
 .tab-list ul.service  {padding: 33px 0;}
 .tab-list ul.service li { background:url(/images/li-icon.png) no-repeat left center; padding-left:90px; height:50px; margin: 15px 0}
 .tab-list ul.location li { background: url(/images/li-location.png) no-repeat 20px center; padding-left: 90px; padding-top: 8px; height: 45px; margin: 20px 0; }
+.tab-list ul.key li { background: url(/images/key.png) no-repeat 20px center; padding-left: 90px; padding-top: 8px; height: 45px; margin: 20px 0; }
+
+.key-link-wrapper { background: url(/images/key-circle.png) no-repeat 0px center; padding-left: 80px; padding-top: 20px; height: 60px; }
 
 .lineheight-serv { line-height: 25px;}
 .lineheight-loc { line-height: 23px}
