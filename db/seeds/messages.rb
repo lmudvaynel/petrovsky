@@ -13,6 +13,6 @@ content = <<-HTML
 HTML
 description = <<-HTML
 Только в мае при покупке апартаментов в Petrovsky Apart House воспользуйтесь уникальной скидкой - 15%! Акция распространяется  на апартаменты от 38 до 100 м&sup2; и двухуровневые пентхаусы на последнем этаже.<br /> <br /> 
-Подробности по телефону:  (495) 726-72-16
+Подробности по телефону:  <span id="call_phone_2">(495) 726-72-16</span>
 HTML
 Message.create! showed: true, content: content, description: description
