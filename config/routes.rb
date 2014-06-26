@@ -32,6 +32,8 @@ Petrovsky::Application.routes.draw do
 
   resources :pages, only: :index
 
+  get 'pages/send_penthouses_pdf' => 'pages#send_penthouses_pdf'
+
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales

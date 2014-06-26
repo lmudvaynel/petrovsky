@@ -20,6 +20,12 @@ class PagesController < ApplicationController
       redirect_to root_path
     end
   end
+  
+  def send_penthouses_pdf
+    fullpath = 'public/downloads/Petrovsky_2level_aparts_preview.pdf'
+    send_file Rails.root.join(fullpath)
+  end
+
   private
 
   def view_exists?(view)
