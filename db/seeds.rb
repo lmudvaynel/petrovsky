@@ -1,11 +1,16 @@
-#place your seed data to db/seeds
-
 puts "Seeding..."
+seeds= {
+  'pages.rb'=> 1,
+  'messages.rb'=> 0,
+  'apartments'=> 0
+}
 
-Dir.glob(Rails.root.join("db", "seeds", "*.rb")).each do |file|
-  print "-> #{file} ... "
-  load file
-  puts "ok"
+seeds.each do |file,flag|
+  if flag==1
+    print "-> #{file} ... "
+    load "db/seeds/#{file}" 
+    puts "ok"
+  end
 end
 
 puts "Done"

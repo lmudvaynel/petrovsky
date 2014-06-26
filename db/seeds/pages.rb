@@ -1,9 +1,10 @@
 # encoding: utf-8
-
+Page.destroy_all
 pages_names = {
   home: 'ГЛАВНАЯ',
   concept: 'КОНЦЕПЦИЯ',
   place: 'РАСПОЛОЖЕНИЕ',
+  penthouses: 'ПЕНТХАУСЫ',
   floor_plans: 'ПЛАНИРОВКА',
   service: 'СЕРВИС',
   gallery: 'ГАЛЕРЕЯ',
