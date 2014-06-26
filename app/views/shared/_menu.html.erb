@@ -2,7 +2,7 @@
   <% if @pages %>
     <ul>
       <% @pages.each_with_index do |page, id| %>
-        <% if id != 0 && id !=7 %>
+        <% if id != 0 && id !=8 %>
           <li class="icon-<%= id %> <%= id == @page.id-1 ? 'current' : ''%>">
             <%= link_to raw("<span></span>#{page.name}"), slug_path(page.slug) %>
           </li>

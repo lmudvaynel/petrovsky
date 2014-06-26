@@ -82,7 +82,7 @@ h5 { font-size:12px; color:#fff; }
 #header .menu li.icon-4 span { background-image:url(/images/icon-4.png);}
 #header .menu li.icon-5 span { background-image:url(/images/icon-5.png);}
 #header .menu li.icon-6 span { background-image:url(/images/icon-6.png);}
-#header .menu li.icon-8 span { background-image:url(/images/icon-8.png);}
+#header .menu li.icon-7 span { background-image:url(/images/icon-7.png);}
 
 #header .menu li a:hover span, #header .menu li.current a span { background-position:0 -60px; }
 #header .menu li a:hover, #header .menu li.current a { color:#fff; }
