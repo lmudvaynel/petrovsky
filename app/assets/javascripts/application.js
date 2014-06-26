@@ -23,3 +23,4 @@
 //= require soundmanager2
 //= require video-js
 //= require bigvideo
+//= require google_analytics
