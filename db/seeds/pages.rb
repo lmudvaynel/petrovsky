@@ -11,9 +11,11 @@ pages_names = {
   contacts: 'КОНТАКТЫ',
   main: 'ГЛАВНАЯ',
 }
+j=0;
 Page.reset_column_information
 pages_names.each do |page_slug, page_name|
-  parent_page = Page.create! slug: page_slug, name: page_name, title: page_name, content: ''
+  parent_page = Page.create! slug: page_slug, name: page_name, title: page_name, content: '', position: j
+  j=j+1
 end
 
 
