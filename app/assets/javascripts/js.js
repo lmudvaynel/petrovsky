@@ -240,7 +240,16 @@ $(window).on('load', function () {
 		$(".common-wrapper .map-btn-wrap .place-icon").css('background-position', '');
 		$(".common-wrapper .map-btn-wrap .content-link").css('color', '');
 	});
-
+  // Penthouse link 
+  $(".key-link-wrapper")
+  .mouseover(function(){
+    $(this).find(".penthouse-icon").css('background-position', '0 0');
+    $(this).find(".penthouse-link").css('color', '#757575');
+  })
+  .mouseout(function(){
+    $(this).find(".penthouse-icon").css('background-position', '');
+    $(this).find(".penthouse-link").css('color', '');
+  });
 	// Map and bg
 
 	$("#maps-link").clicktoggle(

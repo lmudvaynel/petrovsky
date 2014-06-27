@@ -8,10 +8,12 @@
     из шести пентхаусов в <span class="petrovsky">Petrovsky Apart House</span>.<br />
 
     <div class="key-link-wrapper">
-      <%= link_to 'Скачать презентацию', pages_send_penthouses_pdf_path %>
+      <span class="penthouse-icon"></span>
+      <%= link_to 'Скачать презентацию', pages_send_penthouses_pdf_path, class: "penthouse-link" %>
     </div>
     <div class="key-link-wrapper">
-      <%= link_to 'Смотреть планировки', slug_path(:floor_plans) %>
+      <span class="penthouse-icon"></span>
+      <%= link_to 'Смотреть планировки', slug_path(:floor_plans), class: "penthouse-link" %>
     </div>
   </div>
 
