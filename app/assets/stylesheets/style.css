@@ -163,7 +163,17 @@ h5 { font-size:12px; color:#fff; }
 #center .block-wrapper .block-info {width: 610px; height: 321px; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 0 60px; position:relative; z-index:5}
 #center .block-wrapper .penthouses-block-info {width: 750px; height: 321px; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 0 60px; position:relative; z-index:5}
 
-#center .block-shadow { position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:8px; top:10px}
+#center .block-shadow {
+	position: absolute;
+	/* width: 100%; */
+	/* height: 100%; */
+	z-index: 1;
+	background: rgba(0,0,0,0.2);
+	left: 10px;
+	top: 10px;
+	width: 890px;
+	height: 341px;
+}
 
 #center .callback { font-family: 'PT Sans Bold', sans-serif; font-weight:bold; font-size:20px; float:left;}
 #center .callback a { display:block; padding:5px 10px; border:2px solid #fff;}
