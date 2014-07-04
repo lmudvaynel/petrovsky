@@ -2,7 +2,6 @@
 //= require threejs/renderers/CSS3DRenderer
 //= require threejs/controls/OrbitControls
 
-// TODO: documentation
 // TODO: images preloader
 // TODO: svg preview
 // TODO: apartments shifted
