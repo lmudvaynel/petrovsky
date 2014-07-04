@@ -102,12 +102,12 @@
 	  <div id="gallery-wrap">
   <% elsif @page.slug=="floor_plans"%>
   <script type="text/javascript">
-  $(window).resize(resize_1920_left);
-  $(document).ready(function(){
-    $('#main').show()
-    $.app.pages.shared.floor_plans.apartments = JSON.parse('<%= raw @apartments_json %>');
-  });
-</script>
+    $(window).resize(resize_1920_left);
+    $(document).ready(function(){
+      $('#main').show();
+      $.app.apartments = JSON.parse('<%= raw @apartments_json %>');
+    });
+  </script>
 <style type="text/css">
 .path {
   stroke-dasharray: 100;

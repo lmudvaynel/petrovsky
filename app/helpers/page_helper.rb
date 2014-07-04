@@ -13,7 +13,10 @@ module PageHelper
   def init_shared_page_js
     return unless @page
     js_fullname = "#{controller_name}/shared/#{@page.slug.gsub('-', '_')}"
-    if File.exist? Rails.root.join('app', 'assets', 'javascripts', "#{js_fullname}.js.coffee")
+    fullname_js = "#{js_fullname}.js"
+    fullname_js_coffee = "#{js_fullname}.js.coffee"
+    if File.exist?(Rails.root.join('app', 'assets', 'javascripts', fullname_js)) ||
+       File.exist?(Rails.root.join('app', 'assets', 'javascripts', fullname_js_coffee))
       javascript_include_tag js_fullname
     end
   end 
