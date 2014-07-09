@@ -146,7 +146,9 @@ $(window).on('load', function () {
     $svg = $('#svg')
     $("#svg").length==0 ? timer=10 : timer=1100
     $svg.delay(2000).fadeOut('slow')
-    $preloader.delay(timer).fadeOut('slow');
+    $preloader.delay(timer).fadeOut('slow', function () {
+      if ($.app.svgLoaded) { $.app.svgLoaded(); }
+    });
 });
 	// FLOOR CONTROL
 	$(".house-image-container .floor_number a")

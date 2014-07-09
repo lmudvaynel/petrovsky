@@ -1,10 +1,7 @@
 //= require threejs/three.min
 //= require threejs/renderers/CSS3DRenderer
 //= require threejs/controls/OrbitControls
-
-// TODO: images preloader
-// TODO: svg preview
-// TODO: apartments shifted
+//= require images_preloader
 
 // Класс в основном нужен для инициализации и доступа к основным
 // объектам плагина three.js, типа камеры, сцены и так далее.
@@ -502,5 +499,44 @@ function Controller () {
 
 }
 
-// Создание, инициализация и вызов ВСЕГО вообще
-var controller = new Controller();
+// Запускается сразу после окончания svg-анимации на странице
+$.app.svgLoaded = function () {
+  var attributes = [
+    { class: "floor bg-item", id: "floor-1" },
+    { class: "floor bg-item", id: "floor-2" },
+    { class: "floor bg-item", id: "floor-3" },
+    { class: "floor bg-item", id: "floor-4" },
+    { class: "floor bg-item", id: "floor-5" },
+    { class: "floor bg-item", id: "floor-6" },
+    { class: "floor-2 bg-item", id: "inset-floor-1" },
+    { class: "floor-2 bg-item", id: "inset-floor-2" },
+    { class: "floor-2 bg-item", id: "inset-floor-3" },
+    { class: "floor-2 bg-item", id: "inset-floor-4" },
+    { class: "floor-2 bg-item", id: "inset-floor-5" },
+    { class: "floor-2 bg-item", id: "inset-floor-6" },
+  ];
+  var divs = [];
+  
+  attributes.forEach(function (attrs) {
+    divs.push($('<div>').addClass(attrs.class).attr('id', attrs.id));
+  });
+  $('.fasad-bg-wrap').append(divs);
+  
+  $.app.preloadFloorPlansImages();
+};
+
+// Предзагрузка картинок
+$.app.preloadFloorPlansImages = function () {
+  var images = [];
+  for (var i = 1; i <= 6; i++) {
+    images.push('/images/floor-' + i + '.png');
+  }
+  $.app.apartments.forEach(function (apartment) {
+    images.push('/uploads/apartment/image/' + apartment.image);
+  });
+  $.app.preload.ready(images, function () {
+    // Когда изображения этажей и апартаментов загружены -
+    // инициализируется данный скрипт
+    var controller = new Controller();
+  });
+};
