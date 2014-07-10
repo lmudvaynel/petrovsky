@@ -131,7 +131,7 @@
 }
 
 .conclusion {
-  height: 3%;
+  height: 4%;
   position: absolute;
   z-index: 1000;
   left: 4%;
@@ -150,31 +150,31 @@
   top: 30%;
 }
 .conclusion.introduction.second {
-  top: 33%;
+  top: 34%;
 }
 .conclusion.introduction.third {
-  top: 36%;
+  top: 38%;
 }
 .conclusion.harmony.first {
   top: 46%;
 }
 .conclusion.harmony.second {
-  top: 49%;
+  top: 50%;
 }
 .conclusion.harmony.third {
-  top: 49%;
+  top: 54%;
 }
 .conclusion.liberty.first {
-  top: 58%;
+  top: 62%;
 }
 .conclusion.liberty.second {
-  top: 61%;
+  top: 66%;
 }
 .conclusion.comfort.first {
-  top: 70%;
+  top: 74%;
 }
 .conclusion.comfort.second {
-  top: 73%;
+  top: 78%;
 }
 
 .conclusion.introduction.first span[data-number="0"] {
