@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626193017) do
+ActiveRecord::Schema.define(version: 20140710112004) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140626193017) do
     t.string   "price"
     t.string   "area"
     t.string   "image_sold"
+    t.boolean  "show_price",   default: false
   end
 
   create_table "friendly_id_slugs", force: true do |t|

@@ -463,6 +463,11 @@ function Controller () {
     
     $('.floor-number').text(apartmentProperties.floor_number);
     $('.apart-number').text(apartmentProperties.number);
+    if (apartmentProperties.show_price) {
+      $('.apart-show-price').show();
+    } else {
+      $('.apart-show-price').hide();
+    }
     $('.apart-price').text(apartmentProperties.price);
     $('.apart-area').text(apartmentProperties.area);
     if (apartmentProperties.floor_number === 1) {

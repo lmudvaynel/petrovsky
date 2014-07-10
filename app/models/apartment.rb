@@ -15,6 +15,7 @@ class Apartment < ActiveRecord::Base
       floor_number: floor_number,
       sold_out: sold_out,
       price: price,
+      show_price: show_price,
       area: area
     }
   end
