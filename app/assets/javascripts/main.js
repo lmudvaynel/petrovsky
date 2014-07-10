@@ -74,7 +74,7 @@ jQuery(function($){
 	    },
 	    place: {
 	      textBlockHeight: 0.2,
-	      infoBlockHeight: 0.3,
+	      infoBlockHeight: 0.35,
 	    },
 	    service: {
 	      textBlockHeight: 0.2,
