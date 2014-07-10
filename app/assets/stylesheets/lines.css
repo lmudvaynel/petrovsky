@@ -43,6 +43,7 @@
   height: 8%;
   left: 4%;
   text-shadow: -1px -1px 1px gray, 1px -1px 1px gray, -1px 1px 1px gray, 1px 1px 1px gray;
+  font-family: 'PT Sans Normal', sans-serif;
 }
 
 .line.greeting.title {
@@ -136,7 +137,7 @@
   left: 4%;
 }
 .concl-link, .concl-link:hover {
-  font-family: Arial;
+  font-family: 'PT Sans Normal', sans-serif;
 }
 .concl-link > div {
   text-shadow: 2px 2px 2px black;
@@ -193,4 +194,8 @@
 }
 .conclusion.comfort.first span[data-number="0"] {
   font-weight: bold;
+}
+
+.concl-link {
+  font-family: 'PT Sans Normal', sans-serif;
 }
