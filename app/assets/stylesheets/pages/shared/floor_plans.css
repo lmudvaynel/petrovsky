@@ -49,8 +49,10 @@
 
 #house-controls-container , #floors-controls-container {
   position: absolute;
-  bottom: 80px;
-  right: 25%;
+  bottom: 15%;
+  left: 50%;
+  width: 170px;
+  margin-left: -85px;
   z-index: 1100;
 }
 #house-controls-container a , #floors-controls-container a {
@@ -110,4 +112,8 @@
 }
 .floor-element.floor-6 {
   background: url(/images/floor-6.png) no-repeat 0 0;
+}
+
+#house-svg-container {
+  opacity: 0;
 }

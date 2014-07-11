@@ -2,12 +2,12 @@ function resize_2620()  {
   var x_y=2620/1200,
   winx_winy=$(window).width()/$(window).height()
   if (winx_winy>x_y) 
-    {$('#svg').attr('width', $(window).width());
-     $('#svg').attr('height', $(window).width()*1200/2620);
+    {$('.svg').attr('width', $(window).width());
+     $('.svg').attr('height', $(window).width()*1200/2620);
      $('#main').css('margin-top',-($(window).width()*1200/2620-$(window).height())/2+'px')}
   else
-    {$('#svg').attr('height', $(window).height());
-     $('#svg').attr('width', $(window).height()*2620/1200);
+    {$('.svg').attr('height', $(window).height());
+     $('.svg').attr('width', $(window).height()*2620/1200);
      $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())/2+'px')
    }
 }
@@ -15,47 +15,47 @@ function resize_1920_right_top () {
   var x_y=1920/1080,
       winx_winy=$(window).width()/$(window).height()
   if (winx_winy>x_y) 
-    {$('#svg').attr('width', $(window).width());
-     $('#svg').attr('height', $(window).width()*1080/1920);}
+    {$('.svg').attr('width', $(window).width());
+     $('.svg').attr('height', $(window).width()*1080/1920);}
   else
-    {$('#svg').attr('height', $(window).height());
-     $('#svg').attr('width', $(window).height()*1920/1080);
+    {$('.svg').attr('height', $(window).height());
+     $('.svg').attr('width', $(window).height()*1920/1080);
      $('#main').css('margin-left',-($(window).height()*1920/1080-$(window).width())+'px')}
 }
 function resize_2620_right () {
   var x_y=2620/1200,
   winx_winy=$(window).width()/$(window).height()
   if (winx_winy>x_y) 
-    {$('#svg').attr('width', $(window).width());
-     $('#svg').attr('height', $(window).width()*1200/2620);
+    {$('.svg').attr('width', $(window).width());
+     $('.svg').attr('height', $(window).width()*1200/2620);
      $('#main').css('margin-top',-($(window).width()*1200/2620-$(window).height())/2+'px')}
   else
-    {$('#svg').attr('height', $(window).height());
-     $('#svg').attr('width', $(window).height()*2620/1200);
+    {$('.svg').attr('height', $(window).height());
+     $('.svg').attr('width', $(window).height()*2620/1200);
      $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())+'px')}
 }
 function resize_1920_left () {
   var x_y=1920/1080,
   winx_winy=$(window).width()/$(window).height()
   if (winx_winy>x_y) 
-    {$('#svg').attr('width', $(window).width());
-     $('#svg').attr('height', $(window).width()*1080/1920);
+    {$('.svg').attr('width', $(window).width());
+     $('.svg').attr('height', $(window).width()*1080/1920);
      $('#main').css('margin-top',-($(window).width()*1080/1920-$(window).height())/2+'px')}
   else
-    {$('#svg').attr('height', $(window).height());
-     $('#svg').attr('width', $(window).height()*1920/1080);
+    {$('.svg').attr('height', $(window).height());
+     $('.svg').attr('width', $(window).height()*1920/1080);
 		}
 }
 function resize_1920 () {
   var x_y=1920/1080,
       winx_winy=$(window).width()/$(window).height()
   if (winx_winy>x_y) 
-    {$('#svg').attr('width', $(window).width());
-     $('#svg').attr('height', $(window).width()*1080/1920);
+    {$('.svg').attr('width', $(window).width());
+     $('.svg').attr('height', $(window).width()*1080/1920);
      $('#main').css('margin-top',-($(window).width()*1080/1920-$(window).height())/2+'px')}
   else
-    {$('#svg').attr('height', $(window).height());
-     $('#svg').attr('width', $(window).height()*1920/1080);
+    {$('.svg').attr('height', $(window).height());
+     $('.svg').attr('width', $(window).height()*1920/1080);
      $('#main').css('margin-left',-($(window).height()*1920/1080-$(window).width())/2+'px')}
   $('#main').show();
 }
@@ -143,8 +143,8 @@ $(window).on('load', function () {
     var $preloader = $('#page-preloader'),
     		$spinner   = $preloader.find('.spinner');
     $spinner.fadeOut();
-    $svg = $('#svg')
-    $("#svg").length==0 ? timer=10 : timer=1100
+    $svg = $('.svg.bg-svg');
+    $svg.length === 0 ? timer = 10 : timer = 1100;
     $svg.delay(2000).fadeOut('slow')
     $preloader.delay(timer).fadeOut('slow', function () {
       if ($.app.svgLoaded) { $.app.svgLoaded(); }
