@@ -438,7 +438,7 @@ h5 { font-size:12px; color:#fff; }
 	margin-left: -304.5px;
 	margin-top: -203px;
 	background: #000;
-	width: 537px;
+	width: 700px;
 	border: 10px solid #cbc4ad;
 	color: #fffcd9;
 	padding: 20px 60px;
@@ -551,6 +551,21 @@ h5 { font-size:12px; color:#fff; }
     top: 50%;
     background: url('/images/spinner.gif') no-repeat 50% 50%;
     margin: -16px 0 0 -16px;
+}
+
+.container .tt-grid-wrapper img {
+  width: 300px;
+  height: 225px;
+}
+
+#full-img {
+  position: fixed;
+  left: 50%;
+  margin-left: -500px;
+  top: 60%;
+  margin-top: -300px;
+  width: 1000px;
+  height: 600px;
 }
 
  @media (min-height: 670px) {
