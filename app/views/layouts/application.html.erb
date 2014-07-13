@@ -23,18 +23,6 @@
     <div class="fasad-bg-wrap">
       <div class="fasad-2 bg-item"></div>
       <div class="fasad bg-item"></div>
-      <div class="floor bg-item" id="floor-1"></div>
-      <div class="floor bg-item" id="floor-2"></div>
-      <div class="floor bg-item" id="floor-3"></div>
-      <div class="floor bg-item" id="floor-4"></div>
-      <div class="floor bg-item" id="floor-5"></div>
-      <div class="floor bg-item" id="floor-6"></div>
-      <div class="floor-2 bg-item" id="inset-floor-1"></div>
-      <div class="floor-2 bg-item" id="inset-floor-2"></div>
-      <div class="floor-2 bg-item" id="inset-floor-3"></div>
-      <div class="floor-2 bg-item" id="inset-floor-4"></div>
-      <div class="floor-2 bg-item" id="inset-floor-5"></div>
-      <div class="floor-2 bg-item" id="inset-floor-6"></div>
     </div>
   <% end %>
   <% if @page.slug=="contacts" %>
@@ -102,12 +90,12 @@
 	  <div id="gallery-wrap">
   <% elsif @page.slug=="floor_plans"%>
   <script type="text/javascript">
-  $(window).resize(resize_1920_left);
-  $(document).ready(function(){
-    $('#main').show()
-    $.app.pages.shared.floor_plans.apartments = JSON.parse('<%= raw @apartments_json %>');
-  });
-</script>
+    $(window).resize(resize_1920_left);
+    $(document).ready(function(){
+      $('#main').show();
+      $.app.apartments = JSON.parse('<%= raw @apartments_json %>');
+    });
+  </script>
 <style type="text/css">
 .path {
   stroke-dasharray: 100;
