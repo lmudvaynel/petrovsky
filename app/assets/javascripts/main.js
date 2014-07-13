@@ -67,13 +67,72 @@ jQuery(function($){
 
 	//Window on resize event
 	//------------------------------------------------
+	function resizeContent () {
+	  var options = {
+	    concept: {
+	      textBlockHeight: 0.4,
+	    },
+	    place: {
+	      textBlockHeight: 0.2,
+	      infoBlockHeight: 0.35,
+	    },
+	    service: {
+	      textBlockHeight: 0.2,
+	      infoBlockHeight: 0.4,
+	    },
+	    contacts: {
+	      textBlockHeight: 0.2,
+	      infoBlockHeight: 0.35,
+	    },
+	  };
+	  var page = $('.common-wrapper').data('page');
+	  if (!page) return;
+	  var params = options[page];
+	  var textW = $('.content_text');
+	  var infoW = $('.default-block');
+	  var infoTextW = $('.default-block .info_text');
+	  
+	  textW.height($(window).height() * params.textBlockHeight);
+	  if (infoW) { infoW.height($(window).height() * params.infoBlockHeight) }
+	  
+	  var fontSize = 0.7 * textW.height()/(textW.find('br').length + 1);
+	  
+	  $('.shadow-text').css('font-size', fontSize + 'px');
+	  
+	  if (infoTextW) {
+	    var infoFontSize = 0.7 * infoTextW.height()/(infoTextW.find('br').length + 1);
+	    console.log(infoTextW.height(), infoTextW.find('br').length, infoFontSize);
+	    
+	    infoTextW.css('font-size', infoFontSize + 'px');
+	  }
+	  
+	  var lists = $('.default-block .tab-item ul');
+	  var list, fullHeight, height, paddingTop, margin;
+	  if (infoW && lists) {
+	    lists.each(function () {
+	      list = $(this);
+	      fullHeight = infoW.height()/list.find('li').length;
+	      height = 0.75 * fullHeight;
+	      paddingTop = 0.05 * fullHeight;
+	      margin = 0.1 * fullHeight;
+	      fontSize = 0.7 * fullHeight;
+	      list.find('li').css({
+	        height: height,
+	        margin: margin,
+	        'padding-top': paddingTop,
+	        'font-size': fontSize,
+	      });
+	    });
+	  }
+	}
+	
 	$(window).resize(function(){
 	
 			var metro = $('#header .container.visible-phone:visible');
 			var bricks = metro.find('.brick1');
 			var size = metro.width()/2
 			bricks.css({width:size,height:size});
-		
+		  resizeContent();
 
 	});
 

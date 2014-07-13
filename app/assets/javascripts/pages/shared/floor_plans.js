@@ -383,6 +383,55 @@ function Controller () {
     this.container.on('click', '.apartment-element', function (event) {
       controller.apartmentElementClickEvent(event);
     });
+    // Обработка событий, связанных с невидимым поэтажным svg-макетом дома
+    this.initSVGEvents();
+  };
+
+  this.initSVGEvents = function () {
+    var controller = this;
+    
+    $('#house-svg-container svg').css('pointer-events', 'all');
+    for (var i = 1; i <= 6; i++) {
+      $('#svg-floor-' + i).on('mouseover', 'path', function (event) {
+        controller.svgFloorMouseEvent(event);
+      });
+      $('#svg-floor-' + i).on('mouseout', 'path', function (event) {
+        controller.svgFloorMouseEvent(event);
+      });
+      $('#svg-floor-' + i).on('click', 'path', function (event) {
+        controller.svgFloorClickEvent(event);
+      });
+    }
+  };
+
+  // Наведение на этаж
+  this.svgFloorMouseEvent = function (event) {
+    var element = event.target;
+    var floorNumber = parseInt($(element).parent().attr('id').split('-')[2]);
+    
+    if (this.animation.goes()) return;
+    event.preventDefault();
+    
+    switch (event.type) {
+      case 'mouseover':
+        $('#floor-' + floorNumber).addClass('active');
+        break;
+      case 'mouseout':
+        $('#floor-' + floorNumber).removeClass('active');
+        break;
+    }
+  };
+
+  // Клик по этажу
+  this.svgFloorClickEvent = function (event) {
+    var element = event.target;
+    var floorNumber = parseInt($(element).parent().attr('id').split('-')[2]);
+    
+    if (this.animation.goes()) return;
+    event.preventDefault();
+    
+    $('#floor-' + floorNumber).removeClass('active');
+    $('.show-house-floor.floor_' + floorNumber).click();
   };
 
   // Лучше не трогать, вроде бы работает
@@ -463,6 +512,11 @@ function Controller () {
     
     $('.floor-number').text(apartmentProperties.floor_number);
     $('.apart-number').text(apartmentProperties.number);
+    if (apartmentProperties.show_price) {
+      $('.apart-show-price').show();
+    } else {
+      $('.apart-show-price').hide();
+    }
     $('.apart-price').text(apartmentProperties.price);
     $('.apart-area').text(apartmentProperties.area);
     if (apartmentProperties.floor_number === 1) {

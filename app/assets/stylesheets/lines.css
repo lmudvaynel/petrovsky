@@ -43,6 +43,7 @@
   height: 8%;
   left: 4%;
   text-shadow: -1px -1px 1px gray, 1px -1px 1px gray, -1px 1px 1px gray, 1px 1px 1px gray;
+  font-family: 'PT Sans Normal', sans-serif;
 }
 
 .line.greeting.title {
@@ -130,13 +131,13 @@
 }
 
 .conclusion {
-  height: 3%;
+  height: 4%;
   position: absolute;
   z-index: 1000;
   left: 4%;
 }
 .concl-link, .concl-link:hover {
-  font-family: Arial;
+  font-family: 'PT Sans Normal', sans-serif;
 }
 .concl-link > div {
   text-shadow: 2px 2px 2px black;
@@ -149,31 +150,31 @@
   top: 30%;
 }
 .conclusion.introduction.second {
-  top: 33%;
+  top: 34%;
 }
 .conclusion.introduction.third {
-  top: 36%;
+  top: 38%;
 }
 .conclusion.harmony.first {
   top: 46%;
 }
 .conclusion.harmony.second {
-  top: 49%;
+  top: 50%;
 }
 .conclusion.harmony.third {
-  top: 49%;
+  top: 54%;
 }
 .conclusion.liberty.first {
-  top: 58%;
+  top: 62%;
 }
 .conclusion.liberty.second {
-  top: 61%;
+  top: 66%;
 }
 .conclusion.comfort.first {
-  top: 70%;
+  top: 74%;
 }
 .conclusion.comfort.second {
-  top: 73%;
+  top: 78%;
 }
 
 .conclusion.introduction.first span[data-number="0"] {
@@ -193,4 +194,8 @@
 }
 .conclusion.comfort.first span[data-number="0"] {
   font-weight: bold;
+}
+
+.concl-link {
+  font-family: 'PT Sans Normal', sans-serif;
 }

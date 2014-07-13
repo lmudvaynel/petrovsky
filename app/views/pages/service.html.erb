@@ -20,7 +20,7 @@
 }
 </style>
 <div id="main">
-<svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2620 1200" enable-background="new 0 0 2620 1200" xml:space="preserve">
+<svg class="svg bg-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2620 1200" enable-background="new 0 0 2620 1200" xml:space="preserve">
 <g id="Layer_5">
   <rect y="3.5" fill="none" stroke="#201600" stroke-miterlimit="10"  width="2620" height="1196.5"/>
 </g>
@@ -50,21 +50,25 @@
     <%= javascript_include_tag 'svganimations.js' %>
     <%= javascript_include_tag 'classie.js' %>
 </div>
-    <div class="common-wrapper">
-      <span class="petrovsky">Petrovsky Apart House</span> - пространство, где все подчинено желаниям
-владельцев<br />апартаментов. Каждая деталь  дарит удивительное ощущение тепла,
-света, заботы и красоты.<br />Дом обслуживает профессиональная консьерж - служба 
-с многолетним опытом эксплуатации,<br /> которая готова оказать помощь и поддержку
-в организации любого аспекта Вашей жизни. 
-      <div class="default-block block-wrapper">
+    <div class="common-wrapper" data-page="service">
+      <div class="shadow-text">
+        <div class="content_text">
+          <span class="petrovsky">Petrovsky Apart House</span> - пространство, где все подчинено желаниямвладельцев<br />
+          апартаментов. Каждая деталь  дарит удивительное ощущение тепла, света, заботы и красоты.<br />
+          Дом обслуживает профессиональная консьерж - служба с многолетним опытом эксплуатации,<br />
+          которая готова оказать помощь и поддержку в организации любого аспекта Вашей жизни.
+        </div>
+      </div>
+      <div class="default-block block-wrapper service">
         <div class="block-shadow"></div>
         <div class="block-info">
           <div id="tab">
-            <div class="tab-list tab-list-s">
+            <div class="tab-list">
               <div class="tab-item current" id="tab-1">
                 <ul class="service">  
                   <li>Комплексная безопасность </li>
-                  <li class="lineheight-serv">Диспетчерский контроль инженерно-технических систем</li>
+                  <li>Диспетчерский контроль</li>
+                  <li class="extension">инженерно-технических систем</li>
                   <li>Круглосуточная консьерж служба</li>
                   <li>Паркинг на огороженной территории</li>
                 </ul>
@@ -74,11 +78,12 @@
                   <li>Кафе и ресторан с room-сервисом</li>
                   <li>Собственная клиниговая компания</li>
                   <li>Химчистка, салон красоты/SPA</li>
-                  <li>Карты привилегий для владельцев апартаментов</li>
+                  <li>Карты привилегий для</li>
+                  <li class="extension">владельцев апартаментов</li>
                 </ul>
               </div>
             </div>
-            <div class="tab-control tab-serv">
+            <div class="tab-control">
               <ul>
                 <li><a class="current" href="" rel="tab-1"></a></li>
                 <li><a href="" rel="tab-2"></a></li>

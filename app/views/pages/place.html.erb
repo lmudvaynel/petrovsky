@@ -20,7 +20,7 @@
 }
 </style>
 <div id="main">
-<svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1920" height="1080" viewBox="0 0 1920 1080" enable-background="new 0 0 1920 1080" xml:space="preserve">
+<svg class="svg bg-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1920" height="1080" viewBox="0 0 1920 1080" enable-background="new 0 0 1920 1080" xml:space="preserve">
 <g id="Layer_2">
   <path fill="none" stroke="#201600" stroke-miterlimit="10" d="M627,1080l18.667-91.333l-107.167,13.5l65.167-178.833l82.167-8
     L694.25,776l-75.75,6.5l34.083-93.667l61.083-4.167l4.5-22.665L660.75,666L682,607.666l48.667-2.75l3-16.083l-45.5,2.334
@@ -101,12 +101,15 @@
     <%= javascript_include_tag 'svganimations.js' %>
     <%= javascript_include_tag 'classie.js' %>
 </div>
-    <div class="common-wrapper">
+    <div class="common-wrapper" data-page="place">
 
-      <div class="shadow-text"><span class="petrovsky">Petrovsky Apart House</span> расположен в динамично развивающейся части<br />
-      САО столицы с развитой инфраструктурой и высокой транспортной доступностью,<br />
-      в 3 минутах ходьбы от метро Войковская и непосредственной близости к<br />
-      основным транспортным магистралям Москвы.
+      <div class="shadow-text">
+        <div class="content_text">
+          <span class="petrovsky">Petrovsky Apart House</span> расположен в динамично развивающейся части<br />
+          САО столицы с развитой инфраструктурой и высокой транспортной доступностью,<br />
+          в 3 минутах ходьбы от метро Войковская и непосредственной близости к<br />
+          основным транспортным магистралям Москвы.
+        </div>
         <div class="map-btn-wrap">
           <span class="place-icon"></span>
           <a href="#" class="content-link" id="maps-link" data-sh="n">Посмотреть на карте</a>
@@ -127,7 +130,8 @@
               </div>
               <div class="tab-item" id="tab-2">
                 <ul class="location">
-                  <li class="lineheight-loc" >Природно-исторический парк "Покровское - Стрешнево"</li>
+                  <li>Природно-исторический парк</li>
+                  <li class="extension">"Покровское - Стрешнево"</li>
                   <li>"Парк Воровского"</li>
                   <li>ТТК – 6 км</li>
                   <li>МКАД – 7,6 км</li>

@@ -5,7 +5,7 @@
     <%= content_for?(:title) ? yield(:title) : 'Petrovsky Apart House' %>
   </title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "http://scriptjava.net/source/scriptjava/scriptjava.js" %>
+  <%#= javascript_include_tag "http://scriptjava.net/source/scriptjava/scriptjava.js" %>
   <%= javascript_include_tag  "http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" %>
   <%#= stylesheet_link_tag "responsive" %>
   <%#= stylesheet_link_tag "component" %>
@@ -112,7 +112,7 @@
 }
 </style>
 <div id="main">
-<svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 1080" enable-background="new 0 0 1920 1080" xml:space="preserve">
+<svg class="svg bg-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 1080" enable-background="new 0 0 1920 1080" xml:space="preserve">
 <g id="Layer_2">
   <path fill="none" stroke="#201600" stroke-miterlimit="10" d="M473.333,994.001l14.333-709.667l-1.333-0.667v-3.333l132.667-72l3,1
     l113.983-88.026l20.684-15.974l360.666,164.667l-0.333,3.333l-20.667,9.667l0.334,15.333l39-18.667l162,73.667l-19,9l-0.333,8.667
