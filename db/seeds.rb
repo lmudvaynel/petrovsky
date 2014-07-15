@@ -1,7 +1,7 @@
 puts "Seeding..."
 seeds= {
   'pages.rb'=> 1,
-  'messages.rb'=> 0,
+  'messages.rb'=> 1,
   'apartments'=> 0
 }
 
