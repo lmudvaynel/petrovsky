@@ -3,7 +3,7 @@ role :app, "5.9.50.131"
 role :db,  "5.9.50.131", :primary => true
 
 set :rails_env, "production"
-set :branch, "apt-features"
+set :branch, "apt-main"
 
 set :deploy_to, "#{base_directory}/#{application}_#{stage}"
 
