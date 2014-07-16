@@ -34,7 +34,7 @@ function resize_2620_right () {
      $('.svg').attr('width', $(window).height()*2620/1200);
      $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())+'px')}
 }
-function resize_1920_left () {
+function resize_1920_left (z) {
   var x_y=1920/1080,
   winx_winy=$(window).width()/$(window).height()
   if (winx_winy>x_y) 

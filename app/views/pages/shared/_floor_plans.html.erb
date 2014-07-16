@@ -1,3 +1,17 @@
+  <script type="text/javascript">
+    $(window).resize(function(){
+      var x_y=1920/1080,
+      winx_winy=$(window).width()/$(window).height()
+      if (winx_winy>x_y) 
+        {$('.svg_2').attr('width', $(window).width());
+         $('.svg_2').attr('height', $(window).width()*1080/1920);
+         $('#house-svg-container').css('margin-top',-($(window).width()*1080/1920-$(window).height())/2+'px')}
+      else
+        {$('.svg_2').attr('height', $(window).height());
+         $('.svg_2').attr('width', $(window).height()*1920/1080);
+        }
+    });
+  </script>
 <!--<section id="preloader-container">
   LOADING: <span id="percents">0</span>%
 </section>
@@ -14,7 +28,7 @@
     </section>
   -->
     <div id="house-svg-container">
-      <svg class="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1920px"
+      <svg class="svg_2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1920px"
 	       height="1080px" viewBox="0 0 1920 1080" enable-background="new 0 0 1920 1080" xml:space="preserve">
       <g id="svg-floor-1">
 	      <path fill="none" stroke="#00DFDB" stroke-miterlimit="10" d="M476.5,884l264.167,47L1554,824.5l0.5,68.5L1056,1021l-15.333,8.167
