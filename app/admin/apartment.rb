@@ -4,9 +4,6 @@ ActiveAdmin.register Apartment do
   permit_params :image, :image_sold, :dx, :dy, :number, :floor_number, :sold_out, :price, :area, :show_price
 
   index do
-    column :image do |apartment|
-      link_to image_tag(apartment.image.url, class: "admin_img"), admin_apartment_path(apartment)
-    end
     column :floor_number
     column :number
     column :dx
