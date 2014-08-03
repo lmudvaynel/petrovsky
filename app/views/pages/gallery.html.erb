@@ -1,3 +1,41 @@
+<script type="text/javascript">
+  $(window).resize(resize_1920_right);
+  $(document).ready(function () {
+    $('#main').show()
+  });
+</script>
+<style type="text/css">
+.path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: dash 1s linear alternate infinite;
+}
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+</style>
+<div id="main">
+<svg class="svg bg-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 1200" enable-background="new 0 0 1920 1200" xml:space="preserve">
+<g id="Layer_2">
+  <path fill="none" stroke="#201600" stroke-miterlimit="10" d="M846,846l-6-37.667L835.5,813l-7-1l10.75-11.5
+    c0,0,9.579-1.655,12.75,6.5c5.25,13.5,7.25,32.75,7.25,32.75H866c0,0-1.302-28.652-5.5-35.25c-7-11-21-5-21-5l-9.5-60l100-2.5
+    l7.5,26.5l7.5,42c0,0,17-12.75,25.25-2.75c7.653,9.276,10.25,33,10.25,33s-3.25-22-9.75-32.75s-25,2.25-25,2.25l10.75-7
+    c0,0,15.158-7.838,24.75,5.75c6,8.5,6.25,24,6.25,24l6,90H988l-1-3.5l-6.5-68L960,847l-21,56l-5-1.5l16.5-54.5l-66.5,1l-7-0.5
+    l-2.5-2L880,922l-5-1.5l-7.5-76L860,848l-8,2l-5,8l-12,48.5h-5.5L846,846z"/>
+</g>
+<g id="Layer_3">
+  <path fill="none" stroke="#201600" stroke-miterlimit="10" d="M0,0l850.597,354.103l934.453-59.997l91.495-290.985L1917.043,0
+    L1920,1083.066l-62.5-94.566L1853,474l-14,13.5l7.5,475l9.5,15"/>
+</g>
+</svg>
+    <%= javascript_include_tag 'svganimations.js' %>
+    <%= javascript_include_tag 'classie.js' %>
+</div>
 <div class="common">
 
   <%= javascript_include_tag 'thumbnailGridAnimations/modernizr.custom' %>
@@ -8,12 +46,12 @@
 	<div class="container">
 		<section class="tt-grid-wrapper">
 			<ul class="tt-grid tt-effect-stackback tt-effect-delay">
-				<li><a href="#"><img src="images/t-sampl-1.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-2.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-3.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-4.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-5.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-6.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-1.jpg" bsrc="images/sampl-1.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-2.jpg" bsrc="images/sampl-2.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-3.jpg" bsrc="images/sampl-3.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-4.jpg" bsrc="images/sampl-4.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-5.jpg" bsrc="images/sampl-5.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-6.jpg" bsrc="images/sampl-6.jpg"/></a></li>
 			</ul>
 			<nav>
 				<a class="tt-current"></a><a></a>
@@ -28,16 +66,28 @@
 </div>
 
 <script type="text/javascript">
-  var i=0
+  $( window ).resize(function() {
+    var wWidth=$(window).width(),
+        widthLi=(wWidth*20.761245674740486)/100,
+        heightLi=(wWidth*15.570934256055365)/100,
+        marginLi=(wWidth*0.6920415224913495)/100,
+        bigImgWidth=(wWidth*65.16724336793541)/100
+    $('.tt-grid-wrapper').find('li').css('height', heightLi + 'px')
+                                    .css('margin', marginLi + 'px')
+                                    .css('width', widthLi + 'px');
+    $('.container .tt-grid-wrapper ul li a img').css('height', heightLi + 'px')
+                                        .css('width', widthLi + 'px');   
+    $('#full-img').css('width', bigImgWidth + 'px')
+                  .css('marginLeft', -bigImgWidth/2 + 'px');
+  });
+
   setInterval(function () {
     $('.tt-grid-wrapper a').on('click', 'img', function (event) {
-      $('#full-img').attr('src', $(this).attr('src'));
+      $('#full-img').attr('src', $(this).attr('bsrc'));
       $('#full-img').removeClass('hidden');
     });
     $('.common').on('click', '#full-img', function (event) {
       $(this).addClass('hidden');
     });
-    $('.tt-grid-wrapper').find('nav').find('a')[i].click()
-    i==0 ? i=1 : i=0
-  }, 5000);
+  }, 0);
 </script>

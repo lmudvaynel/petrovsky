@@ -10,7 +10,7 @@
 	position: relative;
 	margin: 20px auto;
 	padding: 0;
-	max-width: 960px;
+	max-width: 68%;
 	list-style: none;
 	text-align: center;
 	font-size: 0px;
@@ -54,7 +54,9 @@
 	z-index: 1;
 	visibility: hidden;
 }
-
+.tt-grid-wrapper {
+	opacity: 0;
+}
 /* Navigation */
 .tt-grid-wrapper nav {
 	text-align: center;
@@ -188,6 +190,8 @@
 	transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
+	height: 100%;
+	width: 100%;
 }
 
 .tt-effect-stackback.tt-effect-active li:not(.tt-empty) a:first-child {

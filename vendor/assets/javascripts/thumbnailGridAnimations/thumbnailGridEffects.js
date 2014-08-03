@@ -4,8 +4,18 @@
 
 	// some dummy data to play with..
 	var allImages = {
-		page1 : ['<a href="#"><img src="images/sampl-1.jpg"/></a>','<a href="#"><img src="images/sampl-2.jpg"/></a>','<a href="#"><img src="images/sampl-3.jpg"/></a>','<a href="#"><img src="images/sampl-4.jpg"/></a>','<a href="#"><img src="images/sampl-5.jpg"/></a>','<a href="#"><img src="images/sampl-6.jpg"/></a>'],
-		page2 : ['<a href="#"><img src="images/sampl-7.jpg"/></a>','<a href="#"><img src="images/sampl-8.jpg"/></a>','<a href="#"><img src="images/sampl-9.jpg"/></a>','<a href="#"><img src="images/sampl-10.jpg"/></a>','<a href="#"><img src="images/sampl-11.jpg"/></a>','<a href="#"><img src="images/sampl-12.jpg"/></a>']
+		page1 : ['<a href="#"><img src="images/t-sampl-1.jpg" bsrc="images/sampl-1.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-2.jpg" bsrc="images/sampl-2.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-3.jpg" bsrc="images/sampl-3.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-4.jpg" bsrc="images/sampl-4.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-5.jpg" bsrc="images/sampl-5.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-6.jpg" bsrc="images/sampl-6.jpg"/></a>'],
+		page2 : ['<a href="#"><img src="images/t-sampl-7.jpg" bsrc="images/sampl-7.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-8.jpg" bsrc="images/sampl-8.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-9.jpg" bsrc="images/sampl-9.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-10.jpg" bsrc="images/sampl-10.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-11.jpg" bsrc="images/sampl-11.jpg"/></a>',
+							'<a href="#"><img src="images/t-sampl-12.jpg" bsrc="images/sampl-12.jpg"/></a>']
 	};
 
 	// http://coveroverflow.com/a/11381730/989439

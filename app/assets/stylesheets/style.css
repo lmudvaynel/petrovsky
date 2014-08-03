@@ -24,7 +24,7 @@ a { font-family: 'PT Sans Normal', sans-serif; text-decoration:none; color:#fff;
 a:hover { font-family: 'PT Sans Normal', sans-serif; text-decoration:none; color:#fff; }
 
 .clear   { clear:both}
-#wrapper { position:relative; min-width:1260px; display: block;}
+#wrapper { position:relative; display: block;}
 
 a, img, input, button, textarea, select { outline: none; resize:none }
 strong, b { font-weight:bold; }
@@ -553,19 +553,15 @@ h5 { font-size:12px; color:#fff; }
     margin: -16px 0 0 -16px;
 }
 
-.container .tt-grid-wrapper img {
-  width: 300px;
-  height: 225px;
+.container .tt-grid-wrapper ul li a img {
+	height: 100%;
+	width: 100%;
 }
 
 #full-img {
   position: fixed;
-  left: 50%;
-  margin-left: -500px;
   top: 0%;
   margin-top: 170px;
-  width: 1000px;
-  height: 600px;
 }
 
  @media (min-height: 670px) {

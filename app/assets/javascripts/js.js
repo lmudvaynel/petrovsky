@@ -34,7 +34,7 @@ function resize_2620_right () {
      $('.svg').attr('width', $(window).height()*2620/1200);
      $('#main').css('margin-left',-($(window).height()*2620/1200-$(window).width())+'px')}
 }
-function resize_1920_left (z) {
+function resize_1920_left () {
   var x_y=1920/1080,
   winx_winy=$(window).width()/$(window).height()
   if (winx_winy>x_y) 
@@ -45,6 +45,18 @@ function resize_1920_left (z) {
     {$('.svg').attr('height', $(window).height());
      $('.svg').attr('width', $(window).height()*1920/1080);
 		}
+}
+function resize_1920_right () {
+  var x_y=1920/1200,
+  winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('.svg').attr('width', $(window).width());
+     $('.svg').attr('height', $(window).width()*1200/1920);
+     $('#main').css('margin-top',-($(window).width()*1200/1920-$(window).height())/2+'px')}
+  else
+    {$('.svg').attr('height', $(window).height());
+     $('.svg').attr('width', $(window).height()*1920/1200);
+     $('#main').css('margin-left',-($(window).height()*1920/1200-$(window).width())+'px')}
 }
 function resize_1920 () {
   var x_y=1920/1080,
@@ -146,6 +158,7 @@ $(window).on('load', function () {
     $svg = $('.svg.bg-svg');
     $svg.length === 0 ? timer = 10 : timer = 1100;
     $svg.delay(2000).fadeOut('slow')
+    $('.tt-grid-wrapper').delay(1500).animate({opacity: 1}, 2000);
     $preloader.delay(timer).fadeOut('slow', function () {
       if ($.app.svgLoaded) { $.app.svgLoaded(); }
     });
