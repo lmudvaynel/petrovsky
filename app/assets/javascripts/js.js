@@ -1,3 +1,14 @@
+function resize_2560_right_top () {
+  var x_y=2560/1714,
+      winx_winy=$(window).width()/$(window).height()
+  if (winx_winy>x_y) 
+    {$('.svg').attr('width', $(window).width());
+     $('.svg').attr('height', $(window).width()*1714/2560);}
+  else
+    {$('.svg').attr('height', $(window).height());
+     $('.svg').attr('width', $(window).height()*2560/1714);
+     $('#main').css('margin-left',-($(window).height()*2560/1714-$(window).width())+'px')}
+}
 function resize_2620()  {
   var x_y=2620/1200,
   winx_winy=$(window).width()/$(window).height()

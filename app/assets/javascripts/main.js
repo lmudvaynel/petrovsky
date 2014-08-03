@@ -84,6 +84,10 @@ jQuery(function($){
 	      textBlockHeight: 0.2,
 	      infoBlockHeight: 0.35,
 	    },
+	    penthouses: {
+	      textBlockHeight: 0.23,
+	      infoBlockHeight: 0.3,
+	    },
 	  };
 	  var page = $('.common-wrapper').data('page');
 	  if (!page) return;
