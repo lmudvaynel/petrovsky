@@ -8,26 +8,27 @@
 	<div class="container">
 		<section class="tt-grid-wrapper">
 			<ul class="tt-grid tt-effect-stackback tt-effect-delay">
-				<li><a href="#"><img src="images/sampl-1.jpg"/></a></li>
-				<li><a href="#"><img src="images/sampl-2.jpg"/></a></li>
-				<li><a href="#"><img src="images/sampl-3.jpg"/></a></li>
-				<li><a href="#"><img src="images/sampl-4.jpg"/></a></li>
-				<li><a href="#"><img src="images/sampl-5.jpg"/></a></li>
-				<li><a href="#"><img src="images/sampl-6.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-1.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-2.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-3.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-4.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-5.jpg"/></a></li>
+				<li><a href="#"><img src="images/t-sampl-6.jpg"/></a></li>
 			</ul>
 			<nav>
 				<a class="tt-current"></a><a></a>
 			</nav>
+      <img id="full-img" class="hidden" src="images/sampl-1.jpg"/>
 		</section>
 	</div><!-- /container -->
-  <img id="full-img" class="hidden" src="images/sampl-1.jpg"/>
-
+  
   <%= javascript_include_tag 'thumbnailGridAnimations/classie' %>
   <%= javascript_include_tag 'thumbnailGridAnimations/thumbnailGridEffects' %>
 
 </div>
 
 <script type="text/javascript">
+  var i=0
   setInterval(function () {
     $('.tt-grid-wrapper a').on('click', 'img', function (event) {
       $('#full-img').attr('src', $(this).attr('src'));
@@ -36,5 +37,7 @@
     $('.common').on('click', '#full-img', function (event) {
       $(this).addClass('hidden');
     });
-  }, 0);
+    $('.tt-grid-wrapper').find('nav').find('a')[i].click()
+    i==0 ? i=1 : i=0
+  }, 5000);
 </script>
