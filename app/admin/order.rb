@@ -1,4 +1,5 @@
 ActiveAdmin.register Order do
+  menu :priority => 3
   actions :all, :except => [:destroy, :new]
   
   # See permitted parameters documentation:

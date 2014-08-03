@@ -1,0 +1,115 @@
+ru:
+   time:
+     formats:
+       default: "%Y/%m/%d"
+       short: "%b %d"
+       long: "%d-%m-%Y"
+   active_admin:
+     devise:
+       email:
+         title: "Емайл"
+       password:
+         title: "Пароль"
+   footer:
+     text: "Компания"
+   mailer:
+     email: "Введите ваш e-mail"
+     message: "Введите ваше сообщение"
+     send: "Отправить"
+   js:
+     project_prefix: "/ru"
+     wrong_email: "Введите правильный e-mail"
+     short_message: "Ваше сообщение cлишком короткое"
+     send_success: "Ваше сообщение успешно отправлено"
+     send_error: "Произошла ошибка"
+   translation:
+     en: "English"
+     ru: "Русский"
+   activerecord:
+     models:
+       admin_user:
+         zero:  Администраторов
+         one:   Администратор
+         few:   Администраторa
+         many:  Администраторов
+         other: Администраторы
+       feedback:
+         Обратная связь
+       page:
+         zero: Страниц
+         one: Страница
+         few: Страницы
+         many: Страниц
+         other: Страницы
+       message:
+          zero: Акций
+          one: Акция
+          few: Акций
+          many: Акций
+          other: Акции 
+       order:
+          zero: Заказов
+          one: Заказ
+          few: Заказов
+          many: Заказов
+          other: Заказы
+       comment:
+          zero: Комментариев
+          one: Комментарий
+          few: Комментариев
+          many: Комментариев
+          other: Комментарии
+       apartment:
+          zero: Апартаментов
+          one: Апартаменты
+          few: Апартаментов
+          many: Апартаментов
+          other: Апартаменты
+       seo:
+         СЕО
+     attributes:
+       admin_user:
+         id: Номер
+         email: Емайл
+         current_sign_in_at: Время текущего входа
+         last_sign_in_at: Врема последнего входа
+         current_sign_in_ip: Текущий IP
+         last_sign_in_ip: Последний IP
+         created_at: Дата создания
+         updated_at: Дата обновления
+         sign_in_count: Число входов
+         password: Пароль
+         password_confirmation: Подтверждение пароля
+       feedback:
+         id: Номер
+         email: Емайл
+         message: Сообщение
+         created_at: Дата создания
+         updated_at: Дата обновления
+       order:
+          name: Имя
+          company: Компания
+          phone: Номер телефона
+          content: Описание заказа
+          email: E-Mail
+       seo:
+         title: Заголовок
+         keywords: Ключевые слова
+         description: Описание
+         created_at: Дата создания
+         updated_at: Дата обновления
+       message:
+         id: Номер
+         showed: Отображать?
+         content: Контент
+         description: Описание
+       apartment:
+         id: Номер
+         floor_number: Этаж
+         number: Квартира
+         sold_out: Проданы?
+         image: Изображение
+         image_sold: Изображение проданных
+         price: Цена
+         area: Площадь
+         show_price: Показать цену?

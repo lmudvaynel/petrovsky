@@ -1,5 +1,6 @@
 # encoding: utf-8
 ActiveAdmin.register Apartment do
+  menu :priority => 1
   permit_params :image, :image_sold, :dx, :dy, :number, :floor_number, :sold_out, :price, :area, :show_price
 
   index do

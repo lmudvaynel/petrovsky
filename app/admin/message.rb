@@ -1,5 +1,6 @@
 # encoding: utf-8
 ActiveAdmin.register Message do
+  menu :priority => 2
   permit_params :content, :showed, :description
 
   index do

@@ -5,7 +5,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Petrovsky"
+  config.site_title = "Перейти на сайт"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -56,7 +56,9 @@ ActiveAdmin.setup do |config|
   # This setting changes the method which Active Admin calls
   # within the controller.
   config.authentication_method = :authenticate_admin_user!
-
+    config.before_filter do
+    I18n.locale = 'ru'
+  end
   # == User Authorization
   #
   # Active Admin will automatically call an authorization
@@ -110,8 +112,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  # config.root_to = 'dashboard#index'
-
+  config.root_to = 'apartments#index'
 
   # == Admin Comments
   #
