@@ -25,3 +25,4 @@
 //= require bigvideo
 //= require google_analytics
 //= require scriptjava
+//= require jquery.prettyPhoto

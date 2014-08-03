@@ -91,7 +91,8 @@ $.fn.clicktoggle = function(a,b){
     });// fixed typo here, was missing )
 };
 $(document).ready(function(){
-  	$('#canvas-container').on('mouseover', '.apartment-element', function (event) {
+  $('.gallery_1').find("a[rel^='prettyPhoto']").prettyPhoto({theme: 'facebook', /* light_rounded / dark_rounded / light_square / dark_square / facebook */slideshow:5000, autoplay_slideshow:true});  	
+    $('#canvas-container').on('mouseover', '.apartment-element', function (event) {
       $(this).addClass('current');
 	  	$('.apartment-element').stop().each(function() {
 				if (!$(this).hasClass('current'))

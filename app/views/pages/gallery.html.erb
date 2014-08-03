@@ -45,14 +45,40 @@
 
 	<div class="container">
 		<section class="tt-grid-wrapper">
-			<ul class="tt-grid tt-effect-stackback tt-effect-delay">
-				<li><a href="#"><img src="images/t-sampl-1.jpg" bsrc="images/sampl-1.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-2.jpg" bsrc="images/sampl-2.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-3.jpg" bsrc="images/sampl-3.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-4.jpg" bsrc="images/sampl-4.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-5.jpg" bsrc="images/sampl-5.jpg"/></a></li>
-				<li><a href="#"><img src="images/t-sampl-6.jpg" bsrc="images/sampl-6.jpg"/></a></li>
-			</ul>
+      <div class="gallery_1">
+  			<ul class="tt-grid tt-effect-stackback tt-effect-delay">
+  				<li>
+            <a href="images/sampl-1.jpg" rel="prettyPhoto[pp_gal]">
+              <img src="images/t-sampl-1.jpg" title="">
+            </a>
+          </li>
+  				<li>
+            <a href="images/sampl-2.jpg" rel="prettyPhoto[pp_gal]">
+              <img src="images/t-sampl-2.jpg" title="">
+            </a>
+          </li>
+  				<li>
+            <a href="images/sampl-3.jpg" rel="prettyPhoto[pp_gal]">
+              <img src="images/t-sampl-3.jpg" title="">
+            </a>
+          </li>
+  				<li>
+            <a href="images/sampl-4.jpg" rel="prettyPhoto[pp_gal]">
+              <img src="images/t-sampl-4.jpg" title="">
+            </a>
+          </li>
+          <li>
+            <a href="images/sampl-5.jpg" rel="prettyPhoto[pp_gal]">
+              <img src="images/t-sampl-5.jpg" title="">
+            </a>
+          </li>
+          <li>
+            <a href="images/sampl-6.jpg" rel="prettyPhoto[pp_gal]">
+              <img src="images/t-sampl-6.jpg" title="">
+            </a>
+          </li>
+  			</ul>
+      </div>
 			<nav>
 				<a class="tt-current"></a><a></a>
 			</nav>
@@ -81,13 +107,4 @@
                   .css('marginLeft', -bigImgWidth/2 + 'px');
   });
 
-  setInterval(function () {
-    $('.tt-grid-wrapper a').on('click', 'img', function (event) {
-      $('#full-img').attr('src', $(this).attr('bsrc'));
-      $('#full-img').removeClass('hidden');
-    });
-    $('.common').on('click', '#full-img', function (event) {
-      $(this).addClass('hidden');
-    });
-  }, 0);
 </script>
