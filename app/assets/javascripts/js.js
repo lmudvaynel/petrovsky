@@ -195,12 +195,12 @@ $(window).on('load', function () {
 
 	$("#gallery_link")
 	.mouseover(function(){
-		$("#header .menu li.icon-5 span").css('background-position', '0 -60px');
-		$("#header .menu li.icon-5 a").css('color', '#fff');
+		$("#header .menu li.icon-6 span").css('background-position', '0 -60px');
+		$("#header .menu li.icon-6 a").css('color', '#fff');
 	})
 	.mouseout(function(){
-		$("#header .menu li.icon-5 span").css('background-position', '');
-		$("#header .menu li.icon-5 a").css('color', '');
+		$("#header .menu li.icon-6 span").css('background-position', '');
+		$("#header .menu li.icon-6 a").css('color', '');
 	});
 
 	$("#floorplans_link")
@@ -215,12 +215,12 @@ $(window).on('load', function () {
 
 	$("#service_link")
 	.mouseover(function(){
-		$("#header .menu li.icon-4 span").css('background-position', '0 -60px');
-		$("#header .menu li.icon-4 a").css('color', '#fff');
+		$("#header .menu li.icon-5 span").css('background-position', '0 -60px');
+		$("#header .menu li.icon-5 a").css('color', '#fff');
 	})
 	.mouseout(function(){
-		$("#header .menu li.icon-4 span").css('background-position', '');
-		$("#header .menu li.icon-4 a").css('color', '');
+		$("#header .menu li.icon-5 span").css('background-position', '');
+		$("#header .menu li.icon-5 a").css('color', '');
 	});
 
 	$("#dwn-link")
