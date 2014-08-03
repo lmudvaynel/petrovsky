@@ -86,7 +86,7 @@ jQuery(function($){
 	    },
 	    penthouses: {
 	      textBlockHeight: 0.23,
-	      infoBlockHeight: 0.3,
+	      infoBlockHeight: 0.35,
 	    },
 	  };
 	  var page = $('.common-wrapper').data('page');
@@ -125,6 +125,7 @@ jQuery(function($){
 	        margin: margin,
 	        'padding-top': paddingTop,
 	        'font-size': fontSize,
+	        'line-height':fontSize+'px',
 	      });
 	    });
 	  }
