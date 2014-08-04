@@ -168,7 +168,7 @@ h5 { font-size:12px; color:#fff; }
 #center .block-wrapper .block-info {width: 100%; height: 100%; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; position:relative; z-index:5}
 #center .block-wrapper .penthouses-block-info {width: 750px; height: 321px; border:10px solid #cbc4ad; background:rgba(0,0,0,0.2); color:#fffcd9; padding: 0 60px; position:relative; z-index:5}
 
-.default-block {width: 60%; height: 50%;}
+.default-block {width: 748px;height: 339px;}
 #center .block-shadow {
  position:absolute; width:100%; height:100%; z-index:1; background:rgba(0,0,0,0.2); left:10px; top:10px;
 }
