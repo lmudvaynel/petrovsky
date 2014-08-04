@@ -347,7 +347,7 @@ z-index: 5;}
 .tab-list-s { height: 342px; }
 .tab-list .tab-item { display:none}
 .tab-list .tab-item.current { display:block}
-.tab-list ul.service  {padding: 0 0;}
+.tab-list ul.service  {padding: 33px 0;}
 .tab-list ul.service li { background:url(/images/li-icon.png) no-repeat left center; padding-left:90px; height:50px; margin: 15px 0}
 .tab-list ul.location li { background: url(/images/li-location.png) no-repeat 20px center; padding-left: 90px; padding-top: 8px; height: 45px; margin: 20px 0; }
 .tab-list ul.key li { background: url(/images/key.png) no-repeat 20px center; padding-left: 90px; padding-top: 8px; height: 45px; margin: 20px 0; }
