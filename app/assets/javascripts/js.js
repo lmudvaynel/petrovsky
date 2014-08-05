@@ -168,7 +168,7 @@ $(window).on('load', function () {
     		$spinner   = $preloader.find('.spinner');
     $spinner.fadeOut();
     $svg = $('.svg.bg-svg');
-    $svg.length === 0 ? timer = 10 : timer = 1100;
+    $svg.length === 0 ? timer = 10 : timer = 1600;
     $svg.delay(2000).fadeOut('slow')
     $('.tt-grid-wrapper').delay(1500).animate({opacity: 1}, 2000);
     $preloader.delay(timer).fadeOut('slow', function () {
