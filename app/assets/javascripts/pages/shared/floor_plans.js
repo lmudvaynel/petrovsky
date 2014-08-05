@@ -415,9 +415,13 @@ function Controller () {
     switch (event.type) {
       case 'mouseover':
         $('#floor-' + floorNumber).addClass('active');
+        $('.n_'+ floorNumber).removeClass("floor_number").addClass("jqhover").addClass("floor_number")
+        $('.n_'+ floorNumber).find('a').css('color','#fffcd9')
         break;
       case 'mouseout':
         $('#floor-' + floorNumber).removeClass('active');
+        $('.n_'  + floorNumber).removeClass("jqhover")
+        $('.n_'+ floorNumber).find('a').css('color','')
         break;
     }
   };

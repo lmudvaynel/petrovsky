@@ -245,7 +245,7 @@ z-index: 5;}
 	text-align: center;
 	cursor: pointer;
 }
-.house-image-container .floor_number {
+.floor_number {
 	height: 40px;
 	width: 40px;
 	border:3px solid #fff;
@@ -272,10 +272,10 @@ z-index: 5;}
 .house-image-container-2 .floor_number a {
 	width: 30px;
 }
-.floor_number a:hover{ 
+.floor_number a:hover, .jqhover_a{ 
 	color: #fffcd9;  
 }
-.floor_number:hover{ 
+.floor_number:hover, .jqhover{ 
 	font-color:#fffcd9; 
 	border:3px solid #8a8982;
 }
