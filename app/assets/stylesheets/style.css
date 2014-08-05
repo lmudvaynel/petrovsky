@@ -443,7 +443,7 @@ z-index: 5;}
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-left: -304.5px;
+	margin-left: -396.5px;
 	margin-top: -203px;
 	background: #000;
 	width: 700px;
@@ -458,7 +458,7 @@ z-index: 5;}
 }
 .callback-form .field input {
 	background: #fff;
-	width: 523px;
+	width: 98%;
 	margin: 0;
 	padding: 7px;
 	border: none;
