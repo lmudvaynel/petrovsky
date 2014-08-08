@@ -386,7 +386,7 @@ z-index: 5;}
 #footer a { }
 
 /* SLIDER */
-.gallery_1 ul li{overflow: hidden;}
+.gallery_1 ul li a{overflow: hidden;}
 .gallery_1 ul li img {transition: all 0.8s ease-in-out;}
 .gallery_1 ul li img:hover {
 	-webkit-transform: scale(1.2) rotate(2deg);
