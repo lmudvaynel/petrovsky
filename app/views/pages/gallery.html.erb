@@ -113,5 +113,15 @@
     $('#full-img').css('width', bigImgWidth + 'px')
                   .css('marginLeft', -bigImgWidth/2 + 'px');
   });
-  
+  setInterval(function() {
+    var i;
+    if ($('.tt-grid-wrapper').find('nav').find('a').eq(0).hasClass('tt-current'))
+          {i=1}
+        else 
+          {i=0}
+    if ($('.gallery_1').hasClass('active')) 
+      {}
+    else
+      {$('.tt-grid-wrapper').find('nav').find('a')[i].click();}
+  }, 4000);
 </script>
