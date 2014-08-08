@@ -458,6 +458,7 @@
 		* Closes prettyPhoto.
 		*/
 		$.prettyPhoto.close = function(){
+			$('.gallery_1').removeClass('active')
 			if($pp_overlay.is(":animated")) return;
 			
 			$.prettyPhoto.stopSlideshow();
@@ -541,6 +542,7 @@
 		* Hide the content...DUH!
 		*/
 		function _hideContent(callback){
+
 			// Fade out the current picture
 			$pp_pic_holder.find('#pp_full_res object,#pp_full_res embed').css('visibility','hidden');
 			$pp_pic_holder.find('.pp_fade').fadeOut(settings.animation_speed,function(){
@@ -745,6 +747,7 @@
 	
 		function _build_overlay(caller){
 			// Inject Social Tool markup into General markup
+			$('.gallery_1').addClass('active')
 			if(settings.social_tools)
 				facebook_like_link = settings.social_tools.replace('{location_href}', encodeURIComponent(location.href)); 
 
