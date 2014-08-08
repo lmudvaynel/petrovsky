@@ -68,7 +68,7 @@ h5 { font-size:12px; color:#fff; }
 }
 
 /* HEADER */
-#header { background:url(/images/header-shadow.png) repeat-x top; min-height:125px; min-width:1170px; padding: 25px 50px 0 50px; position:relative; z-index:1900; }
+#header { background:url(/images/header-shadow.png) repeat-x top; min-height:125px; min-width:1340px; padding: 25px 50px 0 50px; position:relative; z-index:1900; }
 #header .logo { float:left; margin-right:40px; }
 
 #header .menu { float:left; padding-top:3px; }
@@ -386,6 +386,15 @@ z-index: 5;}
 #footer a { }
 
 /* SLIDER */
+.gallery_1 ul li{overflow: hidden;}
+.gallery_1 ul li img {transition: all 0.8s ease-in-out;}
+.gallery_1 ul li img:hover {
+	-webkit-transform: scale(1.2) rotate(2deg);
+-moz-transform: scale(1.2) rotate(2deg);
+-o-transform: scale(1.2) rotate(2deg);
+-ms-transform: scale(1.2) rotate(2deg);
+/* transform: scale(1.2) rotate(2deg); */
+}
 #gallery-wrap { font-family: 'PT Sans Normal'; font-size:28px; position:relative; }
 
 #slider { margin-top: -20px; width:844px; height: auto; margin:auto }
