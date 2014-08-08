@@ -4,18 +4,18 @@
 
 	// some dummy data to play with..
 	var allImages = {
-		page1 : ['<a href="images/sampl-1.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-1.jpg"</a>',
-							'<a href="images/sampl-2.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-2.jpg"</a>',
-							'<a href="images/sampl-3.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-3.jpg"</a>',
-							'<a href="images/sampl-4.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-4.jpg"</a>',
-							'<a href="images/sampl-5.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-5.jpg"</a>',
-							'<a href="images/sampl-6.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-6.jpg"</a>'],
-		page2 : ['<a href="images/sampl-7.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-7.jpg"</a>',
-							'<a href="images/sampl-8.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-8.jpg"</a>',
-							'<a href="images/sampl-9.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-9.jpg"</a>',
-							'<a href="images/sampl-10.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-10.jpg"</a>',
-							'<a href="images/sampl-11.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-11.jpg"</a>',
-							'<a href="images/sampl-12.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-12.jpg"</a>']
+		page1 : ['<a href="images/sampl-1.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-1.jpg"></a>',
+							'<a href="images/sampl-2.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-2.jpg"></a>',
+							'<a href="images/sampl-3.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-3.jpg"></a>',
+							'<a href="images/sampl-4.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-4.jpg"></a>',
+							'<a href="images/sampl-5.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-5.jpg"></a>',
+							'<a href="images/sampl-6.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-6.jpg"></a>'],
+		page2 : ['<a href="images/sampl-7.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-7.jpg"></a>',
+							'<a href="images/sampl-8.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-8.jpg"></a>',
+							'<a href="images/sampl-9.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-9.jpg"></a>',
+							'<a href="images/sampl-10.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-10.jpg"></a>',
+							'<a href="images/sampl-11.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-11.jpg"></a>',
+							'<a href="images/sampl-12.jpg" rel="prettyPhoto[pp_gal]"><img src="images/t-sampl-12.jpg"></a>']
 	};
 
 	// http://coveroverflow.com/a/11381730/989439
