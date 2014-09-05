@@ -1,9 +1,9 @@
-role :web, "5.9.50.131"
-role :app, "5.9.50.131"
-role :db,  "5.9.50.131", :primary => true
+role :web, "83.69.233.88"
+role :app, "83.69.233.88"
+role :db,  "83.69.233.88", :primary => true
 
 set :rails_env, "production"
-set :branch, "apt-petrovsky"
+set :branch, "new-apt"
 
 set :deploy_to, "#{base_directory}/#{application}_#{stage}"
 
